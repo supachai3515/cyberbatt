@@ -269,7 +269,7 @@ class Products extends CI_Controller {
 	    if($countSql < 2)
 	    {
 	        $sql   = "SELECT pc.search , p.* ,t.name type_name, b.name brand_name , s.stock_all FROM products p 
-					INNER JOIN ( SELECT CONCAT(IFNULL(name,''), IFNULL(model,''), strip_tags(IFNULL(detail,'')), IFNULL(sku,'')) search , id FROM products ) 
+					INNER JOIN ( SELECT CONCAT(IFNULL(name,''), IFNULL(model,''), IFNULL(shot_detail,''), IFNULL(sku,'')) search , id FROM products ) 
 					pc ON p.id = pc.id LEFT JOIN product_brand b ON p.product_brand_id = b.id 
 					LEFT JOIN (SELECT product_id, SUM(number) stock_all FROM stock GROUP BY product_id) s ON s.product_id = p.id
 					LEFT JOIN product_type t ON p.product_type_id = t.id 

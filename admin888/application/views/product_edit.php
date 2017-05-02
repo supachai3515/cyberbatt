@@ -182,6 +182,14 @@
 		</div>
 
 		<!-- Textarea -->
+        <div class="form-group">
+            <label class="col-md-3 control-label" for="shot_detail">รายละเอียดแบบย่อ (สำหรับค้นหา)</label>
+            <div class="col-md-8">
+                <textarea class="form-control" name="shot_detail"><?php echo $product_data['shot_detail']; ?></textarea>
+            </div>
+        </div>
+
+		<!-- Textarea -->
 		<div class="form-group">
 		  <label class="col-md-3 control-label" for="detail">รายละเอียด</label>
 		  <div class="col-md-8">                     

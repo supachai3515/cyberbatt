@@ -100,6 +100,7 @@ class Products_model extends CI_Model {
 			'weight' => $this->input->post('weight'),
 			'image' => '',
 			'detail' => $this->input->post('detail'),
+			'shot_detail' => $this->input->post('shot_detail'),
 			'stock' => $this->input->post('stock'),
 			'is_hot' => $this->input->post('is_hot'),
 			'is_promotion' => $this->input->post('is_promotion'),
@@ -192,6 +193,7 @@ class Products_model extends CI_Model {
 			'warranty' => $this->input->post('warranty'),
 			'weight' => $this->input->post('weight'),
 			'detail' => $this->input->post('detail'),
+			'shot_detail' => $this->input->post('shot_detail'),
 			'stock' => $this->input->post('stock'),
 			'is_hot' => $this->input->post('is_hot'),
 			'is_promotion' => $this->input->post('is_promotion'),
@@ -265,7 +267,7 @@ class Products_model extends CI_Model {
 		 $sql ="SELECT pc.search , p.* ,t.name type_name, b.name brand_name ,p.stock stock_number
 				FROM products p 
 				INNER JOIN (
-				SELECT CONCAT(IFNULL(name,''),IFNULL(model,''),strip_tags(IFNULL(detail,'')),IFNULL(sku,'')) search ,id FROM
+				SELECT CONCAT(IFNULL(name,''),IFNULL(model,''),IFNULL(shot_detail,''),IFNULL(sku,'')) search ,id FROM
 				products 
 				)
 				pc ON p.id = pc.id 
