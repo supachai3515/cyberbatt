@@ -73,7 +73,7 @@
                                             <?php endif ?>
                                         </p>
                                         <p class="product-desc">
-                                            <?php //echo $product_detail['shot_detail'] ?>
+                                            <?php echo $product_detail['shot_detail'] ?>
                                         </p>
                                         <p class="pquantityavailable">
                                         <?php if ($product_detail['stock'] > 0): ?>
