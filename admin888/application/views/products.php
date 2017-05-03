@@ -235,7 +235,7 @@
                                                     <br/>
                                                     <span>ราคา dealer : </span><span class="text-info" ng-bind="<?php echo $product['member_discount'];?> | currency:'฿':0"></span>
                                                     <br/>
-                                                    <span>ราคา dealer fanshine : </span><span class="text-danger" ng-bind="<?php echo $product['member_discount_lv1'];?> | currency:'฿':0"></span>
+                                                    <span>ราคา dealer franshine : </span><span class="text-danger" ng-bind="<?php echo $product['member_discount_lv1'];?> | currency:'฿':0"></span>
                                                     <br/>
                                                 </td>
                                                 <td>
@@ -375,9 +375,9 @@
 
                             <!-- Text input-->
                             <div class="form-group">
-                                <label class="col-md-3 control-label" for="member_discount_lv1">ราคา fanshine</label>
+                                <label class="col-md-3 control-label" for="member_discount_lv1">ราคา franshine</label>
                                 <div class="col-md-4">
-                                    <input id="member_discount_lv1" name="member_discount_lv1" type="number" placeholder="ราคา fanshine" class="form-control input-md">
+                                    <input id="member_discount_lv1" name="member_discount_lv1" type="number" placeholder="ราคา franshine" class="form-control input-md">
                                 </div>
                             </div>
 
@@ -424,14 +424,6 @@
                                             <input type="checkbox" name="is_hot" id="is_hot" value="1"> ได้รับความนิยม
                                         </label>
                                     </div>
-                                </div>
-                            </div>
-
-                            <!-- Textarea -->
-                            <div class="form-group">
-                                <label class="col-md-3 control-label" for="shot_detail">รายละเอียดแบบย่อ (สำหรับค้นหา)</label>
-                                <div class="col-md-8">
-                                    <textarea class="form-control" name="shot_detail"></textarea>
                                 </div>
                             </div>
 

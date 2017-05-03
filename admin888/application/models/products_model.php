@@ -100,7 +100,7 @@ class Products_model extends CI_Model {
 			'weight' => $this->input->post('weight'),
 			'image' => '',
 			'detail' => $this->input->post('detail'),
-			'shot_detail' => $this->input->post('shot_detail'),
+			'shot_detail' => strip_tags($this->input->post('detail'));
 			'stock' => $this->input->post('stock'),
 			'is_hot' => $this->input->post('is_hot'),
 			'is_promotion' => $this->input->post('is_promotion'),
@@ -193,7 +193,7 @@ class Products_model extends CI_Model {
 			'warranty' => $this->input->post('warranty'),
 			'weight' => $this->input->post('weight'),
 			'detail' => $this->input->post('detail'),
-			'shot_detail' => $this->input->post('shot_detail'),
+			'shot_detail' => strip_tags($this->input->post('detail'));
 			'stock' => $this->input->post('stock'),
 			'is_hot' => $this->input->post('is_hot'),
 			'is_promotion' => $this->input->post('is_promotion'),

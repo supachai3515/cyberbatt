@@ -70,7 +70,7 @@
                             <?php endif ?>
 
                              <?php if ($member['is_lavel1']=="1"): ?>
-                                <span><i class="fa fa-check"></i> Dealer fanshine</span>
+                                <span><i class="fa fa-check"></i> Dealer franshine</span>
                             <?php endif ?>
 
                         </td>

@@ -105,13 +105,13 @@
         <div class="form-group">
             <label class="col-md-3 control-label" for="member_discount">ราคา Dealer</label>
             <div class="col-md-4">
-                <input id="member_discount" name="member_discount" type="number" value="<?php echo $product_data['member_discount']; ?>" placeholder="ราคา fanshine" class="form-control input-md">
+                <input id="member_discount" name="member_discount" type="number" value="<?php echo $product_data['member_discount']; ?>" placeholder="ราคา franshine" class="form-control input-md">
             </div>
         </div>
 
          <!-- Text input-->
         <div class="form-group">
-            <label class="col-md-3 control-label" for="member_discount_lv1">ราคา dealer fanshine</label>
+            <label class="col-md-3 control-label" for="member_discount_lv1">ราคา dealer franshine</label>
             <div class="col-md-4">
                 <input id="member_discount_lv1" name="member_discount_lv1" type="number" value="<?php echo $product_data['member_discount_lv1']; ?>" placeholder="ราคา Dealer" class="form-control input-md">
             </div>
@@ -180,14 +180,6 @@
 			</div>
 		  </div>
 		</div>
-
-		<!-- Textarea -->
-        <div class="form-group">
-            <label class="col-md-3 control-label" for="shot_detail">รายละเอียดแบบย่อ (สำหรับค้นหา)</label>
-            <div class="col-md-8">
-                <textarea class="form-control" name="shot_detail"><?php echo $product_data['shot_detail']; ?></textarea>
-            </div>
-        </div>
 
 		<!-- Textarea -->
 		<div class="form-group">

@@ -133,7 +133,7 @@
 
 		<!-- Multiple Checkboxes -->
 		<div class="form-group">
-		  <label class="col-md-3 control-label" for="is_lavel1">ยืนยัน Dealer fanshine </label>
+		  <label class="col-md-3 control-label" for="is_lavel1">ยืนยัน Dealer franshine </label>
 		  <div class="col-md-4">
 		  <div class="checkbox">
 		    <label for="verify-0">
