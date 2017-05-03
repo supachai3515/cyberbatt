@@ -52,7 +52,7 @@ class Products_model extends CI_Model {
 		$sqlString=" SELECT pc.search , p.* ,t.name type_name, b.name brand_name, t.id type_id, b.id brand_id
 					FROM products p 
 					INNER JOIN (
-					SELECT CONCAT(IFNULL(name,''), IFNULL(model,''), strip_tags(IFNULL(detail,'')), IFNULL(sku,'')) search ,id FROM products
+					SELECT CONCAT(IFNULL(name,''), IFNULL(model,''), IFNULL(detail,''), IFNULL(sku,'')) search ,id FROM products
 					)
 					pc ON p.id = pc.id 
 					LEFT JOIN product_brand b ON p.product_brand_id = b.id 

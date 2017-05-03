@@ -295,6 +295,31 @@ class Products extends CI_Controller {
 
 	}
 
+	public function run_strip()
+	{	
+
+		$sql ="SELECT * FROM products "; 
+		$query = $this->db->query($sql);
+		$datalist = $query->result_array();
+
+
+		foreach ($datalist  as $row) {
+
+		    $shot_detail =	strip_tags($row['detail']);
+
+		    $data_product = array(
+				'shot_detail' => $shot_detail	
+			);
+
+			$where = "id = '".$row['id']."'"; 
+			$this->db->update("products", $data_product, $where);
+
+ 			echo $shot_detail.'<br/>';
+		}
+
+	}
+
+
 
 	public function getstock()
 	{
