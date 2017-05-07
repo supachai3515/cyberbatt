@@ -100,7 +100,7 @@ class Orders extends CI_Controller {
 	}
 
 
-
+   //update status order
 	public function update_status($orders_id)
 	{
 		$this->is_logged_in();
@@ -212,18 +212,33 @@ class Orders extends CI_Controller {
 				if(trim($value->serial_number) != "") {
 						//check ของเดิม ว่ามีการบันทึกไปแล้วหรือยัง
 						$sql =" SELECT * FROM product_serial WHERE serial_number = '".$value->serial_number."'  
-								AND product_id = '".$value->product_id."' "; 
+								AND product_id = '".$value->product_id."'  AND order_id != '' "; 
 
 						$re = $this->db->query($sql);
 						$row =  $re->row_array();
 
 						if(count($row) > 0){
-							$res['message']  = "";
-
+							$res['is_error'] =  true;
+							$res['message']  = $res['message'].$value->serial_number." : ถูกบันทึกแล้วเลขที่ order : #".$value->order_id;
 						}
 						else {
-							$res['is_error'] =  true;
-							$res['message']  = $res['message'].$value->serial_number." : ไม่มีในระบบ, ";
+
+
+							$sql =" SELECT * FROM product_serial WHERE serial_number = '".$value->serial_number."'  
+								AND product_id = '".$value->product_id."' "; 
+
+								$re = $this->db->query($sql);
+								$row =  $re->row_array();
+
+								if(count($row) > 0) {
+									$res['message']  = "";
+								}
+								else {
+
+									$res['is_error'] =  true;
+									$res['message']  = $res['message'].$value->serial_number." : ไม่มีในระบบ, ";
+								}
+
 						}
 				}
 			}

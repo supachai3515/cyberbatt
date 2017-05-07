@@ -125,18 +125,74 @@ class Products_model extends CI_Model {
 	public function get_products_category_count($category)
 	{
 
-		$sql =" SELECT COUNT(p.id) as connt_id FROM  products p 
-				LEFT JOIN product_brand b ON p.product_brand_id = b.id
-				LEFT JOIN product_type t ON p.product_type_id = t.id 
-				WHERE   p.is_active= '1'  AND  t.is_active = '1' AND t.slug ='".$category."' "; 
-		$query = $this->db->query($sql);
-		$row = $query->row_array();
-		return  $row['connt_id'];
-	
+		$sql =" SELECT * FROM product_type  
+				WHERE   is_active = '1' AND slug = '".$category."' ";  
+
+			$query = $this->db->query($sql);
+			$row = $query->row();
+
+			if (isset($row))
+			{
+			      
+			        	$sql =" SELECT COUNT(p.id) connt_id
+						FROM  products p 
+						LEFT JOIN product_brand b ON p.product_brand_id = b.id
+						LEFT JOIN product_type t ON p.product_type_id = t.id 
+
+						WHERE  p.is_active= '1' AND  t.is_active = '1' 
+						AND t.id  IN (SELECT t2.id FROM product_type t2 WHERE t2.id IN (
+							SELECT t1.id FROM product_type t1 
+							WHERE t1.id = '".$row->id."' OR t1.parenttype_id = '".$row->id."'
+							) OR  t2.parenttype_id IN (
+							SELECT t1.id FROM product_type t1 
+							WHERE t1.id = '".$row->id."' OR t1.parenttype_id = '".$row->id."'
+							)
+						)
+						OR t.slug ='".$category."'  AND p.is_active = 1";	
+					$query = $this->db->query($sql);
+					$re = $query->row_array();
+					return  $re['connt_id'];
+			}
+		return 0;
+
 	}
 
 
 	public function get_products_category( $category, $start, $limit)
+	{
+		  $sql =" SELECT * FROM product_type  
+				WHERE   is_active = '1' AND slug = '".$category."' ";  
+
+			$query = $this->db->query($sql);
+			$row = $query->row();
+
+			if (isset($row))
+			{
+			      
+			        	$sql ="SELECT p.* ,t.name type_name, b.name brand_name , t.id type_id, b.id brand_id
+						FROM  products p 
+						LEFT JOIN product_brand b ON p.product_brand_id = b.id
+						LEFT JOIN product_type t ON p.product_type_id = t.id 
+
+						WHERE  p.is_active= '1' AND  t.is_active = '1' 
+						AND t.id  IN (SELECT t2.id FROM product_type t2 WHERE t2.id IN (
+							SELECT t1.id FROM product_type t1 
+							WHERE t1.id = '".$row->id."' OR t1.parenttype_id = '".$row->id."' AND t1.is_active = 1
+							) OR  t2.parenttype_id IN (
+							SELECT t1.id FROM product_type t1 
+							WHERE t1.id = '".$row->id."' OR t1.parenttype_id = '".$row->id."' AND t2.is_active = 1
+							)
+						)
+						OR t.slug ='".$category."' AND p.is_active = 1
+						ORDER BY p.id DESC LIMIT " . $start . "," . $limit;
+						$re = $this->db->query($sql);
+						return $re->result_array(); 
+	
+			}
+	}
+
+
+	public function get_products_category_all( $category, $start, $limit)
 	{
 		  $sql =" SELECT * FROM product_type  
 				WHERE   is_active = '1' AND slug = '".$category."' ";  
@@ -174,7 +230,6 @@ class Products_model extends CI_Model {
 		
 			}
 	}
-
 
 
 	public function get_products_brand_count($brand)

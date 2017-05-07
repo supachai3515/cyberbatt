@@ -28,6 +28,27 @@ class Payment extends CI_Controller {
 		$data['content'] = 'payment';
 		$this->load->view('template/layout', $data);
 	}
+
+	public function order($ref_id)
+	{
+		//header meta tag 
+		$data['header'] = array('title' => 'แจ้งชำระเงิน | '.$this->config->item('sitename'),
+								'description' =>  'แจ้งชำระเงิน | '.$this->config->item('tagline'),
+								'author' => $this->config->item('author'),
+								'keyword' =>  'แจ้งชำระเงิน | '.$this->config->item('tagline') );
+
+		//get menu database 
+		$this->load->model('initdata_model');
+		$data['menus_list'] = $this->initdata_model->get_menu();
+		$data['menu_type'] = $this->initdata_model->get_type();
+		$data['menu_brands'] = $this->initdata_model->get_brands();
+
+
+		$data['content'] = 'payment_order';
+		print($ref_id);
+		//$this->load->view('template/layout', $data);
+	}
+
 	public function sendmail()
 	{
 		$data = json_decode(file_get_contents("php://input"));

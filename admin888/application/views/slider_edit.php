@@ -20,7 +20,7 @@
         <div class="form-group">
           <label class="col-md-3 control-label" for="name">ชื่อ</label>  
           <div class="col-md-6">
-            <input id="name" name="name" type="text" value="<?php echo $slider_data['name']; ?>" placeholder="ชื่อ" class="form-control input-md" required="">
+            <input id="name" name="name" type="text" value="<?php echo $slider_data['name']; ?>" placeholder="ชื่อ" class="form-control input-md" >
           </div>
         </div>
 

@@ -20,7 +20,7 @@ class Product extends CI_Controller {
 				LEFT JOIN product_type t ON p.product_type_id = t.id 
 				LEFT JOIN (SELECT product_id, SUM(number) stock_all FROM stock  
 				GROUP BY product_id) s ON s.product_id = p.id 
-				WHERE p.slug = '".$slug."'"; 
+				WHERE p.slug = '".$slug."' AND p.is_active = 1 "; 
 		$query = $this->db->query($sql);
 		$row = $query->row_array();
 		$data['product_detail'] = $row;

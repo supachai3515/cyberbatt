@@ -67,6 +67,13 @@
 					                				<a href="<?php echo base_url('status/'.$value['ref_id']);?>" target="_bank">
 					                					<strong class="text-success">สะถานะสินค้า <i class="fa fa-angle-double-right" aria-hidden="true"></i></strong>
 					                				</a>
+					                				<br>
+
+					                				<?php if ($value['order_status_id'] ==  "1"): ?>
+					                					<a href="<?php echo base_url('payment/order/'.$value['ref_id']);?>" target="_bank">
+						                					<button type="button" class="btn btn-xs btn-warning">แจ้งชำระเงิน</button>
+						                				</a> 
+					                				<?php endif ?>
 					                			</td>
 					                			<td>
 					                				<strong>ชื่อ : </strong><?php echo $value['name'];?><br/>
@@ -79,7 +86,9 @@
 					                			<td>
 					                				<a href="<?php echo base_url('invoice/'.$value['ref_id']);?>" target="_bank">
 					                					<button type="button" class="btn btn-xs btn-default">ดูใบเสร็จ</button>
-					                				</a>
+					                				</a> 
+					                				<br>
+					                			
 					                			</td>
 					                		</tr>
 						                <?php endforeach ?>

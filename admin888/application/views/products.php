@@ -212,11 +212,11 @@
                                 <tbody>
                                     <?php foreach ($products_list as $product): ?>
                                         <tr>
-                                        <td>
-                                            <input type="checkbox" name="check[]" value="1"  value="1" checked>
-                                            <input type="hidden" name="productid[]" value="<?php echo $product['id'];?>">
-                                            <input type="hidden" name="name[]" value="<?php echo $product['name'];?>">
-                                        </td>
+                                            <td>
+                                            <input type="hidden" name="productid_p[]" value="<?php echo $product['id'];?>">
+                                            <input type="hidden" name="name_p[]" value="<?php echo $product['name'];?>">
+                                            <input type="checkbox" name="check_p[]" value="<?php echo $product['id'];?>" checked>
+                                            </td>
                                             <td><img src=" <?php echo $this->config->item('url_img').$product['image']; ?>" style="width:100px;" class="img-responsive" alt="Image">
                                                 <td>
                                                     <span>รหัส : </span>
@@ -297,7 +297,7 @@
                                                 </td>
                                                 <td><a class="btn btn-xs btn-info" href="<?php echo base_url('products/edit/'.$product['id']) ?>" role="button"><i class="fa fa-pencil"></i> แก้ไข</a></td>
                                         </tr>
-                                        <?php endforeach ?>
+                                    <?php endforeach ?>
                                 </tbody>
                             </table>
                         </div>

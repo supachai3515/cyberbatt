@@ -90,7 +90,6 @@
                                 <br/>
                                 <br/>
                                 <a target="_blank" class="btn btn-default" href="<?php echo base_url('invoice/'.$order['ref_id']) ?>" role="button">
-                   
                                  ดูใบสั่งซื้อ
                                 </a>
                             </div>
@@ -109,7 +108,7 @@
                                     <?php echo $order["tel"];?>
                                     <br/> Email:
                                     <?php echo $order["email"];?>
-                                    <br/> ประเภทการจักส่ง :
+                                    <br/> ประเภทการจัดส่ง :
                                     <?php echo $order["shipping"];?>
                                     <?php if (isset($order["trackpost"])): ?> , tracking:
                                     <?php echo $order["trackpost"];?>

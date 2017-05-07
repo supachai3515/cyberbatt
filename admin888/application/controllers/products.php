@@ -332,20 +332,16 @@ class Products extends CI_Controller {
 	public function updateprice(){
 
 		// Retrieve the posted information
-		$item = $this->input->post('productid');
-	    $check = $this->input->post('check');
-	    $name = $this->input->post('name');
+		$item = $this->input->post('productid_p');
+	    $check = $this->input->post('check_p');
 	    $data["update"] = "";
 	    $in_str ="";
 
 		// Cycle true all items and update them
 		for($i=0;$i < count($item);$i++)
 		{
-			// Create an array with the products rowid's and quantities. 
-			$chk = 0;
-			
+
 			if(isset( $check[$i])){
-				$chk = 1;
 				date_default_timezone_set("Asia/Bangkok");
 				$data_product = array(
 					'price' =>  $this->input->post('price'),
@@ -354,16 +350,17 @@ class Products extends CI_Controller {
 					'member_discount_lv1' => $this->input->post('member_discount_lv1'),
 					'modified_date' => date("Y-m-d H:i:s"),						
 				);
-				$where = "id = '".$item[$i]."'"; 
+				$where = "id = '".$check[$i]."'"; 
+
 				$this->db->update("products", $data_product, $where);
 				if($in_str ==""){
-					$in_str  = $item[$i];
+					$in_str  = $check[$i];
 				}
 				else {
-					$in_str = $in_str.",".$item[$i];
+					$in_str = $in_str.",".$check[$i];
 				}
 				
-				$data["update"] = $data["update"].'<li class="list-group-item"><strong>ProductId</strong> : '.$item[$i].',  <strong>Name</strong> : '.$name[$i].', <strong>price</strong> : '.$this->input->post('price').', <strong>Disprice</strong> : '.$this->input->post('dis_price').', <strong>Dealerprice</strong> : '.$this->input->post('member_discount').', <strong> fanshine</strong> : '.$this->input->post('member_discount_lv1').'</li>';
+				$data["update"] = $data["update"].'<li class="list-group-item"><strong>ProductId</strong> : '.$check[$i].', <strong>price</strong> : '.$this->input->post('price').', <strong>Disprice</strong> : '.$this->input->post('dis_price').', <strong>Dealer_price</strong> : '.$this->input->post('member_discount').', <strong> fanshine</strong> : '.$this->input->post('member_discount_lv1').'</li>';
 			}
             //echo $this->input->post('price')." , ".$this->input->post('dis_price')." , ".$this->input->post('member_discount')."<br>";
             //echo $item[$i]." , ".$chk."<br>";
