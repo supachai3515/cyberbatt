@@ -57,7 +57,7 @@
                         <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                             <div class="caption">
                                 <h3>ไปรษณีย์ไทย</h3>
-                                <p><strong>ชำระเงินก่อน 15.30น. ส่งสินค้าออกวันเดียวกัน หลังจากนั้น ส่งสินค้าออกวันถัดไป  </strong></p>
+                                <p><strong>ชำระเงินก่อน 13.00น. ส่งสินค้าออกวันเดียวกัน หลังจากนั้น ส่งสินค้าออกวันถัดไป  </strong></p>
                                 <div class="button-exclusive">
                                         <a href="http://track.thailandpost.co.th/tracking/default.aspx"  target="_blank">
                                             <span>ไปรษณีย์ไทย</span>
@@ -76,7 +76,7 @@
                         <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                             <div class="caption">
                                 <h3>เคอรี่ เอ็กซ์เพรส (ประเทศไทย)</h3>
-                                <p><strong> ชำระเงินก่อน 14.00น. ส่งสินค้าออกในวันเดียวกัน หลังจากนั้น ส่งสินค้าออกวันถัดไป </strong></p>
+                                <p><strong> ชำระเงินก่อน 16.00น. ส่งสินค้าออกในวันเดียวกัน หลังจากนั้น ส่งสินค้าออกวันถัดไป </strong></p>
                                 <p>
 
                                 <div class="button-exclusive">
@@ -92,18 +92,18 @@
                      <hr/>
                     <div class="row">
                         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                            <img src="<?php echo base_url('theme'); ?>/img/sds.jpg" alt="ALT NAME" class="img-responsive img-rounded" />
+                            <img src="https://www.tnt.com/content/dam/tnt_express_media/express-master/admin/img/tnt-logo.svg" alt="ALT NAME" class="img-responsive img-rounded" />
                         </div>
                         <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                             <div class="caption">
-                                <h3>เซ้าท์เทิร์น ดีลิเวอรี่ เซอร์วิส (SDS)</h3>
-                                <p><strong>ชำระเงินก่อน 17.00น. ส่งสินค้าออกวันเดียวกัน หลังจากนั้น ส่งสินค้าออกวันถัดไป   </strong></p>
+                                <h3>ทีเอ็นที (TNT)</h3>
+                                <p><strong>ชำระเงินก่อน 16.00น. ส่งสินค้าออกวันเดียวกัน หลังจากนั้น ส่งสินค้าออกวันถัดไป   </strong></p>
                              
                                 <p>
 
                                 <div class="button-exclusive">
-                                        <a href="http://www.sds.co.th/status.php"target="_blank">
-                                            <span> เซ้าท์เทิร์น ดีลิเวอรี่ เซอร์วิส</span>
+                                        <a href="https://www.tnt.com/express/th_th/site/home.html"target="_blank">
+                                            <span> ทีเอ็นที (TNT)</span>
                                             <i class="fa fa-arrow-right"></i>
                                         </a>
                                     </div>

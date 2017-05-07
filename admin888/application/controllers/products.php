@@ -351,6 +351,7 @@ class Products extends CI_Controller {
 					'price' =>  $this->input->post('price'),
 					'dis_price' => $this->input->post('dis_price'),
 					'member_discount' => $this->input->post('member_discount'),
+					'member_discount_lv1' => $this->input->post('member_discount_lv1'),
 					'modified_date' => date("Y-m-d H:i:s"),						
 				);
 				$where = "id = '".$item[$i]."'"; 
@@ -362,7 +363,7 @@ class Products extends CI_Controller {
 					$in_str = $in_str.",".$item[$i];
 				}
 				
-				$data["update"] = $data["update"].'<li class="list-group-item"><strong>ProductId</strong> : '.$item[$i].',  <strong>Name</strong> : '.$name[$i].', <strong>price</strong> : '.$this->input->post('price').', <strong>Disprice</strong> : '.$this->input->post('dis_price').', <strong>Dealerprice</strong> : '.$this->input->post('member_discount').'</li>';
+				$data["update"] = $data["update"].'<li class="list-group-item"><strong>ProductId</strong> : '.$item[$i].',  <strong>Name</strong> : '.$name[$i].', <strong>price</strong> : '.$this->input->post('price').', <strong>Disprice</strong> : '.$this->input->post('dis_price').', <strong>Dealerprice</strong> : '.$this->input->post('member_discount').', <strong> fanshine</strong> : '.$this->input->post('member_discount_lv1').'</li>';
 			}
             //echo $this->input->post('price')." , ".$this->input->post('dis_price')." , ".$this->input->post('member_discount')."<br>";
             //echo $item[$i]." , ".$chk."<br>";

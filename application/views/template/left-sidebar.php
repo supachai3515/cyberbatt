@@ -80,8 +80,10 @@
     </div>
     <!-- category-menu-area end-->
     <!-- category-menu-area start-->
-    <!-- <div class="category-menu-area <?php if ($page_n == "product_detail"): ?> hidden-sm hidden-xs <?php endif ?>">
-        <div class="category-title title-brand">
+    <?php if ($content == "products"): ?>
+        
+    <div class="category-menu-area <?php if ($page_n == "product_detail"): ?> hidden-sm hidden-xs <?php endif ?>">
+        <div class="category-title">
             <h2>ยี่ห้อสินค้า</h2>
         </div>
         <div class="category-menu" id="cate-toggle">
@@ -99,10 +101,9 @@
             </ul>
         </div>
     </div>
-    -->
     <!-- category-menu-area end-->
 
-
+    <?php endif ?>
     <!-- add-banner-slider start-->
     <div class="add-banner-slider-area">
         <div class="add-banner-carsuol">

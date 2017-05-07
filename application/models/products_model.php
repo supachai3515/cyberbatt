@@ -139,7 +139,7 @@ class Products_model extends CI_Model {
 	public function get_products_category( $category, $start, $limit)
 	{
 		  $sql =" SELECT * FROM product_type  
-				WHERE   is_active = '1' AND slug = '".$category."' "; 
+				WHERE   is_active = '1' AND slug = '".$category."' ";  
 
 			$query = $this->db->query($sql);
 			$row = $query->row();

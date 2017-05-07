@@ -156,19 +156,25 @@
                         <fieldset>
 
                            <div class="col-md-12" style="padding:0;">
-                                <div class="col-md-3">
+                                <div class="col-md-2">
                                     <label for="price">ราคาสินค้า</label>
                                     <input id="price" name="price" type="number" 
                                         value="" class="form-control input-md" required="true">
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-2">
                                     <label for="dis_price">ราคาส่วนลด</label>
                                     <input id="dis_price" name="dis_price" type="number" 
                                     value="" class="form-control input-md" required="true">
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-2">
                                     <label for="member_discount">ราคา Dealer</label>
                                     <input id="member_discount" name="member_discount" type="number" 
+                                    value="" class="form-control input-md" required="true">
+                                </div>
+
+                                <div class="col-md-2">
+                                    <label for="member_discount_lv1">ราคา fanshine </label>
+                                    <input id="member_discount_lv1" name="member_discount_lv1" type="number" 
                                     value="" class="form-control input-md" required="true">
                                 </div>
 
