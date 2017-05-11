@@ -179,19 +179,36 @@
                 
               </tbody>
             </table>
-
-            <form action="<?php echo base_url('orders/update_tracking/'.$orders_data['id']); ?>" method="POST" class="form-inline" role="form">
+              <?php if ($orders_data['order_status_id'] >= "2" && $orders_data['order_status_id'] < "5"): ?>
+                  <form action="<?php echo base_url('orders/update_tracking/'.$orders_data['id']); ?>" method="POST" class="form-inline" role="form">
               <div class="form-group">
                 <label class="sr-only" for="">tracking</label>
                 <input type="text" class="form-control" id="tracking" name="tracking"
                 <?php if (isset($orders_data['trackpost'])): ?>
                   value="<?php echo $orders_data['trackpost']; ?>"
                 <?php endif ?>
-                 placeholder="tracking number">
+                 placeholder="tracking number" required="true">
               </div>
+              <div class="form-group">
+                 <select id="select_status" name="select_status" class="form-control" readonly="true">
+                <?php foreach ($order_status_list as $status): ?>
+                    <?php if ($status['id'] == "4"): ?>
+                        <option value="<?php echo $status['id']; ?>" selected><?php echo $status['name']; ?></option>
+                    <?php endif ?>          
+                <?php endforeach ?>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="sr-only" for="">description</label>
+            <input type="text" class="form-control" id="description" name="description" placeholder="รายละเอียด" >
+          </div>
+
           
               <button type="submit" class="btn btn-primary">ส่งรหัส tracking</button>
             </form>
+
+                
+              <?php endif ?>
           </div>
           <br>
 

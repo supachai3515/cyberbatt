@@ -6,6 +6,7 @@ class Checkout extends CI_Controller {
 		parent::__construct();
 		//call model inti 
 		$this->load->model('initdata_model');
+		session_start();
 	}
 
 	public function index()

@@ -14,7 +14,7 @@
 
 
 <!-- logo-brand-area-end --><!-- footer-area-start -->
-    <footer>
+       <footer>
         <section class="footer-area">
             <div class="container">
                 <div class="row">
@@ -24,63 +24,54 @@
                                 <div class="footer-title">
                                     <h2>cyberbatt</h2>
                                 </div>
-                                <div class="footer-content">
-                                    <p>"รับซ่อม  Macbook iMac  iphone ipad ขายอะไหล่แท้ มือหนึ่ง และมือสอง ซ่อมด่วนรอรับได้เลย เปลี่ยนชิพการ์ดจอ ลง OSX -ซ่อมหน้าจอ LED LCD เมนบอร์ดทุกอาการ"</p>
-                                    <span class="author">- cyberbatt.com -</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-3 col-lg-2 col-md-2">
-                            <div class="my-account">
-                                <div class="footer-title">
-                                    <h2>cyberbatt</h2>
-                                </div>
                                 <div class="footer-menu">
                                     <ul>
-                                        <li><a href="http://www.cyberbatt.com/howtobuy">วิธีการสั่งซื้อ</a></li>
+                                        <li><a href="http://www.cyberbatt.com/products">สินค้า</a></li>
+                                        <li><a href="http://www.cyberbatt.com/cart">ตะกร้าสินค้า</a></li>
                                         <li><a href="http://www.cyberbatt.com/payment">วีธีแจ้งชำระเงิน</a></li>
-                                        <li><a href="http://www.cyberbatt.com/dealer">Dealer</a></li>
-                                         <li><a href="http://www.cyberbatt.com/content">บทความ</a></li>
+                                         <li><a href="http://www.cyberbatt.com/howtobuy">วิธีการสั่งซื้อ</a></li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-2 col-md-2 hidden-sm">
-                            <div class="information-area">
+                        <div class="col-sm-3 col-lg-3 col-md-3">
+                            <div class="static-book">
                                 <div class="footer-title">
-                                    <h2>หวดหมู่สินค้า</h2>
+                                    <h2>ตรวจสอบสถานะจัดส่งสินค้า</h2>
                                 </div>
                                 <div class="footer-menu">
                                     <ul>
-                                                                                                                            <li><a href="http://www.cyberbatt.com/products/category/apple">
-                                            Apple แอปเปิ้ล                                        </a></li>
-                                            
-                                                                                
-                                                                            </ul>
+                                        <!-- ngRepeat: shipping in shipping_method --><li ng-repeat="shipping in shipping_method" class="ng-scope"><a href="http://www.cyberbatt.com/tracking" class="ng-binding">Ems</a></li><!-- end ngRepeat: shipping in shipping_method --><li ng-repeat="shipping in shipping_method" class="ng-scope"><a href="http://www.cyberbatt.com/tracking" class="ng-binding">GrabBike</a></li><!-- end ngRepeat: shipping in shipping_method --><li ng-repeat="shipping in shipping_method" class="ng-scope"><a href="http://www.cyberbatt.com/tracking" class="ng-binding">TNT</a></li><!-- end ngRepeat: shipping in shipping_method --><li ng-repeat="shipping in shipping_method" class="ng-scope"><a href="http://www.cyberbatt.com/tracking" class="ng-binding">นัดรับสินค้า</a></li><!-- end ngRepeat: shipping in shipping_method -->
+            
+                                    </ul>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-3 col-lg-2 col-md-2">
-                            <div class="footer-menu-area">
+                        
+
+                        <div class="col-sm-3 col-lg-3 col-md-3">
+                             <div class="store-information-area">
                                 <div class="footer-title">
-                                    <h2>หวดหมู่สินค้า</h2>
+                                    <h2>ข้อมูลของร้าน</h2>
                                 </div>
-                                <div class="footer-menu">
+                                <div class="store-content">
                                     <ul>
-                                                                                                                        
-                                                                            </ul>
+                                       <li><i class="fa fa-map-marker"></i>  บริษัท ไชเบอร์ แบต จำกัด <br>
+                                       2963 ซ.ลาดพร้าว 101/2 ถ.ลาดพร้าว คลองจั่น บางกะปิ กทม. 10310 </li>
+                                       <li><i class="fa fa-phone"></i> Mobile: 091-7824565 , 02-7313565</li>
+                                       <li><i class="fa fa-comment"></i> LINE : @cyberbatt</li>
+                                    </ul>
                                 </div>
                             </div>
                         </div>
                         <div class="col-sm-3 col-lg-3 col-md-3">
                             <div class="store-information-area">
                                 <div class="footer-title">
-                                    <h2>ข้อมูลของร้าน</h2>
+                                    <h2>เวลาทำการ Cyberbatt</h2>
                                 </div>
                                 <div class="store-content">
                                     <ul>
-                                        <li>384/241 หมู่ 2 หมู่บ้านเดอะทรัสต์ซิตี้ ถนนงามวงศ์วาน ตำบลบางเขน อำเภอเมืองนนทบุรี จังหวัด นนทบุรี 11000</li>
-                                        <li><a href="https://www.facebook.com/applehomefix/" target="_blank"><i class="fa fa-facebook-official" aria-hidden="true"></i> Facebook</a></li>
+                                        <li><i class="fa fa-clock-o"></i> ทุกวัน 10.30 - 20.00 น.</li>
                                     </ul>
                                 </div>
                                 <div class="footer-payment">
@@ -97,7 +88,7 @@
                 <div class="row">
                     <div class="col-lg-12 col-md-12">
                         <div class="copyright">
-                            <p>Copyright &copy; 2016 <a href="http://www.cyberbatt.com/">รับซ่อม  Macbook iMac  iphone ipad ขายอะไหล่แท้ มือหนึ่งและมือสอง - cyberbatt (แอปเปิ้ลนน)</a>. All rights reserved. Design By <a href="http://www.wisadev.com" target="_blank">wisadev.com</a></p>
+                            <p>Copyright &copy; 2016 <a href="http://www.cyberbatt.com/">รับซ่อม  Macbook iMac  iphone ipad ขายอะไหล่แท้ มือหนึ่งและมือสอง - cyberbatt</a>. All rights reserved. Design By <a href="http://www.wisadev.com" target="_blank">wisadev.com</a></p>
                         </div>
                     </div>
                 </div>
@@ -108,26 +99,26 @@
     <!-- JS -->
     <!-- jquery-1.11.3.min js
         ============================================ -->
-    <script src="http://www.hotelsupply.in.th/theme/js/vendor/jquery-1.11.3.min.js"></script>
+    <script src="http://www.cyberbatt.com/theme/js/vendor/jquery-1.11.3.min.js"></script>
     <!-- bootstrap js
         ============================================ -->
-    <script src="http://www.hotelsupply.in.th/theme/js/bootstrap.min.js"></script>
+    <script src="http://www.cyberbatt.com/theme/js/bootstrap.min.js"></script>
     <!-- owl.carousel.min js
         ============================================ -->
-    <script src="http://www.hotelsupply.in.th/theme/js/owl.carousel.min.js"></script>
+    <script src="http://www.cyberbatt.com/theme/js/owl.carousel.min.js"></script>
     <!-- jquery.meanmenu js
         ============================================ -->
-    <script src="http://www.hotelsupply.in.th/theme/js/jquery.meanmenu.js"></script>
+    <script src="http://www.cyberbatt.com/theme/js/jquery.meanmenu.js"></script>
     <!-- jquery-ui.min js
         ============================================ -->
-    <script src="http://www.hotelsupply.in.th/theme/js/jquery-ui.min.js"></script>
+    <script src="http://www.cyberbatt.com/theme/js/jquery-ui.min.js"></script>
     <!-- fancybox js -->
      <!-- Add fancyBox Js -->
-        <script type="text/javascript" src="http://www.hotelsupply.in.th/theme/fancyBox/lib/jquery.mousewheel.pack.js?v=3.1.3"></script>
-        <script type="text/javascript" src="http://www.hotelsupply.in.th/theme/fancyBox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-        <script type="text/javascript" src="http://www.hotelsupply.in.th/theme/fancyBox/source/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>
-        <script type="text/javascript" src="http://www.hotelsupply.in.th/theme/fancyBox/source/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
-        <script type="text/javascript" src="http://www.hotelsupply.in.th/theme/fancyBox/source/helpers/jquery.fancybox-media.js?v=1.0.6"></script>
+        <script type="text/javascript" src="http://www.cyberbatt.com/theme/fancyBox/lib/jquery.mousewheel.pack.js?v=3.1.3"></script>
+        <script type="text/javascript" src="http://www.cyberbatt.com/theme/fancyBox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+        <script type="text/javascript" src="http://www.cyberbatt.com/theme/fancyBox/source/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>
+        <script type="text/javascript" src="http://www.cyberbatt.com/theme/fancyBox/source/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
+        <script type="text/javascript" src="http://www.cyberbatt.com/theme/fancyBox/source/helpers/jquery.fancybox-media.js?v=1.0.6"></script>
      <script type="text/javascript">
     $(document).ready(function() {
         $(".fancybox-thumb").fancybox({
@@ -147,26 +138,26 @@
     </script>
     <!-- jquery.scrollUp.min js
         ============================================ -->
-    <script src="http://www.hotelsupply.in.th/theme/js/jquery.scrollUp.min.js"></script>
+    <script src="http://www.cyberbatt.com/theme/js/jquery.scrollUp.min.js"></script>
     <!-- wow js
         ============================================ -->
-    <script src="http://www.hotelsupply.in.th/theme/js/wow.js"></script>
+    <script src="http://www.cyberbatt.com/theme/js/wow.js"></script>
     <script>
     new WOW().init();
     </script>
     <!-- Nivo slider js
         ============================================ -->
-    <script src="http://www.hotelsupply.in.th/theme/custom-slider/js/jquery.nivo.slider.js" type="text/javascript"></script>
-    <script src="http://www.hotelsupply.in.th/theme/custom-slider/home.js" type="text/javascript"></script>
+    <script src="http://www.cyberbatt.com/theme/custom-slider/js/jquery.nivo.slider.js" type="text/javascript"></script>
+    <script src="http://www.cyberbatt.com/theme/custom-slider/home.js" type="text/javascript"></script>
     <!-- Google Map js -->
-    <script src="https://maps.googleapis.com/maps/api/js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyC5AOdM__wv8_dChk55jzPZAspp_ViJWik"></script>
     <!-- plugins js
         ============================================ -->
-    <script src="http://www.hotelsupply.in.th/theme/js/plugins.js"></script>
+    <script src="http://www.cyberbatt.com/theme/js/plugins.js"></script>
     <!-- main js
         ============================================ -->
-    <script src="http://www.hotelsupply.in.th/theme/js/main.js"></script>
-    <script type='text/javascript' src='http://www.hotelsupply.in.th/theme/js/angular.min.js'></script>
+    <script src="http://www.cyberbatt.com/theme/js/main.js"></script>
+    <script type='text/javascript' src='http://www.cyberbatt.com/theme/js/angular.min.js'></script>
 
     <script type="text/javascript">
 
@@ -175,10 +166,13 @@ var app = angular.module('myApp', []);
 app.controller('mainCtrl', function($scope,$http) {
     $scope.product_alert = false;
     $scope.is_reservations_check = false;
-     $scope.product_alert_text = 'สินค้า 1 ชิ้น ได้ถูกเพิ่มเข้าไปยังตะกร้าสินค้าของคุณ <a class="btn btn-default" href="http://www.hotelsupply.in.th/cart" role="button">ดูตะกร้าสินค้า</a>';
+     $scope.product_alert_text = 'สินค้า 1 ชิ้น ได้ถูกเพิ่มเข้าไปยังตะกร้าสินค้าของคุณ <a class="btn btn-default" href="http://www.cyberbatt.com/cart" role="button">ดูตะกร้าสินค้า</a>';
+
+     $scope.shipping_price = 0;
+     $scope.spcial_price = 0;
     
-	$scope.productItems = [{
-     		id: '0',
+    $scope.productItems = [{
+            id: '0',
             sku: '0',
             name: '',
             img: '',
@@ -189,9 +183,20 @@ app.controller('mainCtrl', function($scope,$http) {
             brand   : '',
             is_reservations   : 0,
             type   : ''
-	}];
+    }];
 
     $scope.sumTotal = function() {
+        var total = 0;
+        var weight = 0;
+        for (var i = 0; i < $scope.productItems.length; i++) {
+            var product = $scope.productItems[i];
+            total += (product.price * product.quantity);
+        }
+        return total;
+    }
+
+
+    $scope.sumShipping = function() {
         var total = 0;
         for (var i = 0; i < $scope.productItems.length; i++) {
             var product = $scope.productItems[i];
@@ -213,7 +218,7 @@ app.controller('mainCtrl', function($scope,$http) {
           // Simple GET request example:
         $http({
             method: 'GET',
-            url: 'http://www.hotelsupply.in.th/cart/add_item/'+ productId
+            url: 'http://www.cyberbatt.com/cart/add_item/'+ productId
 
         }).success(function(data) {
             $scope.product_alert = true;
@@ -225,7 +230,7 @@ app.controller('mainCtrl', function($scope,$http) {
         // Simple GET request example:
         $http({
             method: 'GET',
-            url: 'http://www.hotelsupply.in.th/cart/update_item/'+ rowid + '/' + editValue
+            url: 'http://www.cyberbatt.com/cart/update_item/'+ rowid + '/' + editValue
         }).success(function(data) {
              $scope.getOrder();
             $scope.deleteResult = data;
@@ -245,7 +250,7 @@ app.controller('mainCtrl', function($scope,$http) {
          if(qty>0){
              $http({
                 method: 'GET',
-                url: 'http://www.hotelsupply.in.th/cart/update_item/'+ rowid + '/' + qty
+                url: 'http://www.cyberbatt.com/cart/update_item/'+ rowid + '/' + qty
             }).success(function(data) {
                  $scope.getOrder();
                 $scope.deleteResult = data;
@@ -268,7 +273,7 @@ app.controller('mainCtrl', function($scope,$http) {
          if(qty>0){
              $http({
                method: 'GET',
-               url: 'http://www.hotelsupply.in.th/cart/update_item/'+ rowid + '/' + qty
+               url: 'http://www.cyberbatt.com/cart/update_item/'+ rowid + '/' + qty
             }).success(function(data) {
                  $scope.getOrder();
                 $scope.deleteResult = data;
@@ -282,7 +287,7 @@ app.controller('mainCtrl', function($scope,$http) {
         // Simple GET request example:
         $http({
             method: 'GET',
-            url: 'http://www.hotelsupply.in.th/cart/delete_item/'+ rowid
+            url: 'http://www.cyberbatt.com/cart/delete_item/'+ rowid
         }).success(function(data) {
              $scope.getOrder();
             //$scope.deleteResult = data;
@@ -290,11 +295,11 @@ app.controller('mainCtrl', function($scope,$http) {
     }
 
     $scope.getOrder = function() {
-    	  
+          
         // Simple GET request example:
         $http({
             method: 'GET',
-            url: 'http://www.hotelsupply.in.th/cart/get_cart'
+            url: 'http://www.cyberbatt.com/cart/get_cart'
         }).success(function(data) {
  
             $scope.productItems = [{
@@ -316,14 +321,14 @@ app.controller('mainCtrl', function($scope,$http) {
             for (var i = 0; i < $scope.dataResult.length; i++) {
                  var product = $scope.dataResult[i];
                 $scope.productItems.push({
-                	id: product.id,
-	                sku: product.sku,
+                    id: product.id,
+                    sku: product.sku,
                     slug: product.slug,
-	                name: product.name,
-	                img: product.img,
-	                price: product.price,
-	                quantity: product.qty,
-	                rowid: product.rowid,
+                    name: product.name,
+                    img: product.img,
+                    price: product.price,
+                    quantity: product.qty,
+                    rowid: product.rowid,
                     model : product.model,
                     brand : product.brand,
                     is_reservations: product.is_reservations,
@@ -368,7 +373,7 @@ app.controller('mainCtrl', function($scope,$http) {
          
           $http({
             method: 'POST',
-            url: 'http://www.hotelsupply.in.th/dealer/register',
+            url: 'http://www.cyberbatt.com/dealer/register',
              headers: {
            'Content-Type': 'application/x-www-form-urlencoded'
          },
@@ -406,34 +411,12 @@ app.controller('mainCtrl', function($scope,$http) {
 
             $scope.showOrderDealer = false;
             $scope.editDealerForm = true;  
-                            $scope.getDealer("supachai");
                     
        }
 
     
      $scope.savedealerEdit = function() {
-            
-                $http({
-                    method: 'POST',
-                    url: 'http://www.hotelsupply.in.th/dealer/edit',
-                     headers: {
-                   'Content-Type': 'application/x-www-form-urlencoded'
-                },
-                    data: $scope.dealerEdit
-                }).success(function(data) {
-
-                    if(data.error == true) {
-                    $scope.isProscess = false;
-                    
-                    $scope.message_prosecss = data.message;
-                }
-                else {
-                    $scope.isProscess = false;
-                    $scope.message_prosecss = 'บันทึกสำเร็จ';
-                }
-               });
-
-                    
+                   
 
        }
 
@@ -441,7 +424,7 @@ app.controller('mainCtrl', function($scope,$http) {
             $scope.name_dealer = name
              $http({
             method: 'POST',
-            url: 'http://www.hotelsupply.in.th/dealer/getdealer',
+            url: 'http://www.cyberbatt.com/dealer/getdealer',
              headers: {
            'Content-Type': 'application/x-www-form-urlencoded'
          },
@@ -463,7 +446,7 @@ app.controller('mainCtrl', function($scope,$http) {
 
               $http({
             method: 'POST',
-            url: 'http://www.hotelsupply.in.th/payment/sendmail',
+            url: 'http://www.cyberbatt.com/payment/sendmail',
              headers: {
            'Content-Type': 'application/x-www-form-urlencoded'
          },
@@ -488,7 +471,7 @@ app.controller('mainCtrl', function($scope,$http) {
 
             $http({
             method: 'GET',
-            url: 'http://www.hotelsupply.in.th/tracking/get_all?get='+orderid,
+            url: 'http://www.cyberbatt.com/tracking/get_all?get='+orderid,
              headers: {
            'Content-Type': 'application/x-www-form-urlencoded'
          },
@@ -505,7 +488,7 @@ app.controller('mainCtrl', function($scope,$http) {
             console.log($scope.txtSearchTracking);
             $http({
             method: 'GET',
-            url: 'http://www.hotelsupply.in.th/download/get_all',
+            url: 'http://www.cyberbatt.com/download/get_all',
              headers: {
            'Content-Type': 'application/x-www-form-urlencoded'
          },
@@ -521,24 +504,119 @@ app.controller('mainCtrl', function($scope,$http) {
         $scope.ckeckoutSubmit = function() {        
            
                  $scope.isProscess = true;
-         $scope.message_prosecss = "กรุณารอ...";
+            $scope.message_prosecss = "กรุณารอ...";
             console.log($scope.paymentMessage);
 
                   $http({
                 method: 'POST',
-                url: 'http://www.hotelsupply.in.th/payment/sendmail',
+                url: 'http://www.cyberbatt.com/payment/sendmail',
                  headers: {
                'Content-Type': 'application/x-www-form-urlencoded'
              },
                 data:$scope.paymentMessage
             }).success(function(data) {
-                 $scope.isProscess = false;
-                $scope.message_prosecss = 'ส่งข้อความสำเร็จ';
-
+                
                 console.log(data);
            });
-       }
+       };
 
+
+
+        $scope.changeProvince = function($province) {
+
+                $http({
+                    method: 'POST',
+                    url: 'http://www.cyberbatt.com/checkout/getProvince',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+
+                    data: {
+                        province_id: $province
+                    }
+
+                }).success(function(data) {
+                    $scope.items = data;
+                    //console.log(data);
+                });
+            };
+
+
+            $scope.changeAmphur = function($amphur_id) {
+
+                $http({
+                    method: 'POST',
+                    url: 'http://www.cyberbatt.com/checkout/getSpecialCounty',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+
+                    data: {
+                        amphur_id: $amphur_id
+                    }
+
+                }).success(function(data) {
+                    $scope.spcial_price = parseInt(data.spcial_price, 10);
+                    //console.log(data);
+                });
+
+            };
+
+
+            $scope.changeShipping = function($transport) {
+
+                $http({
+                    method: 'POST',
+                    url: 'http://www.cyberbatt.com/checkout/getShipping',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+
+                    data: {
+                        shipping_id: $transport
+                    }
+
+                }).success(function(data) {
+                    $scope.shipping_price = parseInt(data.shipping_price, 10);
+                    //console.log(data);
+                });
+            };
+
+
+            $scope.get_shipping_method = function() {
+
+                $http({
+                    method: 'POST',
+                    url: 'http://www.cyberbatt.com/checkout/get_shipping_method',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    }
+
+                }).success(function(data) {
+                    $scope.shipping_method  = data;
+                    //console.log(data);
+                });
+            };
+
+
+             $scope.get_province_list = function() {
+
+                $http({
+                    method: 'POST',
+                    url: 'http://www.cyberbatt.com/checkout/get_province_list',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    }
+
+                }).success(function(data) {
+                    $scope.province_list  = data;
+                    //console.log(data);
+                });
+            };
+
+
+    $scope.get_province_list();
+    $scope.get_shipping_method();
 
     //init get
      $scope.getOrder();
@@ -546,7 +624,6 @@ app.controller('mainCtrl', function($scope,$http) {
 
 });
 </script>
-
 <?php wp_footer(); ?>
 
 <?php zerif_bottom_body_trigger(); ?>

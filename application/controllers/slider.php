@@ -8,7 +8,9 @@ class Slider extends CI_Controller {
 		$this->load->model('initdata_model');
 		$this->load->model('slider_model');
 		$this->load->library('pagination');
+		session_start();
 		$this->is_logged_in();
+
 
 	}
 

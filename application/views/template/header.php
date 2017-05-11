@@ -194,6 +194,7 @@
                                     <li><a href="<?php echo base_url('payment')?>">แจ้งชำระเงิน</a></li>
                                     <li><a href="<?php echo base_url('tracking')?>">ติดตามสินค้า</a></li>
                                     <li><a href="<?php echo base_url('faq')?>">ถาม-ตอบ</a></li>
+                                    <li><a href="<?php echo base_url('content')?>">บทความ</a></li>
                                     <li><a href="<?php echo base_url('contact')?>">ติดต่อเรา</a></li>
                                 </ul>
                             </nav>
@@ -223,6 +224,7 @@
                                     <li><a href="<?php echo base_url('payment')?>">แจ้งชำระเงิน</a></li>
                                     <li><a href="<?php echo base_url('tracking')?>">ติดตามสินค้า</a></li>
                                     <li><a href="<?php echo base_url('faq')?>">ถาม-ตอบ</a></li>
+                                    <li><a href="<?php echo base_url('content')?>">บทความ</a></li>
                                     <li><a href="<?php echo base_url('contact')?>">ติดต่อเรา</a></li>
 
                                 </ul>

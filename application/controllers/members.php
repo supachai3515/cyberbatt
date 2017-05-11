@@ -8,7 +8,9 @@ class Members extends CI_Controller {
 		$this->load->model('initdata_model');
 		$this->load->model('members_model');
 		$this->load->library('pagination');
+		session_start();
 		$this->is_logged_in();
+
 
 	}
 

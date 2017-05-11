@@ -121,6 +121,7 @@ class Orders extends CI_Controller {
 		$this->is_logged_in();
 
 		$this->orders_model->update_tracking($orders_id);
+		$this->orders_model->update_status($orders_id);
 
 		if($orders_id!=""){
 

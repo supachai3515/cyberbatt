@@ -9,6 +9,7 @@ class Home extends CI_Controller {
 		$this->load->model('home_model');
 		$this->load->model('products_model');
 		$this->load->library('pagination');
+		 session_start();
 	}
 
 	public function index()

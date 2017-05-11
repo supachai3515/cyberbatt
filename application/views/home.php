@@ -234,7 +234,7 @@
         </div>
     </div>
 </section>
-<!--
+
 <section class="blog-area">
         <div class="container">
             <div class="row">
@@ -271,5 +271,4 @@
             </div>
         </div>
 </section>
--->
 <?php $this->load->view('template/logo'); ?>

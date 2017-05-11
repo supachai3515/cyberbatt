@@ -8,6 +8,7 @@ class Products extends CI_Controller {
 		$this->load->model('initdata_model');
 		$this->load->model('products_model');
 		$this->load->library('pagination');
+		 session_start();
 	}
 
 	//page view

@@ -72,15 +72,14 @@
 		endif;	
 
 	endif; ?>
-
-<div id="mobilebgfix" class="home-2" ng-app="myApp" ng-controller="mainCtrl">
+<div id="mobilebgfix"  class="home-3" ng-app="myApp" ng-controller="mainCtrl">
 
     <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
     <!-- Add your site or application content here -->
 <header>
-        <div class="header-container">
+    <div class="header-container">
             <!-- header-top-area start -->
             <div class="header-top-area">
                 <div class="container">
@@ -88,22 +87,19 @@
                         <div class="col-xs-12 col-sm-6 col-md-4">
                             <div class="currency">
                                 <span class="menu-lavel">
-                                    LINE ID : @cyberbatt
+                                    <i class="fa fa-phone"></i> 091-7824565
                                 </span>
                             </div>
                         </div>
                         <div class="col-xs-12 hidden-sm hidden-xs col-md-4">
-                            <div class="welcome-msg">
-                                <p>ยินดีต้อนรับ cyberbatt.com</p>
-                            </div>
                         </div>
                         <div class="col-xs-12 col-sm-6 col-md-4">
                             <div class="top-menu">
                                 <nav>
                                     <ul>
                                         <li class="current"><a href="http://www.cyberbatt.com/dealer"><i class="fa fa-user" aria-hidden="true"></i> Dealer</a></li>
-                                        <li><a href="https://www.facebook.com/applehomefix/" target="_blank"><i class="fa fa-facebook-official" aria-hidden="true"></i> Facebook</a></li>
-                                        <li><a href="http://www.cyberbatt.com/cart"><i class="fa fa-shopping-cart" aria-hidden="true"></i> ตะกร้าสินค้า</a></li>
+                                        <li><a href="https://www.facebook.com/cyberbatt/" target="_blank"><i class="fa fa-facebook-official" aria-hidden="true"></i> FB</a></li>
+                                        <li><a href="http://line.me/ti/p/%40cyberbatt">LINE : @cyberbatt</a></li>
                                     </ul>
                                 </nav>
                             </div>
@@ -112,22 +108,21 @@
                 </div>
             </div>
             <!-- header-top-area end -->
-            <div style="padding-bottom: 30px"></div>
             <!-- header-bottom-area start -->
             <div class="header-bottom-area">
                 <div class="container">
                     <div class="row">
                         <!-- logo start -->
-                        <div class="col-md-3">
+                        <div class="col-sm-6 col-xs-12 col-md-3">
                             <div class="logo">
                                 <a href="http://www.cyberbatt.com/">
-                                    <img src="http://www.cyberbatt.com/theme/img/logo/logo-cyberbatt.png" alt="">
+                                    <img src="http://www.cyberbatt.com/theme/img/logo/logo-1.png" alt="">
                                 </a>
                             </div>
                         </div>
                         <!-- logo end -->
                         <!-- search-box start -->
-                        <div class="col-md-6">
+                        <div class="col-sm-6 col-xs-12 col-md-5">
                             <div style="margin-top: -10px">
                                 <form class="navbar-form ng-pristine ng-valid" role="search" action="http://www.cyberbatt.com/search" method="GET">
                                     <div class="input-group search-form">
@@ -142,43 +137,21 @@
                         <!-- search-box end -->
 
                         <!-- shopping-cart start -->
-                        <div class="col-md-3">
+                        <div class="col-sm-12 col-xs-12 col-md-4">
                             <div class="shopping-cart">
                                 <ul>
                                     <li>
-                                        <a href="http://www.cyberbatt.com/cart">
+                                                                            <a href="http://www.cyberbatt.com/cart">
                                             <b>ตะกร้าสินค้า</b>
                                             <span class="item">
-                                            <span ng-bind="sumItems()"></span> - ชิ้น
+                                            <span >0</span> - ชิ้น
                                             <span class="total-amu">
-                                                <span ng-bind="sumTotal() | currency:'฿':0"></span>
+                                                <span></span>
                                             </span>
                                             </span>
                                         </a>
-                                        <div class="mini-cart-content" ng-if="sumTotal() > 1">
-                                            <div class="cart-img-details" ng-repeat="item in productItems" ng-if="item.price != '0'">
-                                                <div class="cart-img-photo">
-                                                    <a href="http://www.cyberbatt.com/product/{{item.slug}}">
-                                                        <img src="{{item.img}}" alt="" />
-                                                    </a>
-                                                </div>
-                                                <div class="cart-img-contaent">
-                                                    <a href="http://www.cyberbatt.com/product/{{item.slug}}"  ><h4  ng-bind="item.name"></h4></a>
-                                                    <span class="quantity"><span ng-bind="item.quantity"></span> ชิ้น</span>
-                                                    <span ng-bind="item.price | currency:'฿':0"></span>
-                                                </div>
-                                                <div class="pro-del">
-                                                    <a href="" ng-click="deleteProduct_click(item.rowid)"><i class="fa fa-times-circle"></i></a>
-                                                </div>
-                                            </div>
-                                            <div class="clear"></div>
-                    
-                                            <div class="cart-inner-bottom">
-                                                <p class="total">รวม: <span class="amount"><span ng-bind="sumTotal() | currency:'฿':0"></span></p>
-                                                <div class="clear"></div>
-                                                <p class="buttons"><a href="http://www.cyberbatt.com/checkout">ยันยันการสั่งซื้อ</a></p>
-                                            </div>
-                                        </div>
+      
+                                        
                                     </li>
                                 </ul>
                             </div>
@@ -189,9 +162,8 @@
             </div>
             <!-- header-bottom-area end -->
         </div>
-           <!-- main-menu-area start -->
+        <!-- main-menu-area start -->
         <div class="main-menu-area">
-            <div class="bg-half"></div>
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12 col-md-12">
@@ -200,20 +172,18 @@
                                 <ul>
                                     <li><a href="http://www.cyberbatt.com/"><i class="fa fa-home"></i></a></li>
                                     <li><a href="http://www.cyberbatt.com/products">สินค้า</a></li>
-                                     <li><a href="http://www.cyberbatt.com/howtobuy">cyberbatt</a>
+                                     <li><a href="http://www.cyberbatt.com/howtobuy">ช่วยเหลือ</a>
                                         <ul class="sub-menu">
                                            <li><a href="http://www.cyberbatt.com/howtobuy">วิธีการสั่งซื้อ</a></li>
                                            <li><a href="http://www.cyberbatt.com/tracking">การจัดส่ง</a></li>
                                            <li><a href="http://www.cyberbatt.com/warranty">การรับประกัน</a></li>
                                         </ul>
                                     </li>
-                                    <li><a href="http://www.cyberbatt.com/fixmac">รับซ่อม</a></li>
                                     <li><a href="http://www.cyberbatt.com/payment">แจ้งชำระเงิน</a></li>
-                                    <li><a href="http://www.cyberbatt.com/dealer">Dealer</a></li>
-                                    <li><a href="http://www.cyberbatt.com/content">บทความ</a></li>
-                                    <li><a href="http://www.cyberbatt.com/faq">พูดคุย (ถามตอบ)</a></li>
+                                    <li><a href="http://www.cyberbatt.com/tracking">ติดตามสินค้า</a></li>
+                                    <li><a href="http://www.cyberbatt.com/faq">ถาม-ตอบ</a></li>
+                                    <li><a href="http://www.cyberbatt.com/content/">บทความ</a></li>
                                     <li><a href="http://www.cyberbatt.com/contact">ติดต่อเรา</a></li>
-
                                 </ul>
                             </nav>
                         </div>
@@ -232,18 +202,17 @@
                                  <ul>
                                     <li><a href="http://www.cyberbatt.com/"><i class="fa fa-home"></i></a></li>
                                     <li><a href="http://www.cyberbatt.com/products">สินค้า</a></li>
-                                     <li><a href="#">cyberbatt</a>
+                                     <li><a href="#">ช่วยเหลือ</a>
                                         <ul>
                                            <li><a href="http://www.cyberbatt.com/howtobuy">วิธีการสั่งซื้อ</a></li>
                                            <li><a href="http://www.cyberbatt.com/tracking">การจัดส่ง</a></li>
                                            <li><a href="http://www.cyberbatt.com/warranty">การรับประกัน</a></li>
                                         </ul>
                                     </li>
-                                    <li><a href="http://www.cyberbatt.com/fixmac">รับซ่อม</a></li>
                                     <li><a href="http://www.cyberbatt.com/payment">แจ้งชำระเงิน</a></li>
-                                    <li><a href="http://www.cyberbatt.com/dealer">Dealer</a></li>
-                                    <li><a href="http://www.cyberbatt.com/content">บทความ</a></li>
-                                    <li><a href="http://www.cyberbatt.com/faq">พูดคุย (ถามตอบ)</a></li>
+                                    <li><a href="http://www.cyberbatt.com/tracking">ติดตามสินค้า</a></li>
+                                    <li><a href="http://www.cyberbatt.com/faq">ถาม-ตอบ</a></li>
+                                    <li><a href="http://www.cyberbatt.com/content/">บทความ</a></li>
                                     <li><a href="http://www.cyberbatt.com/contact">ติดต่อเรา</a></li>
 
                                 </ul>
