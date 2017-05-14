@@ -218,6 +218,75 @@
                <div class="form-group">
                   <legend>รูป slip</legend>
                 </div>
+                 <input hidden="true"  value="<?php echo $orders_data['member_id']; ?>"  name="member_id" >
+                <div class="form-group">
+                    <label class="col-md-3 control-label" for="textinput">เลือกธนาคาร  *</label>
+                    <div class="col-md-6">
+                      <select  name="bank_name"  class="form-control" required="required">
+                          <?php if ($orders_data['bank_name'] == "ธนาคารกรุงเทพ"): ?>
+                            <option value="ธนาคารกรุงเทพ" selected>ธนาคารกรุงเทพ</option>
+                          <?php else: ?>
+                            <option value="ธนาคารกรุงเทพ">ธนาคารกรุงเทพ</option>
+                          <?php endif ?>
+
+                          <?php if ($orders_data['bank_name'] == "ธนาคารกรุงไทย"): ?>
+                            <option value="ธนาคารกรุงไทย" selected>ธนาคารกรุงไทย</option>
+                          <?php else: ?>
+                            <option value="ธนาคารกรุงไทย">ธนาคารกรุงไทย</option>
+                          <?php endif ?>
+
+                          <?php if ($orders_data['bank_name'] == "ธนาคารไทยพาณิชย์"): ?>
+                            <option value="ธนาคารไทยพาณิชย์" selected>ธนาคารไทยพาณิชย์</option>
+                          <?php else: ?>
+                            <option value="ธนาคารไทยพาณิชย์">ธนาคารไทยพาณิชย์</option>
+                          <?php endif ?>
+
+                          <?php if ($orders_data['bank_name'] == "ธนาคารกสิกรไทย"): ?>
+                            <option value="ธนาคารกสิกรไทย" selected>ธนาคารกสิกรไทย</option>
+                          <?php else: ?>
+                            <option value="ธนาคารกสิกรไทย">ธนาคารกสิกรไทย</option>
+                          <?php endif ?>
+
+                      </select>
+                     </div>
+                </div>
+
+              <div class="form-group">
+                  <label class="col-md-3 control-label" for="textinput">จำนวนเงิน *</label>
+                  <div class="col-md-6">
+                    <input value="<?php echo $orders_data['amount']; ?>"  name="amount" type="number" placeholder="จำนวนเงิน" class="form-control input-md" required="required">
+                   </div>
+              </div>
+
+              <div class="form-group">
+              <label class="col-md-3 control-label" for="textinput">วันที่โอน  *</label>
+                <div class="col-md-6">
+                    <div class='input-group date' id='datepicker'>
+                        <input type='text' class="form-control" name="inform_date" placeholder="วันที่" value="<?php echo $orders_data['inform_date']; ?>"  required="true" />
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+                   </div>
+                  </div>
+                        
+                <div class="form-group">
+                <label class="col-md-3 control-label" for="textinput">เวลาที่โอน  *</label>
+                <div class="col-md-6">
+                    <div class="input-group bootstrap-timepicker timepicker">
+                        <input id="timepicker1" type="text" name="inform_time" class="form-control input-small" value="<?php echo $orders_data['inform_time']; ?>"   required="true"/>
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+                    </div>
+                 </div>
+                  </div>
+                         
+                       
+                  <div class="form-group">
+                      <label class="col-md-3 control-label" for="textinput">หมายเหตุ</label>
+                      <div class="col-md-6">
+                        <textarea  name="comment" class="form-control input-md" ><?php echo $orders_data['comment']; ?></textarea>
+                    </div>
+                    </div>
 
 
                 <!-- File Button --> 

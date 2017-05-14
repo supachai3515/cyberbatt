@@ -10,6 +10,8 @@
     <title><?=$header['title'];?></title>
     <!-- Bootstrap Core CSS -->
     <link href="<?=base_url();?>css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="<?php echo base_url('theme');?>/datepicker/css/bootstrap-datepicker3.css">
+    <link rel="stylesheet" href="<?php echo base_url('theme');?>/datepicker/css/bootstrap-timepicker.css">
     <!-- Custom CSS -->
     <link href="<?=base_url();?>css/sb-admin.css" rel="stylesheet">
     <!-- Custom Fonts -->

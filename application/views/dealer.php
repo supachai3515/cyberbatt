@@ -70,7 +70,7 @@
 					                				<br>
 
 					                				<?php if ($value['order_status_id'] ==  "1"): ?>
-					                					<a href="<?php echo base_url('payment/order/'.$value['ref_id']);?>" target="_bank">
+					                					<a href="<?php echo base_url('payment/order/'.$value['ref_id']);?>">
 						                					<button type="button" class="btn btn-xs btn-warning">แจ้งชำระเงิน</button>
 						                				</a> 
 					                				<?php endif ?>

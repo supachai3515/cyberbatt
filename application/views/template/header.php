@@ -20,6 +20,9 @@
     <link href='https://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/css?family=Athiti|Kanit|Prompt:300" rel="stylesheet">
+
+    <link rel="stylesheet" href="<?php echo base_url('theme');?>/datepicker/css/bootstrap-datepicker3.css">
+    <link rel="stylesheet" href="<?php echo base_url('theme');?>/datepicker/css/bootstrap-timepicker.css">
     <link rel="stylesheet" href="<?php echo base_url('theme');?>/css/bootstrap.min.css">
     <link rel="stylesheet" href="<?php echo base_url('theme');?>/css/font-awesome.min.css">
     <link rel="stylesheet" href="<?php echo base_url('theme');?>/css/owl.carousel.css">

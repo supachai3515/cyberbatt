@@ -8,7 +8,18 @@ class Orders_model extends CI_Model {
 	public function get_orders( $start, $limit)
 	{
 
-	    $sql ="  SELECT p.* , os.name order_status_name FROM  orders p INNER JOIN order_status os ON os.id =  p.order_status_id  ORDER BY p.id DESC LIMIT " . $start . "," . $limit;
+	    $sql ="  SELECT o.* , s.name order_status_name,
+				p.bank_name,
+				p.`comment`,
+				p.member_id,
+				p.amount,
+				DATE_FORMAT(p.inform_date_time,'%Y-%m-%d') inform_date,
+				DATE_FORMAT(p.inform_date_time,'%H:%i') inform_time,
+				p.create_date payment_create_date
+				FROM  orders o 
+				LEFT JOIN order_status s ON s.id =  o.order_status_id
+				LEFT JOIN  members m ON m.id = o.customer_id 
+				LEFT JOIN payment p ON p.order_id = o.id ORDER BY o.id DESC LIMIT " . $start . "," . $limit;
 		$re = $this->db->query($sql);
 		return $re->result_array();
 
@@ -26,8 +37,19 @@ class Orders_model extends CI_Model {
 
 	public function get_orders_id($orders_id)
 	{
-		$sql =" SELECT p.* , os.name order_status_name FROM  orders p INNER JOIN order_status os ON os.id =  p.order_status_id
-				 WHERE p.id = '".$orders_id."'"; 
+		$sql =" SELECT o.* , s.name order_status_name,
+				p.bank_name,
+				p.`comment`,
+				p.member_id,
+				p.amount,
+				DATE_FORMAT(p.inform_date_time,'%Y-%m-%d') inform_date,
+				DATE_FORMAT(p.inform_date_time,'%H:%i') inform_time,
+				p.create_date payment_create_date
+				FROM  orders o 
+				LEFT JOIN order_status s ON s.id =  o.order_status_id
+				LEFT JOIN  members m ON m.id = o.customer_id 
+				LEFT JOIN payment p ON p.order_id = o.id
+			  WHERE o.id = '".$orders_id."'"; 
 
 		$query = $this->db->query($sql);
 		$row = $query->row_array();
@@ -62,7 +84,7 @@ class Orders_model extends CI_Model {
 
 		$query = $this->db->query($sql);
 		$row = $query->result_array();
-		return $row;
+		return $row; 
 	}
 	
 
@@ -208,6 +230,21 @@ class Orders_model extends CI_Model {
 		$where = "id = '".$order_id."'"; 
 		$this->db->update('orders', $data_product,$where );
 		
+	}
+
+
+	public function update_invoice($po_orders_id)
+	{	
+		date_default_timezone_set("Asia/Bangkok");
+		$data_order = array(
+			'is_invoice' => $this->input->post('is_invoice'),	
+			'invoice_date' => date("Y-m-d H:i:s"),
+			'invoice_docno' => 'IN'.date("ymd").str_pad($po_orders_id, 4, "0", STR_PAD_LEFT)	
+		);
+
+		$where = array('id' => $po_orders_id);
+		$this->db->update("orders", $data_order, $where);
+		$this->reset_order($po_orders_id);
 	}
 
 

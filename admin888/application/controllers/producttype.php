@@ -46,7 +46,7 @@ class Producttype extends CI_Controller {
 		$data['type_list'] = $this->products_model->get_type();
 
 		//call script
-        $data['menu_id'] ='22';
+        $data['menu_id'] ='1';
 		$data['content'] = 'producttype';
 		$data['script_file']= "js/product_add_js";
 		$data['header'] = array('title' => 'producttype| '.$this->config->item('sitename'),
@@ -66,7 +66,7 @@ class Producttype extends CI_Controller {
 		$data['data_search'] = $return_data['data_search'];
 		$data['menus_list'] = $this->initdata_model->get_menu();
 
-        $data['menu_id'] ='22';
+        $data['menu_id'] ='1';
 		$data['content'] = 'producttype';
 		$data['script_file']= "js/product_add_js";
 		$data['header'] = array('title' => 'producttype| '.$this->config->item('sitename'),
@@ -84,7 +84,7 @@ class Producttype extends CI_Controller {
 		$data['menus_list'] = $this->initdata_model->get_menu();
 		$data['producttype_data'] = $this->producttype_model->get_producttype_id($producttype_id);
 		$data['type_list'] = $this->products_model->get_type();
-        $data['menu_id'] ='22';
+        $data['menu_id'] ='1';
 		$data['content'] = 'producttype_edit';
 		$data['script_file']= "js/product_add_js";
 		$data['header'] = array('title' => 'producttype| '.$this->config->item('sitename'),

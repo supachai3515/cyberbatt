@@ -136,6 +136,12 @@ class Orders_model extends CI_Model {
 	}
 
 
+	public function get_member_order($ref_orderid)
+	{
+		
+	}
+
+
 
 }
 

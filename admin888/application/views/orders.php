@@ -72,7 +72,10 @@
 
                         <a target="_blank" class="btn btn-xs btn-default" href="<?php echo  $this->config->item('weburl').'invoice/'.$orders['ref_id'] ?>" role="button">    
                                  ดูใบสั่งซื้อ
-                                </a>
+                                </a> <span> </span>
+                                <?php if (isset($orders['image_slip_own']) || isset($orders['image_slip_customer']) ): ?>
+                                    <a class="btn btn-xs btn-info" href="<?php echo base_url('orders/edit/'.$orders['id']) ?>" role="button">สลิป <i class="fa fa-paper-plane" aria-hidden="true"></i></i></a>
+                                <?php endif ?>
                         </td>
                         <td>
                             <span>เลขที่ใบสั่งซื้อ : <strong>#<?php echo $orders['id'] ?></strong></span><br/>

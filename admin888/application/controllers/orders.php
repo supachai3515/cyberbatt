@@ -351,6 +351,28 @@ class Orders extends CI_Controller {
 
 		if($order_id!="")
 		{
+
+
+			$sql = "DELETE FROM payment WHERE order_id = '".$order_id."' ";
+			$this->db->query($sql);
+
+			 date_default_timezone_set("Asia/Bangkok");
+			 $data_payment = array(
+				"order_id" => $order_id,
+				"member_id" => $this->input->post('member_id'),
+				"bank_name" => $this->input->post('bank_name'),
+				"comment" => $this->input->post('comment'),
+				"amount" => $this->input->post('amount'),
+				"inform_date_time" => $this->input->post('inform_date')." ".$this->input->post('inform_time'),
+				"modified_date" => date("Y-m-d H:i:s"),
+				"is_active" => "1",
+			);
+
+			$where = "order_id = '".$order_id."'";
+			$this->db->insert('payment', $data_payment, $where);
+			print($where );
+
+
 			$this->my_upload->upload($_FILES["image_field"]);
 		    if ( $this->my_upload->uploaded == true  ) 
 		    {
@@ -409,7 +431,6 @@ class Orders extends CI_Controller {
 		    } else  {
 		      $data['errors'] = $this->my_upload->error;
 		    }
-
 		}
 
 

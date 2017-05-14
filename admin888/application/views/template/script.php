@@ -8,6 +8,9 @@
     <!-- Angular Js -->
     <script src="<?php echo base_url();?>js/angular.min.js"></script>
     <script src="<?php echo base_url();?>js/ui-bootstrap-tpls-1.2.1.min.js"></script>
+    <script src="<?php echo base_url('theme');?>/datepicker/js/bootstrap-datepicker.js"></script>
+    <script src="<?php echo base_url('theme');?>/datepicker/locales/bootstrap-datepicker.th.min.js"></script>
+    <script src="<?php echo base_url('theme');?>/datepicker/js/bootstrap-timepicker.js"></script>
     <?php $this->load->view("js/app_js"); ?>
     <?php if(isset($script)){echo $script;}?>
     <?php if(isset($script_file)){echo $this->load->view($script_file); }?>

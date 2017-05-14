@@ -142,6 +142,10 @@
     <!-- main js
         ============================================ -->
     <script src="<?php echo base_url('theme');?>/js/main.js"></script>
+
+    <script src="<?php echo base_url('theme');?>/datepicker/js/bootstrap-datepicker.js"></script>
+    <script src="<?php echo base_url('theme');?>/datepicker/locales/bootstrap-datepicker.th.min.js"></script>
+    <script src="<?php echo base_url('theme');?>/datepicker/js/bootstrap-timepicker.js"></script>
     <script type='text/javascript' src='<?php echo base_url('theme');?>/js/angular.min.js'></script>
 
     <?php echo $this->load->view("template/app");?>
