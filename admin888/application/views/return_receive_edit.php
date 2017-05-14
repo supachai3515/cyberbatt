@@ -52,7 +52,7 @@
 
     <div class="container-fluid" ng-controller="return_receive">
         <div class="page-header">
-          <h1>ใบรับคืน</h1>
+          <h2>ใบรับคืน <?php echo $return_receive_data['docno']; ?></h2>
         </div>
         <div style="padding-top:30px;"></div>
         <form class="form-horizontal" method="POST"  action="<?php echo base_url('return_receive/update/'.$return_receive_data['id']);?>" accept-charset="utf-8" enctype="multipart/form-data">

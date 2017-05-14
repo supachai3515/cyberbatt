@@ -68,7 +68,7 @@ class return_receive_model extends CI_Model {
 				INNER JOIN order_detail d ON o.id = d.order_id  
 				INNER JOIN products p on p.id = d.product_id
 				LEFT JOIN product_serial s ON s.product_id = d.product_id  AND s.order_id = o.id
-				 WHERE rr.id LIKE '%".$data_return_receive['search']."%' OR  o.id LIKE '%".$data_return_receive['search']."%'  OR  s.serial_number LIKE '%".$data_return_receive['search']."%'";
+				 WHERE rr.docno LIKE '%".$data_return_receive['search']."%' OR  o.id LIKE '%".$data_return_receive['search']."%'  OR  s.serial_number LIKE '%".$data_return_receive['search']."%'";
 		$re = $this->db->query($sql);
 		$return_data['result_return_receive'] = $re->result_array();
 		$return_data['data_search'] = $data_return_receive;

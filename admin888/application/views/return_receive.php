@@ -92,7 +92,7 @@
                             <?php foreach ($return_receive_list as $return_receive): ?>
                                 <tr>
                                     <td>
-                                        <span>รหัส : <strong><?php echo $return_receive['id'] ?></strong></span><br/>
+                                        <span>รหัส : <strong><?php echo $return_receive['docno'] ?></strong></span><br/>
                                         <span>serial number : <strong><?php echo $return_receive['serial_number'] ?></strong></span><br/>
                                         <span>order : <strong><?php echo $return_receive['order_id'] ?></strong></span><br/>
 
