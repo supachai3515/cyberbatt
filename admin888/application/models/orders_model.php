@@ -8,18 +8,28 @@ class Orders_model extends CI_Model {
 	public function get_orders( $start, $limit)
 	{
 
-	    $sql ="  SELECT o.* , s.name order_status_name,
+	    $sql ="   SELECT o.* , s.name order_status_name,
 				p.bank_name,
 				p.`comment`,
 				p.member_id,
 				p.amount,
 				DATE_FORMAT(p.inform_date_time,'%Y-%m-%d') inform_date,
 				DATE_FORMAT(p.inform_date_time,'%H:%i') inform_time,
-				p.create_date payment_create_date
+				p.create_date payment_create_date,
+				sh.create_date status_modified_date
 				FROM  orders o 
 				LEFT JOIN order_status s ON s.id =  o.order_status_id
 				LEFT JOIN  members m ON m.id = o.customer_id 
-				LEFT JOIN payment p ON p.order_id = o.id ORDER BY o.id DESC LIMIT " . $start . "," . $limit;
+				LEFT JOIN payment p ON p.order_id = o.id 
+				LEFT JOIN order_status_history sh ON sh.order_id = o.id AND sh.create_date =
+
+        		(
+						SELECT MAX(create_date)
+						FROM order_status_history AS b
+						WHERE b.order_id = o.id
+				)
+
+        ORDER BY sh.create_date DESC , o.date DESC LIMIT " . $start . "," . $limit;
 		$re = $this->db->query($sql);
 		return $re->result_array();
 

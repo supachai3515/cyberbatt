@@ -189,9 +189,9 @@ class return_receive_model extends CI_Model {
 
 	public function get_search_order($search_txt)
 	{
-		$sql =" SELECT o.id order_id, o.invoice_docno invoice_no,
+		$sql =" SELECT * FROM (  SELECT o.id order_id, o.invoice_docno invoice_no,
 				o.date order_date,
-				s.serial_number,
+				IFNULL(s.serial_number,'') serial_number,
 				p.id product_id,
 				p.name product_name,
 				p.sku
@@ -201,7 +201,7 @@ class return_receive_model extends CI_Model {
 				INNER JOIN products p on p.id = d.product_id
 				LEFT JOIN product_serial s ON s.product_id = d.product_id  AND s.order_id = o.id
 
-				WHERE (o.id  LIKE '%".$search_txt."%'
+				WHERE o.id  LIKE '%".$search_txt."%'
 					OR o.`name`  LIKE '%".$search_txt."%'
 					OR p.`name`  LIKE '%".$search_txt."%'
 					OR o.`address`  LIKE '%".$search_txt."%'
@@ -210,8 +210,12 @@ class return_receive_model extends CI_Model {
 					OR o.`invoice_docno`  LIKE '%".$search_txt."%'
 					OR p.`id`  LIKE '%".$search_txt."%'
 					OR s.serial_number  LIKE '%".$search_txt."%'
-					OR p.`sku`  LIKE '%".$search_txt."%' ) AND s.serial_number NOT IN (SELECT serial FROM return_receive WHERE is_active = 1)
+					OR p.`sku`  LIKE '%".$search_txt."%' 
+					) a
+
+				WHERE   a.serial_number NOT IN (SELECT serial FROM return_receive WHERE is_active = 1)
 					";
+
 
 		$re = $this->db->query($sql);
 		$return_data = $re->result_array();

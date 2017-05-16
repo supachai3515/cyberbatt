@@ -427,11 +427,17 @@ class Products_model extends CI_Model {
 	}
 	public function getstock_serial($product_id){
 
-		$sql ="SELECT p.sku, sn.serial_number ,r.doc_no receive_id ,sn.create_date ,ss.`name` status_name ,p.`name` product_name ,r.create_date receive_date FROM product_serial sn 
+		$sql =" SELECT p.sku, sn.serial_number ,r.doc_no receive_id ,sn.create_date ,
+				sh.`comment` status_name ,p.`name` product_name ,r.create_date receive_date 
+					FROM product_serial sn 
 				LEFT JOIN receive r ON r.id = sn.receive_id
 				LEFT JOIN products p ON p.id = sn.product_id
-				LEFT JOIN serial_status ss ON ss.id = sn.serial_status_id
-				 WHERE product_id  =  '".$product_id."'"; 
+        		INNER JOIN serial_history sh ON sh.serial_number = sn.serial_number AND sn.product_id = sh.product_id AND sh.create_date = (
+					SELECT MAX(create_date)
+					FROM serial_history AS b
+					WHERE b.serial_number = sn.serial_number AND b.product_id = sh.product_id 
+			)
+				 WHERE p.id  =  '".$product_id."'"; 
 						$query = $this->db->query($sql);
 		$row = $query->result_array();
 		return $row;

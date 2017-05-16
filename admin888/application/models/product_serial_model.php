@@ -12,10 +12,16 @@ class product_serial_model extends CI_Model {
 	public function get_product_serial( $start, $limit)
 	{
 
-	    $sql =" SELECT sn.* , p.`name` product_name, p.sku ,ss.name status_name ,ss.id status_id
-				FROM product_serial sn 
-				INNER JOIN products p ON p.id = sn.product_id
-				LEFT JOIN serial_status ss ON ss.id = sn.serial_status_id LIMIT " . $start . "," . $limit;
+	    $sql =" SELECT sn.*, p.sku, sn.serial_number ,r.doc_no receive_id ,sn.create_date ,sh.comment status_name , sh.create_date create_date_status,
+			p.`name` product_name ,r.create_date receive_date 
+					FROM product_serial sn 
+				LEFT JOIN receive r ON r.id = sn.receive_id
+				LEFT JOIN products p ON p.id = sn.product_id
+        	INNER JOIN serial_history sh ON sh.serial_number = sn.serial_number AND sn.product_id = sh.product_id AND sh.create_date = (
+					SELECT MAX(create_date)
+					FROM serial_history AS b
+					WHERE b.serial_number = sn.serial_number AND b.product_id = sh.product_id 
+			) LIMIT " . $start . "," . $limit;
 		$re = $this->db->query($sql);
 		return $re->result_array();
 
@@ -39,10 +45,16 @@ class product_serial_model extends CI_Model {
 			'search' => $this->input->post('search')		
 		);
 
-		$sql =" SELECT sn.* , p.`name` product_name, p.sku ,ss.name status_name ,ss.id status_id
-				FROM product_serial sn 
-				INNER JOIN products p ON p.id = sn.product_id
-				LEFT JOIN serial_status ss ON ss.id = sn.serial_status_id
+		$sql ="SELECT sn.*, p.sku, sn.serial_number ,r.doc_no receive_id ,sn.create_date ,sh.comment status_name , sh.create_date create_date_status,
+				p.`name` product_name ,r.create_date receive_date 
+						FROM product_serial sn 
+					LEFT JOIN receive r ON r.id = sn.receive_id
+					LEFT JOIN products p ON p.id = sn.product_id
+	        	INNER JOIN serial_history sh ON sh.serial_number = sn.serial_number AND sn.product_id = sh.product_id AND sh.create_date = (
+						SELECT MAX(create_date)
+						FROM serial_history AS b
+						WHERE b.serial_number = sn.serial_number AND b.product_id = sh.product_id 
+				)
 				WHERE sn.serial_number  LIKE '%".$data_product_serial['search']."%' OR   p.sku LIKE '%".$data_product_serial['search']."%'
 
 				";
@@ -55,8 +67,7 @@ class product_serial_model extends CI_Model {
 
 	public function get_product_serial_history($product_id, $serial_number)
 	{
-		 $sql =" SELECT h.* , st.`name` status_name FROM serial_history h 
-				LEFT JOIN serial_status st ON st.id = h.serial_status_id
+		 $sql =" SELECT h.* , h.`comment` status_name FROM serial_history h 
 				WHERE  product_id ='".$product_id."' AND serial_number ='".$serial_number."'  
 				ORDER BY h.create_date DESC";
 		$re = $this->db->query($sql);

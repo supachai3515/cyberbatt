@@ -11,7 +11,6 @@
                             <th>Serial Number</th>
                             <th>หมายเหตุ</th>
                             <th>วันที่ทำรายการ</th>
-                            <th>สถาณะ</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -19,7 +18,6 @@
                             <td><span ng-bind="value.serial_number"></span></td>
                             <td><span ng-bind="value.comment"></span></td>
                             <td><span ng-bind="value.create_date"></span></td>
-                            <td><span ng-bind="value.status_name"></span></td>  
                         </tr>
                     </tbody>
                 </table>
@@ -75,27 +73,8 @@
                                         <span>ชื่อสินค้า : <strong><?php echo $product_serial['product_name'] ?></strong></span><br/>
       
                                     </td>
-                                    
-                                    <?php switch ($product_serial['status_id']) {
-                                        case '1':
-                                            echo '<td class= "text-info">';
-                                            break;
-                                        case '2':
-                                        echo '<td class= "text-danger">';
-                                        break;
-                                        case '3':
-                                        echo '<td class= "text-success">';
-                                        break;
-                                        case '4':
-                                        echo '<td class= "text-warning">';
-                                        break;
-                                    
-                                        default:
-                                             echo '<td>';
-                                            break;
-                                    } ?>
-                                        
-                                         <span>สถานะ : <strong><?php echo $product_serial['status_name'] ?></strong></span><br/>
+                                    <td>    
+                                         <span>สถานะ : <strong><?php echo $product_serial['status_name'].' วันที่ : '.date("d-m-Y H:i",strtotime($product_serial['create_date_status'])); ?></strong></span><br/>
                                          <?php if (isset($product_serial['order_id'] )): ?>
                                               <span>วันที่ขาย : </span> <strong><?php echo date("d-m-Y H:i", strtotime($product_serial['modified_date_order']));?></strong><br/>
                                              

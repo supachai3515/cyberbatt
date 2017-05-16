@@ -25,8 +25,8 @@ $config['tagline'] = "รับซ่อม  Macbook iMac  iphone ipad ขาย
 $config['url_img'] = "http://www.cyberbatt.com/";
 $config['no_url_img'] = "http://www.cyberbatt.com/uploads/no_image.jpg";
 
-$config['email_name'] = "supachai";
-$config['email_owner'] = "supachai.wi@gmail.com";
+$config['email_name'] = "cyberbatt";
+$config['email_owner'] = "cyberbatt_md@hotmail.com";
 $config['email_noreply'] = "cyberbatt.fix@gmail.com";
 $config['pass_mail_noreply'] = "cyberb@tt";
 $config['weburl'] = "http://www.cyberbatt.com/";
@@ -272,10 +272,10 @@ $config['encryption_key'] = 'k152qkFSaX2rNt6c2yZrEaQOAPtskF7u';
 |
 */
 $config['sess_cookie_name']		= 'ci_session';
-$config['sess_expiration']		= 7200;
+$config['sess_expiration']		= 86400;
 $config['sess_expire_on_close']	= FALSE;
 $config['sess_encrypt_cookie']	= FALSE;
-$config['sess_use_database']	= FALSE;
+$config['sess_use_database']	= TRUE;
 $config['sess_table_name']		= 'ci_sessions';
 $config['sess_match_ip']		= FALSE;
 $config['sess_match_useragent']	= TRUE;

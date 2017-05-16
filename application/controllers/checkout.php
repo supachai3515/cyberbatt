@@ -6,7 +6,6 @@ class Checkout extends CI_Controller {
 		parent::__construct();
 		//call model inti 
 		$this->load->model('initdata_model');
-		session_start();
 	}
 
 	public function index()
@@ -356,7 +355,7 @@ class Checkout extends CI_Controller {
 				            <table style="float: right">
 							    <tr>
 							        <td style="padding: 5px 10px;background-color: #215A6D;color: #fff;">ค่าจัดส่ง</td>
-							        <td style="padding: 5px 10px;background-color: #215A6D;color: #fff;">90 บาท</td>
+							        <td style="padding: 5px 10px;background-color: #215A6D;color: #fff;">@shipping_price</td>
 							    </tr>
 							    @vat
 							    <tr>
@@ -465,6 +464,7 @@ class Checkout extends CI_Controller {
 			$result =  str_replace("@listOrder",$orderList,$result);
 			$result =  str_replace("@vat",$vatstr,$result);
 			$result =  str_replace("@_vat_address",$vat_address,$result);
+			$result =  str_replace("@shipping_price", $result_order['shipping']." ".number_format($result_order['shipping_charge'],2),$result);
 			$result =  str_replace("@sumtotal",number_format($result_order['total'],2),$result);
 
 			return $result;

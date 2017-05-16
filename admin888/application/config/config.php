@@ -19,24 +19,28 @@ $config['base_url'] .= "://".$_SERVER['HTTP_HOST'];
 $config['base_url'] .= str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT_NAME']);
 
 //Config by user
-$config['sitename'] = "cyberbatt";
-$config['tagline'] = "cyberbatt";
+$config['short_sitename'] = "Cyberbatt (ไซเบอร์ แบต)";
+$config['sitename'] = "รับซ่อม  Macbook iMac  iphone ipad ขายอะไหล่แท้ มือหนึ่งและมือสอง - cyberbatt";
+$config['tagline'] = "รับซ่อม  Macbook iMac  iphone ipad ขายอะไหล่แท้ มือหนึ่ง และมือสอง ซ่อมด่วนรอรับได้เลย เปลี่ยนชิพการ์ดจอ ลง OSX -ซ่อมหน้าจอ LED LCD เมนบอร์ดทุกอาการ";
 $config['url_img'] = "http://www.cyberbatt.com/";
 $config['no_url_img'] = "http://www.cyberbatt.com/uploads/no_image.jpg";
 
 $config['email_name'] = "cyberbatt";
-$config['email_owner'] = "supachai.wi@gmail.com";
+$config['email_owner'] = "cyberbatt_md@hotmail.com";
 $config['email_noreply'] = "cyberbatt.fix@gmail.com";
 $config['pass_mail_noreply'] = "cyberb@tt";
 $config['weburl'] = "http://www.cyberbatt.com/";
 $config['line_id'] = "@cyberbatt";
 
 $config['payment_transfer'] = '<h4>ธนาคารกรุงเทพ</h4>
-								<p>917-009-963-5 นาย รังษี ไตรวงศ์ย้อย</p>
+								<p>เลขที่บัญชี : <strong>087-3-00208-3</strong> บริษัท ไชเบอร์ แบต จำกัด</p>
 								<h4>ธนาคารไทยพาณิชย์</h4>
-								<p>388-202-210-3 นาย รังษี ไตรวงศ์ย้อย</p>
+								<p>เลขที่บัญชี : <strong>403-8-25867-1</strong> บริษัท ไชเบอร์ แบต จำกัด</p>
 								<h4>ธนาคารกสิกร</h4>
-								<p>697-213-284-3 นาย รังษี ไตรวงศ์ย้อย</p>
+								<p>เลขที่บัญชี : <strong>996-2-05800-8</strong> บริษัท ไชเบอร์ แบต จำกัด</p>
+								<h4>ธนากรุงไทย</h4>
+								<p>เลขที่บัญชี : <strong>981-7-80914-5</strong> บริษัท ไชเบอร์ แบต จำกัด</p>
+
 								';
 
 /*
@@ -268,10 +272,10 @@ $config['encryption_key'] = 'k152qkFSaX2rNt6c2yZrEaQOAPtskF7u';
 |
 */
 $config['sess_cookie_name']		= 'ci_session';
-$config['sess_expiration']		= 7200;
+$config['sess_expiration']		= 86400;
 $config['sess_expire_on_close']	= FALSE;
 $config['sess_encrypt_cookie']	= FALSE;
-$config['sess_use_database']	= FALSE;
+$config['sess_use_database']	= TRUE;
 $config['sess_table_name']		= 'ci_sessions';
 $config['sess_match_ip']		= FALSE;
 $config['sess_match_useragent']	= TRUE;

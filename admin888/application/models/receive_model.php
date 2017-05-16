@@ -94,6 +94,13 @@ class Receive_model extends CI_Model {
 	public function update_receive($receive_id)
 	{
 		$this->db->trans_start(); # Starting Transaction
+		 //DOC_NO
+			$sql =" SELECT doc_no  FROM receive  WHERE  id = '".$receive_id."'"; 
+			$re = $this->db->query($sql);
+			$row_doc_no =  $re->row_array();
+			$receive_docno = $row_doc_no['doc_no'];
+			//
+
 
 		$sku_s = $this->input->post('sku');
 		$qty_s =$this->input->post('qty');
@@ -230,10 +237,10 @@ class Receive_model extends CI_Model {
 		$is_active = $this->input->post('isactive');
 		if($is_active){
 				$ch_is_active = 4;
-				$comment = "แก้ไขใบรับสินค้า";
+				$comment = "แก้ไขใบรับสินค้า : ".$receive_docno;
 		} else{
 				$ch_is_active = 2;
-				$comment = "ทำการยกเลิกใยรับ";
+				$comment = "ทำการยกเลิกใยรับ : ".$receive_docno;
 		}
 
 		$sql =" SELECT * FROM product_serial WHERE receive_id = '".$receive_id."' "; 
@@ -244,7 +251,6 @@ class Receive_model extends CI_Model {
 			$data_serial_history = array(
 				'serial_number' => $row['serial_number'] ,
 				'product_id' => $row['product_id'] ,
-				'serial_status_id' => $ch_is_active,
 				'comment' => $comment,
 				'create_date' => date("Y-m-d H:i:s"),				
 			);
@@ -261,8 +267,7 @@ class Receive_model extends CI_Model {
 				$data_serial_history = array(
 					'serial_number' => $row['serial_number'] ,
 					'product_id' => $row['product_id'] ,
-					'serial_status_id' => "3",
-					'comment' => "ลบออก",
+					'comment' => "ลบออกจากใบรับ : ".$receive_docno,
 					'create_date' => date("Y-m-d H:i:s"),				
 				);
 				$this->db->insert("serial_history", $data_serial_history);
@@ -283,7 +288,6 @@ class Receive_model extends CI_Model {
 				$data_product_serial = array(
 					'serial_number' => $row['serial_number'] ,
 					'product_id' => $row['product_id'] ,
-					'serial_status_id' => "3",
 					'comment' => "ลบออก",
 					'create_date' => date("Y-m-d H:i:s"),				
 				);

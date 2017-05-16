@@ -80,7 +80,11 @@
                         <td>
                             <span>เลขที่ใบสั่งซื้อ : <strong>#<?php echo $orders['id'] ?></strong></span><br/>
                             <span>โดย : <strong><?php echo $orders['name'] ?></strong></span><br/>
-                            <span><i class="fa fa-calendar"></i> <?php echo date("d-m-Y H:i", strtotime($orders['date']));?></span>
+                            <span>วันที่สร้าง : <i class="fa fa-calendar"></i> <?php echo date("d-m-Y H:i", strtotime($orders['date']));?></span><br/>
+                            <?php if (isset($orders['status_modified_date'])): ?>
+                                 <span>วันที่แก้ไข : <i class="fa fa-calendar"></i> <?php echo date("d-m-Y H:i", strtotime($orders['status_modified_date']));?></span>
+                            <?php endif ?>
+                            
 
                         </td>
                         <td>

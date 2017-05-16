@@ -181,20 +181,28 @@ class Receive extends CI_Controller {
 			foreach ($values as $value ) {
 				if(trim($value->serial_number) != ""){
 
+					   //DOC_NO
+						$sql =" SELECT doc_no  FROM receive  WHERE  id = '".$value->receive_id."'"; 
+						$re = $this->db->query($sql);
+						$row_doc_no =  $re->row_array();
+						$docno = $row_doc_no['doc_no'];
+						//
+
 						//check ของเดิม
-						$sql =" SELECT * FROM product_serial WHERE receive_id = '".$value->receive_id."'  
-							AND  line_number = '".$value->line_number."'  
-							AND product_id = '".$value->product_id."' "; 
+						$sql =" SELECT * FROM product_serial ps inner join receive r ON r.id = ps.receive_id WHERE ps.receive_id = '".$value->receive_id."'  
+							AND  ps.line_number = '".$value->line_number."'  
+							AND ps.product_id = '".$value->product_id."' "; 
 
 						$re = $this->db->query($sql);
 						$row_re =  $re->result_array();
+						
 						foreach ($row_re as $r_ow ) {
+		
 							date_default_timezone_set("Asia/Bangkok");
 							$data_serial_history = array(
 								'serial_number' =>$r_ow['serial_number'],
 								'product_id' => $r_ow['product_id'],
-								'serial_status_id' => "3",
-								'comment' => "ลบออก",
+								'comment' => "ลบออก จากใบรับเข้า : ".$docno ,
 								'create_date' => date("Y-m-d H:i:s"),				
 							);
 							$this->db->insert("serial_history", $data_serial_history);
@@ -212,7 +220,6 @@ class Receive extends CI_Controller {
 							'serial_number' =>$value->serial_number,
 							'line_number' => $value->line_number,
 							'product_id' => $value->product_id,
-							'serial_status_id' => "1",
 							'receive_id' => $value->receive_id,
 							'modified_date' => date("Y-m-d H:i:s"),	
 							'create_date' => date("Y-m-d H:i:s"),				
@@ -221,8 +228,7 @@ class Receive extends CI_Controller {
 						$data_serial_history = array(
 								'serial_number' =>$value->serial_number,
 								'product_id' => $value->product_id,
-								'serial_status_id' => "1",
-								'comment' => "บันทึกใหม่",
+								'comment' => "บันทึก จากใบรับเข้า : ".$docno,
 								'create_date' => date("Y-m-d H:i:s"),				
 						);
 

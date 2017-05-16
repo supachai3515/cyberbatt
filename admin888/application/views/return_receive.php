@@ -195,7 +195,7 @@
                             <!-- Button -->
                             <div class="form-group">
                                 <label class="col-md-3 control-label" for="save"></label>
-                                <div class="col-md-4" ng-show="!return_form.product_id.$invalid && !return_form.order_id.$invalid && !return_form.serial.$invalid" >
+                                <div class="col-md-4" ng-show="!return_form.product_id.$invalid && !return_form.order_id.$invalid" >
                                     <button type="submit" class="btn btn-primary">บันทึก</button>
                                 </div>
                             </div>

@@ -57,14 +57,106 @@
           <div class="form-group">
             <label class="sr-only" for="">สถานะ</label>
              <select id="select_status" name="select_status" class="form-control">
-                <?php foreach ($order_status_list as $status): ?>
+            <?php 
+             switch ($orders_data['order_status_id']) {
+               case '1':
+                  ?>
+                  <?php foreach ($order_status_list as $status): ?>
+                    <?php if ($status['id'] == "1" || $status['id'] == "2" || $status['id'] == "5" ): ?>
+                        <?php if ($status['id'] == $orders_data['order_status_id']): ?>
+                            <option value="<?php echo $status['id']; ?>" selected><?php echo $status['name']; ?></option>
+                        <?php else: ?>
+                            <option value="<?php echo $status['id']; ?>"><?php echo $status['name']; ?></option>
+                        <?php endif ?>  
+                    <?php endif ?>      
+                <?php endforeach ?>
+                <?php
+                 break;
+
+               case '2':
+                 ?>
+                  <?php foreach ($order_status_list as $status): ?>
+                    <?php if ($status['id'] == "2" || $status['id'] == "3" || $status['id'] == "4" || $status['id'] == "6" ): ?>
+                        <?php if ($status['id'] == $orders_data['order_status_id']): ?>
+                            <option value="<?php echo $status['id']; ?>" selected><?php echo $status['name']; ?></option>
+                        <?php else: ?>
+                            <option value="<?php echo $status['id']; ?>"><?php echo $status['name']; ?></option>
+                        <?php endif ?>  
+                    <?php endif ?>      
+                <?php endforeach ?>
+                <?php
+                break;
+
+               case '3':
+                ?>
+                  <?php foreach ($order_status_list as $status): ?>
+                    <?php if ($status['id'] == "3" || $status['id'] == "4" || $status['id'] == "6" ): ?>
+                        <?php if ($status['id'] == $orders_data['order_status_id']): ?>
+                            <option value="<?php echo $status['id']; ?>" selected><?php echo $status['name']; ?></option>
+                        <?php else: ?>
+                            <option value="<?php echo $status['id']; ?>"><?php echo $status['name']; ?></option>
+                        <?php endif ?>  
+                    <?php endif ?>      
+                <?php endforeach ?>
+                <?php
+                break;
+
+               case '4':
+                ?>
+                  <?php foreach ($order_status_list as $status): ?>
+                    <?php if ($status['id'] == "4"): ?>
+                        <?php if ($status['id'] == $orders_data['order_status_id']): ?>
+                            <option value="<?php echo $status['id']; ?>" selected><?php echo $status['name']; ?></option>
+                        <?php else: ?>
+                            <option value="<?php echo $status['id']; ?>"><?php echo $status['name']; ?></option>
+                        <?php endif ?>  
+                    <?php endif ?>      
+                <?php endforeach ?>
+                <?php
+                break;
+
+               case '5':
+                ?>
+                  <?php foreach ($order_status_list as $status): ?>
+                    <?php if ($status['id'] == "5"): ?>
+                        <?php if ($status['id'] == $orders_data['order_status_id']): ?>
+                            <option value="<?php echo $status['id']; ?>" selected><?php echo $status['name']; ?></option>
+                        <?php else: ?>
+                            <option value="<?php echo $status['id']; ?>"><?php echo $status['name']; ?></option>
+                        <?php endif ?>  
+                    <?php endif ?>      
+                <?php endforeach ?>
+                <?php
+               break;
+
+               case '6':
+                ?>
+                  <?php foreach ($order_status_list as $status): ?>
+                    <?php if ($status['id'] == "6" || $status['id'] == "1"): ?>
+                        <?php if ($status['id'] == $orders_data['order_status_id']): ?>
+                            <option value="<?php echo $status['id']; ?>" selected><?php echo $status['name']; ?></option>
+                        <?php else: ?>
+                            <option value="<?php echo $status['id']; ?>"><?php echo $status['name']; ?></option>
+                        <?php endif ?>  
+                    <?php endif ?>      
+                <?php endforeach ?>
+                <?php
+               break;
+               
+               default:
+                 ?>
+                 <?php foreach ($order_status_list as $status): ?>
                     <?php if ($status['id'] == $orders_data['order_status_id']): ?>
                         <option value="<?php echo $status['id']; ?>" selected><?php echo $status['name']; ?></option>
                     <?php else: ?>
                         <option value="<?php echo $status['id']; ?>"><?php echo $status['name']; ?></option>
                     <?php endif ?>          
                 <?php endforeach ?>
-            </select>
+                 <?php
+                 break;
+             }
+             ?>
+             </select>
           </div>
           <div class="form-group">
             <label class="sr-only" for="">description</label>

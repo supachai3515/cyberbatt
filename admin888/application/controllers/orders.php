@@ -211,14 +211,15 @@ class Orders extends CI_Controller {
 			$this->db->trans_start(); # Starting Transaction
 			foreach ($values as $value ) {
 				if(trim($value->serial_number) != "") {
+
 						//check ของเดิม ว่ามีการบันทึกไปแล้วหรือยัง
 						$sql =" SELECT * FROM product_serial WHERE serial_number = '".$value->serial_number."'  
-								AND product_id = '".$value->product_id."'  AND order_id != '' "; 
+								AND product_id = '".$value->product_id."'  AND order_id != '".$value->order_id."' "; 
 
 						$re = $this->db->query($sql);
 						$row =  $re->row_array();
-
 						if(count($row) > 0){
+
 							$res['is_error'] =  true;
 							$res['message']  = $res['message'].$value->serial_number." : ถูกบันทึกแล้วเลขที่ order : #".$value->order_id;
 						}
@@ -244,71 +245,72 @@ class Orders extends CI_Controller {
 				}
 			}
 
-			if($res['is_error'] == false){
+			if($res['is_error'] == false) {
+
+				//check ของเดิม ว่ามีการบันทึกไปแล้วหรือยัง
+				$sql =" SELECT * FROM product_serial WHERE order_id = '".$value->order_id."'  
+					AND product_id = '".$value->product_id."' "; 
+
+				$re = $this->db->query($sql);
+				$row_re =  $re->result_array();
+				foreach ($row_re as $r_ow ) 
+				{
+					date_default_timezone_set("Asia/Bangkok");
+					$data_serial_history = array(
+						'serial_number' =>$r_ow['serial_number'],
+						'product_id' => $r_ow['product_id'],
+						'comment' => "แก้ไขจาก เลขที่ใบสั่งซื้อ #".$value->order_id,
+						'create_date' => date("Y-m-d H:i:s"),				
+					);
+					$this->db->insert("serial_history", $data_serial_history);
+
+					//update serial 
+					date_default_timezone_set("Asia/Bangkok");
+					$data_product_serial = array(
+						'order_id' => NULL,	
+						'modified_date_order' =>date("Y-m-d H:i:s"),	
+					);
+					
+					$where = "serial_number = '".$r_ow['serial_number']."' AND product_id = '".$r_ow['product_id']."'   ";
+					$this->db->update("product_serial", $data_product_serial,$where );
+
+				}
+						
 				foreach ($values as $value ) {
+	
 					if(trim($value->serial_number) != "") 
 					{
-							//check ของเดิม ว่ามีการบันทึกไปแล้วหรือยัง
-							$sql =" SELECT * FROM product_serial WHERE order_id = '".$value->order_id."'  
-								AND product_id = '".$value->product_id."' "; 
-
-							$re = $this->db->query($sql);
-							$row_re =  $re->result_array();
-							foreach ($row_re as $r_ow ) 
-							{
-								date_default_timezone_set("Asia/Bangkok");
-								$data_serial_history = array(
-									'serial_number' =>$r_ow['serial_number'],
-									'product_id' => $r_ow['product_id'],
-									'serial_status_id' => "4",
-									'comment' => "แก้ไขจากใบสั่งซื้อ",
-									'create_date' => date("Y-m-d H:i:s"),				
-								);
-								$this->db->insert("serial_history", $data_serial_history);
-
-								//update serial 
-								date_default_timezone_set("Asia/Bangkok");
-								$data_product_serial = array(
-									'serial_status_id' => "1",
-									'order_id' => NULL,	
-									'modified_date_order' =>date("Y-m-d H:i:s"),	
-								);
-								
-								$where = "serial_number = '".$r_ow['serial_number']."' AND product_id = '".$r_ow['product_id']."'   ";
-								$this->db->update("product_serial", $data_product_serial,$where );
-
-							}
-				
-							//update history
-							$data_serial_history = array(
-									'serial_number' =>$value->serial_number,
-									'product_id' => $value->product_id,
-									'serial_status_id' => "3",
-									'comment' => "ยันยันในใบสั่งซื้อ",
-									'create_date' => date("Y-m-d H:i:s"),				
-							);
-							$this->db->insert("serial_history", $data_serial_history);
-
-							//update serial 
-							date_default_timezone_set("Asia/Bangkok");
-							$data_product_serial = array(
+						
+						
+						//update history
+						$data_serial_history = array(
 								'serial_number' =>$value->serial_number,
 								'product_id' => $value->product_id,
-								'serial_status_id' => "3",
-								'order_id' => $value->order_id,
-								'modified_date' => date("Y-m-d H:i:s"),		
-								'modified_date_order' =>date("Y-m-d H:i:s"),			
-							);
-							
+								'comment' => "ยันยันการขาย เลขที่ใบสั่งซื้อ #".$value->order_id,
+								'create_date' => date("Y-m-d H:i:s"),				
+						);
+						$this->db->insert("serial_history", $data_serial_history);
 
-							$db_debug = $this->db->db_debug; //save setting
-							$this->db->db_debug = FALSE; //disable debugging for queries
+						//update serial 
+						date_default_timezone_set("Asia/Bangkok");
+						$data_product_serial = array(
+							'serial_number' =>$value->serial_number,
+							'product_id' => $value->product_id,
+							'order_id' => $value->order_id,
+							'modified_date' => date("Y-m-d H:i:s"),		
+							'modified_date_order' =>date("Y-m-d H:i:s"),			
+						);
+						
 
-							$where = "serial_number = '".$value->serial_number."' AND product_id = '".$value->product_id."' ";
-							$this->db->update("product_serial", $data_product_serial,$where );
+						$db_debug = $this->db->db_debug; //save setting
+						$this->db->db_debug = FALSE; //disable debugging for queries
 
-							$this->db->db_debug = $db_debug; //restore setting
+						$where = "serial_number = '".$value->serial_number."' AND product_id = '".$value->product_id."' ";
+						$this->db->update("product_serial", $data_product_serial,$where );
+
+						$this->db->db_debug = $db_debug; //restore setting
 					}
+					
 				}
 
 			}
@@ -477,7 +479,7 @@ class Orders extends CI_Controller {
 				            <table style="border-collapse: collapse;width: 100%;">
 							    <tr>
 							        <td style="padding: 8px;text-align: left;border-bottom: 1px solid #000;">ค่าจัดส่ง</td>
-							        <td style="padding: 8px;text-align: left;border-bottom: 1px solid #000;">90 บาท</td>
+							        <td style="padding: 8px;text-align: left;border-bottom: 1px solid #000;">@shipping_price บาท</td>
 							    </tr>
 							    @vat
 							    <tr>
@@ -575,6 +577,7 @@ class Orders extends CI_Controller {
 			$result =  str_replace("@listOrder",$orderList,$result);
 			$result =  str_replace("@vat",$vatstr,$result);
 			$result =  str_replace("@_vat_address",$vat_address,$result);
+			$result =  str_replace("@shipping_price", $result_order['shipping']." ".number_format($result_order['shipping_charge'],2),$result);
 			$result =  str_replace("@sumtotal",number_format($result_order['total'],2),$result);
 
 			return $result;
