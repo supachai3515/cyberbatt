@@ -91,7 +91,14 @@ class Receive extends CI_Controller {
 								'description' =>  'receive| '.$this->config->item('tagline'),
 								'author' => $this->config->item('author'),
 								'keyword' =>  'cyberbatt');
-		$this->load->view('template/layout', $data);	
+
+		if($data['receive_data']['count_use'] < 1){
+			$this->load->view('template/layout', $data);	
+		}else{
+
+			redirect('receive','refresh');
+		}
+		
 
 	}
 
@@ -178,6 +185,7 @@ class Receive extends CI_Controller {
 
 		  	$values = json_decode(file_get_contents("php://input"));
 			$this->db->trans_start(); # Starting Transaction
+			$check_loop = 0 ;
 			foreach ($values as $value ) {
 				if(trim($value->serial_number) != ""){
 
@@ -187,58 +195,71 @@ class Receive extends CI_Controller {
 						$row_doc_no =  $re->row_array();
 						$docno = $row_doc_no['doc_no'];
 						//
+						if ($check_loop == 0) {
+							//check ของเดิม
+							$sql =" SELECT * FROM product_serial ps inner join receive r ON r.id = ps.receive_id 
+							        WHERE ps.receive_id = '".$value->receive_id."'  
+											AND ps.product_id = '".$value->product_id."' 
+											AND ( ps.order_id IS NULL OR  ps.order_id  = '' )"; 
 
-						//check ของเดิม
-						$sql =" SELECT * FROM product_serial ps inner join receive r ON r.id = ps.receive_id WHERE ps.receive_id = '".$value->receive_id."'  
-							AND  ps.line_number = '".$value->line_number."'  
-							AND ps.product_id = '".$value->product_id."' "; 
+							$re = $this->db->query($sql);
+							$row_re =  $re->result_array();
+							
+							foreach ($row_re as $r_ow ) {
+			
+								date_default_timezone_set("Asia/Bangkok");
+								$data_serial_history = array(
+									'serial_number' =>$r_ow['serial_number'],
+									'product_id' => $r_ow['product_id'],
+									'comment' => "ลบออก จากใบรับเข้า : ".$docno ,
+									'create_date' => date("Y-m-d H:i:s"),				
+								);
+								$this->db->insert("serial_history", $data_serial_history);
 
-						$re = $this->db->query($sql);
-						$row_re =  $re->result_array();
-						
-						foreach ($row_re as $r_ow ) {
-		
-							date_default_timezone_set("Asia/Bangkok");
-							$data_serial_history = array(
-								'serial_number' =>$r_ow['serial_number'],
-								'product_id' => $r_ow['product_id'],
-								'comment' => "ลบออก จากใบรับเข้า : ".$docno ,
-								'create_date' => date("Y-m-d H:i:s"),				
-							);
-							$this->db->insert("serial_history", $data_serial_history);
+								//ลบ ของเดิม
+								$sql =" DELETE FROM product_serial WHERE serial_number = '".$r_ow['serial_number']."'
+								AND product_id = '".$value->product_id."' "; 
+								$re = $this->db->query($sql);
+							}
+
+							$check_loop++;
+
 						}
 
-						//ลบ ของเดิม
-						$sql =" DELETE FROM product_serial WHERE receive_id = '".$value->receive_id."'  
-							AND  line_number = '".$value->line_number."'  
-							AND product_id = '".$value->product_id."' "; 
+						$count_use = 0;
+						if(isset($value->count_use)){
+							$count_use =$value->count_use;
 
-						$re = $this->db->query($sql);
-						//บันทึกใหม่
-						date_default_timezone_set("Asia/Bangkok");
-						$data_product_serial = array(
-							'serial_number' =>$value->serial_number,
-							'line_number' => $value->line_number,
-							'product_id' => $value->product_id,
-							'receive_id' => $value->receive_id,
-							'modified_date' => date("Y-m-d H:i:s"),	
-							'create_date' => date("Y-m-d H:i:s"),				
-						);
-
-						$data_serial_history = array(
+						}
+						
+						if($count_use != '1'){
+							//บันทึกใหม่
+							date_default_timezone_set("Asia/Bangkok");
+							$data_product_serial = array(
 								'serial_number' =>$value->serial_number,
+								'line_number' => $value->line_number,
 								'product_id' => $value->product_id,
-								'comment' => "บันทึก จากใบรับเข้า : ".$docno,
+								'receive_id' => $value->receive_id,
+								'modified_date' => date("Y-m-d H:i:s"),	
 								'create_date' => date("Y-m-d H:i:s"),				
-						);
+							);
 
-						$db_debug = $this->db->db_debug; //save setting
-						$this->db->db_debug = FALSE; //disable debugging for queries
+							$data_serial_history = array(
+									'serial_number' =>$value->serial_number,
+									'product_id' => $value->product_id,
+									'comment' => "บันทึก จากใบรับเข้า : ".$docno,
+									'create_date' => date("Y-m-d H:i:s"),				
+							);
 
-						$this->db->insert("serial_history", $data_serial_history);
-						$this->db->insert("product_serial", $data_product_serial);
+							$db_debug = $this->db->db_debug; //save setting
+							$this->db->db_debug = FALSE; //disable debugging for queries
+							$this->db->insert("serial_history", $data_serial_history);
+							$this->db->insert("product_serial", $data_product_serial);
+							$this->db->db_debug = $db_debug; //restore setting
 
-						$this->db->db_debug = $db_debug; //restore setting
+						}
+						
+						
 
 				}
 			}

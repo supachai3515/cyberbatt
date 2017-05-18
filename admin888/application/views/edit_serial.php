@@ -8,7 +8,8 @@
 
                   <div class="form-group">
                         <label class="col-md-2 control-label"><p class="text-center">ลำดับ</p></label>
-                        <label class="col-md-6 control-label"><p class="text-center">Serial Number</p></label>
+                        <label class="col-md-4 control-label"><p class="text-center">Serial Number</p></label>
+                        <label class="col-md-2 control-label"><p class="text-center">ถูกใช้แล้ว</p></label>
                         <label class="col-md-4 control-label"><p class="text-center">วันที่บันทึก</p></label>
 
                     </div>
@@ -18,9 +19,20 @@
                 <div ng-repeat="value in product_serial">
                     <div class="form-group">
                         <label class="col-md-2 control-label"><span ng-bind="value.line_number"></span></label>
-                        <div class="col-md-6">
+                        <div class="col-md-4">
+                          <div ng-if="value.count_use != 1">
                             <input type="text" class="form-control input-md" ng-model="product_serial.serial_number[value.line_number]"  ng-init="product_serial.serial_number[value.line_number] = value.serial_number " enter>
+                          </div>
+                          <div ng-if="value.count_use == 1 ">
+                            <input readonly="true" type="text" class="form-control input-md" ng-model="product_serial.serial_number[value.line_number]"  ng-init="product_serial.serial_number[value.line_number] = value.serial_number " enter>
+                          </div>
+
+                            
                         </div>
+                        <label class="col-md-2 control-label">
+                          <span ng-if="value.count_use == 1" class="label label-success"><i class="fa fa-check" aria-hidden="true"></i></span>
+                          <span ng-if="value.count_use == 0" class="label"></span>
+                        </label>
                         <label class="col-md-4 control-label"><span ng-bind="value.create_date"></span></label>
             
                     </div>

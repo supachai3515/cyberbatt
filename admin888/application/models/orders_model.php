@@ -8,7 +8,7 @@ class Orders_model extends CI_Model {
 	public function get_orders( $start, $limit)
 	{
 
-	    $sql ="   SELECT o.* , s.name order_status_name,
+	    $sql =" SELECT o.* , s.name order_status_name,
 				p.bank_name,
 				p.`comment`,
 				p.member_id,
@@ -29,7 +29,7 @@ class Orders_model extends CI_Model {
 						WHERE b.order_id = o.id
 				)
 
-        ORDER BY sh.create_date DESC , o.date DESC LIMIT " . $start . "," . $limit;
+        ORDER BY o.date DESC LIMIT " . $start . "," . $limit;
 		$re = $this->db->query($sql);
 		return $re->result_array();
 
@@ -191,21 +191,47 @@ class Orders_model extends CI_Model {
 			'order_id' => $this->input->post('order_id')	
 		);
 
-		$sql ="SELECT p.* , os.name order_status_name FROM  orders p INNER JOIN order_status os ON os.id =  p.order_status_id WHERE  1=1";
+		$sql ="
+
+		SELECT o.* , s.name order_status_name,
+				p.bank_name,
+				p.`comment`,
+				p.member_id,
+				p.amount,
+				DATE_FORMAT(p.inform_date_time,'%Y-%m-%d') inform_date,
+				DATE_FORMAT(p.inform_date_time,'%H:%i') inform_time,
+				p.create_date payment_create_date,
+				sh.create_date status_modified_date
+				FROM  orders o 
+				LEFT JOIN order_status s ON s.id =  o.order_status_id
+				LEFT JOIN  members m ON m.id = o.customer_id 
+				LEFT JOIN payment p ON p.order_id = o.id 
+				LEFT JOIN order_status_history sh ON sh.order_id = o.id AND sh.create_date =
+
+        		(
+						SELECT MAX(create_date)
+						FROM order_status_history AS b
+						WHERE b.order_id = o.id
+				)
+
+				WHERE  1=1";
 
 				 if($data_orders['order_id'] !="")
 				 { 
-				 	$sql = $sql." AND p.id ='".$data_orders['order_id']."'";
+				 	$sql = $sql." AND o.id ='".$data_orders['order_id']."'";
 				 }
 
 				 if($this->input->post('select_status') !="0")
 				 { 
-				 	$sql = $sql." AND os.id ='".$this->input->post('select_status')."'";
+				 	$sql = $sql." AND s.id ='".$this->input->post('select_status')."'";
 				 }
 				
-				 $sql = $sql." AND (p.name LIKE '%".$data_orders['search']."%' 
-								 OR  p.id LIKE '%".$data_orders['search']."%' 
-								 OR  p.trackpost LIKE '%".$data_orders['search']."%') ";
+				 $sql = $sql." AND (o.name LIKE '%".$data_orders['search']."%' 
+								 OR  o.id LIKE '%".$data_orders['search']."%' 
+								 OR  o.trackpost LIKE '%".$data_orders['search']."%') 
+
+								 ORDER BY sh.create_date DESC , o.date DESC 
+								 ";
 				 
 
 

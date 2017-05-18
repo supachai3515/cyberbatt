@@ -74,9 +74,14 @@
                                         <?php endif ?>
                                     </td>
                                     <td>
-                                    <a class="btn btn-xs btn-warning" href="<?php echo base_url('receive/edit_serial/'.$receive['id']) ?>" role="button"><i class="fa fa-pencil"></i> Seaial Number</a>
+                                    <a class="btn btn-xs btn-warning" href="<?php echo base_url('receive/edit_serial/'.$receive['id']) ?>" role="button"><i class="fa fa-pencil"></i> Serial Number</a>
+                                    <?php if ($receive['count_use'] < 1): ?>
+                                      <a class="btn btn-xs btn-info" href="<?php echo base_url('receive/edit/'.$receive['id']) ?>" role="button"><i class="fa fa-pencil"></i> แก้ไข</a></td>   
+                                    <?php else: ?> 
+                                        <span class="label label-default">Serial ถูกใช้แล้ว</span>
+                                    <?php endif ?>
 
-                                    <a class="btn btn-xs btn-info" href="<?php echo base_url('receive/edit/'.$receive['id']) ?>" role="button"><i class="fa fa-pencil"></i> แก้ไข</a></td>       
+                                         
                                 </tr>
                             <?php endforeach ?>
                             </tbody>

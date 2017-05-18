@@ -175,7 +175,7 @@
                                 <div class="col-md-4">
                                     <div class="checkbox">
                                         <label for="is_cut_stock-0">
-                                            <input type="checkbox" name="is_cut_stock" id="is_cut_stock-0" value="1" checked> ตัดสต็อกสินค้า
+                                            <input type="checkbox" name="is_cut_stock" id="is_cut_stock-0" value="1"> ตัดสต็อกสินค้า
                                         </label>
                                     </div>
                                 </div>
