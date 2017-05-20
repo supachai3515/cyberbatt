@@ -369,22 +369,86 @@ class Products extends CI_Controller {
 
 		if ($in_str != "") {
 				$data['products_list'] = $this->products_model->get_products_in($in_str);
-			}
+		}
 			
-			$data['menus_list'] = $this->initdata_model->get_menu();
-			$data['brands_list'] = $this->products_model->get_brands();
-			$data['type_list'] = $this->products_model->get_type();
-			
-			//call script
-			$data['script_file']= "js/product_add_js";
-	        $data['menu_id'] ='1';
-			$data['content'] = 'products';
-			$data['header'] = array('title' => 'Products | '.$this->config->item('sitename'),
-									'description' =>  'Products | '.$this->config->item('tagline'),
-									'author' => 'www.wisadev.com',
-									'keyword' =>  'wisadev e-commerce');
-			$this->load->view('template/layout', $data);
+		$data['menus_list'] = $this->initdata_model->get_menu();
+		$data['brands_list'] = $this->products_model->get_brands();
+		$data['type_list'] = $this->products_model->get_type();
+		
+		//call script
+		$data['script_file']= "js/product_add_js";
+        $data['menu_id'] ='1';
+		$data['content'] = 'products';
+		$data['header'] = array('title' => 'Products | '.$this->config->item('sitename'),
+								'description' =>  'Products | '.$this->config->item('tagline'),
+								'author' => 'www.wisadev.com',
+								'keyword' =>  'wisadev e-commerce');
+		$this->load->view('template/layout', $data);
 
+	}
+
+	public function export_stock()
+	{
+
+
+		// Retrieve the posted information
+		$item = $this->input->post('productid_p');
+	    $check = $this->input->post('check_p');
+	    $in_str ="";
+
+		// Cycle true all items and update them
+		for($i=0;$i < count($item);$i++)
+		{
+			if(isset( $check[$i])){
+				if($in_str ==""){
+					$in_str  = $check[$i];
+				}
+				else {
+					$in_str = $in_str.",".$check[$i];
+				}
+				
+			}
+		}
+
+		if ($in_str != "") {
+		    $sql =" SELECT p.id ,p.sku ,p.name product_name,t.name type_name, b.name brand_name, p.stock ,p.price,
+		    				p.dis_price discount_price , p.member_discount dealer_price ,p.member_discount_lv1 fanshine_price
+					FROM  products p 
+					LEFT JOIN product_brand b ON p.product_brand_id = b.id
+					LEFT JOIN product_type t ON p.product_type_id = t.id 
+					WHERE p.id in(".$in_str.")
+					 ORDER BY p.id DESC ";
+			$re = $this->db->query($sql);
+			$data['products_list'] = $re->result_array();
+		
+ 			//$data[] = array('x'=> $x, 'y'=> $y, 'z'=> $z, 'a'=> $a);
+ 			header("Content-Encoding: UTF-8");
+            header("Content-type: application/csv;UTF-8");
+            header("Content-Disposition: attachment; filename=\"export_stock".".csv\"");
+            header("Pragma: no-cache");
+            header("Expires: 0");
+
+            $handle = fopen('php://output', 'w');
+
+            fputcsv($handle, array( 'id',
+									'sku',
+									'product_name',
+									'type_name',
+									'brand_name',
+									'stock',
+									'price',
+									'discount_price',
+									'dealer_price',
+									'fanshine_price'));
+
+            foreach ($data['products_list'] as $data) {
+                fputcsv($handle,$data);
+            }
+                fclose($handle);
+            exit;
+
+		}
+		
 	}
 
 }

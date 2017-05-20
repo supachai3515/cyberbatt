@@ -16,9 +16,9 @@
                 <table class="table table-hover">
                     <thead>
                         <tr>
-                            <th>Order</th>
+                            <th>#</th>
                             <th>Serial Number</th>
-                            <th>Order Date</th>
+                            <th>วันที่</th>
                             <th>Products</th>
                             <th>Action</th>
                         </tr>
@@ -26,18 +26,20 @@
                     <tbody>
                         <tr ng-repeat="value in order_data">
                             <td>
-                                <span ng-bind="value.order_id"></span><br>
-                                <span ng-bind="value.invoice_no"></span>
+                                ใบส่งคืน : <span ng-bind="value.return_id"></span>/<span ng-bind="value.return_docno"></span><br>
+                                ใบสั่งซื้อ : <span ng-bind="value.order_id"></span>/<span ng-bind="value.invoice_no"></span><br>
+                                
                             </td>
                             <td>
                                 <span ng-bind="value.serial_number"></span><br>
                             </td>
-                            <td><span ng-bind="value.order_date"></span></td>
+                            <td><span ng-bind="value.create_date"></span></td>
                             <td>
                                 SKU : <span ng-bind="value.sku"></span><br>
                                 NAME : <span ng-bind="value.product_name"></span>
                             </td>  
-                            <td><button type="button" class="btn btn-info btn-xs"  ng-click="selectOrder(value.order_id,value.product_id,value.serial_number)">เลือก</button></td> 
+                            <td ng-if="value.is_return == 0"><button type="button" class="btn btn-info btn-xs"  ng-click="selectOrder(value.order_id,value.return_id,value.serial_number)">เลือก</button></td> 
+                              <td ng-if="value.is_return == 1"><span class="label label-default">ทำใบลดหนี้แล้ว</span></td>
                         </tr>
                     </tbody>
                 </table>
@@ -48,45 +50,53 @@
         </div>
     </script>
 
-
-
-    <div class="container-fluid" ng-controller="return_receive">
+    <div class="container-fluid" ng-controller="delivery_return">
         <div class="page-header">
-          <h2>ใบรับคืน <?php echo $return_receive_data['docno']; ?></h2>
+          <h2>ใบส่งคืน <?php echo $delivery_return_data['docno']; ?></h2>
         </div>
         <div style="padding-top:30px;"></div>
-        <form class="form-horizontal" method="POST"  action="<?php echo base_url('return_receive/update/'.$return_receive_data['id']);?>" accept-charset="utf-8" enctype="multipart/form-data">
+        <form class="form-horizontal" method="POST"  action="<?php echo base_url('delivery_return/update/'.$delivery_return_data['id']);?>" accept-charset="utf-8" enctype="multipart/form-data">
         <fieldset>
 
         <!-- Text input-->
         <div class="form-group">
           <label class="col-md-3 control-label" for="id">รหัส</label>  
           <div class="col-md-4">
-          <input type="text" name="docno" hidden="true" value="<?php echo $return_receive_data['docno']; ?>">
-          <input id="id" name="id" type="text" readonly="true" value="<?php echo $return_receive_data['id']; ?>" placeholder="รหัส" class="form-control input-md" required="">
+          <input type="text" name="docno" hidden="true" value="<?php echo $delivery_return_data['docno']; ?>">
+          <input id="id" name="id" type="text" readonly="true" value="<?php echo $delivery_return_data['id']; ?>" placeholder="รหัส" class="form-control input-md" required="">
             
           </div>
         </div>
 
-
+       
         <!-- Text input-->
         <div class="form-group">
-            <label class="col-md-3 control-label" for="order_id">เลขที่ใบสั่งซื้อ</label>
+            <label class="col-md-3 control-label" for="return_id">เลขที่ใบรับคืน</label>
+            
             <div class="col-md-6">
                 <div class="input-group">
-                    <input id="order_id" name="order_id" type="text" placeholder="เลขที่ใบสั่งซื้อ" class="form-control input-md" 
-                    ng-model="order_id"  ng-init="order_id = items.order_id" required=""  readonly="true">
+                    <input id="return_id" name="return_id" type="text" placeholder="เลขที่ใบรับคืน" class="form-control input-md" 
+                        ng-model="return_id"  ng-init="return_id = items.return_id" 
+                        required="" readonly="true"  readonly="true">
                 </div>
             </div>
         </div>
 
        
         <div class="form-group">
+         <label class="col-md-3 control-label" for="order_id">เลขที่ใบสั่งซื้อ</label>
+          <div class="col-md-6">
+                 <input id="order_id" name="order_id" type="text" placeholder="เลขที่ใบสั่งซื้อ" class="form-control input-md" 
+                    ng-model="order_id"  ng-init="order_id = items.order_id" required="" readonly="true">
+            </div>
+        </div>
+
+        <div class="form-group">
           <label class="col-md-3 control-label" for="product_id">รหัสสินค้า</label>
           <div class="col-md-6">
                 <input id="product_id" name="product_id" type="text" placeholder="รหัสสินค้า" class="form-control input-md" 
-                ng-model="product_id"  ng-init="product_id = items.product_id" 
-                required=""  readonly="true">
+                 ng-model="product_id"  ng-init="product_id = items.product_id" 
+                 required="" readonly="true">
             </div>
         </div>
 
@@ -95,39 +105,30 @@
           <div class="col-md-6">
                 <input id="serial" name="serial" type="text" placeholder="serial number" class="form-control input-md" 
                  ng-model="serial"  ng-init="serial = items.serial" 
-                 required=""  readonly="true" >
+                 required="" readonly="true">
             </div>
         </div>
 
-        
+
+
+        <!-- Text input-->
+        <div class="form-group">
+          <label class="col-md-3 control-label" for="tracking">tracking</label>  
+          <div class="col-md-6">
+          <input id="tracking" name="tracking" type="text" value="<?php echo $delivery_return_data['tracking']; ?>" placeholder="tracking" class="form-control input-md" required="">
+            
+          </div>
+        </div>
 
         <div class="form-group">
           <label class="col-md-3 control-label" for="comment">หมายเหตุ</label>
           <div class="col-md-6">
-                <textarea class="form-control" name="comment"><?php echo $return_receive_data['comment']; ?></textarea>
+                <textarea class="form-control" name="comment"><?php echo $delivery_return_data['comment']; ?></textarea>
             </div>
         </div>
-        <?php if ($return_receive_data['is_cut_stock']==1): ?>
-          <input hidden="true" type="text" name="is_cut_stock" value="1" >
-        <?php endif ?>
-        <!-- Multiple Checkboxes -->
-        <div class="form-group">
-            <label class="col-md-3 control-label" for="is_cut_stock">ตัดสต็อก</label>
-            <div class="col-md-4">
-                <div class="checkbox">
-                    <label for="is_cut_stock-0">
-                        <input type="checkbox" name="is_cut_stock" id="is_cut_stock-0" value="1" 
-                        <?php if ($return_receive_data['is_cut_stock']==1): ?>
-                        <?php echo "checked"; ?>
-                        <?php echo 'disabled="true"> ตัดสต็อกสินค้า' ?>
-                    <?php else: ?>
-                      <?php echo '> ตัดสต็อกสินค้า' ?>
-                    <?php endif ?>
 
-                    </label>
-                </div>
-            </div>
-        </div>
+
+
 
         <!-- Multiple Checkboxes -->
         <div class="form-group">
@@ -136,7 +137,7 @@
           <div class="checkbox">
             <label for="isactive-0">
               <input type="checkbox" name="is_active" id="isactive-0" value="1" 
-              <?php if ($return_receive_data['is_active']==1): ?>
+              <?php if ($delivery_return_data['is_active']==1): ?>
                 <?php echo "checked"; ?>
               <?php endif ?>
               >

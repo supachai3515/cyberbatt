@@ -52,6 +52,8 @@ class Orders_model extends CI_Model {
 				p.`comment`,
 				p.member_id,
 				p.amount,
+				p.credit_note_id,
+				c.docno credit_note_docno,
 				DATE_FORMAT(p.inform_date_time,'%Y-%m-%d') inform_date,
 				DATE_FORMAT(p.inform_date_time,'%H:%i') inform_time,
 				p.create_date payment_create_date
@@ -59,6 +61,7 @@ class Orders_model extends CI_Model {
 				LEFT JOIN order_status s ON s.id =  o.order_status_id
 				LEFT JOIN  members m ON m.id = o.customer_id 
 				LEFT JOIN payment p ON p.order_id = o.id
+				LEFT JOIN credit_note c ON c.id = p.credit_note_id
 			  WHERE o.id = '".$orders_id."'"; 
 
 		$query = $this->db->query($sql);
@@ -68,7 +71,7 @@ class Orders_model extends CI_Model {
 
 	public function get_orders_detail_id($orders_id)
 	{
-		$sql ="SELECT od.* ,  IFNULL(p.sku,'') sku, IFNULL(p.name,'') product_name FROM order_detail od 
+		$sql ="SELECT od.* ,  IFNULL(p.sku,'') sku, IFNULL(p.name,'') product_name , p.slug FROM order_detail od 
 		LEFT JOIN products p ON od.product_id = p.id WHERE od.order_id = '".$orders_id."'"; 
 
 		$query = $this->db->query($sql);
@@ -275,12 +278,44 @@ class Orders_model extends CI_Model {
 		$data_order = array(
 			'is_invoice' => $this->input->post('is_invoice'),	
 			'invoice_date' => date("Y-m-d H:i:s"),
-			'invoice_docno' => 'IN'.date("ymd").str_pad($po_orders_id, 4, "0", STR_PAD_LEFT)	
+			'invoice_docno' => 'IN'.date("ym").str_pad($po_orders_id, 4, "0", STR_PAD_LEFT)	
 		);
 
 		$where = array('id' => $po_orders_id);
 		$this->db->update("orders", $data_order, $where);
 		$this->reset_order($po_orders_id);
+	}
+
+	public function get_search_credit_note($search_txt)
+	{
+		$sql =" SELECT cn.order_id, 
+				cn.id credit_note_id,
+				cn.docno credit_note_docno,
+				o.invoice_docno invoice_no,
+				cn.create_date create_date,
+				cn.serial serial_number,
+				p.id product_id,
+				p.name product_name,
+				p.sku,
+				(SELECT COUNT(credit_note_id) FROM payment WHERE is_active = 1 AND credit_note_id = cn.id) is_payment
+				FROM credit_note cn
+				INNER JOIN orders o ON o.id = cn.order_id
+				INNER JOIN products p on p.id = cn.product_id
+
+				WHERE cn.id  LIKE '%".$search_txt."%'
+					OR o.`name`  LIKE '%".$search_txt."%'
+					OR p.`name`  LIKE '%".$search_txt."%'
+					OR o.`address`  LIKE '%".$search_txt."%'
+					OR o.`email`  LIKE '%".$search_txt."%'
+					OR o.`tel`  LIKE '%".$search_txt."%'
+					OR o.`invoice_docno`  LIKE '%".$search_txt."%'
+					OR p.`id`  LIKE '%".$search_txt."%'
+					OR cn.serial  LIKE '%".$search_txt."%'
+					OR p.`sku`  LIKE '%".$search_txt."%' 
+			";
+		$re = $this->db->query($sql);
+		$return_data = $re->result_array();
+		return $return_data;
 	}
 
 

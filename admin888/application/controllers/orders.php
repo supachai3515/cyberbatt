@@ -181,6 +181,39 @@ class Orders extends CI_Controller {
 
 	}  
 
+
+	public function invoice($orders_id)
+	{
+		$this->is_logged_in();
+		$data['orders_tem'] = $this->orders_model->get_orders_id($orders_id);
+
+		if($data['orders_tem']['is_invoice'] == 0){
+			
+			$sql ="SELECT COUNT(*)+1 connt_id FROM orders WHERE invoice_docno != '' OR invoice_docno is not null"; 
+			$query = $this->db->query($sql);
+			$row = $query->row_array();
+			$order_inv_count =  $row['connt_id'];
+			
+			date_default_timezone_set("Asia/Bangkok");
+			$data_order = array(
+				'is_invoice' => 1,	
+				'invoice_date' => date("Y-m-d H:i:s"),
+				'invoice_docno' => 'INV'.date("ymd").str_pad($order_inv_count, 4, "0", STR_PAD_LEFT)	
+			);
+
+			$where = array('id' => $orders_id);
+			$this->db->update("orders", $data_order, $where);
+
+		}
+
+		$data['orders_data'] = $this->orders_model->get_orders_id($orders_id);
+		$data['orders_detail'] = $this->orders_model->get_orders_detail_id($orders_id);
+		$data['order_status_list'] = $this->orders_model->get_order_status();
+		$data['order_status_history_list'] = $this->orders_model->get_order_status_history($orders_id);
+		$this->load->view('invoice_doc', $data);	
+
+	}
+
 	public function is_logged_in(){
 		$is_logged_in = $this->session->userdata('is_logged_in');
 		$chk_admin =  $this->session->userdata('permission');
@@ -283,6 +316,7 @@ class Orders extends CI_Controller {
 						
 						
 						//update history
+						date_default_timezone_set("Asia/Bangkok");
 						$data_serial_history = array(
 								'serial_number' =>$value->serial_number,
 								'product_id' => $value->product_id,
@@ -361,6 +395,7 @@ class Orders extends CI_Controller {
 			 date_default_timezone_set("Asia/Bangkok");
 			 $data_payment = array(
 				"order_id" => $order_id,
+				"credit_note_id" => $this->input->post('credit_note_id'),
 				"member_id" => $this->input->post('member_id'),
 				"bank_name" => $this->input->post('bank_name'),
 				"comment" => $this->input->post('comment'),
@@ -443,6 +478,13 @@ class Orders extends CI_Controller {
 			redirect('orders');
 		}
 
+	}
+
+	public function get_search_credit_note()
+	{
+		$value = json_decode(file_get_contents("php://input"));
+		$data['search_credit_note'] =  $this->orders_model->get_search_credit_note($value->search);
+		print json_encode($data['search_credit_note']);
 	}
 
 	function sendmail_order_tracking($orderId)
@@ -532,7 +574,7 @@ class Orders extends CI_Controller {
 			   <tr>
                 <td style="padding: 8px;text-align: left;border-bottom: 1px solid #ddd;">
                     sku : '.$value["sku"].'<br/>
-                    <a target="_blank" href="'.base_url("product/".$value["slug"]).'">
+                    <a target="_blank" href="'.$this->config->item('url_img').'product/'.$value['slug'].'">
                         '.$value["name"].'
                     </a>
                 </td>

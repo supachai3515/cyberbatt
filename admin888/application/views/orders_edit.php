@@ -1,4 +1,54 @@
 <div id="page-wrapper" ng-app="myApp">
+
+    <script type="text/ng-template" id="myModalContent_credit.html">
+        <div class="modal-header">
+            <h4>เลือกใบสั่งซื้อ</h4>
+        </div>
+        <div class="modal-body">
+        <form class="form-inline" role="form" ng-submit="searchOrder(search_order)">
+            <div class="form-group">
+                <label class="sr-only" for="">รหัสสินค้า , เลขที่ใบสั่งซื้อ</label>
+                <input type="text" class="form-control"  ng-model="search_order" ng-init="search_order =''" placeholder="รหัสสินค้า , เลขที่สั่งซื้อ" >
+            </div>
+            <button type="submit" class="btn btn-primary" >ค้นหา</button>
+        </form>
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Serial Number</th>
+                            <th>วันที่ออกใบลดหนี้</th>
+                            <th>Products</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="value in order_data">
+                            <td>
+                                เลขที่ใบสั่งซื้อ : <span ng-bind="value.order_id"></span>/<span ng-bind="value.invoice_no"></span><br/>
+                                เลขที่ใบลดหนี้ : <span ng-bind="value.credit_note_id"></span>/<span ng-bind="value.credit_note_docno"></span>
+                            </td>
+                            <td>
+                                <span ng-bind="value.serial_number"></span><br>
+                            </td>
+                            <td><span ng-bind="value.create_date"></span></td>
+                            <td>
+                                SKU : <span ng-bind="value.sku"></span><br>
+                                NAME : <span ng-bind="value.product_name"></span>
+                            </td>  
+                            <td ng-if="value.is_payment == 0"><button type="button" class="btn btn-info btn-xs"  ng-click="selectOrder(value.credit_note_id,value.credit_note_docno)">เลือก</button></td> 
+                              <td ng-if="value.is_payment == 1"><span class="label label-default">ใช้อ้างอิงแล้ว</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+        </div>
+    </script>
+
     <div class="container-fluid" ng-controller="order">
 
           <script type="text/ng-template" id="myModalContent.html">
@@ -308,8 +358,20 @@
 
                <form class="form-horizontal" method="POST" action="<?php echo base_url('orders/save_slip/'.$orders_data['id']);?>" accept-charset="utf-8" enctype="multipart/form-data">
                <div class="form-group">
-                  <legend>รูป slip</legend>
+                  <legend>การชำระเงิน</legend>
                 </div>
+                 <!-- Text input-->
+                  <div class="form-group">
+                      <label class="col-md-3 control-label" for="credit_note_id">อ้างอิงใบลดหนี้</label>
+                      <div class="col-md-4">
+                          <div class="input-group">
+                              <input id="credit_note_id" name="credit_note_id" type="text" placeholder="เลขที่ใบลดหนี้" class="form-control input-md" 
+                              ng-model="credit_note_id"  ng-init="credit_note_id = items.credit_note_id" required="" readonly="true">
+                              <span class="input-group-addon"> <button type="button" ng-click="open_credit()">เลือกใบลดหนี้</i></button></span>
+                          </div>
+                      </div>
+                      <div class="col-md-4"></div> <span ng-model="credit_note_docno" ng-bind="credit_note_docno"  ng-init="credit_note_docno = items.credit_note_docno"> </span>
+                  </div>
                  <input hidden="true"  value="<?php echo $orders_data['member_id']; ?>"  name="member_id" >
                 <div class="form-group">
                     <label class="col-md-3 control-label" for="textinput">เลือกธนาคาร  *</label>
@@ -412,7 +474,17 @@
 
 
           <div class="col-md-4">
-            <a href="<?php echo $this->config->item('weburl').'/invoice/'.$orders_data['ref_id']; ?>" target="_blank"><button type="button" class="btn btn-success">ใบสั่งซื้อ</button></a>
+            <a href="<?php echo $this->config->item('weburl').'invoice/'.$orders_data['ref_id']; ?>" target="_blank"><button type="button" class="btn btn-success">ใบสั่งซื้อ</button></a>
+
+            <?php if ($orders_data['order_status_id'] == 4): ?>
+                <?php if ($orders_data['is_invoice'] == 1): ?>
+                  <a href="<?php echo  base_url('orders/invoice/'.$orders_data['id']); ?>" ><button type="button" class="btn btn-info">ใบกำกับภาษี</button></a> <span><?php echo $orders_data['invoice_docno'] ?></span>
+                <?php else: ?>
+                  <a href="<?php echo base_url('orders/invoice/'.$orders_data['id']); ?>"><button type="button" class="btn btn-warning">ออกใบกำกับภาษี</button></a>
+                <?php endif ?>
+
+              
+            <?php endif ?>
 
             <h4 class="text-info">สถานะสินค้า</h4>
             <div class="well">

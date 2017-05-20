@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="<?=$header['description'];?>">
-     <meta name="keyword" content="<?=$header['keyword'];?>" /> 
+    <meta name="keyword" content="<?=$header['keyword'];?>" /> 
     <meta name="author" content="<?=$header['author'];?>">
     <title><?=$header['title'];?></title>
     <!-- Bootstrap Core CSS -->
