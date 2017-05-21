@@ -300,6 +300,35 @@ class Receive extends CI_Controller {
 	}
 
 
+	public function line_number()
+	{
+		$sql ="SELECT receive_id , product_id FROM product_serial GROUP BY receive_id , product_id"; 
+		$query = $this->db->query($sql);
+		$re = $query->result_array();
+		foreach ($re as $r) {
+
+
+			$sql ="SELECT *  FROM product_serial WHERE receive_id ='".$r['receive_id']."' AND product_id = '".$r['product_id']."'"; 
+			$query = $this->db->query($sql);
+			$re1 = $query->result_array();
+			$i= 1;
+			foreach ($re1 as $r1) {
+				
+			print($i." - ".$r1['serial_number']." - ".$r1['product_id']." - ".$r1['receive_id']."<br/>");
+
+			date_default_timezone_set("Asia/Bangkok");
+			$data_update = array(
+				'line_number' => $i			
+			);
+			
+			$this->db->update("product_serial", $data_update,"product_id = '".$r1['product_id']."' AND  serial_number = '".$r1['serial_number']."'  AND receive_id = '".$r1['receive_id']."'");
+			$i++;
+				
+			}
+		}
+	}
+
+
 	public function is_logged_in(){
 		$is_logged_in = $this->session->userdata('is_logged_in');
 		$chk_admin =  $this->session->userdata('permission');

@@ -45,6 +45,19 @@ class product_serial_model extends CI_Model {
 			'search' => $this->input->post('search')		
 		);
 
+
+		$sql =" SELECT serial_number FROM  product_serial sn  LEFT JOIN products p ON p.id = sn.product_id
+				WHERE sn.serial_number  = '".$data_product_serial['search']."' OR  p.sku = '".$data_product_serial['search']."'"; 
+		$query = $this->db->query($sql);
+		$re_se = $query->result_array();
+		$in  ="0";
+		foreach ($re_se as $r) {
+			$in = $in.",'".$r['serial_number']."'";
+		}
+		if(count($re_se) == 0){
+			$and_str  = "AND 1=2";
+		}
+	 
 		$sql ="SELECT sn.*, p.sku, sn.serial_number ,r.doc_no receive_id ,sn.create_date ,sh.comment status_name , sh.create_date create_date_status,
 				p.`name` product_name ,r.create_date receive_date 
 						FROM product_serial sn 
@@ -55,9 +68,8 @@ class product_serial_model extends CI_Model {
 						FROM serial_history AS b
 						WHERE b.serial_number = sn.serial_number AND b.product_id = sh.product_id 
 				)
-				WHERE sn.serial_number  LIKE '%".$data_product_serial['search']."%' OR   p.sku LIKE '%".$data_product_serial['search']."%'
+				WHERE  sn.serial_number in (".str_replace("0,","",$in).") ";
 
-				";
 		$re = $this->db->query($sql);
 		$return_data['result_product_serial'] = $re->result_array();
 		$return_data['data_search'] = $data_product_serial;

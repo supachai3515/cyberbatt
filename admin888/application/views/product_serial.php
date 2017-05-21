@@ -30,14 +30,14 @@
 
     <div class="container-fluid" ng-controller="product_serial">
         <div class="page-header">
-            <h1>ใบรับสินค้า</h1>
+            <h1>Serial Number</h1>
             <?php //if(isset($sql))echo "<p>".$sql."</p>"; ?>
         </div>
         <div role="tabpanel">
         <!-- Nav tabs -->
             <ul class="nav nav-tabs" role="tablist">
                 <li role="presentation" class="active">
-                    <a href="#search" aria-controls="search" role="tab" data-toggle="tab"><i class="fa fa-search"></i> ค้นหาใบรับสินค้า</a>
+                    <a href="#search" aria-controls="search" role="tab" data-toggle="tab"><i class="fa fa-search"></i> ค้นหา Serial Number</a>
                 </li>
             </ul>
              <!-- Tab panes -->
@@ -47,7 +47,7 @@
                     <form action="<?php echo base_url('product_serial/search');?>" method="POST" class="form-inline" role="form">
                         <div class="form-group">
                             <label class="sr-only" for="">search</label>
-                            <input type="text" class="form-control" id="search" name="search" placeholder="Serial Number , SKU">
+                            <input type="text" class="form-control" id="search" name="search" placeholder="Serial Number">
                         </div>
                 
                         <button type="submit" class="btn btn-primary">ค้นหา</button>

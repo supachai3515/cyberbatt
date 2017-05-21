@@ -145,7 +145,6 @@ class Receive_model extends CI_Model {
 		$data_receive = array(
 			'comment' =>$this->input->post('comment'),
 			'do_ref' => $this->input->post('do_ref'),
-			'doc_no' =>"RE".date("YmdHis"),
 			'qty' => $qty_m,
 			'vat' => $vat_m ,
 			'total' => $total_m ,
@@ -251,7 +250,7 @@ class Receive_model extends CI_Model {
 				$comment = "แก้ไขใบรับสินค้า : ".$receive_docno;
 		} else{
 				$ch_is_active = 2;
-				$comment = "ทำการยกเลิกใยรับ : ".$receive_docno;
+				$comment = "ทำการยกเลิกใบรับ : ".$receive_docno;
 		}
 
 		$sql =" SELECT * FROM product_serial WHERE receive_id = '".$receive_id."' "; 
