@@ -379,8 +379,11 @@ class Receive_model extends CI_Model {
 		$insert_id = $this->db->insert_id();
 
 		//update docno
+		date_default_timezone_set("Asia/Bangkok");
+		$docno_gen = 'RE'.date("ymd");
+		$docno_gen = $docno_gen.str_pad($insert_id, 4, "0", STR_PAD_LEFT);
 		$data_receive_update = array(
-			'doc_no' => 'RE'.date("ymd").str_pad($insert_id, 4, "0", STR_PAD_LEFT)				
+			'doc_no' => $docno_gen		
 		);
 		$this->db->update("receive", $data_receive_update, "id = '".$insert_id."'");
   		$this->db-> delete('receive_detail',"receive_id = '".$insert_id."'");
