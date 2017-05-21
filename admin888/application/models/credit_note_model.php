@@ -172,7 +172,7 @@ class Credit_note_model extends CI_Model {
 			$data_serial_history = array(
 					'serial_number' =>$this->input->post('serial'),
 					'product_id' => $this->input->post('product_id'),
-					'comment' => "ยันยันใบส่งคืน เลขที่ใบส่งคืน #".$data_order['docno'],
+					'comment' => "ยันยันใบลดหนี้ เลขที่ใบลดหนี้ #".$data_order['docno'],
 					'create_date' => date("Y-m-d H:i:s"),				
 			);
 			$this->db->insert("serial_history", $data_serial_history);
@@ -189,6 +189,7 @@ class Credit_note_model extends CI_Model {
 				rr.id return_id,
 				rr.docno return_docno,
 				o.invoice_docno invoice_no,
+				o.name order_name,
 				rr.create_date create_date,
 				rr.serial serial_number,
 				p.id product_id,

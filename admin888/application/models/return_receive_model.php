@@ -45,7 +45,21 @@ class return_receive_model extends CI_Model {
 
 	public function get_return_receive_id($return_receive_id)
 	{
-		$sql ="SELECT * FROM return_receive WHERE id = '".$return_receive_id."'"; 
+		$sql ="SELECT  rr.*,
+	    		o.id order_id, o.invoice_docno invoice_no,
+	    		o.`name` order_name,
+				o.address,
+				(SELECT docno FROM credit_note WHERE is_active = 1 AND return_id = rr.id) credit_note_docno,
+				(SELECT docno FROM delivery_return WHERE is_active = 1 AND return_id = rr.id) delivery_return_docno ,
+				o.date order_date,
+				s.serial_number,
+				p.id product_id,
+				p.name product_name,
+				p.sku
+				FROM return_receive  rr INNER JOIN orders o ON rr.order_id = o.id 
+				INNER JOIN products p on p.id = rr.product_id
+				LEFT JOIN product_serial s ON s.product_id = rr.product_id  AND s.order_id = o.id AND rr.serial = s.serial_number
+				 WHERE rr.id = '".$return_receive_id."'"; 
 
 		$query = $this->db->query($sql);
 		$row = $query->row_array();
@@ -239,6 +253,7 @@ class return_receive_model extends CI_Model {
 	{
 		$sql =" SELECT * FROM (  SELECT o.id order_id, o.invoice_docno invoice_no,
 				o.date order_date,
+				o.name order_name,
 				d.quantity,
 				(SELECT COUNT(product_id) FROM return_receive WHERE is_active = 1 AND product_id = p.id AND order_id = o.id)Count_qty,
 				IFNULL(s.serial_number,'') serial_number,

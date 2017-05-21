@@ -26,8 +26,9 @@
                     <tbody>
                         <tr ng-repeat="value in order_data">
                             <td>
-                                ใบรับคืน : <span ng-bind="value.return_id"></span>/<span ng-bind="value.return_docno"></span><br>
-                                ใบสั่งซื้อ : <span ng-bind="value.order_id"></span>/<span ng-bind="value.invoice_no"></span><br>
+                                <strong>ใบรับคืน : </strong><span ng-bind="value.return_id"></span>/<span ng-bind="value.return_docno"></span><br>
+                                <strong>ใบสั่งซื้อ : </strong><span ng-bind="value.order_id"></span>/<span ng-bind="value.invoice_no"></span><br>
+                                <strong>Name : </strong><span ng-bind="value.order_name"></span>
                                 
                             </td>
                             <td>

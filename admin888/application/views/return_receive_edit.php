@@ -26,8 +26,8 @@
                     <tbody>
                         <tr ng-repeat="value in order_data">
                             <td>
-                                <span ng-bind="value.order_id"></span><br>
-                                <span ng-bind="value.invoice_no"></span>
+                                order : <span ng-bind="value.order_id"></span>/ <span ng-bind="value.invoice_no"></span>
+                                Name : <span ng-bind="value.order_name"></span>
                             </td>
                             <td>
                                 <span ng-bind="value.serial_number"></span><br>
@@ -145,14 +145,31 @@
             </div>
           </div>
         </div>
-
-        <!-- Button -->
-        <div class="form-group">
-          <label class="col-md-3 control-label" for="save"></label>
-          <div class="col-md-4">
-            <button type="submit" class="btn btn-primary">บันทึก</button>
-          </div>
-        </div>
+        <?php if (isset($return_receive_data['credit_note_docno']) || isset($return_receive_data['delivery_return_docno'])): ?>
+            <div class="form-group">
+              <label class="col-md-3 control-label" for="save"></label>
+              <div class="col-md-4">
+                <div class="alert alert-danger">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    <strong>ถูกนำไปใช้แล้ว </strong> 
+                    <?php if (isset($return_receive_data['credit_note_docno'])): ?>
+                        ใช้เป็นใบลดนี้ #<?php echo $return_receive_data['credit_note_docno'] ?>
+                    <?php else: ?>
+                        ใช้เป็นใบส่งคืน #<?php echo $return_receive_data['delivery_return_docno'] ?>
+                    <?php endif ?>
+                </div>
+              </div>
+            </div>
+        <?php else: ?>
+            <!-- Button -->
+            <div class="form-group">
+              <label class="col-md-3 control-label" for="save"></label>
+              <div class="col-md-4">
+                <button type="submit" class="btn btn-primary">บันทึก</button>
+              </div>
+            </div>
+        <?php endif ?>
+        
         </fieldset>
         </form>
     </div>

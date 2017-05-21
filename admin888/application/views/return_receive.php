@@ -27,8 +27,9 @@
                     <tbody>
                         <tr ng-repeat="value in order_data">
                             <td>
-                                <span ng-bind="value.order_id"></span><br>
-                                <span ng-bind="value.invoice_no"></span>
+                                <strong>order : </strong><span ng-bind="value.order_id"></span>/ <span ng-bind="value.invoice_no"></span>
+                                <strong>Name : </strong><span ng-bind="value.order_name"></span>
+                            </td>
                             </td>
                             <td>
                                 <span ng-bind="value.serial_number"></span><br>
@@ -113,7 +114,7 @@
                                         <span class="label label-info">ออกใบลดหนี้เลขที่ : <strong><?php echo $return_receive['credit_note_docno'] ?></strong></span><br/>
                                     <?php endif ?>
                                     <?php if (isset($return_receive['delivery_return_docno'])): ?>
-                                        <span class="label label-warning">ออกใบส่งคืน : <strong><?php echo $return_receive['credit_note_docno'] ?></strong></span><br/>
+                                        <span class="label label-warning">ออกใบส่งคืน : <strong><?php echo $return_receive['delivery_return_docno'] ?></strong></span><br/>
                                     <?php endif ?>
                                          <span><i class="fa fa-calendar"></i> <?php echo date("d-m-Y H:i", strtotime($return_receive['modified_date']));?></span>
                                         <br/>

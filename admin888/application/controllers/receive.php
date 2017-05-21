@@ -211,7 +211,7 @@ class Receive extends CI_Controller {
 								$data_serial_history = array(
 									'serial_number' =>$r_ow['serial_number'],
 									'product_id' => $r_ow['product_id'],
-									'comment' => "ลบออก จากใบรับเข้า : ".$docno ,
+									'comment' => "ลบออก จากใบรับเข้า : #".$docno ,
 									'create_date' => date("Y-m-d H:i:s"),				
 								);
 								$this->db->insert("serial_history", $data_serial_history);
@@ -247,7 +247,7 @@ class Receive extends CI_Controller {
 							$data_serial_history = array(
 									'serial_number' =>$value->serial_number,
 									'product_id' => $value->product_id,
-									'comment' => "บันทึก จากใบรับเข้า : ".$docno,
+									'comment' => "บันทึก จากใบรับเข้า : #".$docno,
 									'create_date' => date("Y-m-d H:i:s"),				
 							);
 

@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>ใบกํากับภาษี/ใบเสร็จรับเงิน <?php echo $orders_data['invoice_docno']; ?> <?php echo $orders_data["name"];?> </title>
+		<title>ใบกํากับภาษี/ใบเสร็จรับเงิน <?php echo $orders_data['invoice_docno']." ".$orders_data["name"];?></title>
 
 		<!-- Bootstrap CSS -->
 		<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
@@ -100,7 +100,7 @@
 	                            	 <tr>
 										<td><?php echo $value['sku'] ?></td>
 
-										<td class="lineover">
+										<td class="">
 											<a target="_blank" href="<?php echo $this->config->item('url_img')."product/".$value['slug']; ?>">
 												<?php echo $value['product_name'] ?>
 											</a>
@@ -236,7 +236,7 @@
   /* Fallback for non-webkit */
   display: -webkit-box;
   /* Fallback for non-webkit */
-  -webkit-line-clamp: 1;
+  -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;

@@ -164,7 +164,7 @@ class Delivery_return_model extends CI_Model {
 
 		date_default_timezone_set("Asia/Bangkok");
 		$data_order = array(
-			'docno' => 'CN'.date("ymd").str_pad($insert_id, 4, "0", STR_PAD_LEFT)	
+			'docno' => 'DR'.date("ymd").str_pad($insert_id, 4, "0", STR_PAD_LEFT)	
 		);
 
 		$where = array('id' => $insert_id);

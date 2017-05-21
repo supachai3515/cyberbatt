@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>ใบแจ้งชำระเงิน เลขที่ใบสั่งซื้อ <?php echo $order['id']; ?><?php echo $order["name"];?> </title>
+		<title>ใบแจ้งชำระเงิน เลขที่ใบสั่งซื้อ <?php echo $order['id']." ".$order["name"];?> </title>
 
 		<!-- Bootstrap CSS -->
 		<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
@@ -101,7 +101,7 @@
 	                            	 <tr>
 										<td><?php echo $value['sku'] ?></td>
 
-										<td class="lineover">
+										<td class="">
 											<a target="_blank" href="<?php echo base_url("product/".$value['slug']) ?>">
 												<?php echo $value['name'] ?>
 											</a>

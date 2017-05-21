@@ -21,7 +21,7 @@ class product_serial_model extends CI_Model {
 					SELECT MAX(create_date)
 					FROM serial_history AS b
 					WHERE b.serial_number = sn.serial_number AND b.product_id = sh.product_id 
-			) LIMIT " . $start . "," . $limit;
+			)  ORDER BY sh.create_date DESC LIMIT " . $start . "," . $limit;
 		$re = $this->db->query($sql);
 		return $re->result_array();
 
