@@ -17,9 +17,6 @@
                     <thead>
                         <tr>
                             <th>Order</th>
-                            <th>Serial Number</th>
-                            <th>return Done</th>
-                            <th>Order Date</th>
                             <th>Products</th>
                             <th>Action</th>
                         </tr>
@@ -27,18 +24,16 @@
                     <tbody>
                         <tr ng-repeat="value in order_data">
                             <td>
-                                <strong>order : </strong><span ng-bind="value.order_id"></span>/ <span ng-bind="value.invoice_no"></span>
-                                <strong>Name : </strong><span ng-bind="value.order_name"></span>
-                            </td>
+                                <strong>Order: </strong><span ng-bind="value.order_id"></span>/ <span ng-bind="value.invoice_no"></span>
+                                <strong>Serial: </strong><span ng-bind="value.serial_number"></span><br>
+                                <strong>รับคืนแล้ว: </strong><span >{{value.Count_qty}}/{{value.quantity}}</span><br>
+                                <strong>วันที่ขาย: </strong><span ng-bind="value.order_date"></span><br>
+                                
                             </td>
                             <td>
-                                <span ng-bind="value.serial_number"></span><br>
-                            </td>
-                            <td><span >{{value.Count_qty}}/{{value.quantity}}</span></td>
-                            <td><span ng-bind="value.order_date"></span></td>
-                            <td>
-                                SKU : <span ng-bind="value.sku"></span><br>
-                                NAME : <span ng-bind="value.product_name"></span>
+                                <strong>SKU: </strong><span ng-bind="value.sku"></span><br>
+                                <strong>NAME: </strong><span ng-bind="value.product_name"></span><br>
+                                <strong>ชื่อลูกค้า: </strong><span ng-bind="value.order_name"></span><br>
                             </td>  
                             <td ng-if="value.Count_qty < value.quantity"><button type="button" class="btn btn-info btn-xs"  ng-click="selectOrder(value.order_id,value.product_id,value.serial_number)">เลือก</button></td> 
                               <td ng-if="value.Count_qty == value.quantity"><span class="label label-default">รับคืนแล้ว</span></td>
@@ -111,10 +106,10 @@
                                     
                                     <td>
                                     <?php if (isset($return_receive['credit_note_docno'])): ?>
-                                        <span class="label label-info">ออกใบลดหนี้เลขที่ : <strong><?php echo $return_receive['credit_note_docno'] ?></strong></span><br/>
+                                        <span class="label label-info">ใบลดหนี้ : <strong><?php echo $return_receive['credit_note_docno'] ?></strong></span><br/>
                                     <?php endif ?>
                                     <?php if (isset($return_receive['delivery_return_docno'])): ?>
-                                        <span class="label label-warning">ออกใบส่งคืน : <strong><?php echo $return_receive['delivery_return_docno'] ?></strong></span><br/>
+                                        <span class="label label-warning">ส่งคืน : <strong><?php echo $return_receive['delivery_return_docno'] ?></strong></span><br/>
                                     <?php endif ?>
                                          <span><i class="fa fa-calendar"></i> <?php echo date("d-m-Y H:i", strtotime($return_receive['modified_date']));?></span>
                                         <br/>
@@ -181,11 +176,11 @@
 
                             <!-- Multiple Checkboxes -->
                             <div class="form-group">
-                                <label class="col-md-3 control-label" for="is_cut_stock">ตัดสต็อก</label>
+                                <label class="col-md-3 control-label" for="is_cut_stock">เพิ่มสต็อก</label>
                                 <div class="col-md-4">
                                     <div class="checkbox">
                                         <label for="is_cut_stock-0">
-                                            <input type="checkbox" name="is_cut_stock" id="is_cut_stock-0" value="1"> ตัดสต็อกสินค้า
+                                            <input type="checkbox" name="is_cut_stock" id="is_cut_stock-0" value="1"> เพิ่มสต็อกสินค้า
                                         </label>
                                     </div>
                                 </div>

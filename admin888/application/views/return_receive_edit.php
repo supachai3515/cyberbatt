@@ -112,14 +112,14 @@
         <?php endif ?>
         <!-- Multiple Checkboxes -->
         <div class="form-group">
-            <label class="col-md-3 control-label" for="is_cut_stock">ตัดสต็อก</label>
+            <label class="col-md-3 control-label" for="is_cut_stock">เพิ่มสต็อก</label>
             <div class="col-md-4">
                 <div class="checkbox">
                     <label for="is_cut_stock-0">
                         <input type="checkbox" name="is_cut_stock" id="is_cut_stock-0" value="1" 
                         <?php if ($return_receive_data['is_cut_stock']==1): ?>
                         <?php echo "checked"; ?>
-                        <?php echo 'disabled="true"> ตัดสต็อกสินค้า' ?>
+                        <?php echo 'disabled="true"> เพิ่มสต็อกสินค้า' ?>
                     <?php else: ?>
                       <?php echo '> ตัดสต็อกสินค้า' ?>
                     <?php endif ?>
@@ -151,11 +151,11 @@
               <div class="col-md-4">
                 <div class="alert alert-danger">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                    <strong>ถูกนำไปใช้แล้ว </strong> 
+                    <strong></strong> 
                     <?php if (isset($return_receive_data['credit_note_docno'])): ?>
-                        ใช้เป็นใบลดนี้ #<?php echo $return_receive_data['credit_note_docno'] ?>
+                        ใบลดนี้เลขที่ #<?php echo $return_receive_data['credit_note_docno'] ?>
                     <?php else: ?>
-                        ใช้เป็นใบส่งคืน #<?php echo $return_receive_data['delivery_return_docno'] ?>
+                        ใบส่งคืนเลขที่ #<?php echo $return_receive_data['delivery_return_docno'] ?>
                     <?php endif ?>
                 </div>
               </div>

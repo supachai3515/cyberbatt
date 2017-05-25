@@ -209,7 +209,7 @@ class return_receive_model extends CI_Model {
 
 		date_default_timezone_set("Asia/Bangkok");
 		$data_order = array(
-			'docno' => 'RETURN'.date("ymd").str_pad($insert_id, 4, "0", STR_PAD_LEFT)	
+			'docno' => 'RT'.date("ymd").str_pad($insert_id, 4, "0", STR_PAD_LEFT)	
 		);
 
 		$where = array('id' => $insert_id);
