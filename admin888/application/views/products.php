@@ -327,11 +327,17 @@
                                     <fieldset>
 
                                        <div class="col-md-12" style="padding:0;">
-                                            <div class="col-md-2" style="padding:0;">
+
+                                            <div class="col-md-2">
+                                                    <input type="checkbox" name="all_product" value="1"> สินค้าทั้งหมด
+                                            </div>
+
+                                            <div class="col-md-2">
                                                     <label for="to_stock"> </label><br>
                                                     <button type="submit" class="btn btn-primary">export stock</button>
                                             </div>
                                         </div> 
+                                        <p class="text-warning">ใช้แบบเลือกสินค้าไม่เกิน 300 items</p>
                                         
                                     </fieldset>
                                     <div style="padding-top:20px;"></div>
