@@ -11,6 +11,9 @@
     <script src="<?php echo base_url('theme');?>/datepicker/js/bootstrap-datepicker.js"></script>
     <script src="<?php echo base_url('theme');?>/datepicker/locales/bootstrap-datepicker.th.min.js"></script>
     <script src="<?php echo base_url('theme');?>/datepicker/js/bootstrap-timepicker.js"></script>
+    <script src="<?php echo base_url();?>js/sweetalert2.min.js"></script>
+    <!-- Include a polyfill for ES6 Promises (optional) for IE11 and Android browser -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
     <?php $this->load->view("js/app_js"); ?>
     <?php if(isset($script)){echo $script;}?>
     <?php if(isset($script_file)){echo $this->load->view($script_file); }?>

@@ -76,6 +76,12 @@
                                 <?php if (isset($orders['image_slip_own']) || isset($orders['image_slip_customer']) ): ?>
                                     <a class="btn btn-xs btn-info" href="<?php echo base_url('orders/edit/'.$orders['id']) ?>" role="button">สลิป <i class="fa fa-paper-plane" aria-hidden="true"></i></i></a>
                                 <?php endif ?>
+
+
+                                <?php if ($orders['is_invoice'] == 1): ?>
+                                    <p><br><a href="<?php echo  base_url('orders/invoice/'.$orders['id']); ?>" ><button type="button" class="btn btn-xs btn-info">ใบกำกับภาษี</button></a> <span><?php echo $orders['invoice_docno'] ?></span></p>
+                                  
+                                <?php endif ?>
                         </td>
                         <td>
                             <span>เลขที่ใบสั่งซื้อ : <strong>#<?php echo $orders['id'] ?></strong></span><br/>

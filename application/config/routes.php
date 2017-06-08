@@ -44,6 +44,7 @@ $route['products/add'] = "products/add";
 $route['search'] = "products/search";  
 
 $route['invoice/(:any)'] = "invoice/index/$1";
+$route['fullinvoice/(:any)'] = "fullinvoice/index/$1";
 $route['po_invoice/(:any)'] = "po_invoice/index/$1";
 $route['status/(:any)'] = "status/index/$1";
 $route['po_status/(:any)'] = "po_status/index/$1";        

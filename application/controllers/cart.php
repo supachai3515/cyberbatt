@@ -5,7 +5,7 @@ class Cart extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        //call model inti 
+        //call model inti
         $this->load->model('initdata_model');
         $this->load->library('pagination');
         $this->load->model('cart_model');
@@ -14,14 +14,14 @@ class Cart extends CI_Controller
 
     public function index()
     {
-        //header meta tag 
+        //header meta tag
         $data['header'] = array(
             'title' => 'ตะกร้าสินค้า | ' . $this->config->item('sitename'),
             'description' => 'ตะกร้าสินค้า | ' . $this->config->item('tagline'),
             'author' => $this->config->item('author'),
             'keyword' => 'ตะกร้าสินค้า | ' . $this->config->item('tagline')
         );
-        //get menu database 
+        //get menu database
         $this->load->model('initdata_model');
         $data['menus_list']  = $this->initdata_model->get_menu();
         $data['menu_type']   = $this->initdata_model->get_type();
@@ -130,14 +130,15 @@ class Cart extends CI_Controller
     }
 
     public function update_cart(){
-        $this->cart_model->validate_update_cart();
+       $result = $this->cart_model->validate_update_cart();
+        $this->session->set_flashdata('msg', $result);
         redirect('cart','refresh');
     }
-    
+
     public function show_cart(){
         $this->load->view('cart/cart');
     }
-    
+
     public function empty_cart(){
         $this->cart->destroy();
         redirect('cart');

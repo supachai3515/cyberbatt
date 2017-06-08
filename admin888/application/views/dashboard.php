@@ -56,7 +56,7 @@
                                 <a href="<?php echo base_url('orders') ?>" class="list-group-item">
                                     <span class="badge"><?php echo $value['count'] ?></span>
                                     <?php echo $value['name'] ?>
-                                </a> 
+                                </a>
                         <?php endforeach ?>
                         </div>
                     </div>
@@ -81,7 +81,7 @@
                                         <td><?php echo $value['id'] ?>
                                         <td><?php echo date("d-m-Y H:i", strtotime($value['date']));?></td>
                                         <td><strong ng-bind="<?php echo $value['total'];?> | currency:'฿':0"></strong></td>
-                                        <td><a class="btn btn-xs btn-info" href="<?php echo base_url('orders/edit/'.$value['id']) ?>" role="button"><i class="fa fa-eye"></i></a></td> 
+                                        <td><a class="btn btn-xs btn-info" href="<?php echo base_url('orders/edit/'.$value['id']) ?>" role="button"><i class="fa fa-eye"></i></a></td>
                                     </tr>
                                 <?php endforeach ?>
                                 </tbody>

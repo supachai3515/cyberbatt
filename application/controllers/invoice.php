@@ -37,6 +37,11 @@ class Invoice extends CI_Controller {
 		}
 	
 	}
+	public function doc($ref_order_id="")
+	{
+		print("sfs");
+	
+	}
 
 }
 

@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="">
 	<head>
 		<meta charset="utf-8">
@@ -32,11 +32,7 @@
             	<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 text-right">
             	<?php if ($orders_data['is_tax'] == 1): ?>
         				<h3>ใบกํากับภาษี/ใบเสร็จรับเงิน<br>
-        				 <?php if ($print_f == "0"): ?>
-                        		<span style="font-size:14px"> (ต้นฉบับ) </span>
-                        <?php else: ?>
-                        		<span style="font-size:14px"> (สำเนา) </span>
-                        <?php endif ?>
+        				 <span style="font-size:14px"> (สำเนา) </span>
         				 <?php echo  $orders_data['invoice_docno'];?> </h3>
                         <strong>วันที่ออก <?php echo $orders_data['invoice_date']?></strong><br/>
                         <strong>วันครบกำหนด <?php echo $orders_data['invoice_date']?></strong><br/>
@@ -46,11 +42,7 @@
             	<?php else: ?>
 
         				<h3>ใบกํากับภาษีอย่างย่อ/ใบเสร็จรับเงิน<br>
-        				 <?php if ($print_f == "0"): ?>
-                        		<span style="font-size:14px"> (ต้นฉบับ) </span>
-                        <?php else: ?>
-                        		<span style="font-size:14px"> (สำเนา) </span>
-                        <?php endif ?>
+                        <span style="font-size:14px"> (สำเนา) </span>
         				 <?php echo  $orders_data['invoice_docno'];?> </h3>
                         <strong>วันที่ออก <?php echo $orders_data['invoice_date']?></strong><br/>
                         <strong>วันครบกำหนด <?php echo $orders_data['invoice_date']?></strong><br/>
@@ -269,7 +261,6 @@
 		</div>
 		<div class="row noprint">
 			<p class="text-center">
-			<a class="btn btn-default btn-sm" href="<?php echo base_url("orders/invoice/".$orders_data['id']."/1");?>" role="button">สำเนา</a> <a class="btn btn-default btn-sm" href="<?php echo base_url("orders/invoice/".$orders_data['id']);?>" role="button">ต้นฉบับ</a> <br><br>
 			<button type="button" class="btn btn-primary" onClick="window.print()"><span class="glyphicon glyphicon-print" aria-hidden="true"></span> พิมพ์ใบชำระเงิน</button>
 			<a class="btn btn-success" href="<?php echo base_url();?>" role="button">ปิดหน้าต่างนี้</a>
 			</p>

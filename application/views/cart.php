@@ -18,6 +18,16 @@
                 <!-- cart start-->
                 <div class="row">
                     <div class="col-lg-12 col-md-12">
+
+                    <?php 
+                      if($this->session->flashdata('msg') != ''){
+                          echo '
+                          <div class="alert alert-warning alert-dismissible" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            '.$this->session->flashdata('msg').'
+                          </div>';
+                      }   
+                  ?>  
                     <?php if ($this->cart->contents()): ?>
                         <?php echo form_open('cart/update_cart'); ?>
                         <div class="cart table-responsive">
@@ -57,6 +67,7 @@
                                             <span class="price"><?php echo $this->cart->format_number($row['price']); ?></span>
                                         </td>
                                         <td>
+                                            <input type="text" hidden="true"  name="product_id[]" value="<?php echo $row['id'] ?>">
                                             <?php echo form_input(array('name' => 'qty[]', 'value' => $row['qty'], 'maxlength' => '3', 'size' => '5')); ?>
                                         </td>
                                         <td>

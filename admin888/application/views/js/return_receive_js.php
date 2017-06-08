@@ -1,5 +1,4 @@
 <script type="text/javascript">
-
 	app.controller("return_receive", function($scope, $http, $uibModal, $log) {
 
 	$scope.product_return_receive = [];
@@ -13,9 +12,9 @@
  		  				  order_id : "<?php echo $return_receive_data['order_id'] ?>",
  		  				  serial : "<?php echo $return_receive_data['serial'] ?>" };
 	<?php endif ?>
- 	
+
 		 $scope.open = function () {
-		  	
+
 		    var modalInstance = $uibModal.open({
 		      animation: $scope.animationsEnabled,
 		      templateUrl: 'myModalContent.html',
@@ -35,7 +34,7 @@
 		     $scope.order_id = $scope.items.order_id;
 		     $scope.product_id = $scope.items.product_id;
 		     $scope.serial = $scope.items.serial;
-		     
+
 		     	console.log($scope.items);
 		    }, function () {
 		      $log.info('Modal dismissed at: ' + new Date());
@@ -69,7 +68,7 @@
 		            url: '<?php echo base_url('return_receive/get_search_order');?>',
 		            headers: { 'Content-Type': 'application/x-www-form-urlencoded'
 		         }, data: { search : $scope.search_order }
-		           
+
 		        }).success(function(data) {
 		             var order_data = data;
  					$scope.order_data = order_data;
@@ -77,7 +76,7 @@
 
 			}
 
-			
+
 		};
 
 
@@ -94,4 +93,3 @@
 
 
 </script>
-	

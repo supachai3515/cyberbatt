@@ -6,7 +6,9 @@
 		 $scope.items = { return_id : '',
  		  				  order_id : '',
  		  				  serial : '' ,
- 		  				  product_id : '' };
+ 		  				  product_id : '' ,
+							  product_name : '',
+						    product_price : '' };
 
 	<?php if (isset($credit_note_data['id'])): ?>
 
@@ -15,9 +17,9 @@
  		  				  serial : "<?php echo $credit_note_data['serial'] ?>" ,
  		  				  product_id : "<?php echo $credit_note_data['product_id'] ?>"};
 	<?php endif ?>
- 	
+
 		 $scope.open = function () {
-		  	
+
 		    var modalInstance = $uibModal.open({
 		      animation: $scope.animationsEnabled,
 		      templateUrl: 'myModalContent.html',
@@ -38,7 +40,9 @@
 		     $scope.return_id = $scope.items.return_id;
 		     $scope.serial = $scope.items.serial;
 		     $scope.product_id = $scope.items.product_id;
-		     
+				 $scope.product_name = $scope.items.product_name;
+				 $scope.product_price = $scope.items.product_price;
+
 		     	console.log($scope.items);
 		    }, function () {
 		      $log.info('Modal dismissed at: ' + new Date());
@@ -72,23 +76,25 @@
 		            url: '<?php echo base_url('credit_note/get_search_order');?>',
 		            headers: { 'Content-Type': 'application/x-www-form-urlencoded'
 		         }, data: { search : $scope.search_order }
-		           
+
 		        }).success(function(data) {
 		             var order_data = data;
  					$scope.order_data = order_data;
 				});
 
 			}
-			
+
 		};
 
 
-		$scope.selectOrder = function (order_id,return_id,serial_number,product_id){
+		$scope.selectOrder = function (data_v){
 
-			$scope.items.return_id = return_id;
- 		  	$scope.items.order_id = order_id;
- 		  	$scope.items.serial = serial_number;
- 		  	$scope.items.product_id = product_id;
+			$scope.items.return_id = data_v.return_id;
+ 		  	$scope.items.order_id = data_v.order_id;
+ 		  	$scope.items.serial = data_v.serial_number;
+ 		  	$scope.items.product_id = data_v.product_id;
+				$scope.items.product_name  = data_v.product_name;
+				$scope.items.product_price = data_v.product_price;
 			$uibModalInstance.close($scope.items);
 		};
 
@@ -97,4 +103,3 @@
 
 
 </script>
-	

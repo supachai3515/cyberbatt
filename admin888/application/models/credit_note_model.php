@@ -5,7 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Credit_note_model extends CI_Model {
 	public function __construct(){
 		parent::__construct();
-		//call model inti 
+		//call model inti
 		$this->load->model('Initdata_model');
 	}
 
@@ -14,19 +14,25 @@ class Credit_note_model extends CI_Model {
 
 	    $sql ="SELECT  rr.*,
 	    		o.id order_id, o.invoice_docno invoice_no,
-				o.date order_date,
-				s.serial_number,
-				o.`name` order_name,
-				o.address,
-				s.serial_number,
-				p.id product_id,
-				p.name product_name,
-				p.sku
-				FROM credit_note  rr INNER JOIN orders o ON rr.order_id = o.id
-				INNER JOIN products p on p.id = rr.product_id
-				LEFT JOIN product_serial s ON s.product_id = rr.product_id  AND s.order_id = o.id AND rr.serial = s.serial_number
-				
-				 ORDER BY rr.id DESC  LIMIT " . $start . "," . $limit;
+					o.date order_date,
+					s.serial_number,
+					o.`name` order_name,
+					o.address,
+					s.serial_number,
+					p.id product_id,
+					p.name product_name,
+					p.sku,
+					o1.id order_id_new,
+						o1.invoice_docno invoice_docno_new,
+					o1.`name` order_name_new,
+					o1.address	order_address_new,
+					pm.create_date payment_date
+					FROM credit_note  rr INNER JOIN orders o ON rr.order_id = o.id
+					INNER JOIN products p on p.id = rr.product_id
+					LEFT JOIN product_serial s ON s.product_id = rr.product_id  AND s.order_id = o.id AND rr.serial = s.serial_number
+					LEFT JOIN payment pm ON pm.credit_note_id = rr.id
+					LEFT JOIN orders o1 ON o1.id = pm.order_id
+				 	ORDER BY rr.id DESC  LIMIT " . $start . "," . $limit;
 		$re = $this->db->query($sql);
 		return $re->result_array();
 
@@ -34,18 +40,18 @@ class Credit_note_model extends CI_Model {
 
 	public function get_credit_note_count()
 	{
-		$sql =" SELECT COUNT(id) as connt_id FROM  credit_note p"; 
+		$sql =" SELECT COUNT(id) as connt_id FROM  credit_note p";
 		$query = $this->db->query($sql);
 		$row = $query->row_array();
 		return  $row['connt_id'];
-	
+
 	}
 
 
 	public function get_credit_note_id($credit_note_id)
 	{
 		$sql ="SELECT  rr.*,
-	    		o.id order_id, o.invoice_docno invoice_no,
+				o.id order_id, o.invoice_docno invoice_no,
 				o.date order_date,
 				s.serial_number,
 				o.`name` order_name,
@@ -53,11 +59,20 @@ class Credit_note_model extends CI_Model {
 				s.serial_number,
 				p.id product_id,
 				p.name product_name,
-				p.sku
+				p.sku,
+				o1.id order_id_new,
+					o1.invoice_docno invoice_docno_new,
+				o1.`name` order_name_new,
+				o1.address	order_address_new,
+				pm.create_date payment_date,
+				od.price
 				FROM credit_note  rr INNER JOIN orders o ON rr.order_id = o.id
 				INNER JOIN products p on p.id = rr.product_id
 				LEFT JOIN product_serial s ON s.product_id = rr.product_id  AND s.order_id = o.id AND rr.serial = s.serial_number
-				 WHERE rr.id = '".$credit_note_id."'"; 
+				LEFT JOIN payment pm ON pm.credit_note_id = rr.id
+				LEFT JOIN orders o1 ON o1.id = pm.order_id
+				INNER JOIN order_detail od ON od.order_id = o.id AND od.product_id = rr.product_id
+				WHERE rr.id = '".$credit_note_id."'";
 
 		$query = $this->db->query($sql);
 		$row = $query->row_array();
@@ -69,7 +84,7 @@ class Credit_note_model extends CI_Model {
 	{
 		date_default_timezone_set("Asia/Bangkok");
 		$data_credit_note = array(
-			'search' => $this->input->post('search')		
+			'search' => $this->input->post('search')
 		);
 
 		$sql =" SELECT  rr.*,
@@ -81,11 +96,13 @@ class Credit_note_model extends CI_Model {
 				s.serial_number,
 				p.id product_id,
 				p.name product_name,
-				p.sku
+				p.sku,
+				od.price product_price
 				FROM credit_note  rr INNER JOIN orders o ON rr.order_id = o.id
 				INNER JOIN products p on p.id = rr.product_id
 				LEFT JOIN product_serial s ON s.product_id = rr.product_id  AND s.order_id = o.id AND rr.serial = s.serial_number
-				 WHERE rr.docno LIKE '%".$data_credit_note['search']."%' OR  o.id LIKE '%".$data_credit_note['search']."%'  OR  s.serial_number LIKE '%".$data_credit_note['search']."%'  OR o.name LIKE '%".$data_credit_note['search']."%'  ";
+				INNER JOIN order_detail od ON od.order_id = o.id AND od.product_id = rr.product_id
+			 WHERE rr.docno LIKE '%".$data_credit_note['search']."%' OR  o.id LIKE '%".$data_credit_note['search']."%'  OR  s.serial_number LIKE '%".$data_credit_note['search']."%'  OR o.name LIKE '%".$data_credit_note['search']."%'  ";
 		$re = $this->db->query($sql);
 		$return_data['result_credit_note'] = $re->result_array();
 		$return_data['data_search'] = $data_credit_note;
@@ -100,16 +117,16 @@ class Credit_note_model extends CI_Model {
 			'serial' => $this->input->post('serial'),
 			'comment' => $this->input->post('comment'),
 			'modified_date' => date("Y-m-d H:i:s"),
-			'is_active' => $this->input->post('is_active')						
+			'is_active' => $this->input->post('is_active')
 		);
 		$where = array(
-			'id' => $credit_note_id,				
+			'id' => $credit_note_id,
 		);
 		$this->db->update("credit_note", $data_credit_note, $where );
 
 		$is_active = $this->input->post('is_active');
 		if($is_active){
-	
+
 			$serial = $this->input->post('serial');
 			if (isset($serial )) {
 				//update history
@@ -118,7 +135,7 @@ class Credit_note_model extends CI_Model {
 						'serial_number' =>$this->input->post('serial'),
 						'product_id' => $this->input->post('product_id'),
 						'comment' => "ยันยันใบลดหนี้ เลขที่ใบลดหนี้ #".$this->input->post('docno'),
-						'create_date' => date("Y-m-d H:i:s"),				
+						'create_date' => date("Y-m-d H:i:s"),
 				);
 				$this->db->insert("serial_history", $data_serial_history);
 			}
@@ -132,7 +149,7 @@ class Credit_note_model extends CI_Model {
 						'serial_number' =>$this->input->post('serial'),
 						'product_id' => $this->input->post('product_id'),
 						'comment' => "ยกเลิกใบลดหนี้ เลขที่ใบลดหนี้ #".$this->input->post('docno'),
-						'create_date' => date("Y-m-d H:i:s"),				
+						'create_date' => date("Y-m-d H:i:s"),
 				);
 				$this->db->insert("serial_history", $data_serial_history);
 			}
@@ -150,16 +167,16 @@ class Credit_note_model extends CI_Model {
 			'comment' => $this->input->post('comment'),
 			'create_date' => date("Y-m-d H:i:s"),
 			'modified_date' => date("Y-m-d H:i:s"),
-			'is_active' => $this->input->post('isactive')						
+			'is_active' => $this->input->post('isactive')
 		);
-		
+
 		$this->db->insert("credit_note", $data_credit_note);
 		$insert_id = $this->db->insert_id();
 
 
 		date_default_timezone_set("Asia/Bangkok");
 		$data_order = array(
-			'docno' => 'CN'.date("ymd").str_pad($insert_id, 4, "0", STR_PAD_LEFT)	
+			'docno' => 'CN'.date("ymd").str_pad($insert_id, 4, "0", STR_PAD_LEFT)
 		);
 
 		$where = array('id' => $insert_id);
@@ -173,11 +190,11 @@ class Credit_note_model extends CI_Model {
 					'serial_number' =>$this->input->post('serial'),
 					'product_id' => $this->input->post('product_id'),
 					'comment' => "ยันยันใบลดหนี้ เลขที่ใบลดหนี้ #".$data_order['docno'],
-					'create_date' => date("Y-m-d H:i:s"),				
+					'create_date' => date("Y-m-d H:i:s"),
 			);
 			$this->db->insert("serial_history", $data_serial_history);
 		}
-   		
+
    		return  $insert_id;
 
 	}
@@ -185,7 +202,7 @@ class Credit_note_model extends CI_Model {
 
 	public function get_search_order($search_txt)
 	{
-		$sql =" SELECT rr.order_id, 
+		$sql =" SELECT rr.order_id,
 				rr.id return_id,
 				rr.docno return_docno,
 				o.invoice_docno invoice_no,
@@ -195,11 +212,14 @@ class Credit_note_model extends CI_Model {
 				p.id product_id,
 				p.name product_name,
 				p.sku,
+				od.price product_price,
 				(SELECT COUNT(return_id) FROM credit_note WHERE is_active = 1 AND return_id = rr.id) is_credit_note,
-				(SELECT COUNT(return_id) FROM delivery_return WHERE is_active = 1 AND return_id = rr.id) is_delivery_return 
-				FROM return_receive rr 
+				(SELECT COUNT(return_id) FROM delivery_return WHERE is_active = 1 AND return_id = rr.id) is_delivery_return
+				FROM return_receive rr
 				INNER JOIN orders o ON o.id = rr.order_id
 				INNER JOIN products p on p.id = rr.product_id
+				INNER JOIN order_detail od ON od.order_id = o.id AND od.product_id = rr.product_id
+
 
 				WHERE o.id  LIKE '%".$search_txt."%'
 					OR o.`name`  LIKE '%".$search_txt."%'
@@ -210,8 +230,8 @@ class Credit_note_model extends CI_Model {
 					OR o.`invoice_docno`  LIKE '%".$search_txt."%'
 					OR p.`id`  LIKE '%".$search_txt."%'
 					OR rr.serial  LIKE '%".$search_txt."%'
-					OR p.`sku`  LIKE '%".$search_txt."%' 
-			
+					OR p.`sku`  LIKE '%".$search_txt."%'
+
 			";
 		$re = $this->db->query($sql);
 		$return_data = $re->result_array();

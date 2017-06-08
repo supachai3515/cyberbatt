@@ -391,7 +391,7 @@ class Products extends CI_Controller {
 	{
 		$all = $this->input->post('all_product');
 
-		if (isset($all)) {
+		if (isset($all) && $all == '1') {
 
 			$sql =" SELECT p.id ,p.sku ,p.name product_name,t.name type_name, b.name brand_name, p.stock ,p.price,
 		    				p.dis_price discount_price , p.member_discount dealer_price ,p.member_discount_lv1 fanshine_price
@@ -403,6 +403,7 @@ class Products extends CI_Controller {
 			//print($sql);
 			$data['products_list'] = $re->result_array();
 			$this->load->view('export_product', $data);
+			print("all");
 
 		} else {
 			// Retrieve the posted information
@@ -419,7 +420,7 @@ class Products extends CI_Controller {
 					}
 					else {
 						$in_str = $in_str.",".$check[$i];
-						print($in_str);
+			
 					}
 					
 				}
@@ -437,6 +438,7 @@ class Products extends CI_Controller {
 				//print($sql);
 				$data['products_list'] = $re->result_array();
 				$this->load->view('export_product', $data);
+			
 			}
 
 		}

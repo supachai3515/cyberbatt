@@ -29,14 +29,11 @@
 
             	</div>
             	<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 text-right">
-        			<?php if (!$order['is_invoice']): ?>
-                        <h2>เลขที่ใบสั่งซื้อ #<?php echo  $order['id'];?> </h2>
-                        <strong>วันที่ออก <?php echo $order['date']?></strong><br/>
-						กรุณาชำระเงินภายใน 3 วัน 
-                    <?php else: ?>
-                       <h2>เลขที่ใบเสนอราคา #<?php echo  $order['invoice_docno'];?> </h2>
-                       <strong>วันที่ออก <?php echo $order['invoice_date']?></strong><br/>
-                    <?php endif ?>
+        			
+                <h2>เลขที่ใบสั่งซื้อ #<?php echo  $order['id'];?> </h2>
+                <strong>วันที่ออก <?php echo $order['date']?></strong><br/>
+				กรุณาชำระเงินภายใน 3 วัน 
+                   
 					
             	</div>
 		</div>

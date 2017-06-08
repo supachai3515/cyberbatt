@@ -107,7 +107,7 @@
 
 		<!-- Textarea -->
 		<div class="form-group">
-		  <label class="col-md-3 control-label" for="detail">เลขประจำตัวผู้เสียภาษี</label>
+		  <label class="col-md-3 control-label" for="detail">ที่อยู่ออกใบกำกับภาษี</label>
 		  <div class="col-md-8">                     
 		    <textarea class="form-control" id="address_tax" name="address_tax"><?php echo $member_data['address_tax']; ?></textarea>
 		  </div>

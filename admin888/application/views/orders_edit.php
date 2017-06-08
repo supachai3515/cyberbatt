@@ -270,10 +270,67 @@
                       </tr>
                   </tbody>
               </table>
-          </div>
 
-          <h4 class="text-info">รายละเอียดสินค้า</h4>
-          <div class="table-responsive">
+            <div class="panel panel-info">
+              <div class="panel-heading">
+                <h3 class="panel-title">แก้ไขที่อยู่ลูกค้า</h3>
+              </div>
+              <div class="panel-body">
+                <form action="<?php echo base_url('orders/update_address/'.$orders_data['id']); ?>" method="POST"  role="form">
+                  <legend>ที่อยู่จัดส่ง</legend>
+                
+                  <div class="form-group">
+                    <label for="">ที่อยู่</label>
+                    <input type="text" class="form-control" name="address" placeholder="ที่อยู่" value="<?php echo $orders_data['address']; ?>">
+                  </div>
+                  <div class="form-group">
+                    <label for="">วิธีการจัดส่ง</label>
+                    <input type="text" class="form-control" name="shipping" placeholder="วิธีการจัดส่ง" value="<?php echo $orders_data['shipping']; ?>">
+                  </div>
+                  <div class="form-group">
+                    <label for="">email</label>
+                    <input type="text" class="form-control" name="email" placeholder="email" value="<?php echo $orders_data['email']; ?>">
+                  </div>
+                  <div class="form-group">
+                    <label for="">เบอร์โทร</label>
+                    <input type="text" class="form-control" name="tel" placeholder="tel" value="<?php echo $orders_data['tel']; ?>">
+                  </div>
+                  
+                  <legend>ที่อยู่ออกใบกำกับภาษี</legend>
+                  <div class="checkbox">
+                    <label>
+                      <input type="checkbox" name="is_tax" value="1"
+                      <?php if ($orders_data['is_tax']==1): ?>
+                          <?php echo "checked"; ?>
+                        <?php endif ?>
+                        >
+                      ออกใบกำกับภาษี
+                    </label>
+                  </div>
+                  <div class="form-group">
+                    <label for="">เลขที่ผุ้เสียภาษี</label>
+                    <input type="text" class="form-control" name="tax_id" placeholder="เลขที่ผุ้เสียภาษี" value="<?php echo $orders_data['tax_id']; ?>">
+                  </div>
+                  <div class="form-group">
+                    <label for="">บริษัท</label>
+                    <input type="text" class="form-control" name="tax_company" placeholder="บริษัท" value="<?php echo $orders_data['tax_company']; ?>">
+                  </div>
+                  <div class="form-group">
+                    <label for="">ที่อยู่</label>
+                    <input type="text" class="form-control" name="tax_address" placeholder="ที่อยู่" value="<?php echo $orders_data['tax_address']; ?>">
+                  </div>
+
+                  <button type="submit" class="btn btn-primary">บันทึก</button>
+                </form>
+              </div>
+            </div>
+          </div>
+          <div class="panel panel-success">
+            <div class="panel-heading">
+              <h3 class="panel-title">รายละเอียดสินค้า</h3>
+            </div>
+            <div class="panel-body">
+              <div class="table-responsive">
             <table class="table table-striped table-hover">
               <thead>
                 <tr>
@@ -352,8 +409,10 @@
                 
               <?php endif ?>
           </div>
-          <br>
+            </div>
+          </div>
 
+         
             <div class="well">
 
                <form class="form-horizontal" method="POST" action="<?php echo base_url('orders/save_slip/'.$orders_data['id']);?>" accept-charset="utf-8" enctype="multipart/form-data">
@@ -377,6 +436,7 @@
                     <label class="col-md-3 control-label" for="textinput">เลือกธนาคาร  *</label>
                     <div class="col-md-6">
                       <select  name="bank_name"  class="form-control" required="required">
+
                           <?php if ($orders_data['bank_name'] == "ธนาคารกรุงเทพ"): ?>
                             <option value="ธนาคารกรุงเทพ" selected>ธนาคารกรุงเทพ</option>
                           <?php else: ?>
@@ -399,6 +459,13 @@
                             <option value="ธนาคารกสิกรไทย" selected>ธนาคารกสิกรไทย</option>
                           <?php else: ?>
                             <option value="ธนาคารกสิกรไทย">ธนาคารกสิกรไทย</option>
+                          <?php endif ?>
+
+
+                          <?php if ($orders_data['bank_name'] == "ใบลดหนี้"): ?>
+                            <option value="ใบลดหนี้" selected>ใบลดหนี้</option>
+                          <?php else: ?>
+                            <option value="ใบลดหนี้">ใบลดหนี้</option>
                           <?php endif ?>
 
                       </select>
@@ -476,7 +543,7 @@
           <div class="col-md-4">
             <a href="<?php echo $this->config->item('weburl').'invoice/'.$orders_data['ref_id']; ?>" target="_blank"><button type="button" class="btn btn-success">ใบสั่งซื้อ</button></a>
 
-            <?php if ($orders_data['order_status_id'] == 4): ?>
+            <?php if ($orders_data['order_status_id'] >= 2): ?>
                 <?php if ($orders_data['is_invoice'] == 1): ?>
                   <a href="<?php echo  base_url('orders/invoice/'.$orders_data['id']); ?>" ><button type="button" class="btn btn-info">ใบกำกับภาษี</button></a> <span><?php echo $orders_data['invoice_docno'] ?></span>
                 <?php else: ?>

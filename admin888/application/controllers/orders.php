@@ -179,17 +179,39 @@ class Orders extends CI_Controller {
 			redirect('orders');
 		}
 
-	}  
+	}
+
+	// update
+	public function update_address($orders_id)
+	{
+		date_default_timezone_set("Asia/Bangkok");
+		//save orders
+		$this->orders_model->update_address($orders_id);
+
+		if($orders_id!=""){
+			redirect('orders/edit/'.$orders_id);
+		}
+		else {
+			redirect('orders');
+		}
+
+	}
 
 
-	public function invoice($orders_id)
+	  
+
+
+	public function invoice($orders_id,$print_f = 0)
 	{
 		$this->is_logged_in();
+
+		$data['print_f'] = $print_f;
 		$data['orders_tem'] = $this->orders_model->get_orders_id($orders_id);
 
 		if($data['orders_tem']['is_invoice'] == 0){
 			
-			$sql ="SELECT COUNT(*)+1 connt_id FROM orders WHERE invoice_docno != '' OR invoice_docno is not null"; 
+			$checkDate = 'INV'.date("ymd");
+			$sql ="SELECT COUNT(*)+1 connt_id FROM orders WHERE  LEFT(invoice_docno, 7) = LEFT('".$checkDate."', 7)  "; 
 			$query = $this->db->query($sql);
 			$row = $query->row_array();
 			$order_inv_count =  $row['connt_id'];

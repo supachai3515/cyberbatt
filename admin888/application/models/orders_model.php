@@ -56,7 +56,8 @@ class Orders_model extends CI_Model {
 				c.docno credit_note_docno,
 				DATE_FORMAT(p.inform_date_time,'%Y-%m-%d') inform_date,
 				DATE_FORMAT(p.inform_date_time,'%H:%i') inform_time,
-				p.create_date payment_create_date
+				p.create_date payment_create_date,
+				c.docno credit_note_docno
 				FROM  orders o 
 				LEFT JOIN order_status s ON s.id =  o.order_status_id
 				LEFT JOIN  members m ON m.id = o.customer_id 
@@ -98,6 +99,44 @@ class Orders_model extends CI_Model {
 		$query = $this->db->query($sql);
 		$row = $query->result_array();
 		return $row; 
+	}
+
+	public function update_address($orders_id)
+	{
+
+		$data_order = array(
+			'address' => $this->input->post('address'),
+			'shipping' =>$this->input->post('shipping'),
+			'email'=> $this->input->post('email'),
+			'tel'=> $this->input->post('tel'),					
+		);
+
+		$where = "id = '".$orders_id."'"; 
+		$this->db->update("orders", $data_order, $where);
+
+
+		$is_tax = $this->input->post('is_tax');
+		if(isset($is_tax) && $is_tax == "1"){
+			$data_order = array(
+			'is_tax' => $this->input->post('is_tax'),
+			'tax_address' => $this->input->post('tax_address'),
+			'tax_id' =>$this->input->post('tax_id'),
+			'tax_company'=> $this->input->post('tax_company')				
+			);
+
+		$where = "id = '".$orders_id."'"; 
+		$this->db->update("orders", $data_order, $where);
+
+		}
+		else{
+			$data_order = array(
+			'is_tax' => 0,			
+			);
+			$where = "id = '".$orders_id."'"; 
+			$this->db->update("orders", $data_order, $where);
+
+		}
+	
 	}
 	
 

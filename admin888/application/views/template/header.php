@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="<?=$header['description'];?>">
-    <meta name="keyword" content="<?=$header['keyword'];?>" /> 
+    <meta name="keyword" content="<?=$header['keyword'];?>" />
     <meta name="author" content="<?=$header['author'];?>">
     <title><?=$header['title'];?></title>
     <!-- Bootstrap Core CSS -->
@@ -20,6 +20,8 @@
     <link href="<?=base_url();?>css/fileinput.css" rel="stylesheet" type="text/css">
     <!-- Custom css -->
     <link href="<?=base_url();?>css/style.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="<?=base_url();?>css/sweetalert2.css">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -27,6 +29,5 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-<body> 
+<body>
     <div id="wrapper">
-     

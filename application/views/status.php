@@ -92,6 +92,12 @@
                                 <a target="_blank" class="btn btn-default" href="<?php echo base_url('invoice/'.$order['ref_id']) ?>" role="button">
                                  ดูใบสั่งซื้อ
                                 </a>
+
+                                <?php if ($order['is_invoice']=="1"): ?>
+                                    <p></p>
+                                    <a target="_blank" class="btn btn-info" href="<?php echo base_url('fullinvoice/'.$order['ref_id']) ?>" role="button">ใบกำกับภาษี</a>
+                                    
+                                <?php endif ?>
                             </div>
                         </div>
                         <div class="panel panel-default">
