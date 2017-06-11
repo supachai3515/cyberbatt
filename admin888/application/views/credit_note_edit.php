@@ -55,7 +55,7 @@
 
   <div class="container-fluid" ng-controller="credit_note">
     <div class="page-header">
-      <h2>ใบรับคืน <?php echo $credit_note_data['docno']; ?></h2>
+      <h2>ใบลดหนี้ <?php echo $credit_note_data['docno']; ?></h2>
     </div>
     <div style="padding-top:30px;"></div>
     <form class="form-horizontal" method="POST" action="<?php echo base_url('credit_note/update/'.$credit_note_data['id']);?>" accept-charset="utf-8" enctype="multipart/form-data">

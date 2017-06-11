@@ -28,7 +28,7 @@
         <?php foreach ($menus_list as $menu) {
 
                 if($menu['parent_id'] == "0" ) {
-                    
+
                     echo $menu['id'] == $menu_id ? '<li class="active">' : '<li>';
                     echo'<a href="javascript:;" data-toggle="collapse" data-target="#'.$menu['name'].'"><i class="'.$menu['icon'].'"></i> '.$menu['name'].' <i class="fa fa-fw fa-caret-down"></i></a>';
                         echo '<ul id="'.$menu['name'].'" class="collapse">';
@@ -39,9 +39,9 @@
                                         echo "<li>";
                                         echo'<a href="'.base_url().$supmenu['link'].'"><i class="'.$supmenu['icon'].'"></i> '.$supmenu['name'].'</a>';
                                         echo "</li>";
-                                                                               
+
                                     }
-                                
+
                             }
                         echo "</ul>";
                     echo "</li>";
@@ -55,9 +55,8 @@
                     echo'</li>';
                 }
 
-            } ?> 
+            } ?>
         </ul>
     </div>
     <!-- /.navbar-collapse -->
 </nav>
-
