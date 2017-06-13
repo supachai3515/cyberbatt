@@ -24,9 +24,11 @@
 <script src="<?php echo base_url(); ?>assets/datepicker/js/bootstrap-datepicker.js"></script>
 <script src="<?php echo base_url(); ?>assets/datepicker/locales/bootstrap-datepicker.th.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/datepicker/js/bootstrap-timepicker.js"></script>
+<script src="<?php echo base_url();?>js/fileinput.js" type="text/javascript"></script>
+<script src="<?php echo base_url();?>js/fileinput_locale_th.js" type="text/javascript"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
-<!-- page script -->
 <?php $this->load->view("js/app_js"); ?>
+<?php if(isset($script)){echo $script;}?>
 <?php if(isset($script_file)){echo $this->load->view($script_file); }?>
 </body>
 </html>
