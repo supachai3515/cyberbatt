@@ -1,5 +1,5 @@
-<div id="page-wrapper" ng-app="myApp">
-
+<div class="content-wrapper">
+  <section class="content">
   <script type="text/ng-template" id="myModalContent.html">
     <div class="modal-header">
       <h4>เลือกใบสั่งซื้อ</h4>
@@ -12,7 +12,7 @@
         </div>
         <button type="submit" class="btn btn-primary">ค้นหา</button>
       </form>
-      <div class="table-responsive">
+      <div class="box-body table-responsive no-padding">
         <table class="table table-hover">
           <thead>
             <tr>
@@ -53,7 +53,7 @@
     </div>
   </script>
 
-  <div class="container-fluid" ng-controller="credit_note">
+  <div class="container-fluid box" ng-controller="credit_note">
     <div class="page-header">
       <h2>ใบลดหนี้ <?php echo $credit_note_data['docno']; ?></h2>
     </div>
@@ -144,6 +144,7 @@
       </fieldset>
     </form>
   </div>
-  <!-- /.container-fluid -->
+  <!-- /.container-fluid box -->
 </div>
-<!-- /#page-wrapper -->
+</section>
+<!-- /.content -->

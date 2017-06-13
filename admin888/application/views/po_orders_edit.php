@@ -1,5 +1,6 @@
-<div id="page-wrapper" ng-app="myApp">
-    <div class="container-fluid" ng-controller="myCtrl">
+<div class="content-wrapper">
+  <section class="content">
+    <div class="container-fluid box" ng-controller="myCtrl">
         <div class="page-header">
         <?php if ($po_orders_data['is_invoice']== 0): ?>
             <h1>ใบเสนอราคา <strong>#<?php echo $po_orders_data['id'] ?></h1>
@@ -53,7 +54,7 @@
                 <div class="panel panel-info">
                     <div class="panel-heading">ข้อมูลการสั่งซื้อ</div>
                     <div class="panel-body">
-                        <div class="table-responsive">
+                        <div class="box-body table-responsive no-padding">
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
@@ -208,7 +209,7 @@
                                         
                               </form>
                                <hr>
-                        <div class="table-responsive">
+                        <div class="box-body table-responsive no-padding">
                             <table class="table table-striped table-hover">
                                 <thead>
                                     <tr>
@@ -259,7 +260,7 @@
                         <div class="col-md-6">
                         </div>
                         <div class="col-md-6">
-                 <div class="table-responsive">
+                 <div class="box-body table-responsive no-padding">
                             <table class="table table-hover">
                                 <tbody>
                                     <tr>
@@ -310,7 +311,7 @@
                 <div class="panel panel-success">
                     <div class="panel-heading">สถานะสินค้า</div>
                     <div class="panel-body">
-                        <div class="table-responsive">
+                        <div class="box-body table-responsive no-padding">
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
@@ -342,6 +343,7 @@
         </div>
     </div>
 </div>
-<!-- /.container-fluid -->
+<!-- /.container-fluid box -->
 </div>
-<!-- /#page-wrapper -->
+</section>
+<!-- /.content -->

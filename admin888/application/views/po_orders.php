@@ -1,5 +1,6 @@
-<div id="page-wrapper" ng-app="myApp">
-    <div class="container-fluid" ng-controller="myCtrl">
+<div class="content-wrapper">
+  <section class="content">
+    <div class="container-fluid box" ng-controller="myCtrl">
         <div class="page-header">
             <h1>ใบเสนอราคา</h1>
             <?php //if(isset($sql))echo "<p>".$sql."</p>"; ?>
@@ -12,19 +13,19 @@
             </div>
             <select id="select_status" name="select_status" class="form-control">
                 <?php foreach ($po_order_status_list as $status): ?>
-                        <option value="<?php echo $status['id']; ?>"><?php echo $status['name']; ?></option> 
+                        <option value="<?php echo $status['id']; ?>"><?php echo $status['name']; ?></option>
                 <?php endforeach ?>
-                <option value="0" selected>ทั้งหมด</option> 
+                <option value="0" selected>ทั้งหมด</option>
             </select>
-        
+
             <div class="form-group">
                 <label class="sr-only" for="">search</label>
                 <input type="text" class="form-control" id="search" name="search" placeholder="ชื่อ , tracking">
             </div>
-    
+
             <button type="submit" class="btn btn-primary">ค้นหา</button>
         </form>
-        <div class="table-responsive">
+        <div class="box-body table-responsive no-padding">
             <table class="table table-hover">
                 <thead>
                     <tr>
@@ -44,16 +45,16 @@
                         <strong class="label label-<?php echo $po_orders['priority_color'] ?>"> <i class="<?php echo $po_orders['icon_font'] ?>" aria-hidden="true"></i> <?php echo $po_orders['po_order_status_name'] ?></strong><br/><br/>
                         <?php if ($po_orders['is_invoice']== 0): ?>
 
-                            <a target="_blank" class="btn btn-xs btn-default" href="<?php echo  $this->config->item('weburl').'/po_invoice/'.$po_orders['ref_id'] ?>" role="button">    
+                            <a target="_blank" class="btn btn-xs btn-default" href="<?php echo  $this->config->item('weburl').'/po_invoice/'.$po_orders['ref_id'] ?>" role="button">
                                  ใบเสนอราคา
                                 </a>
                         <?php else: ?>
-                            <a target="_blank" class="btn btn-xs btn-success" href="<?php echo  $this->config->item('weburl').'/po_invoice/'.$po_orders['ref_id'] ?>" role="button">    
+                            <a target="_blank" class="btn btn-xs btn-success" href="<?php echo  $this->config->item('weburl').'/po_invoice/'.$po_orders['ref_id'] ?>" role="button">
                                  ใบสั่งซื้อ
                                 </a>
                         <?php endif ?>
 
-                        
+
                         </td>
                         <td>
                             <?php if ($po_orders['is_invoice'] == 0): ?>
@@ -78,17 +79,17 @@
                                  <strong>เลขที่ผุ้เสียภาษี : </strong><span><?php echo $po_orders['tax_id']; ?></span><br/>
                                  <strong>บริษัท : </strong><span><?php echo $po_orders['tax_company']; ?></span><br/>
                                 <strong>ที่อยู่ : </strong><span><?php echo $po_orders['tax_address']; ?></span><br/>
-                          
+
                             <?php endif ?>
-                           
+
                         </td>
-                           
+
                         <td>
                              <strong ng-bind="<?php echo $po_orders['total'];?> | currency:'฿':0"></strong>
                         </td>
                         <td>
                         <a class="btn btn-xs btn-info" href="<?php echo base_url('po_orders/edit/'.$po_orders['id']) ?>" role="button"><i class="fa fa-eye"></i></a>
-                        </td>       
+                        </td>
                     </tr>
                 <?php endforeach ?>
                 </tbody>
@@ -96,6 +97,7 @@
         </div>
         <?php if(isset($links_pagination)) {echo $links_pagination;} ?>
     </div>
-    <!-- /.container-fluid -->
+    <!-- /.container-fluid box -->
 </div>
-<!-- /#page-wrapper -->
+</section>
+<!-- /.content -->

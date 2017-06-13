@@ -1,4 +1,5 @@
-<div id="page-wrapper" ng-app="myApp">
+<div class="content-wrapper">
+  <section class="content">
 
     <script type="text/ng-template" id="myModalContent_credit.html">
         <div class="modal-header">
@@ -12,7 +13,7 @@
             </div>
             <button type="submit" class="btn btn-primary" >ค้นหา</button>
         </form>
-            <div class="table-responsive">
+            <div class="box-body table-responsive no-padding">
                 <table class="table table-hover">
                     <thead>
                         <tr>
@@ -49,7 +50,7 @@
         </div>
     </script>
 
-    <div class="container-fluid" ng-controller="order">
+    <div class="container-fluid box" ng-controller="order">
 
           <script type="text/ng-template" id="myModalContent.html">
           <div class="modal-header">
@@ -219,7 +220,7 @@
         <div class="row">
           <div class="col-md-8">
             <h4 class="text-info">ข้อมูลการสั่งซื้อ</h4>
-            <div class="table-responsive">
+            <div class="box-body table-responsive no-padding">
               <table class="table table-hover">
                   <thead>
                       <tr>
@@ -330,7 +331,7 @@
               <h3 class="panel-title">รายละเอียดสินค้า</h3>
             </div>
             <div class="panel-body">
-              <div class="table-responsive">
+              <div class="box-body table-responsive no-padding">
             <table class="table table-striped table-hover">
               <thead>
                 <tr>
@@ -555,7 +556,7 @@
 
             <h4 class="text-info">สถานะสินค้า</h4>
             <div class="well">
-              <div class="table-responsive">
+              <div class="box-body table-responsive no-padding">
               <table class="table table-hover">
                 <thead>
                   <tr>
@@ -583,6 +584,7 @@
         </div>
         
     </div>
-    <!-- /.container-fluid -->
+    <!-- /.container-fluid box -->
 </div>
-<!-- /#page-wrapper -->
+</section>
+<!-- /.content -->

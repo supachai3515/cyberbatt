@@ -1,4 +1,5 @@
-<div id="page-wrapper" ng-app="myApp">
+<div class="content-wrapper">
+  <section class="content">
     <script type="text/ng-template" id="myModalContent.html">
         <div class="modal-header">
             <h3 class="modal-title" ng-bind="product_serial[0].sku +' : '+ product_serial[0].product_name">Stock สินค้า </h3>
@@ -57,7 +58,7 @@
         </div>
     </script>
 
-    <div class="container-fluid" ng-controller="receive">
+    <div class="container-fluid box" ng-controller="receive">
         <div class="page-header">
           <h1>แก้ไข Serial Number</h1>
         </div>
@@ -96,7 +97,7 @@
           <div class="form-group">
             <label class="col-md-3 control-label" for="comment">รายการสินค้า</label>
               <div class="col-md-6">
-                  <div class="table-responsive">
+                  <div class="box-body table-responsive no-padding">
                       <table class="table table-hover">
                           <thead>
                               <tr>
@@ -208,6 +209,7 @@
         </fieldset>
         </form>
     </div>
-    <!-- /.container-fluid -->
+    <!-- /.container-fluid box -->
 </div>
-<!-- /#page-wrapper -->
+</section>
+<!-- /.content -->

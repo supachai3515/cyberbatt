@@ -1,7 +1,8 @@
-<div id="page-wrapper" ng-app="myApp">
+<div class="content-wrapper">
+  <section class="content">
 <?php $chk_admin_id =  $this->session->userdata('permission_id'); ?>
 <?php if ($chk_admin_id == "1"): ?>
-     <div class="container-fluid" ng-controller="myCtrl">
+     <div class="container-fluid box" ng-controller="myCtrl">
         <div class="page-header">
             <h1>ผู้ใช้</h1>
             <?php //if(isset($sql))echo "<p>".$sql."</p>"; ?>
@@ -20,7 +21,7 @@
             <div class="tab-content">
                 <div role="tabpanel" class="tab-pane active" id="search">
                     <div style="padding-top:30px;"></div>
-                    <div class="table-responsive">
+                    <div class="box-body table-responsive no-padding">
                         <table class="table table-hover">
                             <thead>
                                 <tr>
@@ -119,10 +120,11 @@
             </div>
         </div>
     </div>
-    <!-- /.container-fluid -->
+    <!-- /.container-fluid box -->
     <?php else: ?>
         <p class="text-danger text-center">ไม่มีสิทธิ์เข้าถึง</p>
 <?php endif ?>
    
 </div>
-<!-- /#page-wrapper -->
+</section>
+<!-- /.content -->

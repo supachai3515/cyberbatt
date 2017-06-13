@@ -1,7 +1,8 @@
-<div id="page-wrapper" ng-app="myApp">
+<div class="content-wrapper">
+  <section class="content">
 <?php $chk_admin_id =  $this->session->userdata('permission_id'); ?>
 <?php if ($chk_admin_id == "1"): ?>
-    <div class="container-fluid" ng-controller="myCtrl">
+    <div class="container-fluid box" ng-controller="myCtrl">
         <div class="page-header">
           <h1>แก้ไขผู้ใช้</h1>
         </div>
@@ -72,9 +73,10 @@
         </fieldset>
         </form>
     </div>
-    <!-- /.container-fluid -->
+    <!-- /.container-fluid box -->
 <?php else: ?>
     <p class="text-danger text-center">ไม่มีสิทธิ์เข้าถึง</p>
 <?php endif ?>
 </div>
-<!-- /#page-wrapper -->
+</section>
+<!-- /.content -->

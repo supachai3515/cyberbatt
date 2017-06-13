@@ -1,5 +1,6 @@
-<div id="page-wrapper" ng-app="myApp">
-    <div class="container-fluid" ng-controller="myCtrl">
+<div class="content-wrapper">
+  <section class="content">
+    <div class="container-fluid box" ng-controller="myCtrl">
         <div class="page-header">
           <h1>แก้ไขสินค้า <a class="btn btn-success" href="<?php echo $this->config->item('weburl').'product/'.$product_data['slug']; ?>" role="button" target="_blank">ดูสินค้า</a></h1>
         </div>
@@ -244,6 +245,7 @@
 		</fieldset>
 		</form>
     </div>
-    <!-- /.container-fluid -->
+    <!-- /.container-fluid box -->
 </div>
-<!-- /#page-wrapper -->
+</section>
+<!-- /.content -->

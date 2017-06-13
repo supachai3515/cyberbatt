@@ -1,5 +1,6 @@
-<div id="page-wrapper" ng-app="myApp">
-    <div class="container-fluid" ng-controller="myCtrl">
+<div class="content-wrapper">
+  <section class="content">
+    <div class="container-fluid box" ng-controller="myCtrl">
         <div class="page-header">
             <h1>ใบสั่งซื้อสินค้า</h1>
             <?php //if(isset($sql))echo "<p>".$sql."</p>"; ?>
@@ -12,19 +13,19 @@
             </div>
             <select id="select_status" name="select_status" class="form-control">
                 <?php foreach ($order_status_list as $status): ?>
-                        <option value="<?php echo $status['id']; ?>"><?php echo $status['name']; ?></option> 
+                        <option value="<?php echo $status['id']; ?>"><?php echo $status['name']; ?></option>
                 <?php endforeach ?>
-                <option value="0" selected>ทั้งหมด</option> 
+                <option value="0" selected>ทั้งหมด</option>
             </select>
-        
+
             <div class="form-group">
                 <label class="sr-only" for="">search</label>
                 <input type="text" class="form-control" id="search" name="search" placeholder="ชื่อ , tracking">
             </div>
-    
+
             <button type="submit" class="btn btn-primary">ค้นหา</button>
         </form>
-        <div class="table-responsive">
+        <div class="box-body table-responsive no-padding">
             <table class="table table-hover">
                 <thead>
                     <tr>
@@ -57,12 +58,12 @@
                                    case '5':
                                    echo '<strong class="label label-default"><i class="fa fa-ban" aria-hidden="true"></i> '.$orders['order_status_name'].'</strong><br/>';
                                    break;
-                               
+
                                default:
                                    echo '<strong class="label label-default"><i class="fa fa-repeat" aria-hidden="true"></i> '.$orders['order_status_name'].'</strong><br/>';
                                    break;
                            }?>
-                            
+
                             <?php if (isset($orders['trackpost'])) : ?>
                                 <?php if ($orders['trackpost'] !=""): ?>
                                    <span>traking : </span>  <strong><?php echo $orders['trackpost'];?></strong><br/>
@@ -70,7 +71,7 @@
                             <?php endif ?>
                             <br/>
 
-                        <a target="_blank" class="btn btn-xs btn-default" href="<?php echo  $this->config->item('weburl').'invoice/'.$orders['ref_id'] ?>" role="button">    
+                        <a target="_blank" class="btn btn-xs btn-default" href="<?php echo  $this->config->item('weburl').'invoice/'.$orders['ref_id'] ?>" role="button">
                                  ดูใบสั่งซื้อ
                                 </a> <span> </span>
                                 <?php if (isset($orders['image_slip_own']) || isset($orders['image_slip_customer']) ): ?>
@@ -80,7 +81,7 @@
 
                                 <?php if ($orders['is_invoice'] == 1): ?>
                                     <p><br><a href="<?php echo  base_url('orders/invoice/'.$orders['id']); ?>" ><button type="button" class="btn btn-xs btn-info">ใบกำกับภาษี</button></a> <span><?php echo $orders['invoice_docno'] ?></span></p>
-                                  
+
                                 <?php endif ?>
                         </td>
                         <td>
@@ -90,7 +91,7 @@
                             <?php if (isset($orders['status_modified_date'])): ?>
                                  <span>วันที่แก้ไข : <i class="fa fa-calendar"></i> <?php echo date("d-m-Y H:i", strtotime($orders['status_modified_date']));?></span>
                             <?php endif ?>
-                            
+
 
                         </td>
                         <td>
@@ -106,17 +107,17 @@
                                  <strong>เลขที่ผุ้เสียภาษี : </strong><span><?php echo $orders['tax_id']; ?></span><br/>
                                  <strong>บริษัท : </strong><span><?php echo $orders['tax_company']; ?></span><br/>
                                 <strong>ที่อยู่ : </strong><span><?php echo $orders['tax_address']; ?></span><br/>
-                          
+
                             <?php endif ?>
-                           
+
                         </td>
-                           
+
                         <td>
                              <strong ng-bind="<?php echo $orders['total'];?> | currency:'฿':0"></strong>
                         </td>
                         <td>
                         <a class="btn btn-xs btn-info" href="<?php echo base_url('orders/edit/'.$orders['id']) ?>" role="button"><i class="fa fa-eye"></i></a>
-                        </td>       
+                        </td>
                     </tr>
                 <?php endforeach ?>
                 </tbody>
@@ -124,6 +125,7 @@
         </div>
         <?php if(isset($links_pagination)) {echo $links_pagination;} ?>
     </div>
-    <!-- /.container-fluid -->
+    <!-- /.container-fluid box -->
 </div>
-<!-- /#page-wrapper -->
+</section>
+<!-- /.content -->

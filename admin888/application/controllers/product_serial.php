@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Product_serial extends CI_Controller {
 	public function __construct(){
 		parent::__construct();
-		//call model inti 
+		//call model inti
 		$this->load->model('initdata_model');
 		$this->load->model('product_serial_model');
 		$this->load->model('products_model');
@@ -19,7 +19,7 @@ class Product_serial extends CI_Controller {
 
 		$config['base_url'] = base_url('product_serial/index');
 		$config['total_rows'] = $this->product_serial_model->get_product_serial_count();
-		$config['per_page'] = 10; 
+		$config['per_page'] = 10;
         /* This Application Must Be Used With BootStrap 3 *  */
 		$config['full_tag_open'] = "<ul class='pagination'>";
 		$config['full_tag_close'] ="</ul>";
@@ -38,7 +38,7 @@ class Product_serial extends CI_Controller {
 		$config['last_tag_open'] = "<li>";
 		$config['last_tagl_close'] = "</li>";
 
-        $this->pagination->initialize($config); 
+        $this->pagination->initialize($config);
 		$data['product_serial_list'] = $this->product_serial_model->get_product_serial($page, $config['per_page']);
 		$data['links_pagination'] = $this->pagination->create_links();
 
@@ -46,14 +46,14 @@ class Product_serial extends CI_Controller {
 		$data['type_list'] = $this->products_model->get_type();
 
 		//call script
-        $data['menu_id'] ='22';
+        $data['menu_id'] ='24';
 		$data['content'] = 'product_serial';
 		$data['script_file']= "js/serial_js";
 		$data['header'] = array('title' => 'product_serial| '.$this->config->item('sitename'),
 								'description' =>  'product_serial| '.$this->config->item('tagline'),
 								'author' => $this->config->item('author'),
 								'keyword' =>  'cyberbatt');
-		$this->load->view('template/layout', $data);	
+		$this->load->view('template/layout', $data);
 	}
 
 	//page search
@@ -65,14 +65,14 @@ class Product_serial extends CI_Controller {
 		$data['data_search'] = $return_data['data_search'];
 		$data['menus_list'] = $this->initdata_model->get_menu();
 
-        $data['menu_id'] ='22';
+        $data['menu_id'] ='24';
 		$data['content'] = 'product_serial';
 		$data['script_file']= "js/serial_js";
 		$data['header'] = array('title' => 'product_serial| '.$this->config->item('sitename'),
 								'description' =>  'product_serial| '.$this->config->item('tagline'),
 								'author' => $this->config->item('author'),
 								'keyword' =>  'cyberbatt');
-		$this->load->view('template/layout', $data);	
+		$this->load->view('template/layout', $data);
 
 	}
 
@@ -89,8 +89,8 @@ class Product_serial extends CI_Controller {
 		$is_logged_in = $this->session->userdata('is_logged_in');
 		$chk_admin =  $this->session->userdata('permission');
 		if(!isset($is_logged_in) || $is_logged_in != true || $chk_admin !='admin'){
-			redirect('login');		
-		}		
+			redirect('login');
+		}
 	}
 
 }

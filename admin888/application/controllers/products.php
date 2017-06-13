@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Products extends CI_Controller {
 	public function __construct(){
 		parent::__construct();
-		//call model inti 
+		//call model inti
 		$this->load->model('initdata_model');
 		$this->load->model('products_model');
 		$this->load->library('my_upload');
@@ -19,7 +19,7 @@ class Products extends CI_Controller {
 
 		$config['base_url'] = base_url('products/index');
 		$config['total_rows'] = $this->products_model->get_products_count();
-		$config['per_page'] = 10; 
+		$config['per_page'] = 10;
 		//config for bootstrap pagination class integration
         /* This Application Must Be Used With BootStrap 3 *  */
 		$config['full_tag_open'] = "<ul class='pagination'>";
@@ -39,11 +39,11 @@ class Products extends CI_Controller {
 		$config['last_tag_open'] = "<li>";
 		$config['last_tagl_close'] = "</li>";
 
-        $this->pagination->initialize($config); 
+        $this->pagination->initialize($config);
 		$data['products_list'] = $this->products_model->get_products($page, $config['per_page']);
-		
+
 		$data['links_pagination'] = $this->pagination->create_links();
-		
+
 		$data['menus_list'] = $this->initdata_model->get_menu();
 		$data['brands_list'] = $this->products_model->get_brands();
 		$data['type_list'] = $this->products_model->get_type();
@@ -55,13 +55,13 @@ class Products extends CI_Controller {
 
 		//call script
 		$data['script_file']= "js/product_add_js";
-        $data['menu_id'] ='1';
+        $data['menu_id'] ='5';
 		$data['content'] = 'products';
 		$data['header'] = array('title' => 'Products | '.$this->config->item('sitename'),
 								'description' =>  'Products | '.$this->config->item('tagline'),
 								'author' => 'www.wisadev.com',
 								'keyword' =>  'wisadev e-commerce');
-		$this->load->view('template/layout', $data);	
+		$this->load->view('template/layout', $data);
 	}
 	//page edit
 	public function edit($product_id)
@@ -74,13 +74,13 @@ class Products extends CI_Controller {
 		$data['images_list'] = $this->products_model->get_images($product_id);
 		//call script
 		$data['script_file']= "js/product_js";
-        $data['menu_id'] ='1';
+        $data['menu_id'] ='5';
 		$data['content'] = 'product_edit';
 		$data['header'] = array('title' => 'Products | '.$this->config->item('sitename'),
 								'description' =>  'Products | '.$this->config->item('tagline'),
 								'author' => 'www.wisadev.com',
 								'keyword' =>  'wisadev e-commerce');
-		$this->load->view('template/layout', $data);	
+		$this->load->view('template/layout', $data);
 	}
 	//page search
 	public function search()
@@ -93,16 +93,16 @@ class Products extends CI_Controller {
 		$data['menus_list'] = $this->initdata_model->get_menu();
 		$data['brands_list'] = $this->products_model->get_brands();
 		$data['type_list'] = $this->products_model->get_type();
-		
+
 		//call script
 		$data['script_file']= "js/product_add_js";
-        $data['menu_id'] ='1';
+        $data['menu_id'] ='5';
 		$data['content'] = 'products';
 		$data['header'] = array('title' => 'Products | '.$this->config->item('sitename'),
 								'description' =>  'Products | '.$this->config->item('tagline'),
 								'author' => 'www.wisadev.com',
 								'keyword' =>  'wisadev e-commerce');
-		$this->load->view('template/layout', $data);	
+		$this->load->view('template/layout', $data);
 	}
 
 	// insert
@@ -114,7 +114,7 @@ class Products extends CI_Controller {
 		$product_id = $this->products_model->save_product();
 		echo $product_id;
 
-		$image_name = ""; 
+		$image_name = "";
 		$dir ='./../uploads/'.date("Ym").'/';
 		$dir_insert ='uploads/'.date("Ym").'/';
 
@@ -135,16 +135,16 @@ class Products extends CI_Controller {
 		        $image_name  = $this->my_upload->file_dst_name;
 		        $this->products_model->update_img($product_id, $dir_insert.$image_name);
 
-		        $this->my_upload->clean();  
+		        $this->my_upload->clean();
 		      } else {
 		        $data['errors'] = $this->my_upload->error;
-		        echo $data['errors'];    
+		        echo $data['errors'];
 		      }
 		    } else  {
 		      $data['errors'] = $this->my_upload->error;
 		    }
-	  
-	        for ($i=1; $i <11 ; $i++) { 
+
+	        for ($i=1; $i <11 ; $i++) {
 	        	$this->my_upload->upload($_FILES['image_field_'.$i]);
 			    if ( $this->my_upload->uploaded == true  ) {
 			      $this->my_upload->allowed   = array('image/*');
@@ -154,13 +154,13 @@ class Products extends CI_Controller {
 			        $image_name  = $this->my_upload->file_dst_name;
 			        //inset image
 		        	$this->products_model->insert_productimgs($product_id, $i, $dir_insert.$image_name );
-		        
-			        $this->my_upload->clean();  
+
+			        $this->my_upload->clean();
 			      } else {
 			        $data['errors'] = $this->my_upload->error;
 			        echo $data['errors'];
-			        //inset image  
-			        $this->products_model->insert_productimgs($product_id, $i,"");  
+			        //inset image
+			        $this->products_model->insert_productimgs($product_id, $i,"");
 			      }
 			    } else  {
 			      $data['errors'] = $this->my_upload->error;
@@ -175,8 +175,8 @@ class Products extends CI_Controller {
 		}
 		else {
 			redirect('products');
-		}	
-	} 
+		}
+	}
 	// update
 	public function update($product_id)
 	{
@@ -202,16 +202,16 @@ class Products extends CI_Controller {
 		        $image_name  = $this->my_upload->file_dst_name;
 		        //update img
 		        $this->products_model->update_img($product_id, $dir_insert.$image_name);
-		        $this->my_upload->clean();  
+		        $this->my_upload->clean();
 		      } else {
 		        $data['errors'] = $this->my_upload->error;
-		        echo $data['errors'];    
+		        echo $data['errors'];
 		      }
 		    } else  {
 		      $data['errors'] = $this->my_upload->error;
 		    }
-	  
-	        for ($i=1; $i <11 ; $i++) { 
+
+	        for ($i=1; $i <11 ; $i++) {
 	        	//update is active
 	        	$this->products_model->update_productimgs_active($product_id, $i, $this->input->post('is_active_'.$i));
 	        	$this->my_upload->upload($_FILES['image_field_'.$i]);
@@ -223,8 +223,8 @@ class Products extends CI_Controller {
 			        $image_name  = $this->my_upload->file_dst_name;
 			        //update image
 		        	$this->products_model->update_productimgs($product_id, $i, $dir_insert.$image_name, $this->input->post('is_active_'.$i));
-		        
-			        $this->my_upload->clean();  
+
+			        $this->my_upload->clean();
 			      } else {
 			        $data['errors'] = $this->my_upload->error;
 			      }
@@ -241,20 +241,20 @@ class Products extends CI_Controller {
 			redirect('products');
 		}
 
-	} 
+	}
 
 	public function is_logged_in(){
 		$is_logged_in = $this->session->userdata('is_logged_in');
 		$chk_admin =  $this->session->userdata('permission');
 		if(!isset($is_logged_in) || $is_logged_in != true || $chk_admin !='admin'){
-			redirect('login');		
-		}		
+			redirect('login');
+		}
 	}
 
 	public function runimg()
-	{	
+	{
 
-		$sql ="SELECT * FROM products "; 
+		$sql ="SELECT * FROM products ";
 		$query = $this->db->query($sql);
 		$datalist = $query->result_array();
 
@@ -273,9 +273,9 @@ class Products extends CI_Controller {
 	}
 
 	public function runslug()
-	{	
+	{
 
-		$sql ="SELECT * FROM products "; 
+		$sql ="SELECT * FROM products ";
 		$query = $this->db->query($sql);
 		$datalist = $query->result_array();
 
@@ -284,10 +284,10 @@ class Products extends CI_Controller {
 		    $slug =	$this->Initdata_model->slug($row['name']);
 
 		    $data_product = array(
-				'slug' => $slug	
+				'slug' => $slug
 			);
 
-			$where = "id = '".$row['id']."'"; 
+			$where = "id = '".$row['id']."'";
 			$this->db->update("products", $data_product, $where);
 
  			echo $slug.'<br/>';
@@ -296,9 +296,9 @@ class Products extends CI_Controller {
 	}
 
 	public function run_strip()
-	{	
+	{
 
-		$sql ="SELECT * FROM products "; 
+		$sql ="SELECT * FROM products ";
 		$query = $this->db->query($sql);
 		$datalist = $query->result_array();
 
@@ -308,10 +308,10 @@ class Products extends CI_Controller {
 		    $shot_detail =	strip_tags($row['detail']);
 
 		    $data_product = array(
-				'shot_detail' => $shot_detail	
+				'shot_detail' => $shot_detail
 			);
 
-			$where = "id = '".$row['id']."'"; 
+			$where = "id = '".$row['id']."'";
 			$this->db->update("products", $data_product, $where);
 
  			echo $shot_detail.'<br/>';
@@ -348,9 +348,9 @@ class Products extends CI_Controller {
 					'dis_price' => $this->input->post('dis_price'),
 					'member_discount' => $this->input->post('member_discount'),
 					'member_discount_lv1' => $this->input->post('member_discount_lv1'),
-					'modified_date' => date("Y-m-d H:i:s"),						
+					'modified_date' => date("Y-m-d H:i:s"),
 				);
-				$where = "id = '".$check[$i]."'"; 
+				$where = "id = '".$check[$i]."'";
 
 				$this->db->update("products", $data_product, $where);
 				if($in_str ==""){
@@ -359,7 +359,7 @@ class Products extends CI_Controller {
 				else {
 					$in_str = $in_str.",".$check[$i];
 				}
-				
+
 				$data["update"] = $data["update"].'<li class="list-group-item"><strong>ProductId</strong> : '.$check[$i].', <strong>price</strong> : '.$this->input->post('price').', <strong>Disprice</strong> : '.$this->input->post('dis_price').', <strong>Dealer_price</strong> : '.$this->input->post('member_discount').', <strong> fanshine</strong> : '.$this->input->post('member_discount_lv1').'</li>';
 			}
             //echo $this->input->post('price')." , ".$this->input->post('dis_price')." , ".$this->input->post('member_discount')."<br>";
@@ -370,14 +370,14 @@ class Products extends CI_Controller {
 		if ($in_str != "") {
 				$data['products_list'] = $this->products_model->get_products_in($in_str);
 		}
-			
+
 		$data['menus_list'] = $this->initdata_model->get_menu();
 		$data['brands_list'] = $this->products_model->get_brands();
 		$data['type_list'] = $this->products_model->get_type();
-		
+
 		//call script
 		$data['script_file']= "js/product_add_js";
-        $data['menu_id'] ='1';
+        $data['menu_id'] ='5';
 		$data['content'] = 'products';
 		$data['header'] = array('title' => 'Products | '.$this->config->item('sitename'),
 								'description' =>  'Products | '.$this->config->item('tagline'),
@@ -395,9 +395,9 @@ class Products extends CI_Controller {
 
 			$sql =" SELECT p.id ,p.sku ,p.name product_name,t.name type_name, b.name brand_name, p.stock ,p.price,
 		    				p.dis_price discount_price , p.member_discount dealer_price ,p.member_discount_lv1 fanshine_price
-					FROM  products p 
+					FROM  products p
 					LEFT JOIN product_brand b ON p.product_brand_id = b.id
-					LEFT JOIN product_type t ON p.product_type_id = t.id 
+					LEFT JOIN product_type t ON p.product_type_id = t.id
 					ORDER BY p.id DESC ";
 			$re = $this->db->query($sql);
 			//print($sql);
@@ -420,29 +420,29 @@ class Products extends CI_Controller {
 					}
 					else {
 						$in_str = $in_str.",".$check[$i];
-			
+
 					}
-					
+
 				}
 			}
 
 			if ($in_str != "") {
 			    $sql =" SELECT p.id ,p.sku ,p.name product_name,t.name type_name, b.name brand_name, p.stock ,p.price,
 			    				p.dis_price discount_price , p.member_discount dealer_price ,p.member_discount_lv1 fanshine_price
-						FROM  products p 
+						FROM  products p
 						LEFT JOIN product_brand b ON p.product_brand_id = b.id
-						LEFT JOIN product_type t ON p.product_type_id = t.id 
+						LEFT JOIN product_type t ON p.product_type_id = t.id
 						WHERE p.id in(".$in_str.")
 						 ORDER BY p.id DESC ";
 				$re = $this->db->query($sql);
 				//print($sql);
 				$data['products_list'] = $re->result_array();
 				$this->load->view('export_product', $data);
-			
+
 			}
 
 		}
-		
+
 	}
 
 }

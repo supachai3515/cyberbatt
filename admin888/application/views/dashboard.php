@@ -1,5 +1,6 @@
-<div id="page-wrapper" ng-app="myApp">
-    <div class="container-fluid" ng-controller="myCtrl">
+<div class="content-wrapper">
+  <section class="content">
+    <div class="container-fluid box" ng-controller="myCtrl">
         <!-- Page Heading -->
         <div class="row">
             <div class="col-lg-12">
@@ -66,7 +67,7 @@
                         <h3 class="panel-title"><i class="fa fa-money fa-fw"></i> ใบสั่งซื้อล่าสุด</h3>
                     </div>
                     <div class="panel-body">
-                        <div class="table-responsive">
+                        <div class="box-body table-responsive no-padding">
                             <table class="table table-bordered table-hover table-striped">
                                 <thead>
                                     <tr>
@@ -93,6 +94,7 @@
         </div>
         <!-- /.row -->
     </div>
-    <!-- /.container-fluid -->
+    <!-- /.container-fluid box -->
 </div>
-<!-- /#page-wrapper -->
+</section>
+<!-- /.content -->

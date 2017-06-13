@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Shipping_method extends CI_Controller {
 	public function __construct(){
 		parent::__construct();
-		//call model inti 
+		//call model inti
 		$this->load->model('initdata_model');
 		$this->load->model('shipping_method_model');
 		$this->load->model('products_model');
@@ -19,7 +19,7 @@ class Shipping_method extends CI_Controller {
 
 		$config['base_url'] = base_url('shipping_method/index');
 		$config['total_rows'] = $this->shipping_method_model->get_shipping_method_count();
-		$config['per_page'] = 10; 
+		$config['per_page'] = 10;
         /* This Application Must Be Used With BootStrap 3 *  */
 		$config['full_tag_open'] = "<ul class='pagination'>";
 		$config['full_tag_close'] ="</ul>";
@@ -38,7 +38,7 @@ class Shipping_method extends CI_Controller {
 		$config['last_tag_open'] = "<li>";
 		$config['last_tagl_close'] = "</li>";
 
-        $this->pagination->initialize($config); 
+        $this->pagination->initialize($config);
 		$data['shipping_method_list'] = $this->shipping_method_model->get_shipping_method($page, $config['per_page']);
 		$data['links_pagination'] = $this->pagination->create_links();
 
@@ -46,14 +46,14 @@ class Shipping_method extends CI_Controller {
 		$data['type_list'] = $this->products_model->get_type();
 
 		//call script
-        $data['menu_id'] ='18';
+        $data['menu_id'] ='19';
 		$data['content'] = 'shipping_method';
 		$data['script_file']= "js/product_add_js";
 		$data['header'] = array('title' => 'shipping_method| '.$this->config->item('sitename'),
 								'description' =>  'shipping_method| '.$this->config->item('tagline'),
 								'author' => $this->config->item('author'),
 								'keyword' =>  'cyberbatt');
-		$this->load->view('template/layout', $data);	
+		$this->load->view('template/layout', $data);
 	}
 
 
@@ -66,14 +66,14 @@ class Shipping_method extends CI_Controller {
 		$data['data_search'] = $return_data['data_search'];
 		$data['menus_list'] = $this->initdata_model->get_menu();
 
-        $data['menu_id'] ='18';
+        $data['menu_id'] ='19';
 		$data['content'] = 'shipping_method';
 		$data['script_file']= "js/product_add_js";
 		$data['header'] = array('title' => 'shipping_method| '.$this->config->item('sitename'),
 								'description' =>  'shipping_method| '.$this->config->item('tagline'),
 								'author' => $this->config->item('author'),
 								'keyword' =>  'cyberbatt');
-		$this->load->view('template/layout', $data);	
+		$this->load->view('template/layout', $data);
 
 	}
 
@@ -84,14 +84,14 @@ class Shipping_method extends CI_Controller {
 		$data['menus_list'] = $this->initdata_model->get_menu();
 		$data['shipping_method_data'] = $this->shipping_method_model->get_shipping_method_id($shipping_method_id);
 		$data['type_list'] = $this->products_model->get_type();
-        $data['menu_id'] ='18';
+        $data['menu_id'] ='19';
 		$data['content'] = 'shipping_method_edit';
 		$data['script_file']= "js/product_add_js";
 		$data['header'] = array('title' => 'shipping_method| '.$this->config->item('sitename'),
 								'description' =>  'shipping_method| '.$this->config->item('tagline'),
 								'author' => $this->config->item('author'),
 								'keyword' =>  'cyberbatt');
-		$this->load->view('template/layout', $data);	
+		$this->load->view('template/layout', $data);
 
 	}
 
@@ -109,8 +109,8 @@ class Shipping_method extends CI_Controller {
 			redirect('shipping_method');
 		}
 
-	} 
-	
+	}
+
 	// insert
 	public function add()
 	{
@@ -124,15 +124,15 @@ class Shipping_method extends CI_Controller {
 		}
 		else {
 			redirect('shipping_method');
-		}	
-	}  
+		}
+	}
 
 	public function is_logged_in(){
 		$is_logged_in = $this->session->userdata('is_logged_in');
 		$chk_admin =  $this->session->userdata('permission');
 		if(!isset($is_logged_in) || $is_logged_in != true || $chk_admin !='admin'){
-			redirect('login');		
-		}		
+			redirect('login');
+		}
 	}
 
 }

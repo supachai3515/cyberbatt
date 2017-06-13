@@ -108,7 +108,7 @@
 	        <div class="col-md-12">
 	            <div class="panel panel-default">
 	                <div class="panel-body">
-	                    <div class="table-responsive">
+	                    <div class="box-body table-responsive no-padding">
 	                        <table class="table table-condensed">
 	                            <thead>
 	                                <tr>

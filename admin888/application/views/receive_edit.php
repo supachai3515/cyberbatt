@@ -1,5 +1,6 @@
-<div id="page-wrapper" ng-app="myApp">
-    <div class="container-fluid" ng-controller="receive">
+<div class="content-wrapper">
+  <section class="content">
+    <div class="container-fluid box" ng-controller="receive">
         <div class="page-header">
           <h1>แก้ไขใบรับสินค้า</h1>
         </div>
@@ -52,7 +53,7 @@
                   <p class="text-danger">{{msgError}}</p>
 
 
-                  <div class="table-responsive">
+                  <div class="box-body table-responsive no-padding">
                       <table class="table table-hover">
                           <thead>
                               <tr>
@@ -175,6 +176,7 @@
         </fieldset>
         </form>
     </div>
-    <!-- /.container-fluid -->
+    <!-- /.container-fluid box -->
 </div>
-<!-- /#page-wrapper -->
+</section>
+<!-- /.content -->

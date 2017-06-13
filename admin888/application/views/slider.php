@@ -1,10 +1,11 @@
-<div id="page-wrapper" ng-app="myApp">
-    <div class="container-fluid" ng-controller="myCtrl">
+<div class="content-wrapper">
+  <section class="content">
+    <div class="container-fluid box" ng-controller="myCtrl">
         <div class="page-header">
             <h1>slider<small></small></h1>
             <?php //if(isset($sql))echo "<p>".$sql."</p>"; ?>
         </div>
-        <div class="table-responsive">
+        <div class="box-body table-responsive no-padding">
             <table class="table table-hover">
                 <thead>
                     <tr>
@@ -49,6 +50,7 @@
         </div>
         <?php if(isset($links_pagination)) {echo $links_pagination;} ?>
     </div>
-    <!-- /.container-fluid -->
+    <!-- /.container-fluid box -->
 </div>
-<!-- /#page-wrapper -->
+</section>
+<!-- /.content -->

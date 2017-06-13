@@ -1,4 +1,5 @@
-<div id="page-wrapper" ng-app="myApp">
+<div class="content-wrapper">
+  <section class="content">
   <script type="text/ng-template" id="myModalContent.html">
     <div class="modal-header">
       <h4>เลือกใบสั่งซื้อ</h4>
@@ -11,7 +12,7 @@
         </div>
         <button type="submit" class="btn btn-primary">ค้นหา</button>
       </form>
-      <div class="table-responsive">
+      <div class="box-body table-responsive no-padding">
         <table class="table table-hover">
           <thead>
             <tr>
@@ -48,7 +49,7 @@
       <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
     </div>
   </script>
-  <div class="container-fluid" ng-controller="return_receive">
+  <div class="container-fluid box" ng-controller="return_receive">
     <div class="page-header">
       <h2>ใบรับคืน <?php echo $return_receive_data['docno']; ?></h2>
     </div>
@@ -175,6 +176,7 @@
       </fieldset>
     </form>
   </div>
-  <!-- /.container-fluid -->
+  <!-- /.container-fluid box -->
 </div>
-<!-- /#page-wrapper -->
+</section>
+<!-- /.content -->

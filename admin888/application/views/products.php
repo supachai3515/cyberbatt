@@ -1,12 +1,13 @@
-<div id="page-wrapper" ng-app="myApp">
-    <div class="container-fluid" ng-controller="myCtrl">
+<div class="content-wrapper">
+  <section class="content">
+    <div class="container-fluid box" ng-controller="myCtrl">
 
         <script type="text/ng-template" id="myModalContent.html">
             <div class="modal-header">
                 <h3 class="modal-title" ng-bind="items_stock[0].sku +' : '+ items_stock[0].product_name">Stock สินค้า </h3>
             </div>
             <div class="modal-body">
-                <div class="table-responsive">
+                <div class="box-body table-responsive no-padding">
                     <table class="table table-striped table-hover">
                         <thead>
                             <tr>
@@ -210,7 +211,7 @@
                                         
                                     <?php endif ?>
 
-                                    <div class="table-responsive">
+                                    <div class="box-body table-responsive no-padding">
                                         <table class="table table-hover">
                                             <thead>
                                                 <tr>
@@ -341,7 +342,7 @@
                                         
                                     </fieldset>
                                     <div style="padding-top:20px;"></div>
-                                    <div class="table-responsive">
+                                    <div class="box-body table-responsive no-padding">
                                         <table class="table table-hover">
                                             <thead>
                                                 <tr>
@@ -631,9 +632,10 @@
             </div>
         </div>
     </div>
-    <!-- /.container-fluid -->
+    <!-- /.container-fluid box -->
 </div>
-<!-- /#page-wrapper -->
+</section>
+<!-- /.content -->
 
 
 

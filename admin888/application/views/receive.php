@@ -1,5 +1,6 @@
-<div id="page-wrapper" ng-app="myApp">
-    <div class="container-fluid" ng-controller="receive">
+<div class="content-wrapper">
+  <section class="content">
+    <div class="container-fluid box" ng-controller="receive">
         <div class="page-header">
             <h1>ใบรับสินค้า</h1>
             <?php //if(isset($sql))echo "<p>".$sql."</p>"; ?>
@@ -23,10 +24,10 @@
                             <label class="sr-only" for="">search</label>
                             <input type="text" class="form-control" id="search" name="search" placeholder="เลขที่เอกสาร">
                         </div>
-                
+
                         <button type="submit" class="btn btn-primary">ค้นหา</button>
                     </form>
-                    <div class="table-responsive">
+                    <div class="box-body table-responsive no-padding">
                         <table class="table table-hover">
                             <thead>
                                 <tr>
@@ -56,12 +57,12 @@
 
                                     </td>
                                     <td>
-                                        
+
                                          <span>qty : <strong><?php echo $receive['qty'] ?></strong></span><br/>
                                           <span>vat : <strong><?php echo $receive['vat'] ?></strong></span><br/>
                                            <span>total : <strong><?php echo $receive['total'] ?></strong></span><br/>
-                            
-                                    </td> 
+
+                                    </td>
                                     <td>
                                          <span><i class="fa fa-calendar"></i> <?php echo date("d-m-Y H:i", strtotime($receive['modified_date']));?></span>
                                         <br/>
@@ -76,12 +77,12 @@
                                     <td>
                                     <a class="btn btn-xs btn-warning" href="<?php echo base_url('receive/edit_serial/'.$receive['id']) ?>" role="button"><i class="fa fa-pencil"></i> Serial Number</a>
                                     <?php if ($receive['count_use'] < 1): ?>
-                                      <a class="btn btn-xs btn-info" href="<?php echo base_url('receive/edit/'.$receive['id']) ?>" role="button"><i class="fa fa-pencil"></i> แก้ไข</a></td>   
-                                    <?php else: ?> 
+                                      <a class="btn btn-xs btn-info" href="<?php echo base_url('receive/edit/'.$receive['id']) ?>" role="button"><i class="fa fa-pencil"></i> แก้ไข</a></td>
+                                    <?php else: ?>
                                         <span class="label label-default">Serial ถูกใช้แล้ว</span>
                                     <?php endif ?>
 
-                                         
+
                                 </tr>
                             <?php endforeach ?>
                             </tbody>
@@ -126,7 +127,7 @@
                                     <p class="text-danger">{{msgError}}</p>
 
 
-                                    <div class="table-responsive">
+                                    <div class="box-body table-responsive no-padding">
                                         <table class="table table-hover">
                                             <thead>
                                                 <tr>
@@ -191,7 +192,7 @@
                                                        <strong> {{ getQtyReceive() }}</strong>
                                                     </td>
                                                     <td>
-                                                        
+
                                                     </td>
                                                     <td>
                                                         <strong>{{ getVatReceive()  | currency:'' }}</strong>
@@ -199,12 +200,12 @@
                                                     <td>
                                                         <strong>{{ getTotalReceive() | currency:''  }}</strong>
                                                     </td>
-    
+
                                                     <td>
                                                     </td>
-                                                     
+
                                                 </tr>
-                                                   
+
                                             </tfoot>
                                         </table>
                                     </div>
@@ -219,7 +220,7 @@
                                 </div>
                             </div>
 
-    
+
                             <!-- Multiple Checkboxes -->
                             <div class="form-group">
                                 <label class="col-md-3 control-label" for="isactive">ใช้งาน</label>
@@ -244,6 +245,7 @@
             </div>
         </div>
     </div>
-    <!-- /.container-fluid -->
+    <!-- /.container-fluid box -->
 </div>
-<!-- /#page-wrapper -->
+</section>
+<!-- /.content -->

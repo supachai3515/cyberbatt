@@ -39,7 +39,7 @@
                                         echo "<li>";
                                         echo'<a href="'.base_url().$supmenu['link'].'"><i class="'.$supmenu['icon'].'"></i> '.$supmenu['name'].'</a>';
                                         echo "</li>";
-
+                                                                               
                                     }
 
                             }

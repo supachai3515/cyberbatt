@@ -1,5 +1,6 @@
-<div id="page-wrapper" ng-app="myApp">
-    <div class="container-fluid" ng-controller="myCtrl">
+<div class="content-wrapper">
+  <section class="content">
+    <div class="container-fluid box" ng-controller="myCtrl">
         <div class="page-header">
             <h1>ยี่ห้อสินค้า</h1>
             <?php //if(isset($sql))echo "<p>".$sql."</p>"; ?>
@@ -28,7 +29,7 @@
                 
                         <button type="submit" class="btn btn-primary">ค้นหา</button>
                     </form>
-                    <div class="table-responsive">
+                    <div class="box-body table-responsive no-padding">
                         <table class="table table-hover">
                             <thead>
                                 <tr>
@@ -117,6 +118,7 @@
             </div>
         </div>
     </div>
-    <!-- /.container-fluid -->
+    <!-- /.container-fluid box -->
 </div>
-<!-- /#page-wrapper -->
+</section>
+<!-- /.content -->
