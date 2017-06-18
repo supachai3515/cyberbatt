@@ -20,8 +20,12 @@ $config['base_url'] .= str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER
 
 //Config by user
 $config['short_sitename'] = "Cyberbatt (ไซเบอร์ แบต)";
-$config['sitename'] = "รับซ่อม  Macbook iMac  iphone ipad ขายอะไหล่แท้ มือหนึ่งและมือสอง - cyberbatt";
-$config['tagline'] = "รับซ่อม  Macbook iMac  iphone ipad ขายอะไหล่แท้ มือหนึ่ง และมือสอง ซ่อมด่วนรอรับได้เลย เปลี่ยนชิพการ์ดจอ ลง OSX -ซ่อมหน้าจอ LED LCD เมนบอร์ดทุกอาการ";
+$config['sitename'] = "อะไหล่แมคบุ๊ค อะไหล่โน๊ตบุ๊ค อะไหล่ไอโฟน แบต จอ คีบอร์ด - cyberbatt";
+$config['tagline'] = "อะไหล่แมคบุ๊ค อะไหล่โน๊ตบุ๊ค อะไหล่ไอโฟน จอแมคบุ๊ค จอไอแมค จอไอโฟน  แบตเตอรี่โน๊ตบุ๊ค แบตเตอรี่แมคบุ๊ค แบตเตอรี่ไอโฟน  ครบวงจร";
+$config['author'] = "Cyberbatt (ไซเบอร์ แบต)";
+$config['keyword'] = "อะไหล่แมคบุ๊ค,อะไหล่โน๊ตบุ๊ค,อะไหล่ไอโฟน,จอแมคบุ๊ค,จอไอแมค,จอไอโฟน,แบตเตอรี่โน๊ตบุ๊ค,แบตเตอรี่แมคบุ๊ค,แบตเตอรี่ไอโฟน,ครบวงจร";
+
+
 $config['url_img'] = "http://www.cyberbatt.com/";
 $config['no_url_img'] = "http://www.cyberbatt.com/uploads/no_image.jpg";
 

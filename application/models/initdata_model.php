@@ -2,40 +2,40 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Initdata_model extends CI_Model {
-	
-	public function __construct() {        
+
+	public function __construct() {
 	    parent::__construct();
 	}
 
 	public function get_menu()
 	{
-		$sqlmenu ="SELECT * FROM menu WHERE is_active ='1' ORDER BY order_by "; 
+		$sqlmenu ="SELECT * FROM menu WHERE is_active ='1' ORDER BY order_by ";
 		$reMenus = $this->db->query($sqlmenu);
 		return  $reMenus->result_array();
 	}
 
 	public function get_brands()
 	{
-		$sql =" SELECT pb.id, pb.name, pb.slug, pt.id type_id, COUNT(p.id) count_product FROM product_brand pb 
-				INNER JOIN products p ON p.product_brand_id = pb.id 
-				INNER JOIN product_type  pt  ON p.product_type_id = pt.id 
+		$sql =" SELECT pb.id, pb.name, pb.slug, pt.id type_id, COUNT(p.id) count_product FROM product_brand pb
+				INNER JOIN products p ON p.product_brand_id = pb.id
+				INNER JOIN product_type  pt  ON p.product_type_id = pt.id
 				WHERE pb.is_active = 1 AND p.is_active= '1' AND  pt.is_active = 1 GROUP BY  pb.id, pb.name , pb.slug
 				HAVING COUNT(p.id) > 0
-				ORDER BY pb.name "; 
+				ORDER BY pb.name ";
 		$result = $this->db->query($sql);
 		return  $result->result_array();
 	}
 
 	public function get_type()
 	{
-		//$sql ="SELECT pt.id, pt.name, pt.slug ,COUNT(p.id) count_product FROM product_type  pt 
-		//INNER JOIN products p ON p.product_type_id = pt.id 
+		//$sql ="SELECT pt.id, pt.name, pt.slug ,COUNT(p.id) count_product FROM product_type  pt
+		//INNER JOIN products p ON p.product_type_id = pt.id
 		//WHERE pt.is_active = 1 AND p.is_active= '1'  GROUP BY  pt.id, pt.name ,pt.slug
 		//HAVING COUNT(p.id) > 0
-		//ORDER BY pt.name"; 
+		//ORDER BY pt.name";
 
-		$sql ="SELECT pt.id, pt.name, pt.slug 
-				FROM product_type  pt 
+		$sql ="SELECT pt.id, pt.name, pt.slug
+				FROM product_type  pt
 						WHERE pt.is_active = 1   AND pt.parenttype_id = 0
 				GROUP BY  pt.id, pt.name ,pt.slug
 						ORDER BY pt.name;";
@@ -44,10 +44,10 @@ class Initdata_model extends CI_Model {
 	}
 	public function get_sub_type()
 	{
-		
-		$sql = "SELECT pt.id, pt.name, pt.slug ,pt.parenttype_id ,COUNT(p.id) count_product 
-				FROM product_type  pt 
-						LEFT JOIN products p ON p.product_type_id = pt.id 
+
+		$sql = "SELECT pt.id, pt.name, pt.slug ,pt.parenttype_id ,COUNT(p.id) count_product
+				FROM product_type  pt
+						LEFT JOIN products p ON p.product_type_id = pt.id
 						WHERE pt.is_active = 1   AND pt.parenttype_id != 0
 				GROUP BY  pt.id, pt.name ,pt.slug
 						ORDER BY pt.name";
@@ -57,9 +57,9 @@ class Initdata_model extends CI_Model {
 
 	public function get_brand_oftype()
 	{
-		$sql ="SELECT pt.id product_type_id , pt.name product_type_name ,  pb.id product_brand_id , 
+		$sql ="SELECT pt.id product_type_id , pt.name product_type_name ,  pb.id product_brand_id ,
 				pb.name product_brand_name ,pt.slug  product_type_slug,pb.slug product_brand_slug,  COUNT(p.id)
-				FROM  products p 
+				FROM  products p
 				LEFT JOIN  product_type pt ON p.product_type_id = pt.id
 				LEFT JOIN  product_brand pb ON p.product_brand_id = pb.id
 				WHERE  p.is_active= '1' AND  pt.is_active = '1'
@@ -72,7 +72,7 @@ class Initdata_model extends CI_Model {
 	public function get_type_by_id($id)
 	{
 		$sql ="SELECT * FROM product_type
-		WHERE id = '".$id."'"; 
+		WHERE id = '".$id."'";
 		$result = $this->db->query($sql);
 		return  $result->row_array();
 	}
@@ -80,7 +80,7 @@ class Initdata_model extends CI_Model {
 	public function get_brand_by_id($id)
 	{
 		$sql ="SELECT * FROM product_brand
-		WHERE id = '".$id."'"; 
+		WHERE id = '".$id."'";
 		$result = $this->db->query($sql);
 		return  $result->row_array();
 	}
@@ -88,7 +88,7 @@ class Initdata_model extends CI_Model {
 	public function get_type_by_slug($slug)
 	{
 		$sql ="SELECT * FROM product_type
-		WHERE slug = '".$slug."'"; 
+		WHERE slug = '".$slug."'";
 		$result = $this->db->query($sql);
 		return  $result->row_array();
 	}
@@ -96,37 +96,37 @@ class Initdata_model extends CI_Model {
 	public function get_brand_by_slug($slug)
 	{
 		$sql ="SELECT * FROM product_brand
-		WHERE slug = '".$slug."'"; 
+		WHERE slug = '".$slug."'";
 		$result = $this->db->query($sql);
 		return  $result->row_array();
 	}
 
 		public function get_province_list()
 	{
-		$sql ="SELECT province_id id, province_name name FROM province WHERE  province_name NOT LIKE '%*%' ORDER BY province_name "; 
+		$sql ="SELECT province_id id, province_name name FROM province WHERE  province_name NOT LIKE '%*%' ORDER BY province_name ";
 		$result = $this->db->query($sql);
 		return  $result->result_array();
 	}
 
 	public function get_shipping_method()
 	{
-		$sql ="SELECT * FROM shipping_method WHERE is_active = 1 ORDER BY name"; 
+		$sql ="SELECT * FROM shipping_method WHERE is_active = 1 ORDER BY name";
 		$result = $this->db->query($sql);
 		return  $result->result_array();
 	}
 
 	public function get_amphur_list($province_id)
 	{
-		$sql ="SELECT amphur_id id, amphur_name name FROM amphur WHERE province_id ='".$province_id."' AND amphur_name NOT LIKE '%*%' ORDER BY amphur_name "; 
+		$sql ="SELECT amphur_id id, amphur_name name FROM amphur WHERE province_id ='".$province_id."' AND amphur_name NOT LIKE '%*%' ORDER BY amphur_name ";
 		$result = $this->db->query($sql);
 		return  $result->result_array();
 	}
 
 	public function get_amphur_list_all()
 	{
-		$sql ="SELECT amphur_id id, amphur_name name FROM amphur 
+		$sql ="SELECT amphur_id id, amphur_name name FROM amphur
 				WHERE amphur_name NOT LIKE '%*%'
-				ORDER BY amphur_name  "; 
+				ORDER BY amphur_name  ";
 		$result = $this->db->query($sql);
 		return  $result->result_array();
 	}
@@ -136,7 +136,7 @@ class Initdata_model extends CI_Model {
         $productResult = array();
         foreach ($this->cart->contents() as $items) {
             $sql   = "SELECT p.* ,t.name type_name, b.name brand_name
-                FROM  products p 
+                FROM  products p
                 LEFT JOIN product_brand b ON p.product_brand_id = b.id
                 LEFT JOIN product_type t ON p.product_type_id = t.id  WHERE
                 p.is_active = 1 AND p.stock > 0 AND p.id = '" . $items['id'] . "'";
@@ -198,7 +198,7 @@ class Initdata_model extends CI_Model {
 
         foreach ($this->cart->contents() as $items) {
             $sql   = "SELECT p.* ,t.name type_name, b.name brand_name
-                FROM  products p 
+                FROM  products p
                 LEFT JOIN product_brand b ON p.product_brand_id = b.id
                 LEFT JOIN product_type t ON p.product_type_id = t.id  WHERE
                 p.is_active = 1 AND p.stock > 0 AND p.id = '" . $items['id'] . "'";
@@ -206,11 +206,11 @@ class Initdata_model extends CI_Model {
             $row   = $query->row_array();
             	 $weigth =  $weigth + ($row['weight']*$items['qty']);
          }
-  
+
         if($weigth > 0){
 
-        	  $sql = "SELECT price shipping_price FROM shipping_rate 
-				WHERE shipping_method_id = '".$shipping_id."' 
+        	  $sql = "SELECT price shipping_price FROM shipping_rate
+				WHERE shipping_method_id = '".$shipping_id."'
 				AND '".$weigth."' BETWEEN  from_weight AND to_weight";
 
 			$result = $this->db->query($sql);
@@ -220,7 +220,7 @@ class Initdata_model extends CI_Model {
 				return  $result->row_array();
 			}
 			else{
-				
+
 				return array( 'shipping_price' => 0);
 			}
 
@@ -245,7 +245,7 @@ class Initdata_model extends CI_Model {
 		else {
 			return array( 'spcial_price' => 0);
 		}
-       
+
     }
 
 
@@ -253,4 +253,3 @@ class Initdata_model extends CI_Model {
 
 /* End of file initdata */
 /* Location: ./application/models/initdata */
-

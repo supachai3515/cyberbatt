@@ -27,12 +27,12 @@
                                 <div class="footer-menu">
                                     <ul>
                                         <li ng-repeat="shipping in shipping_method"><a href="<?php echo base_url('tracking')?>">{{shipping.name}}</a></li>
-            
+
                                     </ul>
                                 </div>
                             </div>
                         </div>
-                        
+
 
                         <div class="col-sm-3 col-lg-3 col-md-3">
                              <div class="store-information-area">
@@ -56,7 +56,7 @@
                                 </div>
                                 <div class="store-content">
                                     <ul>
-                                        <li><i class="fa fa-clock-o"></i> ทุกวัน 10.30 - 20.00 น.</li>
+                                        <li><i class="fa fa-clock-o"></i> ทุกวัน จันทร์ - เสาร์ 9.30 - 19.00 น.</li>
                                     </ul>
                                 </div>
                                 <div class="footer-payment">

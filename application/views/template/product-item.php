@@ -1,7 +1,7 @@
 <!-- grid-product-tab-start -->
 <div id="grid" class="tab-pane fade active in">
     <?php $i=1; foreach ($product_list as $row): ?>
-        <?php 
+        <?php
             $image_url="";
             if($row['image'] != "") {
                 $image_url = $this->config->item('url_img').$row['image'];
@@ -38,7 +38,7 @@
                     <img src="<?php echo $image_url;?>" class="img-responsive" alt="<?php echo $row['name']; ?>">
                 </a>
            </div>
-           
+
             <div class="item-product-info">
                 <div class="item-product-title">
                     <a href="<?php echo base_url('product/'.$row['slug']) ?>">
@@ -59,9 +59,9 @@
                     <?php endif ?>
                 </div>
 
-               
-            </div>                          
-            
+
+            </div>
+
             <?php if ($row['stock'] > 0): ?>
                 <div class="action-button button-exclusive btncart">
                     <a href="<?php echo base_url('cart/add/'.$row["id"]) ?>" class="add-to-cart">
@@ -75,7 +75,7 @@
                     </a>
                 </div>
             <?php endif ?>
-                    
+
         </div>
     </div>
     <?php if ($i%3 ==0): ?>
