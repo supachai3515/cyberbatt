@@ -19,7 +19,7 @@ class Receive extends CI_Controller {
 
 		$config['base_url'] = base_url('receive/index');
 		$config['total_rows'] = $this->receive_model->get_receive_count();
-		$config['per_page'] = 5;
+		$config['per_page'] = 10;
         /* This Application Must Be Used With BootStrap 3 *  */
 		$config['full_tag_open'] = "<ul class='pagination'>";
 		$config['full_tag_close'] ="</ul>";
@@ -100,6 +100,17 @@ class Receive extends CI_Controller {
 		}
 
 
+	}
+
+	public function edit_view($receive_id)
+	{
+		$this->is_logged_in();
+		$data['menus_list'] = $this->initdata_model->get_menu();
+		$data['receive_data'] = $this->receive_model->get_receive_id($receive_id);
+		$data['type_list'] = $this->products_model->get_type();
+        $data['menu_id'] ='23';
+		$data['content'] = 'receive_view';
+		$this->load->view('receive_view', $data);
 	}
 
 

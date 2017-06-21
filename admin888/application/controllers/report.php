@@ -4,6 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Report extends CI_Controller {
 	public function __construct(){
 		parent::__construct();
+		//call model inti
 		$this->load->model('initdata_model');
 		$this->load->model('members_model');
 		$this->load->library('pagination');
@@ -17,6 +18,7 @@ class Report extends CI_Controller {
 
 		$config['base_url'] = base_url('members/index');
 		$config['total_rows'] = $this->members_model->get_members_count();
+		$config['per_page'] = 10;
         /* This Application Must Be Used With BootStrap 3 *  */
 		$config['full_tag_open'] = "<ul class='pagination'>";
 		$config['full_tag_close'] ="</ul>";
@@ -35,17 +37,21 @@ class Report extends CI_Controller {
 		$config['last_tag_open'] = "<li>";
 		$config['last_tagl_close'] = "</li>";
 
+  	$this->pagination->initialize($config);
 		$data['members_list'] = $this->members_model->get_members($page, $config['per_page']);
 		$data['links_pagination'] = $this->pagination->create_links();
 
 		$data['menus_list'] = $this->initdata_model->get_menu();
 
 		//call script
+		//$data['script_file']= "js/report_js";
+    $data['menu_id'] ='31';
 		$data['content'] = 'report';
 		$data['header'] = array('title' => 'report | '.$this->config->item('sitename'),
 								'description' =>  'report | '.$this->config->item('tagline'),
 								'author' => $this->config->item('author'),
 								'keyword' =>  'cyberbatt');
+		$this->load->view('template/layout', $data);
 	}
 
 	//page search
@@ -57,21 +63,26 @@ class Report extends CI_Controller {
 		$data['data_search'] = $return_data['data_search'];
 		$data['menus_list'] = $this->initdata_model->get_menu();
 
+        $data['menu_id'] ='31';
 		$data['content'] = 'report';
 		$data['header'] = array('title' => 'report | '.$this->config->item('sitename'),
 								'description' =>  'report | '.$this->config->item('tagline'),
 								'author' => $this->config->item('author'),
 								'keyword' =>  'cyberbatt');
+		$this->load->view('template/layout', $data);
 
 	}
 
 	//page edit
 
 
+
 	public function is_logged_in(){
 		$is_logged_in = $this->session->userdata('is_logged_in');
 		$chk_admin =  $this->session->userdata('permission');
 		if(!isset($is_logged_in) || $is_logged_in != true || $chk_admin !='admin'){
+			redirect('login');
+		}
 	}
 
 }
