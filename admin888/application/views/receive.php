@@ -27,7 +27,7 @@
 
                         <button type="submit" class="btn btn-primary">ค้นหา</button>
                     </form>
-                    <div class="box-body table-responsive no-padding">
+                    <div class="table-responsive">
                         <table class="table table-hover">
                             <thead>
                                 <tr>
@@ -77,12 +77,12 @@
                                     <td>
                                     <a class="btn btn-xs btn-warning" href="<?php echo base_url('receive/edit_serial/'.$receive['id']) ?>" role="button"><i class="fa fa-pencil"></i> Serial Number</a>
                                     <?php if ($receive['count_use'] < 1): ?>
-                                      <a class="btn btn-xs btn-info" href="<?php echo base_url('receive/edit/'.$receive['id']) ?>" role="button"><i class="fa fa-pencil"></i> แก้ไข</a></td>
+                                      <a class="btn btn-xs btn-info" href="<?php echo base_url('receive/edit/'.$receive['id']) ?>" role="button"><i class="fa fa-pencil"></i> แก้ไข</a>
                                     <?php else: ?>
                                         <span class="label label-default">Serial ถูกใช้แล้ว</span>
                                     <?php endif ?>
-
-
+									<a target="_blank" class="btn btn-xs btn-success" href="<?php echo base_url('receive/edit_view/'.$receive['id']) ?>" role="button">ดูใบรับเข้า</a>
+                                    </td>
                                 </tr>
                             <?php endforeach ?>
                             </tbody>
@@ -127,7 +127,7 @@
                                     <p class="text-danger">{{msgError}}</p>
 
 
-                                    <div class="box-body table-responsive no-padding">
+                                    <div class="table-responsive">
                                         <table class="table table-hover">
                                             <thead>
                                                 <tr>
@@ -232,6 +232,19 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label" for="comment">Supplier</label>
+                                <div class="col-md-6">
+                                    <input id="supplier" name="supplier" type="text" placeholder="Supplier" class="form-control input-md" value="" >
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-3 control-label" for="comment">Warranty</label>
+                                <div class="col-md-6">
+                                    <input id="warranty" name="warranty" type="text" placeholder="warranty" class="form-control input-md" value="" >
+                                </div>
+                            </div>
                             <!-- Button -->
                             <div class="form-group">
                                 <label class="col-md-3 control-label" for="save"></label>
@@ -245,7 +258,7 @@
             </div>
         </div>
     </div>
-    <!-- /.container-fluid box -->
+    <!-- /.container-fluid -->
+  </section>
 </div>
-</section>
 <!-- /.content -->

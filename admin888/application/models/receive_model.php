@@ -5,20 +5,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Receive_model extends CI_Model {
 	public function __construct(){
 		parent::__construct();
-		//call model inti 
+		//call model inti
 		$this->load->model('Initdata_model');
 	}
 
 	public function get_receive( $start, $limit)
 	{
 
-	    $sql =" SELECT r.id , r.doc_no ,r.do_ref, r.create_date,r.modified_date,r.qty,r.total,r.vat, r.is_active,r.`comment`, COUNT(rd.product_id) product_id , 
-			(SELECT COUNT(serial_number) serial_number FROM product_serial WHERE (order_id IS NOT NULL OR order_id = '' ) AND  receive_id = r.id ) count_use,	
+	    $sql =" SELECT r.id , r.doc_no ,r.do_ref, r.create_date,r.modified_date,r.qty,r.total,r.vat, r.is_active,r.`comment`, COUNT(rd.product_id) product_id ,
+			(SELECT COUNT(serial_number) serial_number FROM product_serial WHERE (order_id IS NOT NULL OR order_id = '' ) AND  receive_id = r.id ) count_use,
 				(SELECT COUNT(serial_number) serial_number FROM product_serial WHERE receive_id = r.id ) serial_number
 
 				FROM  receive r  INNER JOIN receive_detail rd ON r.id = rd.receive_id
 				GROUP BY r.id , r.doc_no ,r.do_ref, r.create_date,r.modified_date,r.qty,r.total,r.vat, r.is_active,r.`comment`
-				ORDER BY r.id DESC 
+				ORDER BY r.id DESC
 
 				LIMIT " . $start . "," . $limit;
 		$re = $this->db->query($sql);
@@ -29,7 +29,7 @@ class Receive_model extends CI_Model {
 	public function get_receive_detail( $id)
 	{
 
-	    $sql =" SELECT rd.* ,p.`name` name , p.sku FROM receive_detail  rd INNER JOIN products p ON rd.product_id = p.id where rd.receive_id = '".$id."'"; 
+	    $sql =" SELECT rd.* ,p.`name` name , p.sku FROM receive_detail  rd INNER JOIN products p ON rd.product_id = p.id where rd.receive_id = '".$id."'";
 		$re = $this->db->query($sql);
 		return $re->result_array();
 
@@ -39,30 +39,30 @@ class Receive_model extends CI_Model {
 	{
 
 		$sql =" SELECT ps.* , p.`name` product_name ,p.sku ,
-						(SELECT COUNT(serial_number) serial_number FROM product_serial 
+						(SELECT COUNT(serial_number) serial_number FROM product_serial
 						WHERE (order_id IS NOT NULL OR order_id = '' ) AND  receive_id = ps.receive_id AND product_id = '".$product_id."' AND  serial_number = ps.serial_number) count_use
-				FROM product_serial ps INNER JOIN products p ON p.id = ps.product_id 
-				where ps.product_id = '".$product_id."' 
-				AND ps.receive_id = '".$receive_id."' ;"; 
+				FROM product_serial ps INNER JOIN products p ON p.id = ps.product_id
+				where ps.product_id = '".$product_id."'
+				AND ps.receive_id = '".$receive_id."' ;";
 		$re = $this->db->query($sql);
 		return $re->result_array();
 	}
 
 	public function get_receive_count()
 	{
-		$sql =" SELECT COUNT(id) as connt_id FROM  receive p"; 
+		$sql =" SELECT COUNT(id) as connt_id FROM  receive p";
 		$query = $this->db->query($sql);
 		$row = $query->row_array();
 		return  $row['connt_id'];
-	
+
 	}
 
 
 	public function get_receive_id($receive_id)
 	{
-		$sql ="SELECT *,(SELECT COUNT(serial_number) serial_number FROM product_serial 
-						WHERE (order_id IS NOT NULL OR order_id = '' ) AND  receive_id = '".$receive_id."') count_use 
-			   FROM receive WHERE id = '".$receive_id."' "; 
+		$sql ="SELECT *,(SELECT COUNT(serial_number) serial_number FROM product_serial
+						WHERE (order_id IS NOT NULL OR order_id = '' ) AND  receive_id = '".$receive_id."') count_use
+			   FROM receive WHERE id = '".$receive_id."' ";
 
 
 		$query = $this->db->query($sql);
@@ -72,7 +72,7 @@ class Receive_model extends CI_Model {
 
 	public function get_receive_detail_id($receive_id)
 	{
-		$sql ="SELECT * FROM receive_detail WHERE receive_id = '".$receive_id."'"; 
+		$sql ="SELECT * FROM receive_detail WHERE receive_id = '".$receive_id."'";
 		$re = $this->db->query($sql);
 		return $re->result_array();
 	}
@@ -82,17 +82,17 @@ class Receive_model extends CI_Model {
 	{
 		date_default_timezone_set("Asia/Bangkok");
 		$data_receive = array(
-			'search' => $this->input->post('search')		
+			'search' => $this->input->post('search')
 		);
 
-		$sql =" SELECT r.id , r.doc_no ,r.do_ref, r.create_date,r.modified_date,r.qty,r.total,r.vat, r.is_active,r.`comment`, COUNT(rd.product_id) product_id , 
-			(SELECT COUNT(serial_number) serial_number FROM product_serial WHERE (order_id IS NOT NULL OR order_id = '' ) AND  receive_id = r.id ) count_use,	
+		$sql =" SELECT r.id , r.doc_no ,r.do_ref, r.create_date,r.modified_date,r.qty,r.total,r.vat, r.is_active,r.`comment`, COUNT(rd.product_id) product_id ,
+			(SELECT COUNT(serial_number) serial_number FROM product_serial WHERE (order_id IS NOT NULL OR order_id = '' ) AND  receive_id = r.id ) count_use,
 				(SELECT COUNT(serial_number) serial_number FROM product_serial WHERE receive_id = r.id ) serial_number
 
 				FROM  receive r  INNER JOIN receive_detail rd ON r.id = rd.receive_id
-				WHERE r.id  LIKE '%".$data_receive['search']."%' OR   r.doc_no LIKE '%".$data_receive['search']."%' 
+				WHERE r.id  LIKE '%".$data_receive['search']."%' OR   r.doc_no LIKE '%".$data_receive['search']."%'
 				GROUP BY r.id , r.doc_no ,r.do_ref, r.create_date,r.modified_date,r.qty,r.total,r.vat, r.is_active,r.`comment`
-				ORDER BY r.id DESC 
+				ORDER BY r.id DESC
 
 				";
 		$re = $this->db->query($sql);
@@ -106,7 +106,7 @@ class Receive_model extends CI_Model {
 	{
 		$this->db->trans_start(); # Starting Transaction
 		 //DOC_NO
-			$sql =" SELECT doc_no  FROM receive  WHERE  id = '".$receive_id."'"; 
+			$sql =" SELECT doc_no  FROM receive  WHERE  id = '".$receive_id."'";
 			$re = $this->db->query($sql);
 			$row_doc_no =  $re->row_array();
 			$receive_docno = $row_doc_no['doc_no'];
@@ -121,10 +121,10 @@ class Receive_model extends CI_Model {
 		$is_vat =  $this->input->post('is_vat');
 		if($is_vat == 1)
 		{
-			$is_vat_n = 1;	
+			$is_vat_n = 1;
 		}
 		else{
-			$is_vat_n = 0;	
+			$is_vat_n = 0;
 		}
 		$qty_m = 0; $vat_m = 0; $total_m = 0;
 		$i = 0;
@@ -144,23 +144,25 @@ class Receive_model extends CI_Model {
 		date_default_timezone_set("Asia/Bangkok");
 		$data_receive = array(
 			'comment' =>$this->input->post('comment'),
+			'supplier' =>$this->input->post('supplier'),
+			'warranty' =>$this->input->post('warranty'),
 			'do_ref' => $this->input->post('do_ref'),
 			'qty' => $qty_m,
 			'vat' => $vat_m ,
 			'total' => $total_m ,
 			'modified_date' => date("Y-m-d H:i:s"),
 			'is_vat' => $is_vat_n,
-			'is_active' => $this->input->post('isactive')						
+			'is_active' => $this->input->post('isactive')
 		);
 
-		$where = "id = '".$receive_id."'"; 
+		$where = "id = '".$receive_id."'";
 		$this->db->update("receive", $data_receive,$where);
 
 
 		//befor delete is update stock
 		$rowstock = $this->get_receive_detail_id($receive_id);
 			foreach ($rowstock as $row) {
-				$sql =" SELECT COUNT(product_id) as connt_id FROM  stock WHERE product_id ='".$row['product_id']."' AND receive_id ='".$receive_id."' AND is_active = 1"; 
+				$sql =" SELECT COUNT(product_id) as connt_id FROM  stock WHERE product_id ='".$row['product_id']."' AND receive_id ='".$receive_id."' AND is_active = 1";
 
 				$query = $this->db->query($sql);
 				$r = $query->row_array();
@@ -197,11 +199,11 @@ class Receive_model extends CI_Model {
 				'price' => $this->input->post('price')[$i],
 				'qty' => $this->input->post('qty')[$i],
 				'vat' => $vat,
-				'total' => $total,					
+				'total' => $total,
 			);
-			
+
 			$this->db->insert("receive_detail", $data_receive_detail);
-			
+
 			//update stock
 			date_default_timezone_set("Asia/Bangkok");
 			$data_update_stock = array(
@@ -209,9 +211,9 @@ class Receive_model extends CI_Model {
 				'number' => $this->input->post('qty')[$i],
 				'receive_id' => $receive_id,
 				'is_active' => $this->input->post('isactive'),
-				'modified_date' => date("Y-m-d H:i:s"),					
+				'modified_date' => date("Y-m-d H:i:s"),
 			);
-			
+
 			$this->db->insert("stock", $data_update_stock);
 
 			$is_active = $this->input->post('isactive');
@@ -223,7 +225,7 @@ class Receive_model extends CI_Model {
 
 
 				//update product stock
-				$sql_update ="UPDATE product_serial SET is_active = 1  WHERE product_id =".$this->input->post('id')[$i]." 
+				$sql_update ="UPDATE product_serial SET is_active = 1  WHERE product_id =".$this->input->post('id')[$i]."
 							AND receive_id = '".$receive_id."';";
 				$this->db->query($sql_update);
 
@@ -231,10 +233,10 @@ class Receive_model extends CI_Model {
 			else {
 
 				//update product stock
-				$sql_update ="UPDATE product_serial SET is_active = 0  WHERE product_id =".$this->input->post('id')[$i]." 
+				$sql_update ="UPDATE product_serial SET is_active = 0  WHERE product_id =".$this->input->post('id')[$i]."
 							AND receive_id = '".$receive_id."';";
 				$this->db->query($sql_update);
-		
+
 			}
 
 			$not_in = $not_in.",".$this->input->post('id')[$i];
@@ -253,7 +255,7 @@ class Receive_model extends CI_Model {
 				$comment = "ทำการยกเลิกใบรับ : ".$receive_docno;
 		}
 
-		$sql =" SELECT * FROM product_serial WHERE receive_id = '".$receive_id."' "; 
+		$sql =" SELECT * FROM product_serial WHERE receive_id = '".$receive_id."' ";
 		$re = $this->db->query($sql);
 		$row_re =  $re->result_array();
 		foreach ($row_re as $row ) {
@@ -262,14 +264,14 @@ class Receive_model extends CI_Model {
 				'serial_number' => $row['serial_number'] ,
 				'product_id' => $row['product_id'] ,
 				'comment' => $comment,
-				'create_date' => date("Y-m-d H:i:s"),				
+				'create_date' => date("Y-m-d H:i:s"),
 			);
 			$this->db->insert("serial_history", $data_serial_history);
 		}
 
 		if($not_in != "0"){
 
-			$sql = " SELECT * FROM product_serial WHERE product_id NOT in (".str_replace("0,","",$not_in).") AND receive_id = '".$receive_id."' "; 
+			$sql = " SELECT * FROM product_serial WHERE product_id NOT in (".str_replace("0,","",$not_in).") AND receive_id = '".$receive_id."' ";
 			$re = $this->db->query($sql);
 			$row_re =  $re->result_array();
 			foreach ($row_re as $row ) {
@@ -278,19 +280,19 @@ class Receive_model extends CI_Model {
 					'serial_number' => $row['serial_number'] ,
 					'product_id' => $row['product_id'] ,
 					'comment' => "ลบออกจากใบรับ : ".$receive_docno,
-					'create_date' => date("Y-m-d H:i:s"),				
+					'create_date' => date("Y-m-d H:i:s"),
 				);
 				$this->db->insert("serial_history", $data_serial_history);
 			}
 
-			
-			$sql =" DELETE FROM product_serial WHERE product_id NOT in (".str_replace("0,","",$not_in).") AND receive_id = '".$receive_id."' "; 
+
+			$sql =" DELETE FROM product_serial WHERE product_id NOT in (".str_replace("0,","",$not_in).") AND receive_id = '".$receive_id."' ";
 			$re = $this->db->query($sql);
 
 		}
 		else {
 
-			$sql =" SELECT * FROM product_serial WHERE receive_id = '".$receive_id."' "; 
+			$sql =" SELECT * FROM product_serial WHERE receive_id = '".$receive_id."' ";
 			$re = $this->db->query($sql);
 			$row_re =  $re->result_array();
 			foreach ($row_re as $row ) {
@@ -299,17 +301,17 @@ class Receive_model extends CI_Model {
 					'serial_number' => $row['serial_number'] ,
 					'product_id' => $row['product_id'] ,
 					'comment' => "ลบออก",
-					'create_date' => date("Y-m-d H:i:s"),				
+					'create_date' => date("Y-m-d H:i:s"),
 				);
 				$this->db->insert("serial_history", $data_product_serial);
 			}
 
-			$sql =" DELETE FROM product_serial WHERE receive_id = '".$receive_id."' "; 
+			$sql =" DELETE FROM product_serial WHERE receive_id = '".$receive_id."' ";
 			$re = $this->db->query($sql);
 
 		}
 		//end searial number
-			
+
 
 		$this->db->trans_complete(); # Completing transaction
 		/*Optional*/
@@ -318,9 +320,9 @@ class Receive_model extends CI_Model {
 		    # Something went wrong.
 		    $this->db->trans_rollback();
 		   // return FALSE;
-		} 
+		}
 		else {
-		    # Everything is Perfect. 
+		    # Everything is Perfect.
 		    # Committing data to the database.
 		    $this->db->trans_commit();
 		   // return TRUE;
@@ -340,10 +342,10 @@ class Receive_model extends CI_Model {
 		$is_vat =  $this->input->post('is_vat');
 		if($is_vat == 1)
 		{
-			$is_vat_n = 1;	
+			$is_vat_n = 1;
 		}
 		else{
-			$is_vat_n = 0;	
+			$is_vat_n = 0;
 		}
 		$qty_m = 0; $vat_m = 0; $total_m = 0;
 		$i = 0;
@@ -363,6 +365,8 @@ class Receive_model extends CI_Model {
 		date_default_timezone_set("Asia/Bangkok");
 		$data_receive = array(
 			'comment' =>$this->input->post('comment'),
+			'supplier' =>$this->input->post('supplier'),
+			'warranty' =>$this->input->post('warranty'),
 			'do_ref' => $this->input->post('do_ref'),
 			'doc_no' =>"RE".date("YmdHis"),
 			'qty' => $qty_m,
@@ -371,9 +375,9 @@ class Receive_model extends CI_Model {
 			'create_date' => date("Y-m-d H:i:s"),
 			'modified_date' => date("Y-m-d H:i:s"),
 			'is_vat' => $is_vat_n,
-			'is_active' => $this->input->post('isactive')						
+			'is_active' => $this->input->post('isactive')
 		);
-		
+
 		$this->db->insert("receive", $data_receive);
 		$insert_id = $this->db->insert_id();
 
@@ -382,7 +386,7 @@ class Receive_model extends CI_Model {
 		$docno_gen = 'RE'.date("ymd");
 		$docno_gen = $docno_gen.str_pad($insert_id, 4, "0", STR_PAD_LEFT);
 		$data_receive_update = array(
-			'doc_no' => $docno_gen		
+			'doc_no' => $docno_gen
 		);
 		$this->db->update("receive", $data_receive_update, "id = '".$insert_id."'");
   		$this->db-> delete('receive_detail',"receive_id = '".$insert_id."'");
@@ -405,9 +409,9 @@ class Receive_model extends CI_Model {
 				'price' => $this->input->post('price')[$i],
 				'qty' => $this->input->post('qty')[$i],
 				'vat' => $vat,
-				'total' => $total,					
+				'total' => $total,
 			);
-			
+
 			$this->db->insert("receive_detail", $data_receive_detail);
 
 			//update stock
@@ -416,15 +420,15 @@ class Receive_model extends CI_Model {
 				'product_id' =>$this->input->post('id')[$i],
 				'number' => $this->input->post('qty')[$i],
 				'receive_id' => $insert_id ,
-				'modified_date' => date("Y-m-d H:i:s"),					
+				'modified_date' => date("Y-m-d H:i:s"),
 			);
-			
+
 			$this->db->insert("stock", $data_update_stock);
 
 			//update product stock
 			$sql_update ="UPDATE products SET stock = stock+".$this->input->post('qty')[$i]." WHERE id =".$this->input->post('id')[$i]." ";
 			$this->db->query($sql_update);
-		
+
 			$i++;
 		}
 
@@ -435,9 +439,9 @@ class Receive_model extends CI_Model {
 		    # Something went wrong.
 		    $this->db->trans_rollback();
 		   // return FALSE;
-		} 
+		}
 		else {
-		    # Everything is Perfect. 
+		    # Everything is Perfect.
 		    # Committing data to the database.
 		    $this->db->trans_commit();
 		   // return TRUE;
@@ -448,7 +452,7 @@ class Receive_model extends CI_Model {
 
 	public function get_product($product_id)
 	{
-		$sql ="SELECT * FROM products WHERE sku = '".$product_id."'"; 
+		$sql ="SELECT * FROM products WHERE sku = '".$product_id."'";
 
 		$query = $this->db->query($sql);
 		$row = $query->row_array();

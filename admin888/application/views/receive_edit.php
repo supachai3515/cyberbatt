@@ -9,11 +9,11 @@
         <fieldset>
         <!-- Text input-->
         <div class="form-group">
-          <label class="col-md-3 control-label" for="id">รหัส</label>  
+          <label class="col-md-3 control-label" for="id">รหัส</label>
           <div class="col-md-4">
           <input id="receive_id" name="receive_id" type="hidden" disabled="true" value="<?php echo $receive_data['id']; ?>" placeholder="รหัส" class="form-control input-md" required="">
           <input id="doc_no" name="doc_no" type="text" disabled="true" value="<?php echo $receive_data['doc_no']; ?>" placeholder="รหัส" class="form-control input-md" required="">
-           
+
           </div>
         </div>
 
@@ -53,7 +53,7 @@
                   <p class="text-danger">{{msgError}}</p>
 
 
-                  <div class="box-body table-responsive no-padding">
+                  <div class="table-responsive">
                       <table class="table table-hover">
                           <thead>
                               <tr>
@@ -103,11 +103,11 @@
                                   <td>
                                       {{ product.total  | currency:'' }}
                                   </td>
-                  
+
                                   <td>
                                       <button type="button" class="btn btn-danger" ng-click="removeProduct($index)">ลบ</button>
                                   </td>
-                                  
+
                               </tr>
                           </tbody>
                           <tfoot>
@@ -120,7 +120,7 @@
                                      <strong> {{ getQtyReceive() }}</strong>
                                   </td>
                                   <td>
-                                      
+
                                   </td>
                                   <td>
                                       <strong>{{ getVatReceive()  | currency:'' }}</strong>
@@ -131,9 +131,9 @@
 
                                   <td>
                                   </td>
-                                   
+
                               </tr>
-                                 
+
                           </tfoot>
                       </table>
                   </div>
@@ -148,6 +148,20 @@
               </div>
           </div>
 
+          <div class="form-group">
+              <label class="col-md-3 control-label" for="comment">Supplier</label>
+              <div class="col-md-6">
+                  <input id="supplier" name="supplier" type="text" placeholder="Supplier" class="form-control input-md" value="<?php echo $receive_data['supplier']; ?>" >
+              </div>
+          </div>
+
+          <div class="form-group">
+              <label class="col-md-3 control-label" for="comment">Warranty</label>
+              <div class="col-md-6">
+                  <input id="warranty" name="warranty" type="text" placeholder="warranty" class="form-control input-md" value="<?php echo $receive_data['warranty']; ?>" >
+              </div>
+          </div>
+
 
         <!-- Multiple Checkboxes -->
         <div class="form-group">
@@ -155,7 +169,7 @@
           <div class="col-md-4">
           <div class="checkbox">
             <label for="isactive-0">
-              <input type="checkbox" name="isactive" id="isactive-0" value="1" 
+              <input type="checkbox" name="isactive" id="isactive-0" value="1"
               <?php if ($receive_data['is_active']==1): ?>
                 <?php echo "checked"; ?>
               <?php endif ?>
@@ -170,13 +184,13 @@
         <div class="form-group">
           <label class="col-md-3 control-label" for="save"></label>
           <div class="col-md-4">
-            <button type="submit" class="btn btn-primary">บันทึก</button>
+            <button type="submit" class="btn btn-primary">เปลี่ยนแปลงข้อมูล</button>
           </div>
         </div>
         </fieldset>
         </form>
     </div>
-    <!-- /.container-fluid box -->
+    <!-- /.container-fluid -->
+  </section>
 </div>
-</section>
 <!-- /.content -->

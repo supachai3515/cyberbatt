@@ -100,6 +100,23 @@
 
 
 	});
+	$(document).on('ready', function() {
+		    $("#image_fieldedit").fileinput({
+		    	language: "th",
+					<?php if(isset($credit_note_data['note_img']) && $credit_note_data['note_img']!=""){?>
+			        initialPreview: [
+			            '<img src="<?php echo $this->config->item('url_img').$credit_note_data['note_img'];?>" class="file-preview-image">'
+			        ],
+		        <?php } ?>
+		    		overwriteInitial: false,
+		        maxFileSize: 2000,
+		    });
 
+				$("#image_field").fileinput({
+				 language: "th",
+					 overwriteInitial: false,
+					 maxFileSize: 2000,
+			 });
+		});
 
 </script>

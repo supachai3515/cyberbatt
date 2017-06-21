@@ -117,7 +117,8 @@ class Credit_note_model extends CI_Model {
 			'serial' => $this->input->post('serial'),
 			'comment' => $this->input->post('comment'),
 			'modified_date' => date("Y-m-d H:i:s"),
-			'is_active' => $this->input->post('is_active')
+			'is_active' => $this->input->post('is_active'),
+			'is_refund' => $this->input->post('is_refund')
 		);
 		$where = array(
 			'id' => $credit_note_id,
@@ -167,7 +168,8 @@ class Credit_note_model extends CI_Model {
 			'comment' => $this->input->post('comment'),
 			'create_date' => date("Y-m-d H:i:s"),
 			'modified_date' => date("Y-m-d H:i:s"),
-			'is_active' => $this->input->post('isactive')
+			'is_active' => $this->input->post('isactive'),
+			'is_refund' => $this->input->post('is_refund')
 		);
 
 		$this->db->insert("credit_note", $data_credit_note);
@@ -198,7 +200,25 @@ class Credit_note_model extends CI_Model {
    		return  $insert_id;
 
 	}
+	
+	public function update_img($id, $image_name)
+	{
 
+		$sql ="SELECT note_img FROM credit_note WHERE  id ='".$id."' "; 
+		$query = $this->db->query($sql);
+		$row = $query->row_array();
+		if(isset($row["note_img"])){
+			 unlink($row["note_img"]);
+		}
+
+
+		$dataIMG = array(
+			'note_img' => $img_path.$image_name						
+		);
+		$where = "id = '".$id."'"; 
+		$this->db->update('credit_note', $dataIMG, $where);
+		
+	}
 
 	public function get_search_order($search_txt)
 	{

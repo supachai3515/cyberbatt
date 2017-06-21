@@ -32,7 +32,7 @@ $config['no_url_img'] = "http://www.cyberbatt.com/uploads/no_image.jpg";
 $config['email_name'] = "cyberbatt";
 $config['email_owner'] = "cyberbatt_md@hotmail.com";
 $config['email_noreply'] = "cyberbatt.fix@gmail.com";
-$config['pass_mail_noreply'] = "cyberb@tt";
+$config['pass_mail_noreply'] = "0917824565";
 $config['weburl'] = "http://www.cyberbatt.com/";
 $config['line_id'] = "@cyberbatt";
 

@@ -86,7 +86,7 @@
 
             <button type="submit" class="btn btn-primary">ค้นหา</button>
           </form>
-          <div class="box-body table-responsive no-padding">
+          <div class="table-responsive">
             <table class="table table-hover">
               <thead>
                 <tr>
@@ -109,7 +109,7 @@
                       <br/>
 
                     </td>
-                    <td>
+                    <td style="width:30%">
                       <span>name : <strong><?php echo $credit_note['order_name'] ?></strong></span>
                       <br/>
                       <span>ที่อยู่จัดส่ง : <strong><?php echo $credit_note['address'] ?></strong></span>
@@ -136,8 +136,15 @@
                           <span class="text-danger"><i class="fa fa-times"></i> ยกเลิก</span>
                           <br/>
                           <?php endif ?>
+
+                        <?php if ($credit_note['is_refund']=="1"): ?>
+                        <span class="text-info"><i class="fa fa-check"></i> คืนเงิน</span>
+                        <br/>
+                        <?php endif ?>
                     </td>
-                    <td><a class="btn btn-xs btn-info" href="<?php echo base_url('credit_note/edit/'.$credit_note['id']) ?>" role="button"><i class="fa fa-pencil"></i> แก้ไข</a></td>
+                    <td><a class="btn btn-xs btn-info" href="<?php echo base_url('credit_note/edit/'.$credit_note['id']) ?>" role="button"><i class="fa fa-pencil"></i> แก้ไข</a>
+                    <a target="_blank" class="btn btn-xs btn-success" href="<?php echo base_url('credit_note/edit_view/'.$credit_note['id']) ?>" role="button">ดูใบลดหนี้</a>
+                    </td>
                   </tr>
                   <?php endforeach ?>
               </tbody>
@@ -210,6 +217,23 @@
                   </div>
                 </div>
               </div>
+              <div class="form-group">
+                  <label class="col-md-3 control-label" for="isactive">คืนเงิน</label>
+                  <div class="col-md-4">
+                    <div class="checkbox">
+                      <label for="is_refund">
+                        <input type="checkbox" name="is_refund" id="is_refund" value="1"> คืนเงิน
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group" id="imgshow">
+                    <label class="col-md-3 control-label" for="image_field">รูปสลิป</label>
+                    <div class="col-md-6">
+                        <input id="image_field" name="image_field" class="file-loading" type="file" data-show-upload="false" data-min-file-count="1">
+                    </div>
+                </div>
               <!-- Button -->
               <div class="form-group">
                 <label class="col-md-3 control-label" for="save"></label>

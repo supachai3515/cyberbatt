@@ -11,10 +11,10 @@
         <fieldset>
         <!-- Text input-->
         <div class="form-group">
-          <label class="col-md-3 control-label" for="id">รหัส</label>  
+          <label class="col-md-3 control-label" for="id">รหัส</label>
           <div class="col-md-4">
           <input id="id" name="id" type="text" disabled="true" value="<?php echo $account_data['id']; ?>" placeholder="รหัส" class="form-control input-md" required="">
-            
+
           </div>
         </div>
 
@@ -77,6 +77,6 @@
 <?php else: ?>
     <p class="text-danger text-center">ไม่มีสิทธิ์เข้าถึง</p>
 <?php endif ?>
-</div>
 </section>
+</div>
 <!-- /.content -->

@@ -1,5 +1,6 @@
 <div class="content-wrapper">
   <section class="content">
+
   <script type="text/ng-template" id="myModalContent.html">
     <div class="modal-header">
       <h4>เลือกใบสั่งซื้อ</h4>
@@ -12,7 +13,7 @@
         </div>
         <button type="submit" class="btn btn-primary">ค้นหา</button>
       </form>
-      <div class="box-body table-responsive no-padding">
+      <div class="table-responsive">
         <table class="table table-hover">
           <thead>
             <tr>
@@ -134,17 +135,36 @@
           </div>
         </div>
 
+        <div class="form-group">
+          <label class="col-md-3 control-label" for="isactive">คืนเงิน</label>
+          <div class="col-md-4">
+            <div class="checkbox">
+              <label for="isactive">
+                <input type="checkbox" name="is_refund" id="is_refund" value="1" <?php if ($credit_note_data['is_refund']==1): ?>
+                <?php echo "checked"; ?>
+                  <?php endif ?>
+                    > คืนเงิน
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="form-group" id="imgshow">
+          <label class="col-md-3 control-label" for="image_fieldedit">รูปสลิป</label>
+          <div class="col-md-6">
+            <p><input id="image_fieldedit" name="image_fieldedit" class="file-loading" type="file" data-show-upload="false" data-min-file-count="1"></p>
+
+          </div>
+        </div>
         <!-- Button -->
         <div class="form-group">
           <label class="col-md-3 control-label" for="save"></label>
           <div class="col-md-4">
-            <button type="submit" class="btn btn-primary">บันทึก</button>
+            <button type="submit" class="btn btn-primary">เปลี่ยนแปลงข้อมูล</button>
           </div>
         </div>
       </fieldset>
     </form>
   </div>
-  <!-- /.container-fluid box -->
-</div>
+  <!-- /.container-fluid -->
 </section>
-<!-- /.content -->
+</div>
