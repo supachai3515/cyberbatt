@@ -86,47 +86,33 @@
 	                                    <td class="text-center product-id">sku</td>
 	                                    <td class="text-center">name</td>
 	                                    <td class="text-center sumpricepernum">qty</td>
-                                        <td class="text-center">vat</td>
 	                                    <td class="text-center">price</td>
 	                                    <td class="text-center">total</td>
 	                                </tr>
 	                            </thead>
 	                            <tbody>
-	                            <?php 
-								$pro_detail = $this->db->query("SELECT * FROM order_detail LEFT JOIN products ON(products.id = order_detail.product_id) WHERE order_detail.order_id = '".$qor['id']."'")->result_array();
-								foreach ($pro_detail as $value): ?>
+
 	                            	 <tr>
-										<td class="text-center"><?php echo $value['sku'] ?></td>
-										<td><?php echo $value['name'] ?></td>
-                                        <td class="text-center"><?php echo $value['quantity'] ?></td>
-										<td class="text-center"><?php echo $value['vat']; ?></td>
-										<td class="text-center"><?php echo number_format($value["price"]*$value["quantity"],2);?></td>
-										<td class="text-center"><?php echo number_format($value['total'],2);?></td>
-									  </tr>
-	                            <?php endforeach ?>
-								  	<tr>
+																		<td class="text-center"><?php echo $credit_note_data['sku'] ?></td>
+																		<td><?php echo $credit_note_data['product_name'] ?></td>
+								                    <td class="text-center">1</td>
+																		<td class="text-center"><?php echo number_format($credit_note_data["price"],2);?></td>
+																		<td class="text-center"><?php echo number_format($credit_note_data['price'],2);?></td>
+																</tr>
+
+								  								<tr>
                                     	<td class="emptyrow"></td>
-                                        <td class="emptyrow"></td>
 	                                    <td class="emptyrow"></td>
 	                                    <td class="emptyrow"></td>
 	                                    <td class="highrow text-center sumprice" >รวมราคาสินค้า</td>
-	                                    <td class="highrow text-right"><?php echo number_format($qor["total"],2);?>&nbsp;บาท</td>
-	                                </tr>
-	                                <tr>
-                                    	<td class="emptyrow"></td>
-                                        <td class="emptyrow"></td>
-	                                    <td class="emptyrow"></td>
-	                                    <td class="emptyrow"></td>
-	                                    <td class="emptyrow text-center" >VAT(7%)</td>
-	                                    <td class="emptyrow text-right"><?php echo number_format($qor["vat"],2)."&nbsp;บาท"; ?></td>
+	                                    <td class="highrow text-right"><?php echo number_format($credit_note_data["total"],2);?>&nbsp;บาท</td>
 	                                </tr>
 	                                 <tr>
 	                                 	<td class="emptyrow"></td>
-                                        <td class="emptyrow"></td>
 	                                    <td class="emptyrow"></td>
 	                                    <td class="emptyrow"></td>
 	                                    <td class="emptyrow text-center ">รวมราคาสุทธิ</td>
-	                                    <td class="emptyrow text-right text-danger"><strong><?php echo number_format($qor["total"],2);?>&nbsp;บาท</strong></td>
+	                                    <td class="emptyrow text-right text-danger"><strong><?php echo number_format($credit_note_data["total"],2);?>&nbsp;บาท</strong></td>
 	                                </tr>
 
 	                            </tbody>
@@ -137,7 +123,7 @@
 	        </div>
 	    </div>
 
-	    
+
 		<div class="row noprint">
 
 			<p class="text-center">

@@ -65,7 +65,8 @@ class Credit_note_model extends CI_Model {
 				o1.`name` order_name_new,
 				o1.address	order_address_new,
 				pm.create_date payment_date,
-				od.price
+				od.total/od.quantity total,
+        od.price
 				FROM credit_note  rr INNER JOIN orders o ON rr.order_id = o.id
 				INNER JOIN products p on p.id = rr.product_id
 				LEFT JOIN product_serial s ON s.product_id = rr.product_id  AND s.order_id = o.id AND rr.serial = s.serial_number
@@ -200,11 +201,11 @@ class Credit_note_model extends CI_Model {
    		return  $insert_id;
 
 	}
-	
+
 	public function update_img($id, $image_name)
 	{
 
-		$sql ="SELECT note_img FROM credit_note WHERE  id ='".$id."' "; 
+		$sql ="SELECT note_img FROM credit_note WHERE  id ='".$id."' ";
 		$query = $this->db->query($sql);
 		$row = $query->row_array();
 		if(isset($row["note_img"])){
@@ -213,11 +214,11 @@ class Credit_note_model extends CI_Model {
 
 
 		$dataIMG = array(
-			'note_img' => $img_path.$image_name						
+			'note_img' => $img_path.$image_name
 		);
-		$where = "id = '".$id."'"; 
+		$where = "id = '".$id."'";
 		$this->db->update('credit_note', $dataIMG, $where);
-		
+
 	}
 
 	public function get_search_order($search_txt)
