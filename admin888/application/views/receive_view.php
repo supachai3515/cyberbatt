@@ -36,7 +36,7 @@
                     <?php else: ?>
                             <span style="font-size:14px"> (คำนวน vat) </span>
                     <?php endif ?>
-    
+
                     <?php echo  $receive_data['doc_no'];?> </h3>
                     <strong>วันที่รับเข้า <?php echo $receive_data['create_date']?></strong><br/>
                     <strong>วันที่ออก <?php echo $receive_data['date_ref']?></strong><br/>
@@ -77,13 +77,21 @@
 	                                </tr>
 	                            </thead>
 	                            <tbody>
-	                            <?php 
-								$pro_detail = $this->db->query("SELECT * FROM receive_detail LEFT JOIN products ON(products.id = receive_detail.product_id) WHERE receive_detail.receive_id = '".$receive_data['id']."'")->result_array();
+	                            <?php
+															$vat = 0;
+															$total = 0;
+															$priceTotal =0;
+								$pro_detail = $this->db->query("SELECT p.sku, p.name, rd.qty, rd.qty, rd.vat, rd.total, rd.price FROM receive_detail rd LEFT JOIN products p ON(p.id = rd.product_id) WHERE rd.receive_id = '".$receive_data['id']."'")->result_array();
 								foreach ($pro_detail as $value): ?>
+								<?php
+								  $vat = $vat+ $value['vat'];
+									$total = $total+ $value['total'];
+									$priceTotal = $priceTotal + ($value["price"]*$value["qty"]);
+								 ?>
 	                            	 <tr>
 										<td class="text-center"><?php echo $value['sku'] ?></td>
 										<td><?php echo $value['name'] ?></td>
-                                        <td class="text-center"><?php echo $value['qty'] ?></td>
+                    <td class="text-center"><?php echo $value['qty'] ?></td>
 										<td class="text-center"><?php echo $value['vat']; ?></td>
 										<td class="text-center"><?php echo number_format($value["price"]*$value["qty"],2);?></td>
 										<td class="text-center"><?php echo number_format($value['total'],2);?></td>
@@ -95,7 +103,7 @@
 	                                    <td class="emptyrow"></td>
 	                                    <td class="emptyrow"></td>
 	                                    <td class="highrow text-center sumprice" >รวมราคาสินค้า</td>
-	                                    <td class="highrow text-right"><?php echo number_format($receive_data["total"],2);?>&nbsp;บาท</td>
+	                                    <td class="highrow text-right"><?php echo number_format($priceTotal ,2);?>&nbsp;บาท</td>
 	                                </tr>
 	                                <tr>
                                     	<td class="emptyrow"></td>
@@ -103,7 +111,7 @@
 	                                    <td class="emptyrow"></td>
 	                                    <td class="emptyrow"></td>
 	                                    <td class="emptyrow text-center" >VAT(7%)</td>
-	                                    <td class="emptyrow text-right"><?php echo number_format($receive_data["vat"],2)."&nbsp;บาท"; ?></td>
+	                                    <td class="emptyrow text-right"><?php echo number_format($vat,2)."&nbsp;บาท"; ?></td>
 	                                </tr>
 	                                 <tr>
 	                                 	<td class="emptyrow"></td>
@@ -111,7 +119,7 @@
 	                                    <td class="emptyrow"></td>
 	                                    <td class="emptyrow"></td>
 	                                    <td class="emptyrow text-center ">รวมราคาสุทธิ</td>
-	                                    <td class="emptyrow text-right text-danger"><strong><?php echo number_format($receive_data["total"],2);?>&nbsp;บาท</strong></td>
+	                                    <td class="emptyrow text-right text-danger"><strong><?php echo number_format($total,2);?>&nbsp;บาท</strong></td>
 	                                </tr>
 
 	                            </tbody>
@@ -122,7 +130,7 @@
 	        </div>
 	    </div>
 
-	    
+
 		<div class="row noprint">
 
 			<p class="text-center">
