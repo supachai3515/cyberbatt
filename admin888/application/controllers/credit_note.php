@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Credit_note extends CI_Controller {
 	public function __construct(){
 		parent::__construct();
-		//call model inti 
+		//call model inti
 		$this->load->model('initdata_model');
 		$this->load->model('credit_note_model');
 		$this->load->model('products_model');
@@ -20,7 +20,7 @@ class Credit_note extends CI_Controller {
 
 		$config['base_url'] = base_url('credit_note/index');
 		$config['total_rows'] = $this->credit_note_model->get_credit_note_count();
-		$config['per_page'] = 10; 
+		$config['per_page'] = 10;
         /* This Application Must Be Used With BootStrap 3 *  */
 		$config['full_tag_open'] = "<ul class='pagination'>";
 		$config['full_tag_close'] ="</ul>";
@@ -39,7 +39,7 @@ class Credit_note extends CI_Controller {
 		$config['last_tag_open'] = "<li>";
 		$config['last_tagl_close'] = "</li>";
 
-        $this->pagination->initialize($config); 
+        $this->pagination->initialize($config);
 		$data['credit_note_list'] = $this->credit_note_model->get_credit_note($page, $config['per_page']);
 		$data['links_pagination'] = $this->pagination->create_links();
 
@@ -54,7 +54,7 @@ class Credit_note extends CI_Controller {
 								'description' =>  'credit_note| '.$this->config->item('tagline'),
 								'author' => $this->config->item('author'),
 								'keyword' =>  'cyberbatt');
-		$this->load->view('template/layout', $data);	
+		$this->load->view('template/layout', $data);
 	}
 
 
@@ -74,7 +74,7 @@ class Credit_note extends CI_Controller {
 								'description' =>  'credit_note| '.$this->config->item('tagline'),
 								'author' => $this->config->item('author'),
 								'keyword' =>  'cyberbatt');
-		$this->load->view('template/layout', $data);	
+		$this->load->view('template/layout', $data);
 
 	}
 
@@ -84,6 +84,7 @@ class Credit_note extends CI_Controller {
 		$this->is_logged_in();
 		$data['menus_list'] = $this->initdata_model->get_menu();
 		$data['credit_note_data'] = $this->credit_note_model->get_credit_note_id($credit_note_id);
+		$data['credit_note_detail'] = $this->credit_note_model->get_credit_note_detail($credit_note_id);
 		$data['type_list'] = $this->products_model->get_type();
         $data['menu_id'] ='26';
 		$data['content'] = 'credit_note_edit';
@@ -92,32 +93,34 @@ class Credit_note extends CI_Controller {
 								'description' =>  'credit_note| '.$this->config->item('tagline'),
 								'author' => $this->config->item('author'),
 								'keyword' =>  'cyberbatt');
-		$this->load->view('template/layout', $data);	
+		$this->load->view('template/layout', $data);
 
 	}
-	
-	public function edit_view($credit_note_id)
+
+	public function edit_view($credit_note_id,$print_f = 0)
 	{
 		$this->is_logged_in();
+		$data['print_f'] = $print_f;
 		$data['menus_list'] = $this->initdata_model->get_menu();
 		$data['credit_note_data'] = $this->credit_note_model->get_credit_note_id($credit_note_id);
+		$data['credit_note_detail'] = $this->credit_note_model->get_credit_note_detail($credit_note_id);
 		$data['type_list'] = $this->products_model->get_type();
         $data['menu_id'] ='26';
 		$data['content'] = 'credit_note_view';
-		$this->load->view('credit_note_view', $data);	
+		$this->load->view('credit_note_view', $data);
 	}
-	
+
 	// update
 	public function update($credit_note_id)
 	{
 		date_default_timezone_set("Asia/Bangkok");
 		//save credit_note
 		$this->credit_note_model->update_credit_note($credit_note_id);
-		
-		$image_name = ""; 
+
+		$image_name = "";
 		$dir ='./../uploads/credit_note/'.date("Ym").'/';
 		$dir_insert ='uploads/credit_note/'.date("Ym").'/';
-		
+
 		if($credit_note_id != "")
 		{
 			if($this->input->post('is_refund') == 1){
@@ -130,16 +133,16 @@ class Credit_note extends CI_Controller {
 				  $this->my_upload->image_x               = 800;
 				  $this->my_upload->image_ratio_y         = true;
 				  $this->my_upload->process($dir);
-	
+
 				  if ( $this->my_upload->processed == true ) {
-	
+
 					$image_name  = $this->my_upload->file_dst_name;
 					$this->credit_note_model->update_img($credit_note_id, $dir_insert.$image_name);
-	
-					$this->my_upload->clean();  
+
+					$this->my_upload->clean();
 				  } else {
 					$data['errors'] = $this->my_upload->error;
-					echo $data['errors'];    
+					echo $data['errors'];
 				  }
 				} else  {
 				  $data['errors'] = $this->my_upload->error;
@@ -148,7 +151,7 @@ class Credit_note extends CI_Controller {
 				$this->credit_note_model->update_img($credit_note_id, '');
 			}
 		}
-		
+
 		if($credit_note_id!=""){
 			redirect('credit_note/edit/'.$credit_note_id);
 		}
@@ -156,8 +159,8 @@ class Credit_note extends CI_Controller {
 			redirect('credit_note');
 		}
 
-	} 
-	
+	}
+
 	// insert
 	public function add()
 	{
@@ -165,11 +168,11 @@ class Credit_note extends CI_Controller {
 		//save document
 		$credit_note_id ="";
 		$credit_note_id = $this->credit_note_model->save_credit_note();
-		
-		$image_name = ""; 
+
+		$image_name = "";
 		$dir ='./../uploads/credit_note/'.date("Ym").'/';
 		$dir_insert ='uploads/credit_note/'.date("Ym").'/';
-		
+
 		if($credit_note_id != "")
 		{
 			if($this->input->post('is_refund') == 1){
@@ -182,30 +185,30 @@ class Credit_note extends CI_Controller {
 				  $this->my_upload->image_x               = 800;
 				  $this->my_upload->image_ratio_y         = true;
 				  $this->my_upload->process($dir);
-	
+
 				  if ( $this->my_upload->processed == true ) {
-	
+
 					$image_name  = $this->my_upload->file_dst_name;
 					$this->credit_note_model->update_img($credit_note_id, $dir_insert.$image_name);
-	
-					$this->my_upload->clean();  
+
+					$this->my_upload->clean();
 				  } else {
 					$data['errors'] = $this->my_upload->error;
-					echo $data['errors'];    
+					echo $data['errors'];
 				  }
 				} else  {
 				  $data['errors'] = $this->my_upload->error;
 				}
 			}
 		}
-		
+
 		if($credit_note_id !=""){
 			redirect('credit_note/edit/'.$credit_note_id);
 		}
 		else {
 			redirect('credit_note');
-		}	
-	}  
+		}
+	}
 
 
 	public function get_search_order()
@@ -221,8 +224,8 @@ class Credit_note extends CI_Controller {
 		$is_logged_in = $this->session->userdata('is_logged_in');
 		$chk_admin =  $this->session->userdata('permission');
 		if(!isset($is_logged_in) || $is_logged_in != true || $chk_admin !='admin'){
-			redirect('login');		
-		}		
+			redirect('login');
+		}
 	}
 
 }

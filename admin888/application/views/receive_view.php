@@ -93,8 +93,8 @@
 										<td><?php echo $value['name'] ?></td>
                     <td class="text-center"><?php echo $value['qty'] ?></td>
 										<td class="text-center"><?php echo $value['vat']; ?></td>
-										<td class="text-center"><?php echo number_format($value["price"]*$value["qty"],2);?></td>
-										<td class="text-center"><?php echo number_format($value['total'],2);?></td>
+										<td class="text-center"><?php echo number_format($value["price"],2);?></td>
+										<td class="text-center"><?php echo number_format($value['price']*$value["qty"],2);?></td>
 									  </tr>
 	                            <?php endforeach ?>
 								  	<tr>

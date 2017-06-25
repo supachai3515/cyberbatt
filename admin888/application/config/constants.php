@@ -36,6 +36,10 @@ define('FOPEN_READ_WRITE_CREATE',				'a+b');
 define('FOPEN_WRITE_CREATE_STRICT',				'xb');
 define('FOPEN_READ_WRITE_CREATE_STRICT',		'x+b');
 
+$date = @date("Y-m-d");
+define('DATE',$date);
 
+$datetime = @date("Y-m-d H:i:s");
+define('DATETIME',$datetime);
 /* End of file constants.php */
 /* Location: ./application/config/constants.php */

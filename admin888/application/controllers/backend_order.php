@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Backend_order extends CI_Controller {
 	public function __construct(){
 		parent::__construct();
-		//call model inti 
+		//call model inti
 		$this->load->model('initdata_model');
 		$this->load->model('backend_order_model');
 		$this->load->model('products_model');
@@ -19,7 +19,7 @@ class Backend_order extends CI_Controller {
 
 		$config['base_url'] = base_url('backend_order/index');
 		$config['total_rows'] = $this->backend_order_model->get_backend_order_count();
-		$config['per_page'] = 28; 
+		$config['per_page'] = 28;
         /* This Application Must Be Used With BootStrap 3 *  */
 		$config['full_tag_open'] = "<ul class='pagination'>";
 		$config['full_tag_close'] ="</ul>";
@@ -38,7 +38,7 @@ class Backend_order extends CI_Controller {
 		$config['last_tag_open'] = "<li>";
 		$config['last_tagl_close'] = "</li>";
 
-        $this->pagination->initialize($config); 
+        $this->pagination->initialize($config);
 		$data['backend_order_list'] = $this->backend_order_model->get_backend_order($page, $config['per_page']);
 		$data['links_pagination'] = $this->pagination->create_links();
 
@@ -53,7 +53,7 @@ class Backend_order extends CI_Controller {
 								'description' =>  'backend_order| '.$this->config->item('tagline'),
 								'author' => $this->config->item('author'),
 								'keyword' =>  'cyberbatt');
-		$this->load->view('template/layout', $data);	
+		$this->load->view('template/layout', $data);
 	}
 
 
@@ -73,7 +73,7 @@ class Backend_order extends CI_Controller {
 								'description' =>  'backend_order| '.$this->config->item('tagline'),
 								'author' => $this->config->item('author'),
 								'keyword' =>  'cyberbatt');
-		$this->load->view('template/layout', $data);	
+		$this->load->view('template/layout', $data);
 
 	}
 
@@ -91,7 +91,7 @@ class Backend_order extends CI_Controller {
 								'description' =>  'backend_order| '.$this->config->item('tagline'),
 								'author' => $this->config->item('author'),
 								'keyword' =>  'cyberbatt');
-		$this->load->view('template/layout', $data);	
+		$this->load->view('template/layout', $data);
 
 	}
 
@@ -109,8 +109,8 @@ class Backend_order extends CI_Controller {
 			redirect('backend_order');
 		}
 
-	} 
-	
+	}
+
 	// insert
 	public function add()
 	{
@@ -124,15 +124,15 @@ class Backend_order extends CI_Controller {
 		}
 		else {
 			redirect('backend_order');
-		}	
-	}  
+		}
+	}
 
 	public function is_logged_in(){
 		$is_logged_in = $this->session->userdata('is_logged_in');
 		$chk_admin =  $this->session->userdata('permission');
 		if(!isset($is_logged_in) || $is_logged_in != true || $chk_admin !='admin'){
-			redirect('login');		
-		}		
+			redirect('login');
+		}
 	}
 
 }

@@ -1,7 +1,8 @@
-<div id="page-wrapper" ng-app="myApp">
-    <div class="container-fluid" ng-controller="myCtrl">
+<div class="content-wrapper">
+  <section class="content">
+    <div class="container-fluid box">
         <div class="page-header">
-            <h1>รายงานสินค้าอันดับขายดี 
+            <h1>รายงานสินค้าอันดับขายดี
             <?php if($this->input->get("method") == 'post'){?><small style="float:right">
             	<a href="<?php echo base_url('report_order/report_product');?>"><button style="color:#000;" class="btn btn-default"><i class="glyphicon glyphicon-repeat"></i>&nbsp;โชว์ข้อมูลทั้งหมด</button></a>
             </small>
@@ -26,20 +27,21 @@
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th style="text-align:center">ลำดับ</th>
-                        <th style="text-align:center">ชื่อสินค้า</th>
-                        <th style="text-align:center">จำนวน</th>
-                        <th style="text-align:center">ราคาvat</th>
-                        <th style="text-align:center">ราคาทั้งหมด</th>
+                        <th>ลำดับ</th>
+                        <th>ชื่อสินค้า</th>
+                        <th class="text-right">จำนวน</th>
+                        <th class="text-right">ราคาvat</th>
+                        <th class="text-right">ราคาเฉลี่ย</th>
+                        <th class="text-right">ราคารวมทั้งหมด</th>
                     </tr>
                 </thead>
-                <tbody> 
+                <tbody>
 					<?php
                     $number = 1;
                     ?>
                     <?php if(count($selectDB) == 0){?>
                     <tr>
-                        <td colspan="9" align="center" style="color:red;"><strong>ไม่มีข้อมูล</strong></td>
+                        <td colspan="9"  class="text-center text-danger"><strong>ไม่มีข้อมูล</strong></td>
                     </tr>
                     <?php }else{
                         $discountbill = 0;
@@ -47,30 +49,37 @@
                         foreach($selectDB as $dw):
                         ?>
                         <tr>
-                            <td style="text-align:center"><strong><?php echo $number;?></strong></td>
-                            <td align="center"><?php echo "sku : ".$dw['sku']."<br/> ประเภท : ".$dw['typename']."<br/> ยี่ห้อ : ".$dw['brandname']."<br/> ชื่อสินค้า : ".$dw['proname'];?></td>
-                            <td align="center"><?php echo $dw['ordetailsQTY'];?></td>
-                            <td align="center"><?php echo number_format($dw['ordetailsVAC'],2);?></td>
-                            <td align="center"><?php echo number_format($dw['ordetailstotal'],2);?></td>
+                            <td><strong><?php echo $number;?></strong></td>
+                              <td>
+                                <strong>sku : </strong><?php echo $dw['sku'] ?><br/>
+                                <strong>ประเภท : </strong><?php echo $dw['typename'] ?><br/>
+                                <strong>ยี่ห้อ : </strong><?php echo $dw['brandname'] ?><br/>
+                                <strong>ชื่อสินค้า : </strong><?php echo $dw['proname'] ?><br/>
+                              </td>
+                            <td class="text-right"><?php echo $dw['ordetailsQTY'];?></td>
+                            <td class="text-right"><?php echo number_format($dw['ordetailsVAC'],2);?></td>
+                            <td class="text-right"><?php echo number_format($dw['avgtotal'],2);?></td>
+                            <td class="text-right"><?php echo number_format($dw['sum_total'],2);?></td>
                         </tr>
-                        <?php 
+                        <?php
 						$total = $total + $dw['sum_total'];
 						$number++;?>
                         <?php endforeach;?>
                     <?php }?>
-                    <?php 
+                    <?php
 					if($this->input->get("method") == 'post'){
 						if(count($selectDB) != 0){?>
 							<tr>
-								<td style="text-align:center" colspan="4"><strong>รวมยอดขายทั้งหมด</strong></td>
-								<td align="center"><?php echo number_format($total,2);?></td>
+								<td colspan="5"  class="text-right"><strong>รวมยอดขายทั้งหมด</strong></td>
+								<td class="text-right"><strong> <?php echo number_format($total,2);?></strong></td>
 							</tr>
                         <?php }?>
 					<?php }?>
                 </tbody>
             </table>
         </div>
-    </div>
-    <!-- /.container-fluid -->
-</div>
-<!-- /#page-wrapper -->
+      </div>
+      <!-- /.container-fluid -->
+    </section>
+  </div>
+  <!-- /.content -->

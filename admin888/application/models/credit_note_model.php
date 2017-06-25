@@ -50,30 +50,39 @@ class Credit_note_model extends CI_Model {
 
 	public function get_credit_note_id($credit_note_id)
 	{
-		$sql ="SELECT  rr.*,
-				o.id order_id, o.invoice_docno invoice_no,
-				o.date order_date,
-				s.serial_number,
-				o.`name` order_name,
-				o.address,
-				s.serial_number,
-				p.id product_id,
-				p.name product_name,
-				p.sku,
-				o1.id order_id_new,
-					o1.invoice_docno invoice_docno_new,
-				o1.`name` order_name_new,
-				o1.address	order_address_new,
-				pm.create_date payment_date,
-				od.total/od.quantity total,
-        od.price
-				FROM credit_note  rr INNER JOIN orders o ON rr.order_id = o.id
-				INNER JOIN products p on p.id = rr.product_id
-				LEFT JOIN product_serial s ON s.product_id = rr.product_id  AND s.order_id = o.id AND rr.serial = s.serial_number
-				LEFT JOIN payment pm ON pm.credit_note_id = rr.id
-				LEFT JOIN orders o1 ON o1.id = pm.order_id
-				INNER JOIN order_detail od ON od.order_id = o.id AND od.product_id = rr.product_id
-				WHERE rr.id = '".$credit_note_id."'";
+		$sql ="SELECT cr.*,
+					o.invoice_docno,
+					o.is_tax,
+					o.tax_company,
+					o.tax_address,
+					o.tel,
+					o.email,
+					o.tax_id,
+					o.name,
+					o.address,
+					o.customer_id
+
+					FROM credit_note  cr
+					INNER JOIN orders o ON cr.order_id = o.id
+					WHERE cr.id = '".$credit_note_id."'";
+
+		$query = $this->db->query($sql);
+		$row = $query->row_array();
+		return $row;
+	}
+
+	public function get_credit_note_detail($credit_note_id)
+	{
+		$sql ="SELECT  cr.product_id,
+					p.sku,
+					p.slug,
+				  p.`name` product_name,
+					od.price,
+					od.price total
+					FROM credit_note  cr
+					INNER JOIN order_detail od ON cr.product_id = od.product_id AND cr.order_id = od.order_id
+					INNER JOIN products p ON  p.id = cr.product_id
+					WHERE cr.id = '".$credit_note_id."'";
 
 		$query = $this->db->query($sql);
 		$row = $query->row_array();
