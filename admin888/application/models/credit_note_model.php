@@ -61,7 +61,6 @@ class Credit_note_model extends CI_Model {
 					o.name,
 					o.address,
 					o.customer_id
-
 					FROM credit_note  cr
 					INNER JOIN orders o ON cr.order_id = o.id
 					WHERE cr.id = '".$credit_note_id."'";

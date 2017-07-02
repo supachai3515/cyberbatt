@@ -29,7 +29,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php $i = 1; 
+                                <?php $i = 1;
                                     $productResult = array();
                                     $productResult  = $this->initdata_model->get_cart_data();
                                  ?>
@@ -84,7 +84,7 @@
                                 <tr>
                                     <td colspan="2" class="total"><span>รวมทั้งหมด</span></td>
                                     <td colspan="2"><span ng-bind="<?php echo $this->cart->total();?> + shipping_price + spcial_price | currency:'' ">
-                                        
+
                                     </td>
                                 </tr>
                             </tfoot>
@@ -100,7 +100,7 @@
                                 </tr>
                                 <tr>
                                     <td colspan="2">ภาษีมูลค่าเพิ่ม 7%</td>
-                                    <td colspan="2"><?php echo $this->cart->format_number($this->cart->total()*0.07); ?></span>
+                                    <td colspan="2"><?php echo $this->cart->format_number($this->cart->total()*7 /107); ?></span>
                                     </td>
                                 </tr>
                                 <tr>
@@ -127,7 +127,7 @@
                         <a class="standard-checkout" href="<?php echo base_url('checkout/tax') ?>">
                             <span>ออกใบกำกับภาษี <i class="fa fa-file-text-o"></i></span>
                         </a>
-                       
+
                     <?php else: ?>
                       <a href="<?php echo base_url('cart') ?>">
                                 <i class="fa fa-angle-left"></i> กลับไปแก้ไขสินค้า
@@ -140,12 +140,12 @@
                 <?php endif ?>
                 <div style="padding-bottom: 30px;"></div>
                 <div class="commerce">
-                    
+
                     <div class="head-search">
 
                         <div class="product-description">
                             <h1 class="text-center product-name">
-                               
+
                             </h1>
                         </div>
                     </div>
@@ -159,13 +159,13 @@
                               <div class="form-group " hidden="true">
                                 <label class="col-md-4 control-label" for="purchase">รูปแบบการออกใบเสร็จ</label>
                                 <div class="col-md-4">
-                                        
+
                                        <?php if ($is_tax == 0 ): ?>
                                             <label><input type="checkbox" name="purchase" id="p2"> ใบกำกับภาษี</label><br />
                                         <?php else: ?>
                                             <label><input type="checkbox" name="purchase" id="p2" checked> ใบกำกับภาษี</label><br />
                                         <?php endif ?>
-                                 
+
 
                                 </div>
                               </div>
@@ -173,14 +173,14 @@
                             <?php if ($is_tax == 1): ?>
                                 <!-- Text input-->
                               <div class="form-group">
-                                <label class="col-md-4 control-label" for="company">ชื่อบริษัท / ร้าน</label>  
+                                <label class="col-md-4 control-label" for="company">ชื่อบริษัท / ร้าน</label>
                                 <div class="col-md-4">
                                 <?php if( $isUsername == 1) {?>
                                   <input id="company" name="company" type="text" placeholder="ชื่อบริษัท / ร้าน" value="<?php echo $username_login["Company"]; ?>" class="form-control input-md">
                                 <?php } else { ?>
                                   <input id="company" name="company" type="text" placeholder="ชื่อบริษัท / ร้าน" class="form-control input-md">
                                 <?php } ?>
-                                  
+
                                 </div>
                               </div>
 
@@ -193,36 +193,36 @@
                                       <textarea class="form-control" name="purchase_address"><?php echo trim($username_login["AVat"]);?></textarea>
                                   <?php } else { ?>
                                       <textarea class="form-control" name="purchase_address"></textarea>
-                                  <?php } ?> 
+                                  <?php } ?>
                                 </div>
                               </div>
 
                               <!-- Text input-->
                               <div class="form-group" >
-                                <label class="col-md-4 control-label" for="IDCARD">เลขประจำตัวผู้เสียภาษี</label>  
+                                <label class="col-md-4 control-label" for="IDCARD">เลขประจำตัวผู้เสียภาษี</label>
                                 <div class="col-md-4">
                                 <?php if( $isUsername == 1) {?>
                                   <input id="IDCARD" name="IDCARD" type="text" placeholder="เลขประจำตัวผู้เสียภาษี" value="<?php echo $username_login["Nid"]; ?>" class="form-control input-md">
                                 <?php } else { ?>
                                   <input id="IDCARD" name="IDCARD" type="text" placeholder="เลขประจำตัวผู้เสียภาษี" class="form-control input-md">
                                 <?php } ?>
-                                  
+
                                 </div>
                               </div>
 
 
                             <?php endif ?>
 
-                             
+
                               <!-- Text input-->
                               <div class="form-group">
-                                <label class="col-md-4 control-label" for="textinput">ชื่อผู้รับ</label>  
+                                <label class="col-md-4 control-label" for="textinput">ชื่อผู้รับ</label>
                                 <div class="col-md-4">
                                   <?php if( $isUsername == 1) {?>
-                                      <input type="text" name="txtName"  placeholder="ชื่อผู้รับ" class="form-control input-md" required="required" 
+                                      <input type="text" name="txtName"  placeholder="ชื่อผู้รับ" class="form-control input-md" required="required"
                                       value="<?php echo $username_login["FullName"] ." ". $username_login["LastName"]; ?>"/>
                                   <?php } else { ?>
-                                      <input type="text" name="txtName"  placeholder="ชื่อผู้รับ" class="form-control input-md" required="required" 
+                                      <input type="text" name="txtName"  placeholder="ชื่อผู้รับ" class="form-control input-md" required="required"
                                   value=""/>
                                   <?php } ?>
                                 </div>
@@ -231,7 +231,7 @@
                               <!-- Textarea -->
                               <div class="form-group">
                                 <label class="col-md-4 control-label" for="textarea">ที่อยู่จัดส่ง</label>
-                                <div class="col-md-4"> 
+                                <div class="col-md-4">
                                   <?php if( $isUsername == 1) {?>
                                       <textarea class="form-control" name="txtAddress"><?php echo trim($username_login["ARecieve"]);?></textarea>
                                   <?php } else { ?>
@@ -258,26 +258,26 @@
                                 <input type="hidden" name="shipping_price" value="{{shipping_price + spcial_price}}">
                                 <div class="col-md-4">
 
-                                     <select id="txtTransport" name="txtTransport" class="form-control" ng-model="txtTransport" ng-change="changeShipping(txtTransport)"          
-                                            ng-model="txtTransport" 
+                                     <select id="txtTransport" name="txtTransport" class="form-control" ng-model="txtTransport" ng-change="changeShipping(txtTransport)"
+                                            ng-model="txtTransport"
                                             ng-options="shipping.id as shipping.name for shipping in shipping_method track by shipping.id "
-                                            required> 
-                                      <option value="">เลือกวิธีการจัดส่ง</option> 
-                                    </select> 
+                                            required>
+                                      <option value="">เลือกวิธีการจัดส่ง</option>
+                                    </select>
                                     <span ng-show="form1.txtTransport.$error.required" class="text-danger">กรุณาเลือกวิธีการจัดส่ง</span>
                                     <p>ค่าจัดส่งสินค้า : {{shipping_price + spcial_price}}</p>
                                   </div>
-                                 
+
                               </div>
 
                             <div class="well" ng-if="txtTransport==2">
                                  <div class="form-group" ng-if="txtTransport==2">
                                   <label class="col-md-4 control-label" for="province">จังหวัด</label>
                                   <div class="col-md-4">
-                                      <select id="province" name="province" class="form-control"  ng-change="changeProvince(province)" 
-                                            ng-model="province" 
+                                      <select id="province" name="province" class="form-control"  ng-change="changeProvince(province)"
+                                            ng-model="province"
                                             ng-options="province.id as province.name for province in province_list track by province.id "
-                                            required> 
+                                            required>
                                             <option value="">เลือกจังหวัด</option>
                                       </select>
                                       <span ng-show="form1.province.$error.required" class="text-danger">กรุณาเลือกจังหวัด</span>
@@ -287,9 +287,9 @@
                                   <label class="col-md-4 control-label" for="amphur_id">อำเภอ</label>
                                   <div class="col-md-4">
                                       <select id="amphur_id" name="amphur_id" class="form-control"  ng-change="changeAmphur(amphur_id)"
-                                            ng-model="amphur_id" 
+                                            ng-model="amphur_id"
                                             ng-options="amphur.id as amphur.name for amphur in items track by amphur.id "
-                                            required> 
+                                            required>
                                             <option value="">เลือกอำเภอ</option>
                                       </select>
                                       <span ng-show="form1.amphur_id.$error.required" class="text-danger">กรุณาเลือกอำเภอ</span>
@@ -299,7 +299,7 @@
 
                               <!-- Text input-->
                               <div class="form-group">
-                                <label class="col-md-4 control-label" for="txtEmail">อีเมล์</label>  
+                                <label class="col-md-4 control-label" for="txtEmail">อีเมล์</label>
                                 <div class="col-md-4">
                                 <?php if( $isUsername == 1) {?>
                                       <input type="text" name="txtEmail" id="txtEmail" required="required "placeholder="อีเมล์"  class="form-control input-md" value="<?php echo $username_login["Email"];?>" />
@@ -320,12 +320,12 @@
                                     </span>
                                   </button>
                                 </div>
-                                  
+
                                   <div class="form-group" ng-if="isProscess==true">
                                     <hr>
                                         <div class="progress progress-striped active">
                                         <div class="progress-bar progress-bar-success" style="width:70%"></div>
-                                    </div>                  
+                                    </div>
                                   </div>
                                   <h4 class="text-success" ng-bind="message_prosecss"></h4>
 
@@ -341,9 +341,9 @@
                                 <a href="<?php echo base_url('products') ?>">
                                     <i class="fa fa-angle-left"></i> กลับไปเลือกสินค้า
                                 </a>
-        
+
                             </div>
-                </div> 
+                </div>
             </div>
         </div>
     </div>

@@ -9,7 +9,7 @@ app.controller('mainCtrl', function($scope,$http) {
 
      $scope.shipping_price = 0;
      $scope.spcial_price = 0;
-    
+
 	$scope.productItems = [{
      		id: '0',
             sku: '0',
@@ -84,7 +84,7 @@ app.controller('mainCtrl', function($scope,$http) {
              {
                 qty =value.quantity +1;
              }
-               
+
          });
          if(qty>0){
              $http({
@@ -94,7 +94,7 @@ app.controller('mainCtrl', function($scope,$http) {
                  $scope.getOrder();
                 $scope.deleteResult = data;
             });
-         }     
+         }
 
     }
 
@@ -107,7 +107,7 @@ app.controller('mainCtrl', function($scope,$http) {
              {
                 qty =value.quantity - 1;
              }
-               
+
          });
          if(qty>0){
              $http({
@@ -117,8 +117,8 @@ app.controller('mainCtrl', function($scope,$http) {
                  $scope.getOrder();
                 $scope.deleteResult = data;
             });
-         } 
-    
+         }
+
     }
 
     $scope.deleteProduct_click = function(rowid) {
@@ -134,13 +134,13 @@ app.controller('mainCtrl', function($scope,$http) {
     }
 
     $scope.getOrder = function() {
-    	  
+
         // Simple GET request example:
         $http({
             method: 'GET',
             url: '<?php echo base_url()."cart/get_cart";?>'
         }).success(function(data) {
- 
+
             $scope.productItems = [{
                 id: '0',
                 sku: '0',
@@ -182,11 +182,11 @@ app.controller('mainCtrl', function($scope,$http) {
         });
 
     }
-    
+
     $scope.caltax = function() {
         var sumtex = 0;
         if ($scope.isTax) {
-            sumtex = (($scope.sumTotal()) * 7) / 100;
+            sumtex = (($scope.sumTotal()) * 7) / 107;
         }
         return sumtex;
     }
@@ -209,7 +209,7 @@ app.controller('mainCtrl', function($scope,$http) {
         $scope.saveDealer = function() {
             $scope.isProscess = true;
             $scope.message_prosecss = "กรุณารอ...";
-         
+
           $http({
             method: 'POST',
             url: '<?php echo base_url('dealer/register');?>',
@@ -249,13 +249,13 @@ app.controller('mainCtrl', function($scope,$http) {
     $scope.editDealerForm_click = function() {
 
             $scope.showOrderDealer = false;
-            $scope.editDealerForm = true;  
+            $scope.editDealerForm = true;
             <?php if ($this->session->userdata('is_logged_in')): ?>
                 $scope.getDealer("<?php echo $this->session->userdata('username');?>");
-            <?php endif ?>        
+            <?php endif ?>
        }
 
-    
+
      $scope.savedealerEdit = function() {
             <?php if($this->session->userdata('is_logged_in')) {?>
 
@@ -270,7 +270,7 @@ app.controller('mainCtrl', function($scope,$http) {
 
                     if(data.error == true) {
                     $scope.isProscess = false;
-                    
+
                     $scope.message_prosecss = data.message;
                 }
                 else {
@@ -280,7 +280,7 @@ app.controller('mainCtrl', function($scope,$http) {
                });
 
              <?php }?>
-       
+
 
        }
 
@@ -294,7 +294,7 @@ app.controller('mainCtrl', function($scope,$http) {
          },
 
          data: { name_dealer : $scope.name_dealer}
-           
+
         }).success(function(data) {
             $scope.dealerEdit = data;
             //console.log(data);
@@ -325,7 +325,7 @@ app.controller('mainCtrl', function($scope,$http) {
 
       }
 
-       $scope.getOrderTracking = function() {        
+       $scope.getOrderTracking = function() {
             console.log($scope.txtSearchTracking);
             var orderid = $scope.txtSearchTracking;
             if($scope.txtSearchTracking==null)
@@ -339,16 +339,16 @@ app.controller('mainCtrl', function($scope,$http) {
              headers: {
            'Content-Type': 'application/x-www-form-urlencoded'
          },
-           
+
         }).success(function(data) {
             $scope.orderTracking = data;
             //console.log(data);
        });
 
-     
+
        }
 
-          $scope.getDoclist = function() {        
+          $scope.getDoclist = function() {
             console.log($scope.txtSearchTracking);
             $http({
             method: 'GET',
@@ -356,17 +356,17 @@ app.controller('mainCtrl', function($scope,$http) {
              headers: {
            'Content-Type': 'application/x-www-form-urlencoded'
          },
-           
+
         }).success(function(data) {
             $scope.doc_list = data;
             //console.log(data);
        });
 
-     
+
        }
 
-        $scope.ckeckoutSubmit = function() {        
-           
+        $scope.ckeckoutSubmit = function() {
+
                  $scope.isProscess = true;
             $scope.message_prosecss = "กรุณารอ...";
             console.log($scope.paymentMessage);
@@ -379,7 +379,7 @@ app.controller('mainCtrl', function($scope,$http) {
              },
                 data:$scope.paymentMessage
             }).success(function(data) {
-                
+
                 console.log(data);
            });
        };

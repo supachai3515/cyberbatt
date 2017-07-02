@@ -11,6 +11,16 @@
             <?php //if(isset($sql))echo "<p>".$sql."</p>"; ?>
         </div>
         <form action="?method=post" method="post" class="form-inline" role="form">
+            <select name="select_date" id="input" class="form-control" required="required">
+            <?php if (!isset($resultpost['select_date']) || $resultpost['select_date'] == 1): ?>
+              <option value="1" selected="true">วันที่สั่งซื้อ</option>
+              <option value="2">วันที่ออกใบกำกับภาษี</option>
+            <?php else: ?>
+              <option value="1">วันที่สั่งซื้อ</option>
+              <option value="2"  selected="true">วันที่ออกใบกำกับภาษี</option>
+            <?php endif ?>
+
+            </select>
             <div class="form-group">
             	<span id="startDate" style="display:none"><?php echo DATE;?></span>
                 <label for="">วันที่เริ่มต้นค้นหา</label>
@@ -27,49 +37,45 @@
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th>ลำดับ</th>
                         <th>วันที่</th>
                         <th class="text-right">จำนวน</th>
-                        <th class="text-right">ราคาvat</th>
+                        <th class="text-right">VAT</th>
+                        <th class="text-right">ยอดรวมใบกำกับภาษี</th>
+                        <th class="text-right">ค่าจัดส่ง</th>
                         <th class="text-right">ทั้งหมด</th>
                     </tr>
                 </thead>
+                <?php $quantity =0 ;$vat =0; $shipping_charge =0; $total = 0; $total_invat=0; ?>
+                <?php foreach ($price_report_data as $value): ?>
+                  <tr>
+                      <td><?php echo $value['date']; ?></td>
+                      <td class="text-right"><?php echo number_format($value['quantity'],0); ?></td>
+                      <td class="text-right"><?php echo number_format($value['vat'],2); ?></td>
+                      <td class="text-right"><?php echo number_format($value['total_invat'],2); ?></td>
+                      <td class="text-right"><?php echo number_format($value['shipping_charge'],2); ?></td>
+                      <td class="text-right"><?php echo number_format($value['total'],2); ?></td>
+
+                  </tr>
+                <?php
+                 $quantity =  $quantity + $value['quantity'];
+                  $vat = $vat + $value['vat'];
+                  $shipping_charge = $shipping_charge + $value['shipping_charge'];
+                  $total = $total + $value['total'];
+                  $total_invat = $total_invat + $value['total_invat'];
+                ?>
+                <?php endforeach; ?>
                 <tbody>
-					<?php
-                    $number = 1;
-                    ?>
-                    <?php if(count($selectDB) == 0){?>
-                    <tr>
-                        <td colspan="9" class="text-center text-danger"><strong>ไม่มีข้อมูล</strong></td>
-                    </tr>
-                    <?php }
-                    else{
-                        $discountbill = 0;
-						$total = 0;
-                        foreach($selectDB as $dw):
-                        ?>
-                        <tr>
-                            <td><strong><?php echo $number;?></strong></td>
-                            <td><?php echo $dw['orDATE'];?></td>
-                            <td class="text-right"><?php echo $dw['orQTY'];?></td>
-                            <td class="text-right"><?php echo number_format($dw['orVAT'],2);?></td>
-                            <td class="text-right"><?php echo number_format($dw['sum_total'],2);?></td>
-                        </tr>
-                        <?php
-						$total = $total + $dw['sum_total'];
-						$number++;?>
-                        <?php endforeach;?>
-                    <?php }?>
-                    <?php
-					if($this->input->get("method") == 'post'){
-						if(count($selectDB) != 0){?>
-							<tr>
-								<td colspan="4"  class="text-right"><strong>รวมยอดขายทั้งหมด</strong></td>
-								<td  class="text-right"><strong>  <?php echo number_format($total,2);?></strong></td>
-							</tr>
-                        <?php }?>
-					<?php }?>
                 </tbody>
+                <tfoot>
+                  <tr>
+                      <td class="text-center"><strong>รวม</strong></td>
+                      <td class="text-right"><strong><?php echo number_format($quantity,0); ?></strong> </td>
+                      <td class="text-right"><strong><?php echo number_format($vat,2); ?></td>
+                      <td class="text-right"><strong><?php echo number_format($total_invat,2); ?></td>
+                      <td class="text-right"><strong><?php echo number_format($shipping_charge,2); ?></strong> </td>
+                      <td class="text-right"><strong><?php echo number_format($total,2); ?></strong> </td>
+                  </tr>
+                </tfoot>
             </table>
         </div>
       </div>

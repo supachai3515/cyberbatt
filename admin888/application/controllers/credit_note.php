@@ -39,7 +39,7 @@ class Credit_note extends CI_Controller {
 		$config['last_tag_open'] = "<li>";
 		$config['last_tagl_close'] = "</li>";
 
-        $this->pagination->initialize($config);
+  	$this->pagination->initialize($config);
 		$data['credit_note_list'] = $this->credit_note_model->get_credit_note($page, $config['per_page']);
 		$data['links_pagination'] = $this->pagination->create_links();
 

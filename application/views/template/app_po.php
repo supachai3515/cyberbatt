@@ -4,7 +4,7 @@ app.controller('mainCtrl_po', function($scope,$http) {
     $scope.product_alert = false;
     $scope.is_reservations_check = false;
     $scope.product_alert_text = 'สินค้า 1 ชิ้น ได้ถูกเพิ่มเข้าไปยังตะกร้าสินค้าของคุณ <a class="btn btn-default" href="<?php echo base_url("cart") ?>" role="button">ดูตะกร้าสินค้า</a>';
-    
+
     $scope.productItems = [{
             id: '0',
             sku: '0',
@@ -68,7 +68,7 @@ app.controller('mainCtrl_po', function($scope,$http) {
              {
                 qty =value.quantity +1;
              }
-               
+
          });
          if(qty>0){
              $http({
@@ -78,7 +78,7 @@ app.controller('mainCtrl_po', function($scope,$http) {
                  $scope.getOrder();
                 $scope.deleteResult = data;
             });
-         }     
+         }
 
     }
 
@@ -91,7 +91,7 @@ app.controller('mainCtrl_po', function($scope,$http) {
              {
                 qty =value.quantity - 1;
              }
-               
+
          });
          if(qty>0){
              $http({
@@ -101,8 +101,8 @@ app.controller('mainCtrl_po', function($scope,$http) {
                  $scope.getOrder();
                 $scope.deleteResult = data;
             });
-         } 
-    
+         }
+
     }
 
 
@@ -119,13 +119,13 @@ app.controller('mainCtrl_po', function($scope,$http) {
     }
 
     $scope.getOrder = function() {
-          
+
         // Simple GET request example:
         $http({
             method: 'GET',
             url: '<?php echo base_url()."dealer_po/get_cart";?>'
         }).success(function(data) {
- 
+
             $scope.productItems = [{
                 id: '0',
                 sku: '0',
@@ -171,7 +171,7 @@ app.controller('mainCtrl_po', function($scope,$http) {
      $scope.caltax = function() {
         var sumtex = 0;
         if ($scope.isTax) {
-            sumtex = (($scope.sumTotal()) * 7) / 100;
+            sumtex = (($scope.sumTotal()) * 7) / 107;
         }
         return sumtex;
     }
@@ -187,7 +187,7 @@ app.controller('mainCtrl_po', function($scope,$http) {
         }
     }
 
-    
+
 
     //init get
      $scope.getOrder();

@@ -55,7 +55,7 @@ class Report_order extends CI_Controller {
 		/*Search*/
 		$searchTxt = $this->input->post();
 		$data['resultpost'] = $searchTxt;
-		$data['selectDB'] = $this->report_model->getPrice($searchTxt);
+		$data['price_report_data'] = $this->report_model->get_price_report($searchTxt);
 		//call script
 		$data['script_file']= "js/report_js";
         $data['menu_id'] = '33';
@@ -66,6 +66,7 @@ class Report_order extends CI_Controller {
 								'keyword' =>  'cyberbatt');
 		$this->load->view('template/layout', $data);
 	}
+
 	public function is_logged_in(){
 		$is_logged_in = $this->session->userdata('is_logged_in');
 		$chk_admin =  $this->session->userdata('permission');

@@ -177,7 +177,7 @@
 	    		  		<div class="row">
 	    		  			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 	    		  				<p class="text-center">_______________________<br>
-			    		  		ผู้จ่ายเงิน
+			    		  		ผู้จัดทำ
 			    		  		</p>
 	    		  			</div>
 	    		  			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
@@ -196,7 +196,7 @@
 	    		  		<div class="row">
 	    		  			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 	    		  				<p class="text-center">_______________________<br>
-			    		  		ผู้รับเงิน
+			    		  		ผู้อนุมัติ
 			    		  		</p>
 	    		  			</div>
 	    		  			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">

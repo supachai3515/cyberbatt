@@ -38,7 +38,7 @@ class Productbrand extends CI_Controller {
 		$config['last_tag_open'] = "<li>";
 		$config['last_tagl_close'] = "</li>";
 
-        $this->pagination->initialize($config);
+    $this->pagination->initialize($config);
 		$data['productbrand_list'] = $this->productbrand_model->get_productbrand($page, $config['per_page']);
 		$data['links_pagination'] = $this->pagination->create_links();
 

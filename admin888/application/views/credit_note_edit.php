@@ -79,7 +79,7 @@
               <input id="return_id" name="return_id" type="text" placeholder="เลขที่ใบรับคืน" class="form-control input-md" ng-model="return_id" ng-init="return_id = items.return_id" required="" readonly="true" readonly="true">
           </div>
           <label class="col-md-3">
-            <?php echo $credit_note_data['invoice_no']; ?>
+            <?php echo $credit_note_data['invoice_docno']; ?>
           </label>
         </div>
 
@@ -95,10 +95,10 @@
           <div class="col-md-6">
             <input id="product_id" name="product_id" type="text" placeholder="รหัสสินค้า" class="form-control input-md" ng-model="product_id" ng-init="product_id = items.product_id" required="" readonly="true">
             <p><strong>Product Name: </strong>
-              <?php echo $credit_note_data['product_name']; ?>
+              <?php echo $credit_note_detail['product_name']; ?>
                 <br>
                 <strong>Price : </strong>
-                <?php echo $credit_note_data['price']; ?>
+                <?php echo $credit_note_detail['price']; ?>
             </p>
           </div>
         </div>

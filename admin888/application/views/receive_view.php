@@ -46,11 +46,17 @@
         <div class="row" style="padding-top:10px;">
           <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
               <div class="panel panel-default height">
-                  <div class="panel-heading">หมายเหตุ</div>
+                  <div class="panel-heading">ผู้จำหน่าย</div>
                   <div class="panel-body">
-                      <strong>หมายเหตุ: </strong><?php echo $receive_data["comment"];?><br>
-                      <strong>Supplier: </strong><?php echo $receive_data["supplier"];?><br>
-                      <strong>Warranty: </strong><?php echo $receive_data["warranty"];?><br>
+                      <?php if (isset($receive_data["supplier"]) && $receive_data["supplier"] !=""): ?>
+                      	<strong>Supplier: </strong><?php echo $receive_data["supplier"];?><br>
+											<?php endif; ?>
+											<?php if (isset($receive_data["warranty"]) && $receive_data["warranty"] !=""): ?>
+                      	<strong>Warranty: </strong><?php echo $receive_data["warranty"];?><br>
+											<?php endif; ?>
+											<?php if (isset($receive_data["comment"]) && $receive_data["comment"] !=""): ?>
+												<strong>หมายเหตุ: </strong><?php echo $receive_data["comment"];?><br>
+											<?php endif; ?>
                   </div>
               </div>
           </div>
@@ -129,6 +135,55 @@
 	            </div>
 	        </div>
 	    </div>
+			<div class="row">
+	    	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+	    		<div class="panel panel-default">
+	    		 <div class="panel-heading">การชำระเงิน</div>
+	    		<div class="panel-body">
+	    		  <div class="row">
+	    		  	<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+	    		  		<p class="text-center"><br></p>
+	    		  		<br>
+	    		  		<br>
+	    		  		<br>
+	    		  		<div class="row">
+	    		  			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+	    		  				<p class="text-center">_______________________<br>
+			    		  		ผู้จัดทำ
+			    		  		</p>
+	    		  			</div>
+	    		  			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+	    		  				<p class="text-center">_______________________<br>
+			    		  		วันที่
+			    		  		</p>
+	    		  			</div>
+	    		  		</div>
+
+	    		  	</div>
+	    		  	<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+	    		  		<p class="text-center">ในนาม บริษัท ไซเบอร์ แบต จำกัด</p>
+	    		  		<br>
+	    		  		<br>
+	    		  		<br>
+	    		  		<div class="row">
+	    		  			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+	    		  				<p class="text-center">_______________________<br>
+			    		  		ผู้อนุมัติ
+			    		  		</p>
+	    		  			</div>
+	    		  			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+	    		  				<p class="text-center">_______________________<br>
+			    		  		วันที่
+			    		  		</p>
+	    		  			</div>
+	    		  		</div>
+
+	    		  	</div>
+	    		  </div>
+	    		</div>
+	    	</div>
+
+			</div>
 
 
 		<div class="row noprint">

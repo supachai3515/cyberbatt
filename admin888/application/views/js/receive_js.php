@@ -6,7 +6,7 @@
 	  <?php if (isset($receive_data['id'])): ?>
 
 	  	 $scope.intireceive = function() {
-	   
+
 		           $http({
 		            method: 'POST',
 		            url: '<?php echo base_url('receive/get_receive_detail');?>',
@@ -15,13 +15,13 @@
 		         },
 
 		         data: { id : "<?php echo $receive_data['id']; ?>"}
-		           
+
 		        }).success(function(data) {
 		             var product_receive_re = data;
 
 
 		             angular.forEach(product_receive_re,function(value,key){
-			        
+
 		             		var product_receive = {
 	                      	  	id: value.product_id,
 	                      		sku: value.sku,
@@ -35,7 +35,7 @@
 	                 	$scope.product_receive.push(product_receive);
 
 			        });
-     
+
 		       });
 
 	       }
@@ -69,7 +69,7 @@
 	                  if (product_receive_re["sku"].length > 0) {
 	                      var vat_p = 0;
 	                      if ($scope.is_vat_rececive) {
-	                          vat_p = parseInt(($scope.price * $scope.qty) * 0.07);
+	                          vat_p = parseInt(($scope.price * $scope.qty) * 7 /107);
 	                      }
 
 	                      var product_receive = {
@@ -90,7 +90,7 @@
 		                      		isdup = 1;
 		                      		$scope.msgError = "ข้อมูลสินค้า "+product_receive_re["sku"] +" : "+product_receive_re["name"]+" ***ซ้ำ***  กรุณาลบแล้วเพิ่มใหม่";
 		                      	}
-								  		
+
 							  });
 
 	                      	 if(isdup == 0){
@@ -119,14 +119,14 @@
 
 	   $scope.removeProduct = function(index){
 	    $scope.product_receive.splice(index, 1);
-	   };    
-		
+	   };
+
 
 		$scope.getTotalReceive = function(){
 		    var total = 0;
 		    for(var i = 0; i < $scope.product_receive.length; i++){
 		        var product = $scope.product_receive[i];
-		        total += (parseFloat(product.price) * parseFloat(product.qty)); 
+		        total += (parseFloat(product.price) * parseFloat(product.qty));
 		    }
 		    return total;
 		}
@@ -152,7 +152,7 @@
 
 
 		 $scope.open = function (product_id_p,qty_p,receive_id_p) {
-		  	
+
 		    var modalInstance = $uibModal.open({
 		      animation: $scope.animationsEnabled,
 		      templateUrl: 'myModalContent.html',
@@ -198,11 +198,11 @@
 	         data: { product_id : re_pa.product_id,
 	         		receive_id : re_pa.receive_id,
 	         }
-	           
+
 	        }).success(function(data) {
 	            $scope.product_serial = data;
 	            var count_p = $scope.product_serial.length;
-	            for (i = 0; i < re_pa.qty - count_p; i++) { 
+	            for (i = 0; i < re_pa.qty - count_p; i++) {
 
 	            	 var product_serial = {
 	                      	  sku: "",
@@ -213,7 +213,7 @@
 	                          serial_number: "",
 	                          create_date: "",
 	                          modified_date: "",
-	     
+
 	                      };
 
 	            	$scope.product_serial.push(product_serial);
@@ -233,7 +233,7 @@
 
 	    $scope.removeSerial = function(index){
 	    $scope.product_serial.splice(index, 1);
-	   };    
+	   };
 
 	    $scope.save_serial = function(index){
 	    	$scope.txtError ="";
@@ -248,7 +248,7 @@
 	    	 		if($scope.product_serial.serial_number[value.line_number].trim() == "" ){
 	    	 			 ch_ = false;
               			console.log($scope.product_serial.serial_number[value.line_number]);
-              		
+
               		} else{
 
               			 $scope.product_serial[index].serial_number = $scope.product_serial.serial_number[value.line_number].trim();
@@ -258,7 +258,7 @@
 	    	 	 	  console.log(err.message);
 	                  ch_ = false;
 	             }
-				  		
+
 			  });
 
 	    	 if(ch_ == true){
@@ -275,9 +275,9 @@
 									$scope.txtError = $scope.txtError + value.serial_number  +" ซ้ำ , ";
 								}
 		              		}
-								  		
+
 						});
-						  		
+
 					 });
 
     	 		 	if(ch_dup ==true) {
@@ -292,9 +292,9 @@
 						           'Content-Type': 'application/x-www-form-urlencoded'
 						         },
 						         	data: $scope.product_serial
-						           
+
 						        }).success(function(data) {
-						        	
+
 						        	$scope.txtError = "";
 						           var  result = data;
 
@@ -321,11 +321,10 @@
 	    	 	$scope.txtError ="กรุณากรอก serial number ให้ครบ";
 	    	 }
 
-	    
-	   };  
+
+	   };
 
 	});
 
 
 </script>
-	

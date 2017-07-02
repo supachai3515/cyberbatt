@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Orders extends CI_Controller {
 	public function __construct(){
 		parent::__construct();
-		//call model inti 
+		//call model inti
 		$this->load->model('initdata_model');
 		$this->load->model('orders_model');
 		$this->load->library('pagination');
@@ -21,7 +21,7 @@ class Orders extends CI_Controller {
 
 		$config['base_url'] = base_url('orders/index');
 		$config['total_rows'] = $this->orders_model->get_orders_count();
-		$config['per_page'] = 10; 
+		$config['per_page'] = 10;
         /* This Application Must Be Used With BootStrap 3 *  */
 		$config['full_tag_open'] = "<ul class='pagination'>";
 		$config['full_tag_close'] ="</ul>";
@@ -40,7 +40,7 @@ class Orders extends CI_Controller {
 		$config['last_tag_open'] = "<li>";
 		$config['last_tagl_close'] = "</li>";
 
-        $this->pagination->initialize($config); 
+        $this->pagination->initialize($config);
 		$data['orders_list'] = $this->orders_model->get_orders($page, $config['per_page']);
 		$data['order_status_list'] = $this->orders_model->get_order_status();
 		$data['links_pagination'] = $this->pagination->create_links();
@@ -54,7 +54,7 @@ class Orders extends CI_Controller {
 								'description' =>  'orders| '.$this->config->item('tagline'),
 								'author' => $this->config->item('author'),
 								'keyword' =>  'cyberbatt');
-		$this->load->view('template/layout', $data);	
+		$this->load->view('template/layout', $data);
 	}
 
 
@@ -74,7 +74,7 @@ class Orders extends CI_Controller {
 								'description' =>  'orders| '.$this->config->item('tagline'),
 								'author' => $this->config->item('author'),
 								'keyword' =>  'cyberbatt');
-		$this->load->view('template/layout', $data);	
+		$this->load->view('template/layout', $data);
 
 	}
 
@@ -87,7 +87,7 @@ class Orders extends CI_Controller {
 		$data['orders_detail'] = $this->orders_model->get_orders_detail_id($orders_id);
 		$data['order_status_list'] = $this->orders_model->get_order_status();
 		$data['order_status_history_list'] = $this->orders_model->get_order_status_history($orders_id);
-		
+
         $data['menu_id'] ='10';
 		$data['content'] = 'orders_edit';
 		$data['script_file']= "js/order_js";
@@ -95,7 +95,7 @@ class Orders extends CI_Controller {
 								'description' =>  'orders| '.$this->config->item('tagline'),
 								'author' => $this->config->item('author'),
 								'keyword' =>  'cyberbatt');
-		$this->load->view('template/layout', $data);	
+		$this->load->view('template/layout', $data);
 
 	}
 
@@ -140,7 +140,7 @@ class Orders extends CI_Controller {
 	            'starttls'  => true,
 	            'newline'   => "\r\n"
 	        );
-	        
+
 	        $this->load->library('email', $email_config);
 
 	        $this->email->from($this->config->item('email_noreply'), $this->config->item('email_name'));
@@ -198,7 +198,7 @@ class Orders extends CI_Controller {
 	}
 
 
-	  
+
 
 
 	public function invoice($orders_id,$print_f = 0)
@@ -209,18 +209,18 @@ class Orders extends CI_Controller {
 		$data['orders_tem'] = $this->orders_model->get_orders_id($orders_id);
 
 		if($data['orders_tem']['is_invoice'] == 0){
-			
+
 			$checkDate = 'INV'.date("ymd");
-			$sql ="SELECT COUNT(*)+1 connt_id FROM orders WHERE  LEFT(invoice_docno, 7) = LEFT('".$checkDate."', 7)  "; 
+			$sql ="SELECT COUNT(*)+1 connt_id FROM orders WHERE  LEFT(invoice_docno, 7) = LEFT('".$checkDate."', 7)  ";
 			$query = $this->db->query($sql);
 			$row = $query->row_array();
 			$order_inv_count =  $row['connt_id'];
-			
+
 			date_default_timezone_set("Asia/Bangkok");
 			$data_order = array(
-				'is_invoice' => 1,	
+				'is_invoice' => 1,
 				'invoice_date' => date("Y-m-d H:i:s"),
-				'invoice_docno' => 'INV'.date("ymd").str_pad($order_inv_count, 4, "0", STR_PAD_LEFT)	
+				'invoice_docno' => 'INV'.date("ymd").str_pad($order_inv_count, 4, "0", STR_PAD_LEFT)
 			);
 
 			$where = array('id' => $orders_id);
@@ -232,7 +232,7 @@ class Orders extends CI_Controller {
 		$data['orders_detail'] = $this->orders_model->get_orders_detail_id($orders_id);
 		$data['order_status_list'] = $this->orders_model->get_order_status();
 		$data['order_status_history_list'] = $this->orders_model->get_order_status_history($orders_id);
-		$this->load->view('invoice_doc', $data);	
+		$this->load->view('invoice_doc', $data);
 
 	}
 
@@ -240,8 +240,8 @@ class Orders extends CI_Controller {
 		$is_logged_in = $this->session->userdata('is_logged_in');
 		$chk_admin =  $this->session->userdata('permission');
 		if(!isset($is_logged_in) || $is_logged_in != true || $chk_admin !='admin'){
-			redirect('login');		
-		}		
+			redirect('login');
+		}
 	}
 
 
@@ -255,12 +255,12 @@ class Orders extends CI_Controller {
 	public function save_serial()
 	{
 
-		$res = array('is_error' => false, 
-					 'message' => "", 
+		$res = array('is_error' => false,
+					 'message' => "",
 				);
 
 
-		try { 
+		try {
 
 			$values = json_decode(file_get_contents("php://input"));
 			$this->db->trans_start(); # Starting Transaction
@@ -268,8 +268,8 @@ class Orders extends CI_Controller {
 				if(trim($value->serial_number) != "") {
 
 						//check ของเดิม ว่ามีการบันทึกไปแล้วหรือยัง
-						$sql =" SELECT * FROM product_serial WHERE serial_number = '".$value->serial_number."'  
-								AND product_id = '".$value->product_id."'  AND order_id != '".$value->order_id."' "; 
+						$sql =" SELECT * FROM product_serial WHERE serial_number = '".$value->serial_number."'
+								AND product_id = '".$value->product_id."'  AND order_id != '".$value->order_id."' ";
 
 						$re = $this->db->query($sql);
 						$row =  $re->row_array();
@@ -281,8 +281,8 @@ class Orders extends CI_Controller {
 						else {
 
 
-							$sql =" SELECT * FROM product_serial WHERE serial_number = '".$value->serial_number."'  
-								AND product_id = '".$value->product_id."' "; 
+							$sql =" SELECT * FROM product_serial WHERE serial_number = '".$value->serial_number."'
+								AND product_id = '".$value->product_id."' ";
 
 								$re = $this->db->query($sql);
 								$row =  $re->row_array();
@@ -303,60 +303,60 @@ class Orders extends CI_Controller {
 			if($res['is_error'] == false) {
 
 				//check ของเดิม ว่ามีการบันทึกไปแล้วหรือยัง
-				$sql =" SELECT * FROM product_serial WHERE order_id = '".$value->order_id."'  
-					AND product_id = '".$value->product_id."' "; 
+				$sql =" SELECT * FROM product_serial WHERE order_id = '".$value->order_id."'
+					AND product_id = '".$value->product_id."' ";
 
 				$re = $this->db->query($sql);
 				$row_re =  $re->result_array();
-				foreach ($row_re as $r_ow ) 
+				foreach ($row_re as $r_ow )
 				{
 					date_default_timezone_set("Asia/Bangkok");
 					$data_serial_history = array(
 						'serial_number' =>$r_ow['serial_number'],
 						'product_id' => $r_ow['product_id'],
 						'comment' => "แก้ไขจาก เลขที่ใบสั่งซื้อ #".$value->order_id,
-						'create_date' => date("Y-m-d H:i:s"),				
+						'create_date' => date("Y-m-d H:i:s"),
 					);
 					$this->db->insert("serial_history", $data_serial_history);
 
-					//update serial 
+					//update serial
 					date_default_timezone_set("Asia/Bangkok");
 					$data_product_serial = array(
-						'order_id' => NULL,	
-						'modified_date_order' =>date("Y-m-d H:i:s"),	
+						'order_id' => NULL,
+						'modified_date_order' =>date("Y-m-d H:i:s"),
 					);
-					
+
 					$where = "serial_number = '".$r_ow['serial_number']."' AND product_id = '".$r_ow['product_id']."'   ";
 					$this->db->update("product_serial", $data_product_serial,$where );
 
 				}
-						
+
 				foreach ($values as $value ) {
-	
-					if(trim($value->serial_number) != "") 
+
+					if(trim($value->serial_number) != "")
 					{
-						
-						
+
+
 						//update history
 						date_default_timezone_set("Asia/Bangkok");
 						$data_serial_history = array(
 								'serial_number' =>$value->serial_number,
 								'product_id' => $value->product_id,
 								'comment' => "ยันยันการขาย เลขที่ใบสั่งซื้อ #".$value->order_id,
-								'create_date' => date("Y-m-d H:i:s"),				
+								'create_date' => date("Y-m-d H:i:s"),
 						);
 						$this->db->insert("serial_history", $data_serial_history);
 
-						//update serial 
+						//update serial
 						date_default_timezone_set("Asia/Bangkok");
 						$data_product_serial = array(
 							'serial_number' =>$value->serial_number,
 							'product_id' => $value->product_id,
 							'order_id' => $value->order_id,
-							'modified_date' => date("Y-m-d H:i:s"),		
-							'modified_date_order' =>date("Y-m-d H:i:s"),			
+							'modified_date' => date("Y-m-d H:i:s"),
+							'modified_date_order' =>date("Y-m-d H:i:s"),
 						);
-						
+
 
 						$db_debug = $this->db->db_debug; //save setting
 						$this->db->db_debug = FALSE; //disable debugging for queries
@@ -366,7 +366,7 @@ class Orders extends CI_Controller {
 
 						$this->db->db_debug = $db_debug; //restore setting
 					}
-					
+
 				}
 
 			}
@@ -379,9 +379,9 @@ class Orders extends CI_Controller {
 			    $this->db->trans_rollback();
 			    print json_encode( $res);
 			    // return FALSE;
-			} 
+			}
 			else {
-			    # Everything is Perfect. 
+			    # Everything is Perfect.
 			    # Committing data to the database.
 			    $this->db->trans_commit();
 
@@ -391,7 +391,7 @@ class Orders extends CI_Controller {
 			    print json_encode( $res);
 			    // return TRUE;
 			}
-		} 
+		}
 		catch (Exception $e) {
 
 			$res['is_error'] =  true;
@@ -403,7 +403,7 @@ class Orders extends CI_Controller {
 
 	public function save_slip($order_id)
 	{
-		$image_name = ""; 
+		$image_name = "";
 		$dir ='./../uploads/payment/'.date("Ym").'/';
 		$dir_insert ='uploads/payment/'.date("Ym").'/';
 
@@ -433,7 +433,7 @@ class Orders extends CI_Controller {
 
 
 			$this->my_upload->upload($_FILES["image_field"]);
-		    if ( $this->my_upload->uploaded == true  ) 
+		    if ( $this->my_upload->uploaded == true  )
 		    {
 		      $this->my_upload->allowed   = array('image/*');
 		      //$this->my_upload->file_name_body_pre = 'thumb_';
@@ -448,21 +448,21 @@ class Orders extends CI_Controller {
 		        $data_product = array(
 					"image_slip_customer" => $dir_insert.$image_name,
 				);
-				$where = "id = '".$order_id."'"; 
+				$where = "id = '".$order_id."'";
 				$this->db->update('orders', $data_product, $where );
 
 
-		        $this->my_upload->clean();  
+		        $this->my_upload->clean();
 		      } else {
 		        $data['errors'] = $this->my_upload->error;
-		        echo $data['errors'];    
+		        echo $data['errors'];
 		      }
 		    } else  {
 		      $data['errors'] = $this->my_upload->error;
 		    }
 
 		    $this->my_upload->upload($_FILES["image_field1"]);
-		    if ( $this->my_upload->uploaded == true  ) 
+		    if ( $this->my_upload->uploaded == true  )
 		    {
 		      $this->my_upload->allowed   = array('image/*');
 		      //$this->my_upload->file_name_body_pre = 'thumb_';
@@ -477,15 +477,15 @@ class Orders extends CI_Controller {
 		        $data_product = array(
 					"image_slip_own" => $dir_insert.$image_name,
 				);
-				$where = "id = '".$order_id."'"; 
+				$where = "id = '".$order_id."'";
 				$this->db->update('orders', $data_product, $where );
 
 
 
-		        $this->my_upload->clean();  
+		        $this->my_upload->clean();
 		      } else {
 		        $data['errors'] = $this->my_upload->error;
-		        echo $data['errors'];    
+		        echo $data['errors'];
 		      }
 		    } else  {
 		      $data['errors'] = $this->my_upload->error;
@@ -511,7 +511,7 @@ class Orders extends CI_Controller {
 
 	function sendmail_order_tracking($orderId)
 	{
-			
+
 		$result='
 				<table class="main" width="100%" cellpadding="0" cellspacing="0" style="color:#000;">
 				    <tr>
@@ -554,7 +554,7 @@ class Orders extends CI_Controller {
 				        </td>
 				    </tr>
 				</table>
-				'; 
+				';
 
 
 		$sql =" SELECT * FROM  orders WHERE id= '".$orderId."' ";
@@ -566,13 +566,13 @@ class Orders extends CI_Controller {
 					<td style="padding-bottom:20px;">
 						<div style="background-color:#9BCA94;padding:20px;">
 					       <h2 class="aligncenter">ทางเราได้จัดส่งสินค้า tracking number : '.$result_order['trackpost'].'</h2>
-					       <p>เลขที่ใบสั่งซื้อ #'.$result_order['id'].'<br/> 
+					       <p>เลขที่ใบสั่งซื้อ #'.$result_order['id'].'<br/>
 					        วันที่สั่งซื้อ : '.date_format($date1,"d/m/Y H:i").'</p>
 				        </div>
 				    </td>
 		';
 
-	
+
 		$address = '
 				<strong>ชื่อ: </strong>'.$result_order["name"].'<br>
 	            <strong>ที่อยู่: </strong>'.$result_order['address'].'<br>
@@ -636,7 +636,7 @@ class Orders extends CI_Controller {
 
 			$result =  str_replace("@linkstatus", base_url('status/'.$result_order['ref_id']),$result);
 			$result =  str_replace("@header",$header_str,$result);
-			$result =  str_replace("@reservations","",$result);	
+			$result =  str_replace("@reservations","",$result);
 			$result =  str_replace("@address",$address,$result);
 			$result =  str_replace("@listOrder",$orderList,$result);
 			$result =  str_replace("@vat",$vatstr,$result);

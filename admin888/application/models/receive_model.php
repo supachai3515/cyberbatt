@@ -133,7 +133,7 @@ class Receive_model extends CI_Model {
 		  	$qty_m = $qty_m  + $this->input->post('qty')[$i];
 
 		  	if($is_vat_n ==  1){
-		  		$vat_m = $vat_m  + (($this->input->post('qty')[$i]  * $this->input->post('price')[$i] ) * 0.07);
+		  		$vat_m = $vat_m  + (($this->input->post('qty')[$i]  * $this->input->post('price')[$i] ) * 7 /107);
 		  	}
 
 		  	$total_m = $total_m  + ($this->input->post('qty')[$i]  * $this->input->post('price')[$i]);
@@ -188,7 +188,7 @@ class Receive_model extends CI_Model {
 		foreach( $this->input->post('sku') as $row) {
 		  	$vat = 0;
 		  	if($is_vat_n == 1){
-		  		$vat = ($this->input->post('qty')[$i]  * $this->input->post('price')[$i] ) * 0.07;
+		  		$vat = ($this->input->post('qty')[$i]  * $this->input->post('price')[$i] ) * 7 / 107;
 		  	}
 		  	$total = $this->input->post('qty')[$i]  * $this->input->post('price')[$i];
 
@@ -354,7 +354,7 @@ class Receive_model extends CI_Model {
 		  	$qty_m = $qty_m  + $this->input->post('qty')[$i];
 
 		  	if($is_vat_n ==  1){
-		  		$vat_m = $vat_m  + (($this->input->post('qty')[$i]  * $this->input->post('price')[$i] ) * 0.07);
+		  		$vat_m = $vat_m  + (($this->input->post('qty')[$i]  * $this->input->post('price')[$i] ) * 7 / 107);
 		  	}
 
 		  	$total_m = $total_m  + ($this->input->post('qty')[$i]  * $this->input->post('price')[$i]);
@@ -397,7 +397,7 @@ class Receive_model extends CI_Model {
 
 		  	$vat = 0;
 		  	if($is_vat_n == 1){
-		  		$vat = ($this->input->post('qty')[$i]  * $this->input->post('price')[$i] ) * 0.07;
+		  		$vat = ($this->input->post('qty')[$i]  * $this->input->post('price')[$i] ) * 7/107;
 		  	}
 
 		  	$total = $this->input->post('qty')[$i]  * $this->input->post('price')[$i];

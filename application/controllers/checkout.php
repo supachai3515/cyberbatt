@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Checkout extends CI_Controller {
 	public function __construct(){
 		parent::__construct();
-		//call model inti 
+		//call model inti
 		$this->load->model('initdata_model');
 	}
 
@@ -13,7 +13,7 @@ class Checkout extends CI_Controller {
 
 		$username_login = array();
 		$isUsername =0;
-		
+
 		if($this->session->userdata('is_logged_in')) {
 			if($this->session->userdata('permission')=='2' )
 			{
@@ -37,12 +37,12 @@ class Checkout extends CI_Controller {
 		$data['username_login'] = $username_login;
 		$data['isUsername'] = $isUsername;
 
-		//header meta tag 
+		//header meta tag
 		$data['header'] = array('title' => 'ยืนยันการสั่งซื้อ | '.$this->config->item('sitename'),
 								'description' =>  'ยืนยันการสั่งซื้อ | '.$this->config->item('tagline'),
 								'author' => $this->config->item('author'),
 								'keyword' =>  'ยืนยันการสั่งซื้อ | '.$this->config->item('tagline') );
-		//get menu database 
+		//get menu database
 		$this->load->model('initdata_model');
 		$data['menus_list'] = $this->initdata_model->get_menu();
 		$data['menu_type'] = $this->initdata_model->get_type();
@@ -66,7 +66,7 @@ class Checkout extends CI_Controller {
 
 		$username_login = array();
 		$isUsername =0;
-		
+
 		if($this->session->userdata('is_logged_in')) {
 			if($this->session->userdata('permission')=='2' )
 			{
@@ -90,12 +90,12 @@ class Checkout extends CI_Controller {
 		$data['username_login'] = $username_login;
 		$data['isUsername'] = $isUsername;
 
-		//header meta tag 
+		//header meta tag
 		$data['header'] = array('title' => 'ยืนยันการสั่งซื้อ | '.$this->config->item('sitename'),
 								'description' =>  'ยืนยันการสั่งซื้อ | '.$this->config->item('tagline'),
 								'author' => $this->config->item('author'),
 								'keyword' =>  'ยืนยันการสั่งซื้อ | '.$this->config->item('tagline') );
-		//get menu database 
+		//get menu database
 		$this->load->model('initdata_model');
 		$data['menus_list'] = $this->initdata_model->get_menu();
 		$data['menu_type'] = $this->initdata_model->get_type();
@@ -160,7 +160,7 @@ class Checkout extends CI_Controller {
 			$name =  $this->input->post('txtName');
 		    $address =  $this->input->post('txtAddress');
 		    $tel =  $this->input->post('txtTel');
-		    $email =  $this->input->post('txtEmail');	    
+		    $email =  $this->input->post('txtEmail');
 		    $shipping  =  $this->input->post('txtTransport');
 		    $shipping_price  =  $this->input->post('shipping_price');
 
@@ -204,7 +204,7 @@ class Checkout extends CI_Controller {
 				$total  = $total + ($items['price']* $items['qty']);
 			}
 
-			$vat  = $total * 0.07;
+			$vat  = ($total * 7) /107;
 			$total  = $total + $shipping_price;
 
 
@@ -249,21 +249,21 @@ class Checkout extends CI_Controller {
 
 				if($is_tax == 1)
 				{
-					$vat_detail  = ($total_detail * 7) / 100;
+					$vat_detail  = ($total_detail * 7) / 107;
 				}
 
 		    	$data_detail = array(
 			    	'order_id' =>   $order_id ,
 					'product_id' =>   $items['id'],
-					'linenumber' =>   $linenumber,				
+					'linenumber' =>   $linenumber,
 					'quantity' =>   $items['qty'],
 					'price' =>   $items['price'] ,
 					'discount' =>   0 ,
 					'vat' =>   $vat_detail ,
-					'total' =>   $total_detail 
+					'total' =>   $total_detail
 	            );
 
-		    	$this->db->insert('order_detail', $data_detail); 
+		    	$this->db->insert('order_detail', $data_detail);
 		    	$linenumber++;
 			}
 
@@ -311,7 +311,7 @@ class Checkout extends CI_Controller {
 			    	redirect('status/'.$ref_order_id );
 			       //show_error($this->email->print_debugger());
 			    }
-	    
+
 			}
 
 		}
@@ -323,7 +323,7 @@ class Checkout extends CI_Controller {
 
 	function sendmail_order($orderId)
 	{
-			
+
 		$result='
 				<table class="main" width="100%">
 				    <tr>
@@ -367,7 +367,7 @@ class Checkout extends CI_Controller {
 				    </tr>
 				    <tr>
 				        <td>
-				            
+
 				            <h4>วิธีการชำระเงิน และแจ้งการโอนเงิน :</h4>
 				            <p style="text-align:left">
 				            @payment
@@ -376,7 +376,7 @@ class Checkout extends CI_Controller {
 				        </td>
 				    </tr>
 				</table>
-				'; 
+				';
 
 
 		$sql =" SELECT * FROM  orders WHERE id= '".$orderId."' ";
@@ -387,12 +387,12 @@ class Checkout extends CI_Controller {
 		$header_str ='
 					<td>
 				       <h2 class="aligncenter">ขอบคุณสำหรับการสั่งซื้อ ('.$this->config->item('sitename').')</h2>
-				       <p>เลขที่ใบสั่งซื้อ #'.$result_order['id'].'<br/> 
+				       <p>เลขที่ใบสั่งซื้อ #'.$result_order['id'].'<br/>
 				        วันที่สั่งซื้อ : '.date_format($date1,"d/m/Y H:i").'</p>
 				    </td>
 		';
 
-	
+
 		$address = '
 				<strong>ชื่อ: </strong>'.$result_order["name"].'<br>
 	            <strong>ที่อยู่: </strong>'.$result_order['address'].'<br>
@@ -457,9 +457,9 @@ class Checkout extends CI_Controller {
 			$result =  str_replace("@linkstatus", base_url('status/'.$result_order['ref_id']),$result);
 			$result =  str_replace("@header",$header_str,$result);
 			$result =  str_replace("@reservations","",$result);
-			$result =  str_replace("@payment",$this->config->item('payment_transfer'),$result); 
-			
-			
+			$result =  str_replace("@payment",$this->config->item('payment_transfer'),$result);
+
+
 			$result =  str_replace("@address",$address,$result);
 			$result =  str_replace("@listOrder",$orderList,$result);
 			$result =  str_replace("@vat",$vatstr,$result);
