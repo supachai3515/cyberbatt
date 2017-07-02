@@ -190,7 +190,7 @@ class backend_order_model extends CI_Model {
 											'id' => $row['id'],
 											'sku' => $row['id'],
 											'qty' => 1,
-											'price' => $price,
+											'price' => round($price),
 											'is_reservations' => 0,
 											'name' => $row['id']
 									)
@@ -246,8 +246,5 @@ class backend_order_model extends CI_Model {
 					}
 
 				}
-				echo "<pre>";
-				print_r ($this->cart->contents());
-				echo "</pre>";
 			}
 }

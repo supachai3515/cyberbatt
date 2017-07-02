@@ -54,7 +54,7 @@
 
 					<?php if ($row['stock'] > 0): ?>
 	                    <div class="button-area">
-							<a href="<?php echo base_url('cart/add/'.$row["id"]) ?>"><span>+ หยิบใส่ตะกร้า</span></a>
+							<a href="<?php echo base_url('cart/add/'.$row["id"]) ?>"><span>+ สั่งซื้อสินค้า</span></a>
 						</div>
 	                <?php else: ?>
 	 

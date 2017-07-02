@@ -65,13 +65,13 @@
             <?php if ($row['stock'] > 0): ?>
                 <div class="action-button button-exclusive btncart">
                     <a href="<?php echo base_url('cart/add/'.$row["id"]) ?>" class="add-to-cart">
-                        <span>+ หยิบใส่ตะกร้า</span>
+                        <span>+ สั่งซื้อสินค้า</span>
                     </a>
                 </div>
             <?php else: ?>
                  <div class="action-button button-exclusive btncart outof-stock">
                     <a href="<?php echo base_url('product/'.$row['slug']) ?>" class="add-to-cart">
-                        <span>รายละเอียด</span>
+                        <span>หมดชั่วคราว</span>
                     </a>
                 </div>
             <?php endif ?>

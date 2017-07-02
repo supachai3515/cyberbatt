@@ -107,9 +107,8 @@
           </div>
           <div class="form-group col-sm-offset-9 col-sm-3">
             <div class="input-group">
-              <span class="input-group-addon">ชื่อจัดส่ง</span>
-              <input type="text" name="txtShipping" class="form-control" placeholder="ชื่อจัดส่ง" value="">
-
+              <span class="input-group-addon">ชื่อขนส่ง</span>
+              <input type="text" name="txtShipping" class="form-control" placeholder="ชื่อขนส่ง" value="">
             </div>
           </div>
           <div class="form-group col-sm-offset-9 col-sm-3">

@@ -152,7 +152,49 @@ class Report_model extends CI_Model {
 		}
 		return $query;
 	}
+	function get_report_purchase_order($obj = ''){
+		$date_v = "o.date";
 
+		if($obj == ''){
+			date_default_timezone_set("Asia/Bangkok");
+			$date  = strtotime('-7 days');
+			$obj['dateStart'] = date("Y-m-d",$date );
+			$obj['dateEnd'] = date("Y-m-d");
+		}
+		else {
+
+				if($obj['select_date'] == 2){
+					$date_v = "o.invoice_date";
+				}
+
+			if($obj['dateStart'] != ''){
+				$obj['dateStart'] = $obj['dateStart'];
+			} else {
+				$obj['dateEnd'] = date("Y-m-d");
+			}
+
+			if($obj['dateEnd'] != ''){
+				$obj['dateEnd'] = $obj['dateEnd'];
+			} else {
+				$obj['dateEnd'] = date("Y-m-d");
+			}
+
+		}
+
+		$sql = "SELECT DATE_FORMAT(".$date_v.",'%Y-%m-%d') date,SUM(o.quantity) quantity, SUM(o.vat)vat, SUM(o.shipping_charge) shipping_charge,SUM(o.total) total,
+		SUM(
+				CASE
+				  WHEN o.is_invoice = 1 THEN o.total -o.shipping_charge
+				  WHEN o.is_invoice = 0 THEN 0
+				 END )as total_invat
+					FROM orders o
+					WHERE DATE_FORMAT(".$date_v.",'%Y-%m-%d')  BETWEEN '".$obj['dateStart']."' AND '".$obj['dateEnd']."' AND o.order_status_id = 4
+					GROUP BY DATE_FORMAT(".$date_v.",'%Y-%m-%d')
+					ORDER BY DATE_FORMAT(".$date_v.",'%Y-%m-%d') DESC";
+		$re = $this->db->query($sql);
+		return $re->result_array();
+
+	}
 
 
 	function get_price_report($obj = ''){

@@ -79,7 +79,7 @@
                                         <?php if ($product_detail['stock'] > 0): ?>
                                             <span class="stock-status">มีสินค้า</span>
                                         <?php else: ?>
-                                            <small><span class="label label-default">สินค้าหมด</span></span></small>
+                                            <small><span class="label label-default">สินค้าหมดชั่วคราว</span></span></small>
                                         <?php endif ?>
                                            
                                         </p>

@@ -25,7 +25,7 @@ class Report_order extends CI_Controller {
 		//call script
 		$data['script_file']= "js/report_js";
     $data['menu_id'] ='31';
-		$data['content'] = 'report_order';
+		$data['content'] = 'reports/report_order';
 		$data['header'] = array('title' => 'report_order | '.$this->config->item('sitename'),
 								'description' =>  'report_order | '.$this->config->item('tagline'),
 								'author' => $this->config->item('author'),
@@ -42,7 +42,7 @@ class Report_order extends CI_Controller {
 		//call script
 		$data['script_file']= "js/report_js";
         $data['menu_id'] = '32';
-		$data['content'] = 'report_product';
+		$data['content'] = 'reports/report_product';
 		$data['header'] = array('title' => 'report_product | '.$this->config->item('sitename'),
 								'description' =>  'report_product | '.$this->config->item('tagline'),
 								'author' => $this->config->item('author'),
@@ -59,7 +59,24 @@ class Report_order extends CI_Controller {
 		//call script
 		$data['script_file']= "js/report_js";
         $data['menu_id'] = '33';
-		$data['content'] = 'report_price';
+		$data['content'] = 'reports/report_price';
+		$data['header'] = array('title' => 'report_price | '.$this->config->item('sitename'),
+								'description' =>  'report_price | '.$this->config->item('tagline'),
+								'author' => $this->config->item('author'),
+								'keyword' =>  'cyberbatt');
+		$this->load->view('template/layout', $data);
+	}
+
+	public function report_purchase_order(){
+		$data['menus_list'] = $this->initdata_model->get_menu();$searchTxt = $this->input->post();
+		/*Search*/
+		$searchTxt = $this->input->post();
+		$data['resultpost'] = $searchTxt;
+		$data['price_report_data'] = $this->report_model->get_report_purchase_order($searchTxt);
+		//call script
+		$data['script_file']= "js/report_js";
+		$data['menu_id'] = '35';
+		$data['content'] = 'reports/report_purchase_order';
 		$data['header'] = array('title' => 'report_price | '.$this->config->item('sitename'),
 								'description' =>  'report_price | '.$this->config->item('tagline'),
 								'author' => $this->config->item('author'),
