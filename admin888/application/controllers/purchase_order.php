@@ -133,6 +133,20 @@ class Purchase_order extends CI_Controller {
 
 	}
 
+	// update
+	public function transfer_save($purchase_order_id)
+	{
+
+		//$this->purchase_order_model->transfer_save($purchase_order_id);
+		//if($purchase_order_id!=""){
+		//	redirect('purchase_order/edit/'.$purchase_order_id);
+		//}
+		//else {
+		//	redirect('purchase_order');
+		}
+
+	}
+
 	// insert
 	public function add_save()
 	{

@@ -6,12 +6,12 @@
             <?php //if(isset($sql))echo "<p>".$sql."</p>"; ?>
         </div>
         <form action="<?php echo base_url('members/search');?>" method="POST" class="form-inline" role="form">
-        
+
             <div class="form-group">
                 <label class="sr-only" for="">search</label>
                 <input type="text" class="form-control" id="search" name="search" placeholder="ชื่อ">
             </div>
-    
+
             <button type="submit" class="btn btn-primary">ค้นหา</button>
         </form>
         <div class="box-body table-responsive no-padding">
@@ -32,7 +32,7 @@
                             <strong>Name: </strong><?php echo $member['first_name'].' '.$member['last_name']; ?><br/>
                             <strong>Username: </strong><?php echo $member['username']; ?><br/>
                             <strong>Password: </strong><?php echo $member['password']; ?>
-                        
+
                         </td>
                         <td>
                             <strong>Mobile: </strong><?php echo $member['mobile']; ?><br/>
@@ -48,7 +48,7 @@
                             <?php if (isset($member['tax_number'])): ?>
                                  <b>Tax number :</b>  <span><?php echo $member['tax_number']; ?></span>
                             <?php endif ?>
-                           
+
                         </td>
                         <td>
                              <span><i class="fa fa-calendar"></i> <?php echo date("d-m-Y H:i", strtotime($member['date']));?></span>
@@ -61,7 +61,7 @@
                                 <br/>
                                 <a class="btn btn-xs btn-info" href="<?php echo base_url('members/confirm/'.$member['id']) ?>" role="button"> ยืนยัน Dealer</a><br/>
                             <?php endif ?>
-							
+
                                <?php if ($member['is_active']=="1"): ?>
                                 <span><i class="fa fa-check"></i> ใช้งาน</span>
                                 <br/>
@@ -75,7 +75,7 @@
                             <?php endif ?>
 
                         </td>
-                        <td><a class="btn btn-xs btn-info" href="<?php echo base_url('members/edit/'.$member['id']) ?>" role="button"><i class="fa fa-pencil"></i> แก้ไข</a></td>       
+                        <td><a class="btn btn-xs btn-info" href="<?php echo base_url('members/edit/'.$member['id']) ?>" role="button"><i class="fa fa-pencil"></i> แก้ไข</a></td>
                     </tr>
                 <?php endforeach ?>
                 </tbody>

@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Members extends CI_Controller {
 	public function __construct(){
 		parent::__construct();
-		//call model inti 
+		//call model inti
 		$this->load->model('initdata_model');
 		$this->load->model('members_model');
 		$this->load->library('pagination');
@@ -18,7 +18,7 @@ class Members extends CI_Controller {
 
 		$config['base_url'] = base_url('members/index');
 		$config['total_rows'] = $this->members_model->get_members_count();
-		$config['per_page'] = 10; 
+		$config['per_page'] = 10;
         /* This Application Must Be Used With BootStrap 3 *  */
 		$config['full_tag_open'] = "<ul class='pagination'>";
 		$config['full_tag_close'] ="</ul>";
@@ -37,7 +37,7 @@ class Members extends CI_Controller {
 		$config['last_tag_open'] = "<li>";
 		$config['last_tagl_close'] = "</li>";
 
-        $this->pagination->initialize($config); 
+        $this->pagination->initialize($config);
 		$data['members_list'] = $this->members_model->get_members($page, $config['per_page']);
 		$data['links_pagination'] = $this->pagination->create_links();
 
@@ -51,7 +51,7 @@ class Members extends CI_Controller {
 								'description' =>  'members | '.$this->config->item('tagline'),
 								'author' => $this->config->item('author'),
 								'keyword' =>  'cyberbatt');
-		$this->load->view('template/layout', $data);	
+		$this->load->view('template/layout', $data);
 	}
 
 	//page search
@@ -69,7 +69,7 @@ class Members extends CI_Controller {
 								'description' =>  'members | '.$this->config->item('tagline'),
 								'author' => $this->config->item('author'),
 								'keyword' =>  'cyberbatt');
-		$this->load->view('template/layout', $data);	
+		$this->load->view('template/layout', $data);
 
 	}
 
@@ -85,7 +85,7 @@ class Members extends CI_Controller {
 								'description' =>  'members | '.$this->config->item('tagline'),
 								'author' => $this->config->item('author'),
 								'keyword' =>  'cyberbatt');
-		$this->load->view('template/layout', $data);	
+		$this->load->view('template/layout', $data);
 
 	}
 
@@ -103,21 +103,21 @@ class Members extends CI_Controller {
 			redirect('members');
 		}
 
-	} 
+	}
 
 		// update
 	public function confirm($member_id)
 	{
-		
+
 		if($member_id!=""){
 
 			date_default_timezone_set("Asia/Bangkok");
 			$data_member = array(
-				'verify' => '1'					
+				'verify' => '1'
 			);
-			$where = "id = '".$member_id."'"; 
+			$where = "id = '".$member_id."'";
 			$this->db->update("members", $data_member, $where);
-			
+
 
 			$sql =" SELECT * FROM  members WHERE id= '".$member_id."' ";
 			$re = $this->db->query($sql);
@@ -151,22 +151,22 @@ class Members extends CI_Controller {
 		       show_error($this->email->print_debugger());
 		    }
 
-			
+
 		}
 		else {
 			redirect('members');
 		}
-		
 
-	} 
+
+	}
 
 
 	public function is_logged_in(){
 		$is_logged_in = $this->session->userdata('is_logged_in');
 		$chk_admin =  $this->session->userdata('permission');
 		if(!isset($is_logged_in) || $is_logged_in != true || $chk_admin !='admin'){
-			redirect('login');		
-		}		
+			redirect('login');
+		}
 	}
 
 }
