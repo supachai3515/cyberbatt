@@ -10,14 +10,14 @@
                 <div class="col-md-6">
                   <div class="form-group">
                     <span id="startDate" style="display:none"><?php echo DATE;?></span>
-                      <label for="">จากวันทีสั่งซื้อ</label>
+                      <label for="">จากวันทีใบสั่งซื้อ</label>
                       <input type="text" class="form-control" id="dateStart" name="dateStart" placeholder="วันที่เริ่มต้นค้นหา" value="<?php if($this->input->get("method") == 'post'){echo ($resultpost['dateStart'] == '' ? DATE : $resultpost['dateStart']);}?>">
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
                     <span id="endDate"></span>
-                      <label for="">ถึงวันทีสั่งซื้อ</label>
+                      <label for="">ถึงวันที่ใบสั่งซื้อ</label>
                       <input type="text" class="form-control" id="dateEnd" name="dateEnd" placeholder="วันที่สิ้นสุดการค้นหา" value="<?php if($this->input->get("method") == 'post'){echo ($resultpost['dateEnd'] == '' ? DATE : $resultpost['dateEnd']);}?>">
                   </div>
                 </div>
@@ -61,21 +61,6 @@
                   </div>
                 </div>
                 <div class="clearfix"></div>
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="from_stock">สินค้าคงเหลือ</label>
-                    <input id="from_stock" name="from_stock" type="number"
-                        value="<?php if(isset($data_search['from_stock']))echo $data_search['from_stock']; else echo "0"; ?>" class="form-control input-md">
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="to_stock">ถึง</label>
-                    <input id="to_stock" name="to_stock" type="number"
-                    value="<?php if(isset($data_search['to_stock']))echo $data_search['to_stock']; else echo "9999"; ?>" class="form-control input-md">
-                  </div>
-                </div>
-                <div class="clearfix"></div>
                 <div class="col-md-12">
                   <div class="form-group">
                     <label for="promotion">โปรโมชั่น</label>
@@ -104,18 +89,33 @@
                     </div>
                   </div>
                 </div>
+                <div class="clearfix"></div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="from_stock">สินค้าคงเหลือ</label>
+                    <input id="from_stock" name="from_stock" type="number"
+                        value="<?php if(isset($resultpost['from_stock']))echo $resultpost['from_stock']; else echo "0"; ?>" class="form-control input-md">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="to_stock">ถึง</label>
+                    <input id="to_stock" name="to_stock" type="number"
+                    value="<?php if(isset($resultpost['to_stock']))echo $resultpost['to_stock']; else echo "9999"; ?>" class="form-control input-md">
+                  </div>
+                </div>
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="from_stock">จำนวนขาย</label>
                     <input id="from_stock" name="from_order_qty" type="number"
-                        value="<?php if(isset($data_search['from_order_qty']))echo $data_search['from_order_qty']; else echo "1"; ?>" class="form-control input-md">
+                        value="<?php if(isset($resultpost['from_order_qty']))echo $resultpost['from_order_qty']; else echo "1"; ?>" class="form-control input-md">
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="to_stock">ถึง</label>
                     <input id="to_stock" name="to_order_qty" type="number"
-                    value="<?php if(isset($data_search['to_order_qty']))echo $data_search['to_order_qty']; else echo "9999"; ?>" class="form-control input-md">
+                    value="<?php if(isset($resultpost['to_order_qty']))echo $resultpost['to_order_qty']; else echo "9999"; ?>" class="form-control input-md">
                   </div>
                 </div>
                 <div class="col-md-6">

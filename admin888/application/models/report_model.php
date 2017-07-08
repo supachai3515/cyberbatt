@@ -194,7 +194,7 @@ class Report_model extends CI_Model {
 				$sql = $sql."AND (p.product_brand_id = '".$data_product['product_brand_id']."')";
 			}
 
-			$sql = $sql."AND (IFNULL(p.stock,0) BETWEEN '".$data_product['from_stock']."' AND '".$data_product['to_stock']."' )";
+			//$sql = $sql."AND (IFNULL(p.stock,0) BETWEEN '".$data_product['from_stock']."' AND '".$data_product['to_stock']."' )";
 
 			if($data_product['all_promotion'] == "") {
 				if($data_product['is_hot'] =='' ){$data_product['is_hot']= "0";}
@@ -251,6 +251,8 @@ class Report_model extends CI_Model {
 			$obj['to_purchase_order_qty'] = 9999;
 			$obj['from_order_qty'] = 1;
 			$obj['to_order_qty'] = 9999;
+			$obj['from_stock'] = 0;
+			$obj['to_stock'] = 9999;
 		}
 		else {
 
@@ -289,8 +291,8 @@ class Report_model extends CI_Model {
 							) o ON o.product_id = p.id
 						WHERE 1=1  ".$in_str."
 						AND (IFNULL(po.purchase_order_qty,0) BETWEEN ".$obj['from_purchase_order_qty']." AND ".$obj['to_purchase_order_qty'].")
-						AND (IFNULL(o.order_qty,0) BETWEEN ".$obj['from_order_qty']." AND ".$obj['from_order_qty'].")
-
+						AND (IFNULL(o.order_qty,0) BETWEEN ".$obj['from_order_qty']." AND ".$obj['to_order_qty'].")
+						AND (IFNULL(p.stock,0) BETWEEN ".$obj['from_stock']." AND ".$obj['to_stock'].")
 							";
 
 		$query = $this->db->query($sql);
