@@ -86,6 +86,7 @@ class Report_model extends CI_Model {
 			$query = $this->db->query("select *".$search." from payment left join orders on(orders.id = payment.order_id) where orders.order_status_id = 4 and DATE_FORMAT(payment.inform_date_time,'%Y-%m-%d') Between '".DATE."' and '".DATE."' ".$checkBank."")->result_array();
 		}
 		return $query;
+
 	}
 
 
@@ -152,20 +153,106 @@ class Report_model extends CI_Model {
 		}
 		return $query;
 	}
-	function get_report_purchase_order($obj = ''){
-		$date_v = "o.date";
+
+
+	  public function get_products_search()
+		{
+			date_default_timezone_set("Asia/Bangkok");
+			$data_product = array(
+				'search' => $this->input->post('search'),
+				'product_type_id' => $this->input->post('select_type'),
+				'product_brand_id' => $this->input->post('select_brand'),
+				'branch_id' => $this->input->post('select_branch'),
+				'from_stock' => $this->input->post('from_stock'),
+				'to_stock' =>  $this->input->post('to_stock'),
+				'all_promotion' => $this->input->post('all_promotion'),
+				'is_hot' => $this->input->post('is_hot'),
+				'is_promotion' => $this->input->post('is_promotion'),
+				'is_sale' => $this->input->post('is_sale'),
+				'is_active' => $this->input->post('isactive')
+			);
+
+			 $sql ="SELECT pc.search , p.* ,t.name type_name, b.name brand_name ,p.stock stock_number
+					FROM products p
+					INNER JOIN (
+					SELECT CONCAT(IFNULL(name,''),IFNULL(model,''),IFNULL(shot_detail,''),IFNULL(sku,'')) search ,id FROM
+					products
+					)
+					pc ON p.id = pc.id
+					LEFT JOIN product_brand b ON p.product_brand_id = b.id
+					LEFT JOIN product_type t ON p.product_type_id = t.id ";
+			 //where
+			$sql = $sql." WHERE 1=1 ";
+			if($data_product['search'] != "") {
+				$sql = $sql."AND pc.search LIKE '%".trim($data_product['search'])."%'";
+			}
+			if($data_product['product_type_id'] != "") {
+				$sql = $sql."AND (p.product_type_id = '".$data_product['product_type_id']."')";
+			}
+
+			if($data_product['product_brand_id'] != "") {
+				$sql = $sql."AND (p.product_brand_id = '".$data_product['product_brand_id']."')";
+			}
+
+			$sql = $sql."AND (IFNULL(p.stock,0) BETWEEN '".$data_product['from_stock']."' AND '".$data_product['to_stock']."' )";
+
+			if($data_product['all_promotion'] == "") {
+				if($data_product['is_hot'] =='' ){$data_product['is_hot']= "0";}
+				if($data_product['is_promotion'] =='' ){$data_product['is_promotion']= "0";}
+				if($data_product['is_sale'] =='' ){$data_product['is_sale']= "0";}
+
+				if($data_product['is_hot']=="1")
+				{
+					$sql = $sql."AND (p.is_hot = '".$data_product['is_hot']."')";
+				}
+				if ($data_product['is_promotion'] =='1') {
+					$sql = $sql."AND (p.is_promotion = '".$data_product['is_promotion']."')";
+				}
+				if ($data_product['is_sale'] =='1') {
+					$sql = $sql."AND (p.is_sale = '".$data_product['is_sale']."')";
+				}
+			}
+			if($data_product['is_active'] =='' ){$data_product['is_active']= "0";}
+			$sql = $sql."AND (p.is_active = '".$data_product['is_active']."')";
+
+
+			$re = $this->db->query($sql);
+			$return_data['result_products'] = $re->result_array();
+			$return_data['data_search'] = $data_product;
+			$return_data['sql'] = $sql;
+			return $return_data;
+		}
+
+	function get_report_purchase_order($search_list, $obj = '') {
+		$in = 0;
+		$in_str = "";
+		$join =" INNER JOIN ";
+		if(count($search_list)>0){
+			$join =" LEFT JOIN ";
+			foreach ($search_list as $row) {
+				$in = $in.",".$row['id'];
+
+			}
+
+			if($in != "0"){
+				//str_replace("0,","",$not_in).")
+				$in_str = " AND  p.id in (".str_replace("0,","",$in).")";
+			}
+		}
 
 		if($obj == ''){
 			date_default_timezone_set("Asia/Bangkok");
 			$date  = strtotime('-7 days');
 			$obj['dateStart'] = date("Y-m-d",$date );
 			$obj['dateEnd'] = date("Y-m-d");
+
+
+			$obj['from_purchase_order_qty'] = 0;
+			$obj['to_purchase_order_qty'] = 9999;
+			$obj['from_order_qty'] = 1;
+			$obj['to_order_qty'] = 9999;
 		}
 		else {
-
-				if($obj['select_date'] == 2){
-					$date_v = "o.invoice_date";
-				}
 
 			if($obj['dateStart'] != ''){
 				$obj['dateStart'] = $obj['dateStart'];
@@ -181,18 +268,34 @@ class Report_model extends CI_Model {
 
 		}
 
-		$sql = "SELECT DATE_FORMAT(".$date_v.",'%Y-%m-%d') date,SUM(o.quantity) quantity, SUM(o.vat)vat, SUM(o.shipping_charge) shipping_charge,SUM(o.total) total,
-		SUM(
-				CASE
-				  WHEN o.is_invoice = 1 THEN o.total -o.shipping_charge
-				  WHEN o.is_invoice = 0 THEN 0
-				 END )as total_invat
-					FROM orders o
-					WHERE DATE_FORMAT(".$date_v.",'%Y-%m-%d')  BETWEEN '".$obj['dateStart']."' AND '".$obj['dateEnd']."' AND o.order_status_id = 4
-					GROUP BY DATE_FORMAT(".$date_v.",'%Y-%m-%d')
-					ORDER BY DATE_FORMAT(".$date_v.",'%Y-%m-%d') DESC";
-		$re = $this->db->query($sql);
-		return $re->result_array();
+		$sql= " SELECT p.stock product_stock, IFNULL(o.order_qty,0) order_qty, IFNULL(po.purchase_order_qty,0) purchase_order_qty , pc.search , p.* ,t.name type_name, b.name brand_name , s.stock_all
+						FROM products p
+						INNER JOIN ( SELECT CONCAT(IFNULL(name,''), IFNULL(model,''), IFNULL(shot_detail,''), IFNULL(sku,'')) search , id FROM products )
+						pc ON p.id = pc.id LEFT JOIN product_brand b ON p.product_brand_id = b.id
+						LEFT JOIN (SELECT product_id, SUM(number) stock_all FROM stock GROUP BY product_id) s ON s.product_id = p.id
+						LEFT JOIN product_type t ON p.product_type_id = t.id
+						LEFT JOIN
+						(
+							SELECT  SUM(rd.qty) purchase_order_qty, rd.product_id FROM  purchase_order r
+							INNER JOIN purchase_order_detail rd ON r.id = rd.purchase_order_id
+							WHERE r.is_success = 0
+							GROUP BY rd.product_id
+						)po ON po.product_id = p.id
+						".$join."
+							(
+								SELECT IFNULL(SUM(od.quantity),0) order_qty , od.product_id FROM orders o INNER JOIN order_detail od ON o.id = od.order_id
+								WHERE o.order_status_id = 4 AND  DATE_FORMAT(o.date,'%Y-%m-%d')  BETWEEN '".$obj['dateStart']."' AND '".$obj['dateEnd']."'
+								GROUP BY od.product_id
+							) o ON o.product_id = p.id
+						WHERE 1=1  ".$in_str."
+						AND (IFNULL(po.purchase_order_qty,0) BETWEEN ".$obj['from_purchase_order_qty']." AND ".$obj['to_purchase_order_qty'].")
+						AND (IFNULL(o.order_qty,0) BETWEEN ".$obj['from_order_qty']." AND ".$obj['from_order_qty'].")
+
+							";
+
+		$query = $this->db->query($sql);
+		$result = $query->result();
+		return $result;
 
 	}
 

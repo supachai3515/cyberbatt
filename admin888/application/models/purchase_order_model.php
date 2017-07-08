@@ -36,9 +36,12 @@ class Purchase_order_model extends CI_Model {
 		$page = $this->db->escape_str($page);
 		$segment = $this->db->escape_str($segment);
 
-		$sql =" SELECT r.id , r.doc_no , r.create_date, r.modified_date,r.qty,r.total,r.vat, r.is_active, r.is_success ,r.`comment`,r.supplier, COUNT(rd.product_id) product_id
+		$sql =" SELECT r.id , r.doc_no , r.create_date, r.modified_date,r.qty,r.total,r.vat, r.is_active, r.is_success ,r.`comment`,r.supplier,
+					COUNT(rd.product_id) product_id, IFNULL(COUNT(re.do_ref),'0') is_to_receive
 						FROM  purchase_order r
-						INNER JOIN purchase_order_detail rd ON r.id = rd.purchase_order_id WHERE 1=1 ";
+						INNER JOIN purchase_order_detail rd ON r.id = rd.purchase_order_id
+						LEFT JOIN receive re ON re.do_ref = r.doc_no
+						WHERE 1=1 ";
 		if(!empty($searchText)) {
 				$sql = $sql." AND (r.id  LIKE '%".$searchText."%'
 													OR r.doc_no  LIKE '%".$searchText."%'

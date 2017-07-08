@@ -57,7 +57,7 @@
                         <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                             <div class="caption">
                                 <h3>ไปรษณีย์ไทย</h3>
-                                <p><strong>ชำระเงินก่อน 13.00น. ส่งสินค้าออกวันเดียวกัน หลังจากนั้น ส่งสินค้าออกวันถัดไป  </strong></p>
+                                <p><strong>ชำระเงินก่อน 12.00น. ส่งสินค้าออกวันเดียวกัน หลังจากนั้น ส่งสินค้าออกวันถัดไป  </strong></p>
                                 <div class="button-exclusive">
                                         <a href="http://track.thailandpost.co.th/tracking/default.aspx"  target="_blank">
                                             <span>ไปรษณีย์ไทย</span>
@@ -76,7 +76,7 @@
                         <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                             <div class="caption">
                                 <h3>เคอรี่ เอ็กซ์เพรส (ประเทศไทย)</h3>
-                                <p><strong> ชำระเงินก่อน 16.00น. ส่งสินค้าออกในวันเดียวกัน หลังจากนั้น ส่งสินค้าออกวันถัดไป </strong></p>
+                                <p><strong> ชำระเงินก่อน 14.00น. ส่งสินค้าออกในวันเดียวกัน หลังจากนั้น ส่งสินค้าออกวันถัดไป </strong></p>
                                 <p>
 
                                 <div class="button-exclusive">
@@ -98,7 +98,7 @@
                             <div class="caption">
                                 <h3>ทีเอ็นที (TNT)</h3>
                                 <p><strong>ชำระเงินก่อน 16.00น. ส่งสินค้าออกวันเดียวกัน หลังจากนั้น ส่งสินค้าออกวันถัดไป   </strong></p>
-                             
+
                                 <p>
 
                                 <div class="button-exclusive">
