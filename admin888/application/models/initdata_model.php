@@ -2,14 +2,14 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Initdata_model extends CI_Model {
-	
-	public function __construct() {        
+
+	public function __construct() {
 	    parent::__construct();
 	}
 
 	public function get_menu()
 	{
-		$sqlmenu ="SELECT * FROM menu WHERE is_active ='1' ORDER BY order_by "; 
+		$sqlmenu ="SELECT * FROM menu_old WHERE is_active ='1' ORDER BY order_by ";
 		$reMenus = $this->db->query($sqlmenu);
 		return  $reMenus->result_array();
 	}
@@ -65,25 +65,25 @@ class Initdata_model extends CI_Model {
 	function mbstring_binary_safe_encoding( $reset = false ) {
 	    static $encodings = array();
 	    static $overloaded = null;
-	 
+
 	    if ( is_null( $overloaded ) )
 	        $overloaded = function_exists( 'mb_internal_encoding' ) && ( ini_get( 'mbstring.func_overload' ) & 2 );
-	 
+
 	    if ( false === $overloaded )
 	        return;
-	 
+
 	    if ( ! $reset ) {
 	        $encoding = mb_internal_encoding();
 	        array_push( $encodings, $encoding );
 	        mb_internal_encoding( 'ISO-8859-1' );
 	    }
-	 
+
 	    if ( $reset && $encodings ) {
 	        $encoding = array_pop( $encodings );
 	        mb_internal_encoding( $encoding );
 	    }
 	}
-	
+
 	function reset_mbstring_encoding() {
 	    $this->mbstring_binary_safe_encoding(true);
 	}
@@ -93,15 +93,15 @@ class Initdata_model extends CI_Model {
 	    $values = array();
 	    $num_octets = 1;
 	    $unicode_length = 0;
-	 
+
 	    $this->mbstring_binary_safe_encoding();
 	    $string_length = strlen( $utf8_string );
 	    $this->reset_mbstring_encoding();
-	 
+
 	    for ($i = 0; $i < $string_length; $i++ ) {
-	 
+
 	        $value = ord( $utf8_string[ $i ] );
-	 
+
 	        if ( $value < 128 ) {
 	            if ( $length && ( $unicode_length >= $length ) )
 	                break;
@@ -117,24 +117,24 @@ class Initdata_model extends CI_Model {
 	                    $num_octets = 4;
 	                }
 	            }
-	 
+
 	            $values[] = $value;
-	 
+
 	            if ( $length && ( $unicode_length + ($num_octets * 3) ) > $length )
 	                break;
 	            if ( count( $values ) == $num_octets ) {
 	                for ( $j = 0; $j < $num_octets; $j++ ) {
 	                    $unicode .= '%' . dechex( $values[ $j ] );
 	                }
-	 
+
 	                $unicode_length += $num_octets * 3;
-	 
+
 	                $values = array();
 	                $num_octets = 1;
 	            }
 	        }
 	    }
-	 
+
 	    return $unicode;
 	}
 }
