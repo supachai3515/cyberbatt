@@ -394,7 +394,7 @@ class Products extends CI_Controller {
 		if (isset($all) && $all == '1') {
 
 			$sql =" SELECT p.id ,p.sku ,p.name product_name,t.name type_name, b.name brand_name, p.stock ,p.price,
-		    				p.dis_price discount_price , p.member_discount dealer_price ,p.member_discount_lv1 fanshine_price
+		    				p.dis_price discount_price , p.member_discount dealer_price ,p.member_discount_lv1 fanshine_price, p.is_active
 					FROM  products p
 					LEFT JOIN product_brand b ON p.product_brand_id = b.id
 					LEFT JOIN product_type t ON p.product_type_id = t.id
@@ -428,7 +428,7 @@ class Products extends CI_Controller {
 
 			if ($in_str != "") {
 			    $sql =" SELECT p.id ,p.sku ,p.name product_name,t.name type_name, b.name brand_name, p.stock ,p.price,
-			    				p.dis_price discount_price , p.member_discount dealer_price ,p.member_discount_lv1 fanshine_price
+			    				p.dis_price discount_price , p.member_discount dealer_price ,p.member_discount_lv1 fanshine_price, p.is_active
 						FROM  products p
 						LEFT JOIN product_brand b ON p.product_brand_id = b.id
 						LEFT JOIN product_type t ON p.product_type_id = t.id

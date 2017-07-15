@@ -132,6 +132,17 @@
                     value="<?php if(isset($resultpost['to_purchase_order_qty']))echo $resultpost['to_purchase_order_qty']; else echo "9999"; ?>" class="form-control input-md">
                   </div>
                 </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="is_export">
+                        <input type="checkbox" name="is_export" id="is_hot" value="1"
+                        <?php if(isset($data_search['is_export'])) {if($data_search['is_export']==1) echo "checked";} ?>> export to excel
+                    </label>
+                  </div>
+                </div>
+                <div class="col-md-6">
+
+                </div>
                 <div class="col-md-12">
                   <div class="form-group">
                       <button type="submit" class="btn btn-primary">ค้นหา</button>

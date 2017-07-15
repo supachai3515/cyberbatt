@@ -274,15 +274,26 @@ class Orders extends CI_Controller {
 						$re = $this->db->query($sql);
 						$row =  $re->row_array();
 						if(count($row) > 0){
+							$_order_id = $row['order_id'];
 
-							$res['is_error'] =  true;
-							$res['message']  = $res['message'].$value->serial_number." : ถูกบันทึกแล้วเลขที่ order : #".$value->order_id;
+							//check ใบรับคืน
+							$sql ="SELECT  * FROM return_receive  WHERE serial = '".$value->serial_number."' AND product_id =  '".$value->product_id."' AND is_active = 1";
+							$re = $this->db->query($sql);
+							$row =  $re->row_array();
+							if(count($row) == 0){
+
+								$res['is_error'] =  true;
+								$res['message']  = $res['message'].$value->serial_number." : ถูกบันทึกแล้วเลขที่ order : #".$_order_id;
+
+							}
+
 						}
 						else {
 
 
 							$sql =" SELECT * FROM product_serial WHERE serial_number = '".$value->serial_number."'
 								AND product_id = '".$value->product_id."' ";
+
 
 								$re = $this->db->query($sql);
 								$row =  $re->row_array();

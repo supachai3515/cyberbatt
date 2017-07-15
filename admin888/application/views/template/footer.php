@@ -21,6 +21,7 @@
 <script src="<?php echo base_url(); ?>assets/js/angular.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/ui-bootstrap-tpls-1.2.1.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/bootstrap-notify.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/js/loading-bar.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/datepicker/js/bootstrap-datepicker.js"></script>
 <script src="<?php echo base_url(); ?>assets/datepicker/locales/bootstrap-datepicker.th.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/datepicker/js/bootstrap-timepicker.js"></script>

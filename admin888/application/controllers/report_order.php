@@ -21,7 +21,7 @@ class Report_order extends CI_Controller {
 		$searchTxt = $this->input->post();
 		$data['resultpost'] = $searchTxt;
 		$data['selectDB'] = $this->report_model->getOrder($searchTxt);
-		$data['get_payment'] = $this->report_model->get_sumpayment($searchTxt);
+		//$data['get_payment'] = $this->report_model->get_sumpayment($searchTxt);
 
 		//call script
 		$data['script_file']= "js/report_js";
@@ -81,6 +81,8 @@ class Report_order extends CI_Controller {
 			$data['products_list'] = $return_data['result_products'];
 			$data['data_search'] = $return_data['data_search'];
 			$data['sql'] = $return_data['sql'];
+			$is_export = $this->input->post('is_export');
+
 		}
 
 		$data['menus_list'] = $this->initdata_model->get_menu();
@@ -93,12 +95,18 @@ class Report_order extends CI_Controller {
 		$data['purchase_order_report_data'] = $this->report_model->get_report_purchase_order($data['products_list'], $searchTxt);
 		//call script
 		$data['script_file']= "js/report_js";
-		$data['menu_id'] = '35';
+		$data['menu_id'] = '34';
 		$data['content'] = 'reports/report_purchase_order';
 		$data['header'] = array('title' => 'purchase_order | '.$this->config->item('sitename'),
 								'description' =>  'purchase_order | '.$this->config->item('tagline'),
 								'author' => $this->config->item('author'),
 								'keyword' =>  'cyberbatt');
+
+		if (isset($is_export) && $is_export == '1') {
+			$data['products_list'] = $data['purchase_order_report_data'];
+			$this->load->view('reports/export_report_purchase_order', $data);
+		}
+
 		$this->load->view('template/layout', $data);
 	}
 

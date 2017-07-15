@@ -5,7 +5,7 @@ class Dashboard extends CI_Controller {
 
 	public function __construct(){
 		parent::__construct();
-		//call model inti 
+		//call model inti
 		$this->load->model('initdata_model');
 		$this->load->model('dasboard_model');
 	}
@@ -24,20 +24,17 @@ class Dashboard extends CI_Controller {
 
 		$data['get_order_status'] = $this->dasboard_model->get_order_status();
 		$data['get_orders'] = $this->dasboard_model->get_orders();
-		$data['get_orders_today'] = $this->dasboard_model->get_orders_today(); 
-		$data['get_po_order_status'] = $this->dasboard_model->get_order_status();
-		$data['get_po_orders'] = $this->dasboard_model->get_po_orders();
-		$data['get_po_orders_today'] = $this->dasboard_model->get_po_orders_today(); 
+		$data['get_orders_today'] = $this->dasboard_model->get_orders_today();
 
-		$this->load->view('template/layout', $data);	
+		$this->load->view('template/layout', $data);
 	}
 
 	public function is_logged_in(){
 		$is_logged_in = $this->session->userdata('is_logged_in');
 		$chk_admin =  $this->session->userdata('permission');
 		if(!isset($is_logged_in) || $is_logged_in != true || $chk_admin !='admin'){
-			redirect('login');		
-		}		
+			redirect('login');
+		}
 	}
 }
 

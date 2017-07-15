@@ -48,7 +48,7 @@ class Purchase_order extends CI_Controller {
 		$data['type_list'] = $this->products_model->get_type();
 
 		//call script
-    $data['menu_id'] ='34';
+    $data['menu_id'] ='35';
 		$data['content'] = 'purchase_order/purchase_order_view.php';
 		//$data['script_file']= "js/purchase_order_js";
 		$data['header'] = array('title' => 'purchase_order| '.$this->config->item('sitename'),
@@ -87,7 +87,7 @@ class Purchase_order extends CI_Controller {
 		$data['type_list'] = $this->products_model->get_type();
 
 		//call script
-    $data['menu_id'] ='34';
+    $data['menu_id'] ='35';
 		$data['script_file']= "js/purchase_order_js";
 		$data['content'] = 'purchase_order/purchase_order_add_view.php';
 		//$data['script_file']= "js/purchase_order_js";
@@ -106,7 +106,7 @@ class Purchase_order extends CI_Controller {
 		$data['menus_list'] = $this->initdata_model->get_menu();
 		$data['purchase_order_data'] = $this->purchase_order_model->get_purchase_order_id($purchase_order_id);
 		$data['type_list'] = $this->products_model->get_type();
-        $data['menu_id'] ='34';
+        $data['menu_id'] ='35';
 		$data['content'] = 'purchase_order/purchase_order_edit_view';
 		$data['script_file']= "js/purchase_order_js";
 		$data['header'] = array('title' => 'purchase_order| '.$this->config->item('sitename'),
@@ -140,7 +140,7 @@ class Purchase_order extends CI_Controller {
 		$data['menus_list'] = $this->initdata_model->get_menu();
 		$data['purchase_order_data'] = $this->purchase_order_model->get_purchase_order_id($purchase_order_id);
 		$data['type_list'] = $this->products_model->get_type();
-				$data['menu_id'] ='34';
+				$data['menu_id'] ='35';
 		$data['content'] = 'purchase_order/purchase_order_transfer_view';
 		$data['script_file']= "js/purchase_order_js";
 		$data['header'] = array('title' => 'purchase_order| '.$this->config->item('sitename'),

@@ -115,9 +115,12 @@ class return_receive_model extends CI_Model {
 		$is_cut_stock = $this->input->post('is_cut_stock');
 
 		if($is_active){
-			if($is_cut_stock == "1")
+			if($is_cut_stock)
 			{
-				$sql =" SELECT COUNT(product_id) as connt_id FROM  stock WHERE  return_receive_id ='".$return_receive_id."' AND is_active = 1 AND number = 1 AND product_id = '".$this->input->post('product_id')."'";
+				$sql =" SELECT COUNT(product_id) as connt_id FROM  stock WHERE
+								return_receive_id ='".$return_receive_id."'
+								AND is_active = 1
+								AND number = 1 AND product_id = '".$this->input->post('product_id')."'";
 				$query = $this->db->query($sql);
 				$r = $query->row_array();
 
@@ -167,7 +170,7 @@ class return_receive_model extends CI_Model {
 			}
 
 
-			if($is_cut_stock == "1")
+			if($is_cut_stock)
 			{
 					$sql =" SELECT COUNT(product_id) as connt_id FROM  stock WHERE  return_receive_id ='".$return_receive_id."' AND is_active = 1 AND number = 1 AND product_id = '".$this->input->post('product_id')."'";
 
@@ -185,6 +188,7 @@ class return_receive_model extends CI_Model {
 					$sql_update ="UPDATE products SET stock = stock-1 WHERE id = '".$this->input->post('product_id')."' ";
 					$this->db->query($sql_update);
 				}
+
 			}
 		}
 

@@ -21,6 +21,7 @@
             <th>ส่วนลด</th>
             <th>ส่วนลด Dealer</th>
             <th>ส่วนลด Fanshine</th>
+            <th>ใช้งาน</th>
         </tr>
     </thead>
     <tbody>
@@ -35,6 +36,7 @@
             <td><?php echo $product['discount_price'] ?></td>
             <td><?php echo $product['dealer_price'] ?></td>
             <td><?php echo $product['fanshine_price'] ?></td>
+            <td><?php echo $product['is_active'] ?></td>
         </tr>
     <?php endforeach ?>
     </tbody>
