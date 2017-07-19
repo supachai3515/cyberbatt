@@ -297,7 +297,7 @@ class Payment extends CI_Controller {
 
 	public function save_order()
 	{
-		if($this->session->userdata('is_logged_in')){
+		if(!$this->session->userdata('is_logged_in')){
  		 redirect('dealer','refresh');
 
  	 }
