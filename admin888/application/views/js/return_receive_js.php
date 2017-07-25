@@ -19,7 +19,7 @@
 		      animation: $scope.animationsEnabled,
 		      templateUrl: 'myModalContent.html',
 		      controller: 'ModalInstanceCtrl',
-		      size: "",
+		      size: "lg",
 		      resolve: {
 		        items: function () {
 		          return $scope.items;
