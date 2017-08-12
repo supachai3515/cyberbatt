@@ -12,13 +12,13 @@ class Receive_model extends CI_Model {
 	public function get_receive( $start, $limit)
 	{
 
-	    $sql =" SELECT r.id , r.doc_no ,r.do_ref, r.create_date,r.modified_date,r.qty,r.total,r.vat, r.is_active,r.`comment`, COUNT(rd.product_id) product_id ,
-			(SELECT COUNT(serial_number) serial_number FROM product_serial WHERE (order_id IS NOT NULL OR order_id = '' ) AND  receive_id = r.id ) count_use,
-				(SELECT COUNT(serial_number) serial_number FROM product_serial WHERE receive_id = r.id ) serial_number
+	    $sql ="SELECT r.id , r.doc_no ,r.do_ref, r.create_date,r.modified_date,r.qty,r.total,r.vat, r.is_active,r.`comment`, COUNT(rd.product_id) product_id ,
+						(SELECT COUNT(*) serial_number FROM product_serial WHERE (order_id IS NOT NULL OR order_id = '' ) AND  receive_id = r.id ) count_use,
+						(SELECT COUNT(*) serial_number FROM product_serial WHERE receive_id = r.id ) serial_number
 
-				FROM  receive r  INNER JOIN receive_detail rd ON r.id = rd.receive_id
-				GROUP BY r.id , r.doc_no ,r.do_ref, r.create_date,r.modified_date,r.qty,r.total,r.vat, r.is_active,r.`comment`
-				ORDER BY r.id DESC
+							FROM  receive r  INNER JOIN receive_detail rd ON r.id = rd.receive_id
+							GROUP BY r.id , r.doc_no ,r.do_ref, r.create_date,r.modified_date,r.qty,r.total,r.vat, r.is_active,r.`comment`
+							ORDER BY r.id DESC
 
 				LIMIT " . $start . "," . $limit;
 		$re = $this->db->query($sql);

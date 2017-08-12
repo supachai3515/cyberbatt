@@ -15,20 +15,11 @@ class Orders_model extends CI_Model {
 				p.amount,
 				DATE_FORMAT(p.inform_date_time,'%Y-%m-%d') inform_date,
 				DATE_FORMAT(p.inform_date_time,'%H:%i') inform_time,
-				p.create_date payment_create_date,
-				sh.create_date status_modified_date
+				p.create_date payment_create_date
 				FROM  orders o
 				LEFT JOIN order_status s ON s.id =  o.order_status_id
 				LEFT JOIN  members m ON m.id = o.customer_id
 				LEFT JOIN payment p ON p.order_id = o.id
-				LEFT JOIN order_status_history sh ON sh.order_id = o.id AND sh.create_date =
-
-        		(
-						SELECT MAX(create_date)
-						FROM order_status_history AS b
-						WHERE b.order_id = o.id
-				)
-
         ORDER BY o.date DESC LIMIT " . $start . "," . $limit;
 		$re = $this->db->query($sql);
 		return $re->result_array();

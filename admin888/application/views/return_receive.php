@@ -5,10 +5,10 @@
       <h4>เลือกใบสั่งซื้อ</h4>
     </div>
     <div class="modal-body">
+      <p class="" for="">รหัสสินค้า , เลขที่ใบสั่งซื้อ , เลขที่ invoice , serial number</p>
       <form class="form-inline" role="form" ng-submit="searchOrder(search_order)">
         <div class="form-group">
-          <label class="sr-only" for="">รหัสสินค้า , เลขที่ใบสั่งซื้อ</label>
-          <input type="text" class="form-control" ng-model="search_order" ng-init="search_order =''" placeholder="รหัสสินค้า , เลขที่สั่งซื้อ">
+          <input type="text" class="form-control" ng-model="search_order" ng-init="search_order =''" placeholder="">
         </div>
         <button type="submit" class="btn btn-primary">ค้นหา</button>
       </form>

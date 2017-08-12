@@ -43,7 +43,7 @@
                                     <ul>
                                        <li><i class="fa fa-map-marker"></i>  บริษัท ไชเบอร์ แบต จำกัด <br>
                                        2963 ซ.ลาดพร้าว 101/2 ถ.ลาดพร้าว คลองจั่น บางกะปิ กทม. 10240 </li>
-                                       <li><i class="fa fa-phone"></i> Mobile: 091-7824565 , 02-7313565</li>
+                                       <li><i class="fa fa-phone"></i> Mobile: 091-7824565</li>
                                        <li><i class="fa fa-comment"></i> LINE : @cyberbatt</li>
                                     </ul>
                                 </div>

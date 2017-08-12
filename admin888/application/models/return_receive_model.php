@@ -256,6 +256,9 @@ class return_receive_model extends CI_Model {
 
 	public function get_search_order($search_txt)
 	{
+
+		$search_txt = str_replace(' ', '', $search_txt);
+		$search_txt = $this->db->escape_str($search_txt);
 		$sql =" SELECT * FROM (  SELECT o.id order_id, o.invoice_docno invoice_no,
 				o.date order_date,
 				o.name order_name,
@@ -271,17 +274,10 @@ class return_receive_model extends CI_Model {
 				INNER JOIN products p on p.id = d.product_id
 				LEFT JOIN product_serial s ON s.product_id = d.product_id  AND s.order_id = o.id
 
-				WHERE o.id  LIKE '%".$search_txt."%'
-					OR o.`name`  LIKE '%".$search_txt."%'
-					OR p.`name`  LIKE '%".$search_txt."%'
-					OR o.`address`  LIKE '%".$search_txt."%'
-					OR o.`email`  LIKE '%".$search_txt."%'
-					OR o.`tel`  LIKE '%".$search_txt."%'
-					OR o.`invoice_docno`  LIKE '%".$search_txt."%'
-					OR p.`id`  LIKE '%".$search_txt."%'
-					OR s.serial_number  LIKE '%".$search_txt."%'
-					OR p.`sku`  LIKE '%".$search_txt."%'
-
+				WHERE o.id  = '".$search_txt."'
+					OR o.`invoice_docno`  = '".$search_txt."'
+					OR s.serial_number  = '".$search_txt."'
+					OR p.`sku`  = '".$search_txt."'
 					) a
 			";
 		$re = $this->db->query($sql);
