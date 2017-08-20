@@ -9,17 +9,17 @@
         <fieldset>
         <!-- Text input-->
         <div class="form-group">
-          <label class="col-md-3 control-label" for="id">รหัส</label>  
+          <label class="col-md-3 control-label" for="id">รหัส</label>
           <div class="col-md-4">
           <input id="id" name="id" type="text" disabled="true" value="<?php echo $slider_data['id']; ?>" placeholder="รหัส" class="form-control input-md" required="">
-            
+
           </div>
         </div>
 
 
         <!-- Text input-->
         <div class="form-group">
-          <label class="col-md-3 control-label" for="name">ชื่อ</label>  
+          <label class="col-md-3 control-label" for="name">ชื่อ</label>
           <div class="col-md-6">
             <input id="name" name="name" type="text" value="<?php echo $slider_data['name']; ?>" placeholder="ชื่อ" class="form-control input-md" >
           </div>
@@ -27,42 +27,41 @@
 
         <!-- Text input-->
         <div class="form-group">
-          <label class="col-md-3 control-label" for="model">รายละเอียด</label>  
+          <label class="col-md-3 control-label" for="model">รายละเอียด</label>
           <div class="col-md-6">
-          <input id="description" name="description" type="text" value="<?php echo $slider_data['description']; ?>" placeholder="รายละเอียด" class="form-control input-md">           
+          <input id="description" name="description" type="text" value="<?php echo $slider_data['description']; ?>" placeholder="รายละเอียด" class="form-control input-md">
           </div>
         </div>
 
          <!-- Text input-->
         <div class="form-group">
-          <label class="col-md-3 control-label" for="model">รายละเอียด1</label>  
+          <label class="col-md-3 control-label" for="model">รายละเอียด1</label>
           <div class="col-md-6">
-          <input id="description1" name="description1" type="text" value="<?php echo $slider_data['description1']; ?>" placeholder="รายละเอียด1" class="form-control input-md">           
+          <input id="description1" name="description1" type="text" value="<?php echo $slider_data['description1']; ?>" placeholder="รายละเอียด1" class="form-control input-md">
           </div>
         </div>
 
          <!-- Text input-->
         <div class="form-group">
-          <label class="col-md-3 control-label" for="model">name_link</label>  
+          <label class="col-md-3 control-label" for="model">name_link</label>
           <div class="col-md-6">
-          <input id="name_link" name="name_link" type="text" value="<?php echo $slider_data['name_link']; ?>" placeholder="name_link" class="form-control input-md">           
+          <input id="name_link" name="name_link" type="text" value="<?php echo $slider_data['name_link']; ?>" placeholder="name_link" class="form-control input-md">
           </div>
         </div>
+        <!-- File Button -->
+    		<div class="form-group">
+    		  <label class="col-md-3 control-label" for="image_field">รูปตัวอย่าง</label>
+    		  <div class="col-md-6">
+    		    <p><input id="image_field" name="image_field" class="file-loading" type="file" data-show-upload="false" data-min-file-count="1"></p>
 
-
-         <!-- Text input-->
-        <div class="form-group">
-          <label class="col-md-3 control-label" for="model">image</label>  
-          <div class="col-md-6">
-          <input id="image" name="image" type="text" value="<?php echo $slider_data['image']; ?>" placeholder="image" class="form-control input-md">           
-          </div>
-        </div>
+    		  </div>
+    		</div>
 
         <!-- Text input-->
         <div class="form-group">
-          <label class="col-md-3 control-label" for="model">link</label>  
+          <label class="col-md-3 control-label" for="model">link</label>
           <div class="col-md-6">
-          <input id="link" name="link" type="text" value="<?php echo $slider_data['link']; ?>" placeholder="link" class="form-control input-md">           
+          <input id="link" name="link" type="text" value="<?php echo $slider_data['link']; ?>" placeholder="link" class="form-control input-md">
           </div>
         </div>
 
@@ -72,7 +71,7 @@
           <div class="col-md-4">
           <div class="checkbox">
             <label for="isactive-0">
-              <input type="checkbox" name="isactive" id="isactive-0" value="1" 
+              <input type="checkbox" name="isactive" id="isactive-0" value="1"
               <?php if ($slider_data['is_active']==1): ?>
                 <?php echo "checked"; ?>
               <?php endif ?>
