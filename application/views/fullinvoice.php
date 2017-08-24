@@ -23,7 +23,7 @@
 
             	<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
             		<img src="<?php echo $this->config->item('url_img');?>theme/img/logo/logo.png" style="width: 200px"/>
-            		<h4>บริษัท ไชเบอร์ แบต จำกัด</h4>
+            		<h4>บริษัท ไชเบอร์ แบต จำกัด (สำนักงานใหญ่)</h4>
 			  		 2963 ซ.ลาดพร้าว 101/2 ถ.ลาดพร้าว คลองจั่น บางกะปิ กทม. 10240<br>
 			  		 โทร 02-7313565 มือถือ 081-7547565<br>
 			  		 <strong>เลขประจำตัวผู้เสียภาษี 0105553076314</strong>
@@ -131,7 +131,7 @@
 
 	                            <?php
 
-	                                      $products_price = $orders_data['total'] - $orders_data['shipping_charge'];
+	                                      $products_price = $orders_data['total'];
 	                                      $vat_new =($products_price * 7 )/107;
 	                                      $befor_vat = $products_price -  $vat_new;
 
