@@ -129,52 +129,54 @@
 									  </tr>
 	                            <?php endforeach ?>
 
-	                            <?php
+															<?php
+																 //update invoice total + shipping 20170824
+																 $products_price = $orders_data['total'];
+																 $vat_new =($products_price * 7 )/107;
+																 $befor_vat =($products_price -  $vat_new)-$orders_data['shipping_charge'];
 
-	                                      $products_price = $orders_data['total'];
-	                                      $vat_new =($products_price * 7 )/107;
-	                                      $befor_vat = $products_price -  $vat_new;
+																?>
 
 	                                     ?>
 
-								  <tr>
-								  		<td class="highrow"></td>
-	                                    <td class="highrow"></td>
-	                                    <td class="highrow"></td>
-	                                    <td class="highrow text-center sumprice">รวมราคาสินค้า</td>
-	                                    <td class="highrow text-right"><?php echo number_format($orders_data['total'] - $orders_data['shipping_charge'],2);?>&nbsp;บาท</td>
-	                                </tr>
-	                                <tr>
-	                                	<td class="emptyrow"></td>
-	                                    <td class="emptyrow"></td>
-	                                    <td class="emptyrow"></td>
-	                                    <td class="emptyrow text-center">VAT(7%)</td>
-	                                    <td class="emptyrow text-right"><?php echo number_format($vat_new,2)."&nbsp;บาท"; ?></td>
-	                                </tr>
-	                                <tr>
-	                                	<td class="emptyrow"></td>
-	                                    <td class="emptyrow"></td>
-	                                    <td class="emptyrow"></td>
-	                                    <td class="emptyrow text-center">ราคาก่อนภาษีมูลค่าเพิ่ม</td>
-	                                    <td class="emptyrow text-right">
+																			 <tr>
+																					 <td class="highrow"></td>
+																					 <td class="highrow"></td>
+																					 <td class="highrow"></td>
+																					 <td class="highrow text-center sumprice">รวมราคาสินค้า</td>
+																					 <td class="highrow text-right"><?php echo number_format($orders_data['total'] - $orders_data['shipping_charge'],2);?>&nbsp;บาท</td>
+																			 </tr>
+																			 <tr>
+																				<td class="emptyrow"></td>
+																					<td class="emptyrow"></td>
+																					<td class="emptyrow"></td>
+																					<td class="emptyrow text-center">ค่าขนส่ง</td>
+																					<td class="emptyrow text-right"><?php echo number_format($orders_data['shipping_charge'],2);?>&nbsp;บาท</td>
+																			</tr>
+																			<tr>
+																				<td class="emptyrow"></td>
+																					<td class="emptyrow"></td>
+																					<td class="emptyrow"></td>
+																					<td class="emptyrow text-center">ราคาสินค้าก่อน vat 7%</td>
+																					<td class="emptyrow text-right">
+																					<?php echo number_format($befor_vat,2)."&nbsp;บาท"; ?></td>
+																			</tr>
+																			 <tr>
+																				 <td class="emptyrow"></td>
+																					 <td class="emptyrow"></td>
+																					 <td class="emptyrow"></td>
+																					 <td class="emptyrow text-center">VAT(7%)</td>
+																					 <td class="emptyrow text-right"><?php echo number_format($vat_new,2)."&nbsp;บาท"; ?></td>
+																			 </tr>
 
 
-	                                    <?php echo number_format($befor_vat,2)."&nbsp;บาท"; ?></td>
-	                                </tr>
-	                                 <tr>
-	                                 	<td class="emptyrow"></td>
-	                                    <td class="emptyrow"></td>
-	                                    <td class="emptyrow"></td>
-	                                    <td class="emptyrow text-center">ค่าจัดส่ง <?php echo $orders_data['shipping'];?></td>
-	                                    <td class="emptyrow text-right"><?php echo number_format($orders_data['shipping_charge'],2);?>&nbsp;บาท</td>
-	                                </tr>
-	                                 <tr>
-	                                 	<td class="emptyrow"></td>
-	                                    <td class="emptyrow"></td>
-	                                    <td class="emptyrow"></td>
-	                                    <td class="emptyrow text-center ">รวมราคาสุทธิ</td>
-	                                    <td class="emptyrow text-right text-danger"><strong><?php echo number_format($orders_data["total"],2);?>&nbsp;บาท</strong></td>
-	                                </tr>
+																				<tr>
+																				 <td class="emptyrow"></td>
+																					 <td class="emptyrow"></td>
+																					 <td class="emptyrow"></td>
+																					 <td class="emptyrow text-center ">รวมราคาสุทธิ</td>
+																					 <td class="emptyrow text-right text-danger"><strong><?php echo number_format($orders_data["total"],2);?>&nbsp;บาท</strong></td>
+																			 </tr>
 
 	                            </tbody>
 	                        </table>
