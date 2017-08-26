@@ -4,6 +4,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class slider_model extends CI_Model
 {
+    public function __construct()
+    {
+        parent::__construct();
+    }
     public function get_slider($start, $limit)
     {
         $sql =" SELECT *  FROM  slider p  ORDER BY p.id  LIMIT " . $start . "," . $limit;

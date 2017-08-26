@@ -1,4 +1,6 @@
-<?php if(!defined('BASEPATH')) exit('No direct script access allowed');
+<?php if (!defined('BASEPATH')) {
+    exit('No direct script access allowed');
+}
 
 class Login_model extends CI_Model
 {
@@ -8,19 +10,19 @@ class Login_model extends CI_Model
      * @param string $email : This is email of the user
      * @param string $password : This is encrypted password of the user
      */
-    function loginMe($email, $password)
+    public function loginMe($email, $password)
     {
         $this->db->select('BaseTbl.userId, BaseTbl.password, BaseTbl.name, BaseTbl.roleId, Roles.role, Roles.menu_group_id');
         $this->db->from('tbl_users as BaseTbl');
-        $this->db->join('tbl_roles as Roles','Roles.roleId = BaseTbl.roleId');
+        $this->db->join('tbl_roles as Roles', 'Roles.roleId = BaseTbl.roleId');
         $this->db->where('BaseTbl.email', $email);
         $this->db->where('BaseTbl.isDeleted', 0);
         $query = $this->db->get();
 
         $user = $query->result();
 
-        if(!empty($user)){
-            if(verifyHashedPassword($password, $user[0]->password)){
+        if (!empty($user)) {
+            if (verifyHashedPassword($password, $user[0]->password)) {
                 return $user;
             } else {
                 return array();
@@ -35,14 +37,14 @@ class Login_model extends CI_Model
      * @param {string} $email : This is users email id
      * @return {boolean} $result : TRUE/FALSE
      */
-    function checkEmailExist($email)
+    public function checkEmailExist($email)
     {
         $this->db->select('userId');
         $this->db->where('email', $email);
         $this->db->where('isDeleted', 0);
         $query = $this->db->get('tbl_users');
 
-        if ($query->num_rows() > 0){
+        if ($query->num_rows() > 0) {
             return true;
         } else {
             return false;
@@ -55,14 +57,14 @@ class Login_model extends CI_Model
      * @param {array} $data : This is reset password data
      * @return {boolean} $result : TRUE/FALSE
      */
-    function resetPasswordUser($data)
+    public function resetPasswordUser($data)
     {
         $result = $this->db->insert('tbl_reset_password', $data);
 
-        if($result) {
-            return TRUE;
+        if ($result) {
+            return true;
         } else {
-            return FALSE;
+            return false;
         }
     }
 
@@ -71,7 +73,7 @@ class Login_model extends CI_Model
      * @param string $email : Email id of customer
      * @return object $result : Information of customer
      */
-    function getCustomerInfoByEmail($email)
+    public function getCustomerInfoByEmail($email)
     {
         $this->db->select('userId, email, name');
         $this->db->from('tbl_users');
@@ -87,7 +89,7 @@ class Login_model extends CI_Model
      * @param string $email : Email id of user
      * @param string $activation_id : This is activation string
      */
-    function checkActivationDetails($email, $activation_id)
+    public function checkActivationDetails($email, $activation_id)
     {
         $this->db->select('id');
         $this->db->from('tbl_reset_password');
@@ -98,7 +100,7 @@ class Login_model extends CI_Model
     }
 
     // This function used to create new password by reset link
-    function createPasswordUser($email, $password)
+    public function createPasswordUser($email, $password)
     {
         $this->db->where('email', $email);
         $this->db->where('isDeleted', 0);
@@ -106,5 +108,3 @@ class Login_model extends CI_Model
         $this->db->delete('tbl_reset_password', array('email'=>$email));
     }
 }
-
-?>

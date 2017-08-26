@@ -7,7 +7,6 @@ class Shipping_rate_model extends CI_Model
     public function __construct()
     {
         parent::__construct();
-        //call model inti
     }
 
     public function get_shipping_rate($start, $limit)
