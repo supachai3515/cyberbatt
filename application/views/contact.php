@@ -17,7 +17,7 @@
                         cyberbatt (cyberbatt.com)
                     </h2>
                     <address>
-                        <p><i class="fa fa-map-marker"></i>  บริษัท ไชเบอร์ แบต จำกัด <br>2963 ซ.ลาดพร้าว 101/2 ถ.ลาดพร้าว คลองจั่น บางกะปิ กทม. 10310 </p>
+                        <p><i class="fa fa-map-marker"></i>  บริษัท ไซเบอร์ แบต จำกัด <br>2963 ซ.ลาดพร้าว 101/2 ถ.ลาดพร้าว คลองจั่น บางกะปิ กทม. 10310 </p>
                         <p><i class="fa fa-phone"></i> Mobile: 091-7824565</p>
                         <p><i class="fa fa-envelope-o"></i> Email: <?php echo $this->config->item('email_owner') ?></p>
                         <p><i class="fa fa-comment"></i> Line Id: <a href="http://line.me/ti/p/%40cyberbatt" target="_blank">@cyberbatt</a></p>
