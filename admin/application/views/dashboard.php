@@ -1,6 +1,6 @@
 <div class="content-wrapper">
   <section class="content">
-    <div class="container-fluid box" ng-controller="myCtrl">
+    <div class="container-fluid box" ng-controller="mainCtrl">
         <!-- Page Heading -->
         <div class="row">
             <div class="col-lg-12">
