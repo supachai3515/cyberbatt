@@ -99,25 +99,6 @@ class Products extends BaseController
             // access denied
             $this->loadThis();
         }
-
-        // $return_data = $this->products_model->get_products_search();
-        // $data['products_list'] = $return_data['result_products'];
-        // $data['data_search'] = $return_data['data_search'];
-        // $data['sql'] = $return_data['sql'];
-                //
-                //
-        // $data['brands_list'] = $this->products_model->get_brands();
-        // $data['type_list'] = $this->products_model->get_type();
-                //
-        // //call script
-        // $data['script_file']= "js/product_add_js";
-        // $data['menu_id'] ='5';
-        // $data['content'] = 'products';
-        // $data['header'] = array('title' => 'Products | '.$this->config->item('sitename'),
-        //                         'description' =>  'Products | '.$this->config->item('tagline'),
-        //                         'author' => 'www.wisadev.com',
-        //                         'keyword' =>  'wisadev e-commerce');
-        // $this->load->view('template/layout', $data);
     }
 
     // insert
@@ -340,103 +321,104 @@ class Products extends BaseController
 
     public function updateprice()
     {
+        $data = $this->get_data_check("is_edit");
+        if (!is_null($data)) {
 
         // Retrieve the posted information
-        $item = $this->input->post('productid_p');
-        $check = $this->input->post('check_p');
-        $data["update"] = "";
-        $in_str ="";
+            $item = $this->input->post('productid_p');
+            $check = $this->input->post('check_p');
+            $data["update"] = "";
+            $in_str ="";
 
-        // Cycle true all items and update them
-        for ($i=0;$i < count($item);$i++) {
-            if (isset($check[$i])) {
-                date_default_timezone_set("Asia/Bangkok");
-                $data_product = array(
+            // Cycle true all items and update them
+            for ($i=0;$i < count($item);$i++) {
+                if (isset($check[$i])) {
+                    date_default_timezone_set("Asia/Bangkok");
+                    $data_product = array(
                     'price' =>  $this->input->post('price'),
                     'dis_price' => $this->input->post('dis_price'),
                     'member_discount' => $this->input->post('member_discount'),
                     'member_discount_lv1' => $this->input->post('member_discount_lv1'),
                     'modified_date' => date("Y-m-d H:i:s"),
                 );
-                $where = "id = '".$check[$i]."'";
+                    $where = "id = '".$check[$i]."'";
 
-                $this->db->update("products", $data_product, $where);
-                if ($in_str =="") {
-                    $in_str  = $check[$i];
-                } else {
-                    $in_str = $in_str.",".$check[$i];
-                }
-
-                $data["update"] = $data["update"].'<li class="list-group-item"><strong>ProductId</strong> : '.$check[$i].', <strong>price</strong> : '.$this->input->post('price').', <strong>Disprice</strong> : '.$this->input->post('dis_price').', <strong>Dealer_price</strong> : '.$this->input->post('member_discount').', <strong> fanshine</strong> : '.$this->input->post('member_discount_lv1').'</li>';
-            }
-            //echo $this->input->post('price')." , ".$this->input->post('dis_price')." , ".$this->input->post('member_discount')."<br>";
-            //echo $item[$i]." , ".$chk."<br>";
-        }
-
-        if ($in_str != "") {
-            $data['products_list'] = $this->products_model->get_products_in($in_str);
-        }
-
-
-        $data['brands_list'] = $this->products_model->get_brands();
-        $data['type_list'] = $this->products_model->get_type();
-
-        //call script
-        $data['script_file']= "js/product_add_js";
-        $data['menu_id'] ='5';
-        $data['content'] = 'products';
-        $data['header'] = array('title' => 'Products | '.$this->config->item('sitename'),
-                                'description' =>  'Products | '.$this->config->item('tagline'),
-                                'author' => 'www.wisadev.com',
-                                'keyword' =>  'wisadev e-commerce');
-        $this->load->view('template/layout', $data);
-    }
-
-    public function export_stock()
-    {
-        $all = $this->input->post('all_product');
-
-        if (isset($all) && $all == '1') {
-            $sql =" SELECT p.id ,p.sku ,p.name product_name,t.name type_name, b.name brand_name, p.stock ,p.price,
-		    				p.dis_price discount_price , p.member_discount dealer_price ,p.member_discount_lv1 fanshine_price, p.is_active
-					FROM  products p
-					LEFT JOIN product_brand b ON p.product_brand_id = b.id
-					LEFT JOIN product_type t ON p.product_type_id = t.id
-					ORDER BY p.id DESC ";
-            $re = $this->db->query($sql);
-            //print($sql);
-            $data['products_list'] = $re->result_array();
-            $this->load->view('export_product', $data);
-            print("all");
-        } else {
-            // Retrieve the posted information
-            $item = $this->input->post('productid_p');
-            $check = $this->input->post('check_p');
-            $in_str ="";
-
-            // Cycle true all items and update them
-            for ($i=0;$i < count($item);$i++) {
-                if (isset($check[$i])) {
+                    $this->db->update("products", $data_product, $where);
                     if ($in_str =="") {
                         $in_str  = $check[$i];
                     } else {
                         $in_str = $in_str.",".$check[$i];
                     }
+
+                    $data["update"] = $data["update"].'<li class="list-group-item"><strong>ProductId</strong> : '.$check[$i].', <strong>price</strong> : '.$this->input->post('price').', <strong>Disprice</strong> : '.$this->input->post('dis_price').', <strong>Dealer_price</strong> : '.$this->input->post('member_discount').', <strong> fanshine</strong> : '.$this->input->post('member_discount_lv1').'</li>';
                 }
+                //echo $this->input->post('price')." , ".$this->input->post('dis_price')." , ".$this->input->post('member_discount')."<br>";
+            //echo $item[$i]." , ".$chk."<br>";
             }
 
             if ($in_str != "") {
+                $data['products_list'] = $this->products_model->get_products_in($in_str);
+            }
+
+            $data['brands_list'] = $this->products_model->get_brands();
+            $data['type_list'] = $this->products_model->get_type();
+
+            //call script
+            $data['script_file']= "js/product_add_js";
+            $data['content'] = 'products/products';
+            $data["header"] = $this->get_header("products");
+            $this->load->view("template/layout_main", $data);
+        }
+    }
+
+    public function export_stock()
+    {
+        $data = $this->get_data_check("is_view");
+        if (!is_null($data)) {
+            $all = $this->input->post('all_product');
+
+            if (isset($all) && $all == '1') {
                 $sql =" SELECT p.id ,p.sku ,p.name product_name,t.name type_name, b.name brand_name, p.stock ,p.price,
+		    				p.dis_price discount_price , p.member_discount dealer_price ,p.member_discount_lv1 fanshine_price, p.is_active
+					FROM  products p
+					LEFT JOIN product_brand b ON p.product_brand_id = b.id
+					LEFT JOIN product_type t ON p.product_type_id = t.id
+					ORDER BY p.id DESC ";
+                $re = $this->db->query($sql);
+                //print($sql);
+                $data['products_list'] = $re->result_array();
+                $this->load->view('products/export_product', $data);
+                print("all");
+            } else {
+                // Retrieve the posted information
+                $item = $this->input->post('productid_p');
+                $check = $this->input->post('check_p');
+                $in_str ="";
+
+                // Cycle true all items and update them
+                for ($i=0;$i < count($item);$i++) {
+                    if (isset($check[$i])) {
+                        if ($in_str =="") {
+                            $in_str  = $check[$i];
+                        } else {
+                            $in_str = $in_str.",".$check[$i];
+                        }
+                    }
+                }
+
+                if ($in_str != "") {
+                    $sql =" SELECT p.id ,p.sku ,p.name product_name,t.name type_name, b.name brand_name, p.stock ,p.price,
 			    				p.dis_price discount_price , p.member_discount dealer_price ,p.member_discount_lv1 fanshine_price, p.is_active
 						FROM  products p
 						LEFT JOIN product_brand b ON p.product_brand_id = b.id
 						LEFT JOIN product_type t ON p.product_type_id = t.id
 						WHERE p.id in(".$in_str.")
 						 ORDER BY p.id DESC ";
-                $re = $this->db->query($sql);
-                //print($sql);
-                $data['products_list'] = $re->result_array();
-                $this->load->view('export_product', $data);
+                    $re = $this->db->query($sql);
+                    //print($sql);
+                    $data['products_list'] = $re->result_array();
+                    $this->load->view('products/export_product', $data);
+                }
             }
         }
     }

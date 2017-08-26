@@ -1,148 +1,115 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 require APPPATH . '/libraries/BaseController.php';
 
-class Report_order extends BaseController {
-	public function __construct(){
-		parent::__construct();
-    
-		$this->load->model('report_model');
-		$this->load->model('products_model');
-    $this->isLoggedIn();
-
-	}
-
-	//page view
-	public function index($page=0)
-	{
-
-		$data['global'] = $this->global;
-    $data['menu_id'] ='10';
-		$data['menu_list'] = $this->initdata_model->get_menu($data['global']['menu_group_id']);
-    $data['access_menu'] = $this->isAccessMenu($data['menu_list'],$data['menu_id']);
-    if($data['access_menu']['is_access']&&$data['access_menu']['is_view'])
+class Report_order extends BaseController
+{
+    public function __construct()
     {
-
-			$searchTxt = $this->input->post();
-			$data['resultpost'] = $searchTxt;
-			$data['selectDB'] = $this->report_model->getOrder($searchTxt);
-			$data['get_payment'] = $this->report_model->get_sumpayment($searchTxt);
-
-      $data['content'] = 'reports/report_order';
-      //if script file
-      $data['script_file'] = 'js/report_js';
-  		$data['header'] = array('title' => 'Report order | '.$this->config->item('sitename'),
-              								'description' =>  'Report order | '.$this->config->item('tagline'),
-              								'author' => $this->config->item('author'),
-              								'keyword' => 'Product Brand');
-  		$this->load->view('template/layout_main', $data);
+        parent::__construct();
+        $this->load->model('report_model');
+        $this->load->model('products_model');
+        $this->isLoggedIn();
     }
-    else {
-      //access denied
-       $this->loadThis();
-    }
-	}
 
-	public function report_product()
-	{
-		$data['global'] = $this->global;
-    $data['menu_id'] ='11';
-		$data['menu_list'] = $this->initdata_model->get_menu($data['global']['menu_group_id']);
-    $data['access_menu'] = $this->isAccessMenu($data['menu_list'],$data['menu_id']);
-    if($data['access_menu']['is_access']&&$data['access_menu']['is_view'])
+    //page view
+    public function index($page=0)
     {
+        $data = $this->get_data_check_name("is_view", "report_order/report_order");
+        if (!is_null($data)) {
+            $searchTxt = $this->input->post();
+            $data['resultpost'] = $searchTxt;
+            $data['selectDB'] = $this->report_model->getOrder($searchTxt);
+            $data['get_payment'] = $this->report_model->get_sumpayment($searchTxt);
 
-			$searchTxt = $this->input->post();
-			$data['resultpost'] = $searchTxt;
-			$data['selectDB'] = $this->report_model->getProduct($searchTxt);
-      $data['content'] = 'reports/report_product';
-      //if script file
-      $data['script_file'] = 'js/report_js';
-  		$data['header'] = array('title' => 'Report product | '.$this->config->item('sitename'),
-              								'description' =>  'Report product | '.$this->config->item('tagline'),
-              								'author' => $this->config->item('author'),
-              								'keyword' => 'Product Brand');
-  		$this->load->view('template/layout_main', $data);
+            $data['content'] = 'reports/report_order';
+            //if script file
+            $data['script_file'] = 'js/report_js';
+            $data["header"] = $this->get_header("report_order");
+            $this->load->view('template/layout_main', $data);
+        } else {
+            //access denied
+            $this->loadThis();
+        }
     }
-    else {
-      //access denied
-       $this->loadThis();
-    }
-	}
 
-	public function report_price()
-	{
-
-		$data['global'] = $this->global;
-    $data['menu_id'] ='12';
-		$data['menu_list'] = $this->initdata_model->get_menu($data['global']['menu_group_id']);
-    $data['access_menu'] = $this->isAccessMenu($data['menu_list'],$data['menu_id']);
-    if($data['access_menu']['is_access']&&$data['access_menu']['is_view'])
+    public function report_product()
     {
-
-			$searchTxt = $this->input->post();
-			$data['resultpost'] = $searchTxt;
-			$data['price_report_data'] = $this->report_model->get_price_report($searchTxt);
-      $data['content'] = 'reports/report_price';
-      //if script file
-      $data['script_file'] = 'js/report_js';
-  		$data['header'] = array('title' => 'Report price | '.$this->config->item('sitename'),
-              								'description' =>  'Report price | '.$this->config->item('tagline'),
-              								'author' => $this->config->item('author'),
-              								'keyword' => 'Product Brand');
-  		$this->load->view('template/layout_main', $data);
-    }
-    else {
-      //access denied
-       $this->loadThis();
+        $data = $this->get_data_check_name("is_view", "report_order/report_product");
+        if (!is_null($data)) {
+            $searchTxt = $this->input->post();
+            $data['resultpost'] = $searchTxt;
+            $data['selectDB'] = $this->report_model->getProduct($searchTxt);
+            $data['content'] = 'reports/report_product';
+            //if script file
+            $data['script_file'] = 'js/report_js';
+            $data["header"] = $this->get_header("report_product");
+            $this->load->view('template/layout_main', $data);
+        } else {
+            //access denied
+            $this->loadThis();
+        }
     }
 
-	}
-
-	public function report_purchase_order($inti='')
-	{
-		$data['global'] = $this->global;
-    $data['menu_id'] ='13';
-		$data['menu_list'] = $this->initdata_model->get_menu($data['global']['menu_group_id']);
-    $data['access_menu'] = $this->isAccessMenu($data['menu_list'],$data['menu_id']);
-    if($data['access_menu']['is_access']&&$data['access_menu']['is_view'])
+    public function report_price()
     {
-
-			if($inti ==''){
-				//defalut search
-				$data_search['all_promotion'] = "1";
-				$data_search['is_active'] = "1";
-				$data['data_search'] = $data_search;
-				$data['products_list']= NULL;
-			}
-			else {
-				$return_data = $this->report_model->get_products_search();
-				$data['products_list'] = $return_data['result_products'];
-				$data['data_search'] = $return_data['data_search'];
-				$data['sql'] = $return_data['sql'];
-			}
-
-			$data['brands_list'] = $this->products_model->get_brands();
-			$data['type_list'] = $this->products_model->get_type();
-			/*Search*/
-			$searchTxt = $this->input->post();
-			$data['resultpost'] = $searchTxt;
-			$data['purchase_order_report_data'] = $this->report_model->get_report_purchase_order($data['products_list'], $searchTxt);
-      $data['content'] = 'reports/report_purchase_order';
-      //if script file
-      $data['script_file'] = 'js/report_js';
-  		$data['header'] = array('title' => 'Report price | '.$this->config->item('sitename'),
-              								'description' =>  'Report price | '.$this->config->item('tagline'),
-              								'author' => $this->config->item('author'),
-              								'keyword' => 'Product Brand');
-  		$this->load->view('template/layout_main', $data);
+        $data = $this->get_data_check_name("is_view", "report_order/report_price");
+        if (!is_null($data)) {
+            $searchTxt = $this->input->post();
+            $data['resultpost'] = $searchTxt;
+            $data['price_report_data'] = $this->report_model->get_price_report($searchTxt);
+            $data['content'] = 'reports/report_price';
+            //if script file
+            $data['script_file'] = 'js/report_js';
+            $data["header"] = $this->get_header("report_price");
+            $this->load->view('template/layout_main', $data);
+        } else {
+            //access denied
+            $this->loadThis();
+        }
     }
-    else {
-      //access denied
-       $this->loadThis();
-    }
-	}
 
+    public function report_purchase_order($inti='')
+    {
+        $data = $this->get_data_check_name("is_view", "report_order/report_purchase_order");
+        if (!is_null($data)) {
+            if ($inti =='') {
+                //defalut search
+                $data_search['all_promotion'] = "1";
+                $data_search['is_active'] = "1";
+                $data['data_search'] = $data_search;
+                $data['products_list']= null;
+            } else {
+                $return_data = $this->report_model->get_products_search();
+                $data['products_list'] = $return_data['result_products'];
+                $data['data_search'] = $return_data['data_search'];
+                $data['sql'] = $return_data['sql'];
+                $is_export = $this->input->post('is_export');
+            }
+
+            $data['brands_list'] = $this->products_model->get_brands();
+            $data['type_list'] = $this->products_model->get_type();
+
+            /*Search*/
+            $searchTxt = $this->input->post();
+            $data['resultpost'] = $searchTxt;
+            $data['purchase_order_report_data'] = $this->report_model->get_report_purchase_order($data['products_list'], $searchTxt);
+            //call script
+            $data['script_file']= "js/report_js";
+            $data['content'] = 'reports/report_purchase_order';
+            $data["header"] = $this->get_header("report purchase order");
+
+            if (isset($is_export) && $is_export == '1') {
+                $data['products_list'] = $data['purchase_order_report_data'];
+                $this->load->view('reports/export_report_purchase_order', $data);
+            }
+
+            $this->load->view('template/layout_main', $data);
+        } else {
+            //access denied
+            $this->loadThis();
+        }
+    }
 }
 
 /* End of file prrducts.php */

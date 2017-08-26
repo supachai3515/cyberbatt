@@ -2,7 +2,13 @@
   <section class="content">
     <div class="container-fluid box">
         <div class="page-header">
-            <h1>รายงานยอดขายสินค้า</h1>
+            <h1>รายงานยอดขายสินค้า
+            <?php if($this->input->get("method") == 'post'){?><small style="float:right">
+            	<a href="<?php echo base_url('report_order/report_product');?>"><button style="color:#000;" class="btn btn-default"><i class="glyphicon glyphicon-repeat"></i>&nbsp;โชว์ข้อมูลทั้งหมด</button></a>
+            </small>
+			<?php }?>
+            </h1>
+            <?php //if(isset($sql))echo "<p>".$sql."</p>"; ?>
         </div>
         <form action="?method=post" method="post" class="form-inline" role="form">
             <select name="select_date" id="input" class="form-control" required="required">
@@ -28,7 +34,7 @@
             <button type="submit" class="btn btn-primary">ค้นหา</button>
         </form>
         <div class="table-responsive">
-            <table class="table table-hover">
+            <table class="table table-striped">
                 <thead>
                     <tr>
                         <th>วันที่</th>

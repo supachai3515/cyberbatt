@@ -225,6 +225,20 @@ class BaseController extends CI_Controller
         }
     }
 
+    public function get_data_check_name($check_role ,$link_name)
+    {
+        $data['global'] = $this->global;
+        $data['menu_id'] = $this->initdata_model->get_menu_id($link_name);
+        $data['menu_list'] = $this->initdata_model->get_menu($data['global']['menu_group_id']);
+        $data['access_menu'] = $this->isAccessMenu($data['menu_list'], $data['menu_id']);
+        if ($data['access_menu']['is_access']&&$data['access_menu'][$check_role]) {
+            return $data;
+        } else {
+            // access denied
+            $this->loadThis();
+        }
+    }
+
 		public function get_header($title)
     {
 			 return array('title' => $title.' | '.$this->config->item('sitename'),
