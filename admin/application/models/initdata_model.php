@@ -19,6 +19,18 @@ class Initdata_model extends CI_Model {
 		return  $reMenus->result_array();
 	}
 
+	public function get_menu_id($link)
+	{
+		// $this->db->escape() ใส่ '' ให้
+		// $this->db->escape_str()  ไม่ใส่ '' ให้
+		// $this->db->escape_like_str($searchText) like
+		$sqlmenu =" SELECT m.menu_id
+								FROM menu m WHERE link = ".$this->db->escape($link);
+		$reMenus = $this->db->query($sqlmenu);
+		$menu =  $reMenus->row_array();
+		return $menu['menu_id'];
+	}
+
 	public function get_product_brand()
 	{
 		$sql =" SELECT m.* FROM product_brand m WHERE m.is_active = 1 ORDER BY m.product_brand_id ";

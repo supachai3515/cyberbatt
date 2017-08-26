@@ -6,7 +6,7 @@ class Products_model extends CI_Model {
 	public function __construct(){
 		parent::__construct();
 		//call model inti 
-		$this->load->model('Initdata_model');
+		
 	}
 	
 	public function get_products( $start, $limit)

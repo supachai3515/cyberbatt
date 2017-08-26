@@ -13,9 +13,9 @@ class Product_brand_model extends CI_Model {
 		// $this->db->escape_str()  ไม่ใส่ '' ให้
 		// $this->db->escape_like_str($searchText) like
 		$searchText = $this->db->escape_like_str($searchText);
-		$sql =" SELECT COUNT(m.product_brand_id) as connt_id FROM  product_brand m WHERE 1=1 ";
+		$sql =" SELECT COUNT(m.id) as connt_id FROM  product_brand m WHERE 1=1 ";
 		if(!empty($searchText)) {
-				$sql = $sql." AND (m.product_brand_id  LIKE '%".$searchText."%'
+				$sql = $sql." AND (m.id  LIKE '%".$searchText."%'
 														OR  m.name  LIKE '%".$searchText."%'
 														OR  m.description  LIKE '%".$searchText."%')";
 		}
@@ -35,7 +35,7 @@ class Product_brand_model extends CI_Model {
 						LEFT JOIN tbl_users u1 ON u1.userId = m.create_by
 						LEFT JOIN tbl_users u2 ON u2.userId = m.modified_by WHERE 1=1 ";
 		if(!empty($searchText)) {
-				$sql = $sql." AND (m.product_brand_id  LIKE '%".$searchText."%'
+				$sql = $sql." AND (m.id  LIKE '%".$searchText."%'
 													OR  m.name  LIKE '%".$searchText."%'
 													OR  m.description  LIKE '%".$searchText."%')";
 		}
@@ -55,7 +55,7 @@ class Product_brand_model extends CI_Model {
       return $result;
   }
 
-	public function get_product_brand_id($id)
+	public function get_id($id)
 	{
 
 		$id = $this->db->escape($id);
@@ -63,7 +63,7 @@ class Product_brand_model extends CI_Model {
 		$sql ="SELECT m.* , u1.name create_by_name , u2.name  modified_by_name FROM  product_brand m
 						LEFT JOIN tbl_users u1 ON u1.userId = m.create_by
 						LEFT JOIN tbl_users u2 ON u2.userId = m.modified_by
-						WHERE m.product_brand_id = ".$id;
+						WHERE m.id = ".$id;
 		$query = $this->db->query($sql);
 		$row = $query->row_array();
 		return $row;
@@ -80,7 +80,7 @@ class Product_brand_model extends CI_Model {
 
 	function update_product_brand($product_brand_info,$id)
 	{
-			$this->db->where('product_brand_id', $id);
+			$this->db->where('id', $id);
 			$this->db->update('product_brand', $product_brand_info);
 			return TRUE;
 	}

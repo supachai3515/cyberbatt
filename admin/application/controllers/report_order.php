@@ -5,7 +5,7 @@ require APPPATH . '/libraries/BaseController.php';
 class Report_order extends BaseController {
 	public function __construct(){
 		parent::__construct();
-    $this->load->model('initdata_model');
+    
 		$this->load->model('report_model');
 		$this->load->model('products_model');
     $this->isLoggedIn();

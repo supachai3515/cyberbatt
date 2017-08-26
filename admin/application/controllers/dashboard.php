@@ -6,7 +6,7 @@ class Dashboard extends BaseController {
 	public function __construct(){
 		parent::__construct();
 		//call model inti
-    $this->load->model('initdata_model');
+    
 		$this->load->model('dasboard_model');
     $this->isLoggedIn();
 	}
