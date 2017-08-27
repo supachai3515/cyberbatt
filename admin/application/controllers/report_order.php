@@ -20,7 +20,6 @@ class Report_order extends BaseController
             $searchTxt = $this->input->post();
             $data['resultpost'] = $searchTxt;
             $data['selectDB'] = $this->report_model->getOrder($searchTxt);
-            $data['get_payment'] = $this->report_model->get_sumpayment($searchTxt);
 
             $data['content'] = 'reports/report_order';
             //if script file

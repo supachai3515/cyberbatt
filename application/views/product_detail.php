@@ -3,7 +3,7 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-3 col-lg-3 col-md-3">
-            <?php 
+            <?php
                  //left-sidebar
                 $data['page']= "product_detail";
                      $this->load->view('template/left-sidebar',$data);
@@ -36,12 +36,12 @@
                                         <img src="<?php echo $this->config->item('no_url_img');?>" class="img-responsive" alt="Image">
                                     <?php endif ?>
                                     <?php $i= 1; foreach ($product_images as $value): ?>
-                                    <?php 
+                                    <?php
 										$image_url="";
 										if($value['path'] !=""){
                                             $image_url = $this->config->item('url_img').$value['path'];
                                         }
-										else { 
+										else {
                                             $image_url = $this->config->item('no_url_img');
                                         }
 									?>
@@ -71,6 +71,10 @@
                                             <span><strong>BRAND : </strong></span><span> <a href="<?php echo base_url('products/brand/'.$product_detail['brand_slug']) ?>"><?php echo $product_detail['brand_name'] ?></a></span>
                                             <br>
                                             <?php endif ?>
+                                            <?php if (isset($product_detail['warranty'])  && $product_detail['warranty'] !=''): ?>
+                                            <span><strong>ระยะประกัน : </strong></span><span><?php echo $product_detail['warranty'] ?></span>
+                                            <br>
+                                            <?php endif ?>
                                         </p>
                                         <p class="product-desc">
                                             <?php //echo $product_detail['shot_detail'] ?>
@@ -81,10 +85,10 @@
                                         <?php else: ?>
                                             <small><span class="label label-default">สินค้าหมดชั่วคราว</span></span></small>
                                         <?php endif ?>
-                                           
+
                                         </p>
                                         <div class="price-box-area">
-                                            <?php 
+                                            <?php
                                                 $price = $price = $product_detail["price"];
                                                 $dis_price = $disprice = $product_detail["dis_price"];
 
@@ -113,7 +117,7 @@
                                             <span class="new-price" ng-bind="<?php echo $dis_price;?> | currency:'฿':0"></span>
                                             <?php endif ?>
                                         </div>
-                                        
+
                                         <div class="action-button button-exclusive">
                                         <?php if ($product_detail['stock'] > 0): ?>
                                             <a href="<?php echo base_url('cart/add/'.$product_detail["id"]) ?>" class="add-to-cart">
@@ -121,8 +125,8 @@
                                             </a>
                                         <?php endif ?>
                                         </div>
-                                    
-                                        
+
+
                                         <div class="btn-group" style="padding-bottom:10px;">
                                             <div class="shere-button">
                                                 <a href="https://twitter.com/home?status=<?php echo base_url('product/'.$product_detail['slug']) ?>" target="_blank">

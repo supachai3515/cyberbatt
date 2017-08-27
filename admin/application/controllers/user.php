@@ -17,7 +17,7 @@ class User extends BaseController
     public function __construct()
     {
         parent::__construct();
-        
+
         $this->load->model('user_model');
         $this->load->model('menugroup_model');
         $this->isLoggedIn();
@@ -63,7 +63,7 @@ class User extends BaseController
         $data['searchText'] = $searchText;
         $this->load->library('pagination');
         $count = $this->user_model->userListingCount($searchText);
-        $returns = $this->paginationCompress ( "userListing/", $count, 5 );
+        $returns = $this->paginationCompress ( "userListing/", $count, 10 );
         $data['userRecords'] = $this->user_model->userListing($searchText, $returns["page"], $returns["segment"]);
         $data['content'] = 'users';
         //if script file
