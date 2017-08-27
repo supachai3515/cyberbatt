@@ -11,10 +11,7 @@ class Receive_model extends CI_Model
 
     public function get_receive($start, $limit)
     {
-        $sql ="SELECT r.id , r.doc_no ,r.do_ref, r.create_date,r.modified_date,r.qty,r.total,r.vat, r.is_active,r.`comment`, COUNT(rd.product_id) product_id ,
-						(SELECT COUNT(*) serial_number FROM product_serial WHERE (order_id IS NOT NULL OR order_id = '' ) AND  receive_id = r.id ) count_use,
-						(SELECT COUNT(*) serial_number FROM product_serial WHERE receive_id = r.id ) serial_number
-
+        $sql ="SELECT r.id , r.doc_no ,r.do_ref, r.create_date,r.modified_date,r.qty,r.total,r.vat, r.is_active,r.`comment`, COUNT(rd.product_id) product_id
 							FROM  receive r  INNER JOIN receive_detail rd ON r.id = rd.receive_id
 							GROUP BY r.id , r.doc_no ,r.do_ref, r.create_date,r.modified_date,r.qty,r.total,r.vat, r.is_active,r.`comment`
 							ORDER BY r.id DESC
@@ -49,6 +46,22 @@ class Receive_model extends CI_Model
         $query = $this->db->query($sql);
         $row = $query->row_array();
         return  $row['connt_id'];
+    }
+
+
+    public function get_compare_serial($receive_id)
+    {
+
+      $sql ="  SELECT r.id , r.doc_no ,r.do_ref, r.create_date,r.modified_date,r.qty,r.total,r.vat, r.is_active,r.`comment`, COUNT(rd.product_id) product_id ,
+						(SELECT COUNT(*) serial_number FROM product_serial WHERE (order_id IS NOT NULL OR order_id = '' ) AND  receive_id = r.id ) count_use,
+						(SELECT COUNT(*) serial_number FROM product_serial WHERE receive_id = r.id ) serial_number
+
+							FROM  receive r  INNER JOIN receive_detail rd ON r.id = rd.receive_id
+							WHERE r.id = ".$this->db->escape($receive_id)."
+							GROUP BY r.id , r.doc_no ,r.do_ref, r.create_date,r.modified_date,r.qty,r.total,r.vat, r.is_active,r.`comment` ";
+        $query = $this->db->query($sql);
+        $row = $query->row_array();
+        return $row;
     }
 
 

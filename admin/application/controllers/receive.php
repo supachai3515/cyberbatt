@@ -63,13 +63,31 @@ class Receive extends BaseController
 
     public function edit_view($receive_id)
     {
-        $this->is_logged_in();
-        $data['menus_list'] = $this->initdata_model->get_menu();
-        $data['receive_data'] = $this->receive_model->get_receive_id($receive_id);
-        $data['type_list'] = $this->products_model->get_type();
-        $data['menu_id'] ='23';
-        $data['content'] = 'receive_view';
-        $this->load->view('receive_view', $data);
+        $data = $this->get_data_check("is_edit");
+        if (!is_null($data)) {
+            $data['receive_data'] = $this->receive_model->get_receive_id($receive_id);
+            $data['type_list'] = $this->products_model->get_type();
+            $data['script_file']= "js/receive_js";
+            $data["content"] = "receive/receive_view_edit";
+            $data["header"] = $this->get_header("receive");
+            $this->load->view("receive/receive_view_edit", $data);
+
+        }
+
+    }
+
+    public function view($receive_id)
+    {
+        $data = $this->get_data_check("is_view");
+        if (!is_null($data)) {
+            $data['receive_data'] = $this->receive_model->get_receive_id($receive_id);
+            $data['type_list'] = $this->products_model->get_type();
+            $data['script_file']= "js/receive_js";
+            $data["content"] = "receive/receive_view";
+            $data["header"] = $this->get_header("receive");
+            $this->load->view("receive/receive_view", $data);
+
+        }
     }
 
 
@@ -127,6 +145,27 @@ class Receive extends BaseController
         $value = json_decode(file_get_contents("php://input"));
         $data['product'] =  $this->receive_model->get_product($value->sku);
         print json_encode($data['product']);
+    }
+
+    public function get_compare_serial()
+    {
+
+      $method = $_SERVER['REQUEST_METHOD'];
+
+      if ($method != 'POST') {
+          json_output(400, array('status' => 400,'message' => 'Bad request.'));
+      } else {
+            $data_info = json_decode(file_get_contents("php://input"));
+          //$data_info = json_decode($json_str);
+          if ($data_info) {
+              $result = $this->receive_model->get_compare_serial($data_info->receive_id);
+              if ($result) {
+                  json_output(200, array('status' => 200,'message' => $result));
+              } else {
+                  json_output(400, array('status' => 400,'message' => 'error'));
+              }
+          }
+      }
     }
 
     public function get_receive_detail()
@@ -275,7 +314,6 @@ class Receive extends BaseController
             }
         }
     }
-
 }
 
 /* End of file receive.php */

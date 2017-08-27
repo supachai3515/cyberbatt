@@ -61,6 +61,21 @@ class Return_receive extends BaseController
         }
     }
 
+    //page edit
+    public function view($return_receive_id)
+    {
+        $data = $this->get_data_check("is_view");
+        if (!is_null($data)) {
+            $data['return_receive_data'] = $this->return_receive_model->get_return_receive_id($return_receive_id);
+            $data['type_list'] = $this->products_model->get_type();
+
+            $data['script_file']= "js/return_receive_js";
+            $data["content"] = "return_receive/return_receive_view";
+            $data["header"] = $this->get_header("return_receive");
+            $this->load->view("template/layout_main", $data);
+        }
+    }
+
     // update
     public function update($return_receive_id)
     {

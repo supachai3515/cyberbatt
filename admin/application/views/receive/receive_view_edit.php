@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>ใบขอซื้อ</title>
+		<title>ใบรับเข้า <?php echo $receive_data['doc_no']." ".$receive_data["do_ref"];?></title>
 
 		<!-- Bootstrap CSS -->
 		<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
@@ -30,15 +30,17 @@
 
             	</div>
             	<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 text-right">
-                    <h3>ใบขอซื้อ<br>
-                    <?php if ($purchase_order_data['is_vat'] == "0"): ?>
+                    <h3>ใบรับเข้า<br>
+                    <?php if ($receive_data['is_vat'] == "0"): ?>
                             <span style="font-size:14px"> (ไม่คำนวน vat) </span>
                     <?php else: ?>
                             <span style="font-size:14px"> (คำนวน vat) </span>
                     <?php endif ?>
-                    <?php echo  $purchase_order_data['doc_no'];?> </h3>
-                    <strong>วันที่ <?php echo $purchase_order_data['create_date']?></strong><br/>
 
+                    <?php echo  $receive_data['doc_no'];?> </h3>
+                    <strong>วันที่รับเข้า <?php echo $receive_data['create_date']?></strong><br/>
+                    <strong>วันที่ออก <?php echo $receive_data['date_ref']?></strong><br/>
+                    <strong>Ref. #<?php echo $receive_data['id']?></strong><br/>
             	</div>
 		</div>
         <div class="row" style="padding-top:10px;">
@@ -46,14 +48,14 @@
               <div class="panel panel-default height">
                   <div class="panel-heading">ผู้จำหน่าย</div>
                   <div class="panel-body">
-                      <?php if (isset($purchase_order_data["supplier"]) && $purchase_order_data["supplier"] !=""): ?>
-                      	<strong>Supplier: </strong><?php echo $purchase_order_data["supplier"];?><br>
+                      <?php if (isset($receive_data["supplier"]) && $receive_data["supplier"] !=""): ?>
+                      	<strong>Supplier: </strong><?php echo $receive_data["supplier"];?><br>
 											<?php endif; ?>
-											<?php if (isset($purchase_order_data["warranty"]) && $purchase_order_data["warranty"] !=""): ?>
-                      	<strong>Warranty: </strong><?php echo $purchase_order_data["warranty"];?><br>
+											<?php if (isset($receive_data["warranty"]) && $receive_data["warranty"] !=""): ?>
+                      	<strong>Warranty: </strong><?php echo $receive_data["warranty"];?><br>
 											<?php endif; ?>
-											<?php if (isset($purchase_order_data["comment"]) && $purchase_order_data["comment"] !=""): ?>
-												<strong>หมายเหตุ: </strong><?php echo $purchase_order_data["comment"];?><br>
+											<?php if (isset($receive_data["comment"]) && $receive_data["comment"] !=""): ?>
+												<strong>หมายเหตุ: </strong><?php echo $receive_data["comment"];?><br>
 											<?php endif; ?>
                   </div>
               </div>
@@ -72,32 +74,63 @@
 	                        <table class="table table-condensed">
 	                            <thead>
 	                                <tr>
-	                                    <td class="text-center product-id"><strong>SKU</strong></td>
-	                                    <td class=""><strong>Name</strong></td>
-	                                    <td class="text-center sumpricepernum"><strong>QTY</strong></td>
+	                                    <td class="text-center product-id">sku</td>
+	                                    <td class="text-center">name</td>
+	                                    <td class="text-center sumpricepernum">qty</td>
+                                        <td class="text-center">vat</td>
+	                                    <td class="text-center">price</td>
+	                                    <td class="text-center">total</td>
 	                                </tr>
 	                            </thead>
 	                            <tbody>
-									              <?php
-									              $vat = 0;
-									              $total = 0;
-									              $priceTotal =0;
-									              ?>
+	                            <?php
+															$vat = 0;
+															$total = 0;
+															$priceTotal =0;
+								$pro_detail = $this->db->query("SELECT p.sku, p.name, rd.qty, rd.qty, rd.vat, rd.total, rd.price FROM receive_detail rd LEFT JOIN products p ON(p.id = rd.product_id) WHERE rd.receive_id = '".$receive_data['id']."'")->result_array();
+								foreach ($pro_detail as $value): ?>
+								<?php
+								  $vat = $vat+ $value['vat'];
+									$total = $total+ $value['total'];
+									$priceTotal = $priceTotal + ($value["price"]*$value["qty"]);
+								 ?>
+	                            	 <tr>
+										<td class="text-center"><?php echo $value['sku'] ?></td>
+										<td><?php echo $value['name'] ?></td>
+                    <td class="text-center"><?php echo $value['qty'] ?></td>
+										<td class="text-center"><?php echo $value['vat']; ?></td>
+										<td class="text-center"><?php echo number_format($value["price"],2);?></td>
+										<td class="text-center"><?php echo number_format($value['price']*$value["qty"],2);?></td>
+									  </tr>
+	                            <?php endforeach ?>
+								  	<tr>
+                                    	<td class="emptyrow"></td>
+                                        <td class="emptyrow"></td>
+	                                    <td class="emptyrow"></td>
+	                                    <td class="emptyrow"></td>
+	                                    <td class="highrow text-center sumprice" >รวมราคาสินค้า</td>
+	                                    <td class="highrow text-right"><?php echo number_format($priceTotal ,2);?>&nbsp;บาท</td>
+	                                </tr>
+	                                <tr>
+                                    	<td class="emptyrow"></td>
+                                        <td class="emptyrow"></td>
+	                                    <td class="emptyrow"></td>
+	                                    <td class="emptyrow"></td>
+	                                    <td class="emptyrow text-center" >VAT(7%)</td>
+	                                    <td class="emptyrow text-right"><?php echo number_format($vat,2)."&nbsp;บาท"; ?></td>
+	                                </tr>
+	                                 <tr>
+	                                 	<td class="emptyrow"></td>
+                                        <td class="emptyrow"></td>
+	                                    <td class="emptyrow"></td>
+	                                    <td class="emptyrow"></td>
+	                                    <td class="emptyrow text-center ">รวมราคาสุทธิ</td>
+	                                    <td class="emptyrow text-right text-danger"><strong><?php echo number_format($total,2);?>&nbsp;บาท</strong></td>
+	                                </tr>
 
-																	<?php foreach ($purchase_order_detail_data as $value): ?>
-																		<?php
-										                  $vat = $vat+ $value['vat'];
-										                    $total = $total+ $value['total'];
-										                    $priceTotal = $priceTotal + ($value["price"]*$value["qty"]);
-										                 ?>
-											               <tr>
-																				<td class="text-center"><?php echo $value['sku'] ?></td>
-																				<td><?php echo $value['name'] ?></td>
-										                    <td class="text-center"><?php echo $value['qty'] ?></td>
-																			</tr>
-																		<?php endforeach; ?>
-																</tbody>
-												</table>
+	                            </tbody>
+	                        </table>
+	                    </div>
 	                </div>
 	            </div>
 	        </div>

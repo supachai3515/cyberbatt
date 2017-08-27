@@ -63,7 +63,7 @@ class Credit_note extends BaseController
 
     public function edit_view($credit_note_id, $print_f = 0)
     {
-        $data = $this->get_data_check("is_edit");
+        $data = $this->get_data_check("is_view");
         if (!is_null($data)) {
             $data['print_f'] = $print_f;
             $data['credit_note_data'] = $this->credit_note_model->get_credit_note_id($credit_note_id);

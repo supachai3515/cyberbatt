@@ -22,7 +22,7 @@
               <th>วันที่</th>
               <th>Products</th>
               <th>Action</th>
-              
+
             </tr>
           </thead>
           <tbody>
@@ -92,8 +92,7 @@
               <thead>
                 <tr>
                   <th>รหัส</th>
-                  <th>ชื่อลูกค้า</th>
-                  <th>ชื่อสินค้า</th>
+                  <th>รายละเอียด</th>
                   <th>สถานะ</th>
                   <th>แก้ไข</th>
                 </tr>
@@ -110,16 +109,14 @@
                       <br/>
 
                     </td>
-                    <td style="width:30%">
-                      <span>name : <strong><?php echo $credit_note['order_name'] ?></strong></span>
+                    <td>
+                      <span>Name : <strong><?php echo $credit_note['order_name'] ?></strong></span>
                       <br/>
                       <span>ที่อยู่จัดส่ง : <strong><?php echo $credit_note['address'] ?></strong></span>
                       <br/>
-                    </td>
-                    <td>
-                      <span>sku : <strong><?php echo $credit_note['sku'] ?></strong></span>
+                      <span>SKU : <strong><?php echo $credit_note['sku'] ?></strong></span>
                       <br/>
-                      <span>name : <strong><?php echo $credit_note['product_name'] ?></strong></span>
+                      <span>Product Nane : <strong><?php echo $credit_note['product_name'] ?></strong></span>
                       <br/>
                     </td>
                     <td>
@@ -143,8 +140,9 @@
                         <br/>
                         <?php endif ?>
                     </td>
-                    <td><a class="btn btn-xs btn-info" href="<?php echo base_url('credit_note/edit/'.$credit_note['id']) ?>" role="button"><i class="fa fa-pencil"></i> แก้ไข</a>
-                    <a target="_blank" class="btn btn-xs btn-success" href="<?php echo base_url('credit_note/edit_view/'.$credit_note['id']) ?>" role="button">ดูใบลดหนี้</a>
+                    <td>
+                      <a class="btn btn-sm btn-warning" href="<?php echo base_url('credit_note/edit/'.$credit_note['id']) ?>"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                      <a class="btn btn-sm btn-info" target="_blank" href="<?php echo base_url('credit_note/edit_view/'.$credit_note['id']) ?>"><i class="fa fa-eye" aria-hidden="true"></i></a>
                     </td>
                   </tr>
                   <?php endforeach ?>

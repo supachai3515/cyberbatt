@@ -88,8 +88,7 @@
               <thead>
                 <tr>
                   <th>รหัส</th>
-                  <th>ชื่อลูกค้า</th>
-                  <th>ชื่อ</th>
+                  <th>รายละเอียด</th>
                   <th>สถานะ</th>
                   <th>แก้ไข</th>
                 </tr>
@@ -107,15 +106,13 @@
 
                     </td>
                     <td>
-                      <span>name : <strong><?php echo $return_receive['order_name'] ?></strong></span>
+                      <span>Name : <strong><?php echo $return_receive['order_name'] ?></strong></span>
                       <br/>
                       <span>ที่อยู่จัดส่ง : <strong><?php echo $return_receive['address'] ?></strong></span>
                       <br/>
-                    </td>
-                    <td>
-                      <span>sku : <strong><?php echo $return_receive['sku'] ?></strong></span>
+                      <span>SKU : <strong><?php echo $return_receive['sku'] ?></strong></span>
                       <br/>
-                      <span>name : <strong><?php echo $return_receive['product_name'] ?></strong></span>
+                      <span>Product Name : <strong><?php echo $return_receive['product_name'] ?></strong></span>
                       <br/>
                     </td>
 
@@ -138,7 +135,9 @@
                                   <br/>
                                   <?php endif ?>
                     </td>
-                    <td><a class="btn btn-xs btn-info" href="<?php echo base_url('return_receive/edit/'.$return_receive['id']) ?>" role="button"><i class="fa fa-pencil"></i> แก้ไข</a></td>
+                    <td><a class="btn btn-sm btn-warning" href="<?php echo base_url('return_receive/edit/'.$return_receive['id']) ?>" role="button"><i class="fa fa-pencil"></i></a>
+                      <a class="btn btn-sm btn-info" href="<?php echo base_url('return_receive/view/'.$return_receive['id']) ?>"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                    </td>
                   </tr>
                   <?php endforeach ?>
               </tbody>

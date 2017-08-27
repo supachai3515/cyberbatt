@@ -3,7 +3,7 @@
     <div class="container-fluid box" ng-controller="receive">
         <div class="page-header">
             <h1>ใบรับสินค้า</h1>
-            <?php //if(isset($sql))echo "<p>".$sql."</p>"; ?>
+            <?php //if(isset($sql))echo "<p>".$sql."</p>";?>
         </div>
         <div role="tabpanel">
         <!-- Nav tabs -->
@@ -48,12 +48,7 @@
                                     <td>
                                         <span>หมายเหตุ : <strong><?php echo $receive['comment'] ?></strong></span><br/>
                                         <span>จำนวนรายการสินค้า : <strong><?php echo $receive['product_id'] ?></strong></span><br/>
-                                        <?php if ($receive['qty'] >  $receive['serial_number']): ?>
-
-                                            <span class="text-danger"> <strong>กำหนด Serial Number ไม่ครบ ( <?php echo $receive['serial_number'] ?> of <?php echo $receive['qty'] ?> ) </strong> </span><br/>
-                                        <?php else: ?>
-                                             <span class="text-success"> <strong>กำหนด Serial Number ครบแล้ว ( <?php echo $receive['serial_number'] ?> of <?php echo $receive['qty'] ?> ) </strong> </span><br/>
-                                        <?php endif ?>
+                                        <a class="btn btn-sm btn-info"  role="button" ng-click="compare_serial(<?php echo $receive['id'] ?>)"><i class="fa fa-refresh" aria-hidden="true"> ตรวจสอบ Serial</i></a>
 
                                     </td>
                                     <td>
@@ -75,20 +70,19 @@
                                         <?php endif ?>
                                     </td>
                                     <td>
-                                    <a class="btn btn-xs btn-warning" href="<?php echo base_url('receive/edit_serial/'.$receive['id']) ?>" role="button"><i class="fa fa-pencil"></i> Serial Number</a>
-                                    <?php if ($receive['count_use'] < 1): ?>
-                                      <a class="btn btn-xs btn-info" href="<?php echo base_url('receive/edit/'.$receive['id']) ?>" role="button"><i class="fa fa-pencil"></i> แก้ไข</a>
-                                    <?php else: ?>
-                                        <span class="label label-default">Serial ถูกใช้แล้ว</span>
-                                    <?php endif ?>
-									<a target="_blank" class="btn btn-xs btn-success" href="<?php echo base_url('receive/edit_view/'.$receive['id']) ?>" role="button">ดูใบรับเข้า</a>
+                                    <a class="btn btn-sm btn-warning" href="<?php echo base_url('receive/edit_serial/'.$receive['id']) ?>" role="button"><i class="fa fa-pencil"></i> Serial</a>
+
+                                    <a class="btn btn-sm btn-warning" ng-click="btnEdit(<?php echo $receive['id'] ?>)" role="button"><i class="fa fa-pencil"></i></a>
+
+  									                 <a target="_blank" class="btn btn-sm btn-warning" href="<?php echo base_url('receive/edit_view/'.$receive['id']) ?>" role="button"><i class="fa fa-eye"></i></a>
+                                     <a target="_blank" class="btn btn-sm btn-info" href="<?php echo base_url('receive/view/'.$receive['id']) ?>" role="button"><i class="fa fa-eye"></i></a>
                                     </td>
                                 </tr>
                             <?php endforeach ?>
                             </tbody>
                         </table>
                     </div>
-                    <?php if(isset($links_pagination)) {echo $links_pagination;} ?>
+                    <?php if (isset($links_pagination)) {echo $links_pagination;} ?>
                 </div>
                  <div role="tabpanel" class="tab-pane" id="add">
                     <div style="padding-top:30px;"></div>

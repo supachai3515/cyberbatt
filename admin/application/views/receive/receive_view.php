@@ -74,12 +74,9 @@
 	                        <table class="table table-condensed">
 	                            <thead>
 	                                <tr>
-	                                    <td class="text-center product-id">sku</td>
-	                                    <td class="text-center">name</td>
-	                                    <td class="text-center sumpricepernum">qty</td>
-                                        <td class="text-center">vat</td>
-	                                    <td class="text-center">price</td>
-	                                    <td class="text-center">total</td>
+																		<td class="text-center product-id"><strong>SKU</strong></td>
+																		<td class=""><strong>Name</strong></td>
+																		<td class="text-center sumpricepernum"><strong>QTY</strong></td>
 	                                </tr>
 	                            </thead>
 	                            <tbody>
@@ -98,35 +95,10 @@
 										<td class="text-center"><?php echo $value['sku'] ?></td>
 										<td><?php echo $value['name'] ?></td>
                     <td class="text-center"><?php echo $value['qty'] ?></td>
-										<td class="text-center"><?php echo $value['vat']; ?></td>
-										<td class="text-center"><?php echo number_format($value["price"],2);?></td>
-										<td class="text-center"><?php echo number_format($value['price']*$value["qty"],2);?></td>
 									  </tr>
 	                            <?php endforeach ?>
-								  	<tr>
-                                    	<td class="emptyrow"></td>
-                                        <td class="emptyrow"></td>
-	                                    <td class="emptyrow"></td>
-	                                    <td class="emptyrow"></td>
-	                                    <td class="highrow text-center sumprice" >รวมราคาสินค้า</td>
-	                                    <td class="highrow text-right"><?php echo number_format($priceTotal ,2);?>&nbsp;บาท</td>
-	                                </tr>
-	                                <tr>
-                                    	<td class="emptyrow"></td>
-                                        <td class="emptyrow"></td>
-	                                    <td class="emptyrow"></td>
-	                                    <td class="emptyrow"></td>
-	                                    <td class="emptyrow text-center" >VAT(7%)</td>
-	                                    <td class="emptyrow text-right"><?php echo number_format($vat,2)."&nbsp;บาท"; ?></td>
-	                                </tr>
-	                                 <tr>
-	                                 	<td class="emptyrow"></td>
-                                        <td class="emptyrow"></td>
-	                                    <td class="emptyrow"></td>
-	                                    <td class="emptyrow"></td>
-	                                    <td class="emptyrow text-center ">รวมราคาสุทธิ</td>
-	                                    <td class="emptyrow text-right text-danger"><strong><?php echo number_format($total,2);?>&nbsp;บาท</strong></td>
-	                                </tr>
+
+
 
 	                            </tbody>
 	                        </table>

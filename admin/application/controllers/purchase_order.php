@@ -30,6 +30,21 @@ class Purchase_order extends BaseController
     }
 
 
+    //view_edit
+    public function edit_view($purchase_order_id)
+    {
+        $data = $this->get_data_check("is_edit");
+        if (!is_null($data)) {
+            $data['purchase_order_data'] = $this->purchase_order_model->get_purchase_order_id($purchase_order_id);
+            $data['purchase_order_detail_data'] = $this->purchase_order_model->get_purchase_order_detail($purchase_order_id);
+            $data['type_list'] = $this->products_model->get_type();
+
+            $data['script_file']= "js/purchase_order_js";
+            $data["header"] = $this->get_header("Purchase order");
+            $this->load->view("purchase_order/purchase_order_info_view_edit", $data);
+        }
+    }
+
     //page edit
     public function view($purchase_order_id)
     {
@@ -43,21 +58,6 @@ class Purchase_order extends BaseController
             $data["header"] = $this->get_header("Purchase order");
             $this->load->view("purchase_order/purchase_order_info_view", $data);
         }
-
-        // $this->is_logged_in();
-        // $data['menus_list'] = $this->initdata_model->get_menu();
-        // $data['purchase_order_data'] = $this->purchase_order_model->get_purchase_order_id($purchase_order_id);
-        // $data['purchase_order_detail_data'] = $this->purchase_order_model->get_purchase_order_detail($purchase_order_id);
-        // $data['type_list'] = $this->products_model->get_type();
-        // //$data['menu_id'] ='34';
-        // //$data['content'] = 'purchase_order/purchase_order_info_view';
-        // $data['script_file']= "js/purchase_order_js";
-        // $data['header'] = array('title' => 'purchase_order| '.$this->config->item('sitename'),
-        //                         'description' =>  'purchase_order| '.$this->config->item('tagline'),
-        //                         'author' => $this->config->item('author'),
-        //                         'keyword' =>  'cyberbatt');
-                //
-        // $this->load->view('purchase_order/purchase_order_info_view', $data);
     }
 
 

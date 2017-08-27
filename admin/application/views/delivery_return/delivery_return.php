@@ -29,7 +29,7 @@
                             <td>
                                 ใบรับคืน : <span ng-bind="value.return_id"></span>/<span ng-bind="value.return_docno"></span><br>
                                 ใบสั่งซื้อ : <span ng-bind="value.order_id"></span>/<span ng-bind="value.invoice_no"></span><br>
-                                
+
                             </td>
                             <td>
                                 <span ng-bind="value.serial_number"></span><br>
@@ -38,8 +38,8 @@
                             <td>
                                 SKU : <span ng-bind="value.sku"></span><br>
                                 NAME : <span ng-bind="value.product_name"></span>
-                            </td>  
-                            <td ng-if="value.is_credit_note == 0 &&  value.is_delivery_return == 0"><button type="button" class="btn btn-info btn-xs"  ng-click="selectOrder(value.order_id,value.return_id,value.serial_number,value.product_id)">เลือก</button></td> 
+                            </td>
+                            <td ng-if="value.is_credit_note == 0 &&  value.is_delivery_return == 0"><button type="button" class="btn btn-info btn-xs"  ng-click="selectOrder(value.order_id,value.return_id,value.serial_number,value.product_id)">เลือก</button></td>
                               <td ng-if="value.is_credit_note == 1"><span class="label label-default">ทำใบลดหนี้แล้ว</span></td>
                               <td ng-if="value.is_delivery_return == 1"><span class="label label-default">ทำใบส่งคืนแล้ว</span></td>
                         </tr>
@@ -57,7 +57,7 @@
     <div class="container-fluid box" ng-controller="delivery_return">
         <div class="page-header">
             <h1>ใบส่งคืน</h1>
-            <?php //if(isset($sql))echo "<p>".$sql."</p>"; ?>
+            <?php //if(isset($sql))echo "<p>".$sql."</p>";?>
         </div>
         <div role="tabpanel">
         <!-- Nav tabs -->
@@ -74,12 +74,12 @@
                 <div role="tabpanel" class="tab-pane active" id="search">
                     <div style="padding-top:30px;"></div>
                     <form action="<?php echo base_url('delivery_return/search');?>" method="POST" class="form-inline" role="form">
-                    
+
                         <div class="form-group">
                             <label class="sr-only" for="">search</label>
                             <input type="text" class="form-control" id="search" name="search" placeholder="serial number">
                         </div>
-                
+
                         <button type="submit" class="btn btn-primary">ค้นหา</button>
                     </form>
                     <div class="box-body table-responsive no-padding">
@@ -104,12 +104,12 @@
                                     </td>
                                     <td>
                                         <span>name : <strong><?php echo $delivery_return['order_name'] ?></strong></span><br/>
-                                        <span>ที่อยู่จัดส่ง : <strong><?php echo $delivery_return['address'] ?></strong></span><br/> 
-                                    </td> 
+                                        <span>ที่อยู่จัดส่ง : <strong><?php echo $delivery_return['address'] ?></strong></span><br/>
+                                    </td>
                                     <td>
                                         <span>sku : <strong><?php echo $delivery_return['sku'] ?></strong></span><br/>
                                         <span>name : <strong><?php echo $delivery_return['product_name'] ?></strong></span><br/>
-                                    </td> 
+                                    </td>
                                     <td>
                                          <span><i class="fa fa-calendar"></i> <?php echo date("d-m-Y H:i", strtotime($delivery_return['modified_date']));?></span>
                                         <br/>
@@ -121,13 +121,15 @@
                                             <br/>
                                         <?php endif ?>
                                     </td>
-                                    <td><a class="btn btn-xs btn-info" href="<?php echo base_url('delivery_return/edit/'.$delivery_return['id']) ?>" role="button"><i class="fa fa-pencil"></i> แก้ไข</a></td>       
+                                    <td>
+                                      <a class="btn btn-sm btn-warning" href="<?php echo base_url('delivery_return/edit/'.$delivery_return['id']) ?>"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                    </td>
                                 </tr>
                             <?php endforeach ?>
                             </tbody>
                         </table>
                     </div>
-                    <?php if(isset($links_pagination)) {echo $links_pagination;} ?>
+                    <?php if (isset($links_pagination)) { echo $links_pagination; } ?>
                 </div>
                  <div role="tabpanel" class="tab-pane" id="add">
                     <div style="padding-top:30px;"></div>
@@ -136,31 +138,31 @@
                             <!-- Text input-->
                             <div class="form-group">
                                 <label class="col-md-3 control-label" for="return_id">เลขที่ใบรับคืน</label>
-                                
+
                                 <div class="col-md-6">
                                     <div class="input-group">
-                                        <input id="return_id" name="return_id" type="text" placeholder="เลขที่ใบรับคืน" class="form-control input-md" 
-                                            ng-model="return_id"  ng-init="return_id = items.return_id" 
+                                        <input id="return_id" name="return_id" type="text" placeholder="เลขที่ใบรับคืน" class="form-control input-md"
+                                            ng-model="return_id"  ng-init="return_id = items.return_id"
                                             required="" readonly="true">
-                                       
+
                                         <span class="input-group-addon"> <button type="button" ng-click="open()">เลือกใบรับคืน</i></button></span>
                                     </div>
                                 </div>
                             </div>
 
-                           
+
                             <div class="form-group">
                              <label class="col-md-3 control-label" for="order_id">เลขที่ใบสั่งซื้อ</label>
                               <div class="col-md-6">
-                                     <input id="order_id" name="order_id" type="text" placeholder="เลขที่ใบสั่งซื้อ" class="form-control input-md" 
+                                     <input id="order_id" name="order_id" type="text" placeholder="เลขที่ใบสั่งซื้อ" class="form-control input-md"
                                         ng-model="order_id"  ng-init="order_id = items.order_id" required="" readonly="true">
                                 </div>
                             </div>
                             <div class="form-group">
                               <label class="col-md-3 control-label" for="product_id">รหัสสินค้า</label>
                               <div class="col-md-6">
-                                    <input id="product_id" name="product_id" type="text" placeholder="รหัสสินค้า" class="form-control input-md" 
-                                     ng-model="product_id"  ng-init="product_id = items.product_id" 
+                                    <input id="product_id" name="product_id" type="text" placeholder="รหัสสินค้า" class="form-control input-md"
+                                     ng-model="product_id"  ng-init="product_id = items.product_id"
                                      required="" readonly="true">
                                 </div>
                             </div>
@@ -168,8 +170,8 @@
                             <div class="form-group">
                               <label class="col-md-3 control-label" for="serial">serial number</label>
                               <div class="col-md-6">
-                                    <input id="serial" name="serial" type="text" placeholder="serial number" class="form-control input-md" 
-                                     ng-model="serial"  ng-init="serial = items.serial" 
+                                    <input id="serial" name="serial" type="text" placeholder="serial number" class="form-control input-md"
+                                     ng-model="serial"  ng-init="serial = items.serial"
                                      required="" readonly="true">
                                 </div>
                             </div>
@@ -177,10 +179,10 @@
 
                             <!-- Text input-->
                             <div class="form-group">
-                              <label class="col-md-3 control-label" for="tracking">tracking</label>  
+                              <label class="col-md-3 control-label" for="tracking">tracking</label>
                               <div class="col-md-6">
                               <input id="tracking" name="tracking" type="text" placeholder="tracking" class="form-control input-md" required="">
-                                
+
                               </div>
                             </div>
 

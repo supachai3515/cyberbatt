@@ -11,6 +11,14 @@ function pre($data)
     echo "</pre>";
 }
 
+function json_output($statusHeader,$response)
+{
+  $ci =& get_instance();
+  $ci->output->set_content_type('application/json');
+  $ci->output->set_status_header($statusHeader);
+  $ci->output->set_output(json_encode($response));
+}
+
 /**
  * This function used to get the CI instance
  */
@@ -85,9 +93,9 @@ if(!function_exists('setProtocol'))
     function setProtocol()
     {
         $CI = &get_instance();
-                    
+
         $CI->load->library('email');
-        
+
         $config['protocol'] = PROTOCOL;
         $config['mailpath'] = MAIL_PATH;
         $config['smtp_host'] = SMTP_HOST;
@@ -97,9 +105,9 @@ if(!function_exists('setProtocol'))
         $config['charset'] = "utf-8";
         $config['mailtype'] = "html";
         $config['newline'] = "\r\n";
-        
+
         $CI->email->initialize($config);
-        
+
         return $CI;
     }
 }
@@ -127,18 +135,40 @@ if(!function_exists('resetPasswordEmail'))
         $data["data"] = $detail;
         // pre($detail);
         // die;
-        
-        $CI = setProtocol();        
-        
+
+        $CI = setProtocol();
+
         $CI->email->from(EMAIL_FROM, FROM_NAME);
         $CI->email->subject("Reset Password");
         $CI->email->message($CI->load->view('email/resetPassword', $data, TRUE));
         $CI->email->to($detail["email"]);
         $status = $CI->email->send();
-        
+
         return $status;
     }
 }
+
+if(!function_exists('send_emali_template'))
+{
+    function send_emali_template($detail)
+    {
+        $data["data"] = $detail;
+        // pre($detail);
+        // die;
+
+        $CI = setProtocol();
+
+        $CI->email->from(EMAIL_FROM, FROM_NAME);
+        $CI->email->subject($detail["subject"]);
+        $CI->email->bcc($detail["bcc_mail"]);
+        $CI->email->message($CI->load->view($detail["template"], $detail, TRUE));
+        $CI->email->to($detail["email"]);
+        $status = $CI->email->send();
+
+        return $status;
+    }
+}
+
 
 if(!function_exists('setFlashData'))
 {
