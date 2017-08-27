@@ -1,4 +1,6 @@
-<?php if(!defined('BASEPATH')) exit('No direct script access allowed');
+<?php if (!defined('BASEPATH')) {
+    exit('No direct script access allowed');
+}
 
 /**
  * Class : Login (LoginController)
@@ -29,17 +31,14 @@ class Login extends CI_Controller
     /**
      * This function used to check the user is logged in or not
      */
-    function isLoggedIn()
+    public function isLoggedIn()
     {
         $isLoggedIn = $this->session->userdata('isLoggedIn');
 
-        if(!isset($isLoggedIn) || $isLoggedIn != TRUE)
-        {
+        if (!isset($isLoggedIn) || $isLoggedIn != true) {
             $this->load->view('login');
-        }
-        else
-        {
-            redirect('/dashboard');
+        } else {
+            redirect('dashboard', 'refresh');
         }
     }
 
@@ -54,39 +53,30 @@ class Login extends CI_Controller
         $this->form_validation->set_rules('email', 'Email', 'required|valid_email|max_length[128]|xss_clean|trim');
         $this->form_validation->set_rules('password', 'Password', 'required|max_length[32]|');
 
-        if($this->form_validation->run() == FALSE)
-        {
+        if ($this->form_validation->run() == false) {
             $this->index();
-        }
-        else
-        {
+        } else {
             $email = $this->input->post('email');
             $password = $this->input->post('password');
 
             $result = $this->login_model->loginMe($email, $password);
 
-            if(count($result) > 0)
-            {
-                foreach ($result as $res)
-                {
+            if (count($result) > 0) {
+                foreach ($result as $res) {
                     $sessionArray = array('userId'=>$res->userId,
                                             'role'=>$res->roleId,
                                             'menu_group_id'=>$res->menu_group_id,
                                             'roleText'=>$res->role,
                                             'name'=>$res->name,
-                                            'isLoggedIn' => TRUE
+                                            'isLoggedIn' => true
                                     );
 
                     $this->session->set_userdata($sessionArray);
-
-                    redirect('/dashboard');
+                    redirect('dashboard', 'refresh');
                 }
-            }
-            else
-            {
+            } else {
                 $this->session->set_flashdata('error', 'Email or password mismatch');
-
-                redirect('/login');
+                redirect('login', 'refresh');
             }
         }
     }
@@ -102,41 +92,36 @@ class Login extends CI_Controller
     /**
      * This function used to generate reset password request link
      */
-    function resetPasswordUser()
+    public function resetPasswordUser()
     {
         $status = '';
 
         $this->load->library('form_validation');
 
-        $this->form_validation->set_rules('login_email','Email','trim|required|valid_email|xss_clean');
+        $this->form_validation->set_rules('login_email', 'Email', 'trim|required|valid_email|xss_clean');
 
-        if($this->form_validation->run() == FALSE)
-        {
+        if ($this->form_validation->run() == false) {
             $this->forgotPassword();
-        }
-        else
-        {
+        } else {
             $email = $this->input->post('login_email');
 
-            if($this->login_model->checkEmailExist($email))
-            {
+            if ($this->login_model->checkEmailExist($email)) {
                 $encoded_email = urlencode($email);
 
                 $this->load->helper('string');
                 $data['email'] = $email;
-                $data['activation_id'] = random_string('alnum',15);
+                $data['activation_id'] = random_string('alnum', 15);
                 $data['createdDtm'] = date('Y-m-d H:i:s');
                 $data['agent'] = getBrowserAgent();
                 $data['client_ip'] = $this->input->ip_address();
 
                 $save = $this->login_model->resetPasswordUser($data);
 
-                if($save)
-                {
+                if ($save) {
                     $data1['reset_link'] = base_url() . "resetPasswordConfirmUser/" . $data['activation_id'] . "/" . $encoded_email;
                     $userInfo = $this->login_model->getCustomerInfoByEmail($email);
 
-                    if(!empty($userInfo)){
+                    if (!empty($userInfo)) {
                         $data1["name"] = $userInfo[0]->name;
                         $data1["email"] = $userInfo[0]->email;
                         $data1["message"] = "Reset Your Password";
@@ -144,31 +129,27 @@ class Login extends CI_Controller
 
                     $sendStatus = resetPasswordEmail($data1);
 
-                    if($sendStatus){
+                    if ($sendStatus) {
                         $status = "send";
                         setFlashData($status, "Reset password link sent successfully, please check mails.");
                     } else {
                         $status = "notsend";
                         setFlashData($status, "Email has been failed, try again.");
                     }
-                }
-                else
-                {
+                } else {
                     $status = 'unable';
                     setFlashData($status, "It seems an error while sending your details, try again.");
                 }
-            }
-            else
-            {
+            } else {
                 $status = 'invalid';
                 setFlashData($status, "This email is not registered with us.");
             }
-            redirect('/forgotPassword');
+            redirect('forgotPassword', 'refresh');
         }
     }
 
     // This function used to reset the password
-    function resetPasswordConfirmUser($activation_id, $email)
+    public function resetPasswordConfirmUser($activation_id, $email)
     {
         // Get email and activation code from URL values at index 3-4
         $email = urldecode($email);
@@ -179,18 +160,15 @@ class Login extends CI_Controller
         $data['email'] = $email;
         $data['activation_code'] = $activation_id;
 
-        if ($is_correct == 1)
-        {
+        if ($is_correct == 1) {
             $this->load->view('newPassword', $data);
-        }
-        else
-        {
-            redirect('/login');
+        } else {
+          redirect('forgotPassword', 'login');
         }
     }
 
     // This function used to create new password
-    function createPasswordUser()
+    public function createPasswordUser()
     {
         $status = '';
         $message = '';
@@ -199,41 +177,30 @@ class Login extends CI_Controller
 
         $this->load->library('form_validation');
 
-        $this->form_validation->set_rules('password','Password','required|max_length[20]');
-        $this->form_validation->set_rules('cpassword','Confirm Password','trim|required|matches[password]|max_length[20]');
+        $this->form_validation->set_rules('password', 'Password', 'required|max_length[20]');
+        $this->form_validation->set_rules('cpassword', 'Confirm Password', 'trim|required|matches[password]|max_length[20]');
 
-        if($this->form_validation->run() == FALSE)
-        {
+        if ($this->form_validation->run() == false) {
             $this->resetPasswordConfirmUser($activation_id, urlencode($email));
-        }
-        else
-        {
+        } else {
             $password = $this->input->post('password');
             $cpassword = $this->input->post('cpassword');
 
             // Check activation id in database
             $is_correct = $this->login_model->checkActivationDetails($email, $activation_id);
 
-            if($is_correct == 1)
-            {
+            if ($is_correct == 1) {
                 $this->login_model->createPasswordUser($email, $password);
 
                 $status = 'success';
                 $message = 'Password changed successfully';
-            }
-            else
-            {
+            } else {
                 $status = 'error';
                 $message = 'Password changed failed';
             }
 
             setFlashData($status, $message);
-
-            redirect("/login");
+            redirect('login', 'refresh');
         }
     }
-
-
 }
-
-?>
