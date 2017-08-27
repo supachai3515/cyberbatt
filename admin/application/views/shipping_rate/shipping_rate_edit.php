@@ -1,6 +1,6 @@
 <div class="content-wrapper">
   <section class="content">
-    <div class="container-fluid box" ng-controller="myCtrl">
+    <div class="container-fluid box" ng-controller="mainCtrl">
         <div class="page-header">
           <h1>แก้ไขอัตราค่าจัดส่ง</h1>
         </div>

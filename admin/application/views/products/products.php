@@ -1,6 +1,6 @@
 <div class="content-wrapper">
   <section class="content">
-    <div class="container-fluid box" ng-controller="myCtrl">
+    <div class="container-fluid box" ng-controller="mainCtrl">
 
         <script type="text/ng-template" id="myModalContent.html">
             <div class="modal-header">
@@ -70,9 +70,9 @@
                                                     <option value="<?php echo $brand['id']; ?>" selected><?php echo $brand['name']; ?></option>
                                                 <?php else: ?>
                                                     <option value="<?php echo $brand['id']; ?>"><?php echo $brand['name']; ?></option>
-                                                <?php endif ?>          
+                                                <?php endif ?>
                                             <?php endforeach ?>
-    
+
                                         </select>
                                     </div>
                                     <div class="col-md-4">
@@ -84,7 +84,7 @@
                                                     <option value="<?php echo $type['id']; ?>" selected><?php echo $type['name']; ?></option>
                                                 <?php else: ?>
                                                     <option value="<?php echo $type['id']; ?>"><?php echo $type['name']; ?></option>
-                                                <?php endif ?>          
+                                                <?php endif ?>
                                             <?php endforeach ?>
                                         </select>
                                     </div>
@@ -95,12 +95,12 @@
                                     <div class="col-md-4" style="padding:0;">
                                         <div class="col-md-6">
                                             <label for="from_stock">สินค้าคงเหลือ</label>
-                                            <input id="from_stock" name="from_stock" type="number" 
+                                            <input id="from_stock" name="from_stock" type="number"
                                                 value="<?php if(isset($data_search['from_stock']))echo $data_search['from_stock']; else echo "0"; ?>" class="form-control input-md">
                                         </div>
                                         <div class="col-md-6">
                                             <label for="to_stock">ถึง</label>
-                                            <input id="to_stock" name="to_stock" type="number" 
+                                            <input id="to_stock" name="to_stock" type="number"
                                             value="<?php if(isset($data_search['to_stock']))echo $data_search['to_stock']; else echo "9999"; ?>" class="form-control input-md">
                                         </div>
                                     </div>
@@ -108,7 +108,7 @@
                                         <label for="promotion">โปรโมชั่น</label>
                                         <div class="checkbox">
                                             <label for="all_promotion">
-                                                <input type="checkbox" name="all_promotion" id="all_promotion" value="1" 
+                                                <input type="checkbox" name="all_promotion" id="all_promotion" value="1"
                                                     <?php if(isset($data_search['all_promotion'])) {if($data_search['all_promotion']==1) echo "checked";} ?> > ทั้งหมด
                                             </label>
                                             <label for="is_promotion">
@@ -116,7 +116,7 @@
                                                  <?php if(isset($data_search['is_promotion'])) {if($data_search['is_promotion']==1) echo "checked";} ?> > ลดราคา
                                             </label>
                                             <label for="is_sale">
-                                                <input type="checkbox" name="is_sale" id="is_sale" value="1" 
+                                                <input type="checkbox" name="is_sale" id="is_sale" value="1"
                                                 <?php if(isset($data_search['is_sale'])) {if($data_search['is_sale']==1) echo "checked";} ?> > แนะนำ
                                             </label>
                                             <label for="is_hot">
@@ -124,10 +124,10 @@
                                                 <?php if(isset($data_search['is_hot'])) {if($data_search['is_hot']==1) echo "checked";} ?>> ได้รับความนิยม
                                             </label>
                                             <label for="isactive-0">
-                                                <input type="checkbox" name="isactive" id="isactive" value="1" 
+                                                <input type="checkbox" name="isactive" id="isactive" value="1"
                                                  <?php if(isset($data_search['is_active'])) {if($data_search['is_active']==1) echo "checked";} ?> > ใช้งานสินค้า
                                             </label>
-                                         
+
                                         </div>
                                     </div>
                                     <div class="col-md-4">
@@ -141,7 +141,7 @@
                                                     <option value="<?php echo $branch['id']; ?>" selected><?php echo $branch['name']; ?></option>
                                                 <?php else: ?>
                                                     <option value="<?php echo $branch['id']; ?>"><?php echo $branch['name']; ?></option>
-                                                <?php endif ?>          
+                                                <?php endif ?>
                                             <?php endforeach ?>
                                         </select>
                                     </div>
@@ -163,7 +163,7 @@
                                 <a href="#export" aria-controls="export" role="tab" data-toggle="tab"><i class="fa fa-file-text-o" aria-hidden="true"></i> export stock</a>
                             </li>
                         </ul>
-                    
+
                         <!-- Tab panes -->
                         <div class="tab-content">
                             <div role="tabpanel" class="tab-pane active" id="price">
@@ -174,23 +174,23 @@
                                        <div class="col-md-12" style="padding:0;">
                                             <div class="col-md-2">
                                                 <label for="price">ราคาสินค้า</label>
-                                                <input id="price" name="price" type="number" 
+                                                <input id="price" name="price" type="number"
                                                     value="" class="form-control input-md" required="true">
                                             </div>
                                             <div class="col-md-2">
                                                 <label for="dis_price">ราคาส่วนลด</label>
-                                                <input id="dis_price" name="dis_price" type="number" 
+                                                <input id="dis_price" name="dis_price" type="number"
                                                 value="" class="form-control input-md" required="true">
                                             </div>
                                             <div class="col-md-2">
                                                 <label for="member_discount">ราคา Dealer</label>
-                                                <input id="member_discount" name="member_discount" type="number" 
+                                                <input id="member_discount" name="member_discount" type="number"
                                                 value="" class="form-control input-md" required="true">
                                             </div>
 
                                             <div class="col-md-2">
                                                 <label for="member_discount_lv1">ราคา fanshine </label>
-                                                <input id="member_discount_lv1" name="member_discount_lv1" type="number" 
+                                                <input id="member_discount_lv1" name="member_discount_lv1" type="number"
                                                 value="" class="form-control input-md" required="true">
                                             </div>
 
@@ -198,17 +198,17 @@
                                                     <label for="to_stock"> </label><br>
                                                     <button type="submit"  name ="updateprice" class="btn btn-primary">ปรับปรุงราคา</button>
                                             </div>
-                                        </div> 
-                                        
+                                        </div>
+
                                     </fieldset>
                                     <div style="padding-top:20px;"></div>
-                                    
+
                                     <?php if (isset($update)): ?>
                                         <h4 class="text-success">มีการแก้ไขราคาสินค้า</h4>
                                         <ul class="list-group">
                                            <?php echo $update ?>
                                         </ul>
-                                        
+
                                     <?php endif ?>
 
                                     <div class="box-body table-responsive no-padding">
@@ -250,7 +250,7 @@
                                                                     <br/>
                                                             </td>
                                                             <td>
-                                                                
+
                                                                 <span>ราคา : </span><span class="text-success" ng-bind="<?php echo $product['price'];?> | currency:'฿':0"></span>
                                                                 <br/>
                                                                 <span>ลดราคา : </span><span class="text-danger" ng-bind="<?php echo $product['dis_price'];?> | currency:'฿':0"></span>
@@ -281,7 +281,7 @@
                                                                 <?php else: ?>
                                                                     <span><i class="fa fa-times"></i> ได้รับความนิยม</span>
                                                                     <br/>
-                                                                <?php endif ?> 
+                                                                <?php endif ?>
                                                             </td>
                                                             <td>
                                                                 <span><i class="fa fa-calendar-o"></i> <?php echo  date("d-m-Y H:i", strtotime($product['create_date']));?></span>
@@ -307,9 +307,9 @@
                                                                 <?php endif ?>
                                                                 <?php if ($product['stock'] > 0): ?>
                                                                      <button type="button" class="btn btn-xs btn-info" ng-click="open(<?php echo $product['id'];?>)">แยกตาม Serial</button>
-                              
+
                                                                 <?php endif ?>
-                                                               
+
                                                             </td>
                                                             <td><a class="btn btn-xs btn-info" href="<?php echo base_url('products/edit/'.$product['id']) ?>" role="button"><i class="fa fa-pencil"></i> แก้ไข</a></td>
                                                     </tr>
@@ -337,9 +337,9 @@
                                                     <label for="to_stock"> </label><br>
                                                     <button type="submit" class="btn btn-primary">export stock</button>
                                             </div>
-                                        </div> 
+                                        </div>
                                         <p class="text-warning">ใช้แบบเลือกสินค้าไม่เกิน 300 items</p>
-                                        
+
                                     </fieldset>
                                     <div style="padding-top:20px;"></div>
                                     <div class="box-body table-responsive no-padding">
@@ -381,7 +381,7 @@
                                                                     <br/>
                                                             </td>
                                                             <td>
-                                                                
+
                                                                 <span>ราคา : </span><span class="text-success" ng-bind="<?php echo $product['price'];?> | currency:'฿':0"></span>
                                                                 <br/>
                                                                 <span>ลดราคา : </span><span class="text-danger" ng-bind="<?php echo $product['dis_price'];?> | currency:'฿':0"></span>
@@ -412,7 +412,7 @@
                                                                 <?php else: ?>
                                                                     <span><i class="fa fa-times"></i> ได้รับความนิยม</span>
                                                                     <br/>
-                                                                <?php endif ?> 
+                                                                <?php endif ?>
                                                             </td>
                                                             <td>
                                                                 <span><i class="fa fa-calendar-o"></i> <?php echo  date("d-m-Y H:i", strtotime($product['create_date']));?></span>
@@ -438,9 +438,9 @@
                                                                 <?php endif ?>
                                                                 <?php if ($product['stock'] > 0): ?>
                                                                      <button type="button" class="btn btn-xs btn-info" ng-click="open(<?php echo $product['id'];?>)">แยกตาม Serial</button>
-                              
+
                                                                 <?php endif ?>
-                                                               
+
                                                             </td>
                                                             <td><a class="btn btn-xs btn-info" href="<?php echo base_url('products/edit/'.$product['id']) ?>" role="button"><i class="fa fa-pencil"></i> แก้ไข</a></td>
                                                     </tr>
@@ -485,7 +485,7 @@
                                 <label class="col-md-3 control-label" for="select_brand">ยี่ห้อสินค้า</label>
                                 <div class="col-md-4">
                                     <select id="select_brand" name="select_brand" class="form-control">
-                                    <?php 
+                                    <?php
                                         foreach ($brands_list as $brand) {
                                             echo '<option value="'.$brand["id"].'">'.$brand["name"].'</option>';
                                         }
@@ -498,7 +498,7 @@
                                 <label class="col-md-3 control-label" for="select_type">หมวดสินค้า</label>
                                 <div class="col-md-4">
                                     <select id="select_type" name="select_type" class="form-control">
-                                    <?php 
+                                    <?php
                                         foreach ($type_list as $type) {
                                             echo '<option value="'.$type["id"].'">'.$type["name"].'</option>';
                                         }
@@ -636,6 +636,3 @@
 </div>
 </section>
 <!-- /.content -->
-
-
-

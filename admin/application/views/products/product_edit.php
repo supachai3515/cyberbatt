@@ -1,6 +1,6 @@
 <div class="content-wrapper">
   <section class="content">
-    <div class="container-fluid box" ng-controller="myCtrl">
+    <div class="container-fluid box" ng-controller="mainCtrl">
         <div class="page-header">
           <h1>แก้ไขสินค้า <a class="btn btn-success" href="<?php echo $this->config->item('weburl').'product/'.$product_data['slug']; ?>" role="button" target="_blank">ดูสินค้า</a></h1>
         </div>

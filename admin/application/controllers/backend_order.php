@@ -117,6 +117,8 @@ class Backend_order extends BaseController
                         'discount' =>  0 ,
                         'total' =>   $total,
                         'ref_id' =>   $ref_order_id ,
+                        'userId' =>   $this->vendorId ,
+
                     );
 
                 $this->db->insert('orders', $data);
@@ -148,7 +150,7 @@ class Backend_order extends BaseController
                 } else {
                     $this->db->trans_commit();
                     $this->cart->destroy();
-                    redirect('orders/edit/'.$order_id, 'refresh');
+                    redirect('sale_orders', 'refresh');
                 }
             } else {
                 redirect('backend_order/list_temp', 'refresh');

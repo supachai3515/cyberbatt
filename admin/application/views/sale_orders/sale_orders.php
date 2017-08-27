@@ -2,10 +2,10 @@
   <section class="content">
     <div class="container-fluid box" ng-controller="mainCtrl">
         <div class="page-header">
-            <h1>ใบสั่งซื้อสินค้า</h1>
-            <?php //if(isset($sql))echo "<p>".$sql."</p>"; ?>
+            <h1>ใบสั่งซื้อสินค้า Sale</h1>
+            <?php //if(isset($sql))echo "<p>".$sql."</p>";?>
         </div>
-        <form action="<?php echo base_url('orders/search');?>" method="POST" class="form-inline" role="form">
+        <form action="<?php echo base_url('sale_orders/search');?>" method="POST" class="form-inline" role="form">
 
             <div class="form-group">
                 <label class="sr-only" for="">เลขที่ใบเสร็จ</label>
@@ -38,7 +38,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                <?php foreach ($orders_list as $orders): ?>
+                <?php foreach ($sale_orders_list as $orders): ?>
                     <tr>
                         <td>
 

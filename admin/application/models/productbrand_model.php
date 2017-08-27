@@ -7,6 +7,7 @@ class Productbrand_model extends CI_Model
     public function __construct()
     {
         parent::__construct();
+        $this->load->model('Initdata_model');
     }
 
     public function get_productbrand($start, $limit)

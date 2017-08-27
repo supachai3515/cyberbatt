@@ -8,12 +8,12 @@ class Products_model extends CI_Model {
 		//call model inti 
 		$this->load->model('Initdata_model');
 	}
-	
+
 	public function get_products( $start, $limit)
 	{
 
 	    $sql =" SELECT p.* ,t.name type_name, b.name brand_name
-				FROM  products p 
+				FROM  products p
 				LEFT JOIN product_brand b ON p.product_brand_id = b.id
 				LEFT JOIN product_type t ON p.product_type_id = t.id  ORDER BY p.id DESC LIMIT " . $start . "," . $limit;
 		$re = $this->db->query($sql);
@@ -24,18 +24,18 @@ class Products_model extends CI_Model {
 	public function get_products_count()
 	{
 
-		$sql =" SELECT COUNT(p.id) as connt_id FROM  products p 
+		$sql =" SELECT COUNT(p.id) as connt_id FROM  products p
 				LEFT JOIN product_brand b ON p.product_brand_id = b.id
-				LEFT JOIN product_type t ON p.product_type_id = t.id "; 
+				LEFT JOIN product_type t ON p.product_type_id = t.id ";
 		$query = $this->db->query($sql);
 		$row = $query->row_array();
 		return  $row['connt_id'];
-	
+
 	}
 
 	public function get_brands()
 	{
-		$sql ="SELECT * FROM product_brand WHERE is_active = 1 ORDER BY name"; 
+		$sql ="SELECT * FROM product_brand WHERE is_active = 1 ORDER BY name";
 		$result = $this->db->query($sql);
 		return  $result->result_array();
 	}
@@ -43,37 +43,37 @@ class Products_model extends CI_Model {
 
 	public function get_type()
 	{
-		$sql ="SELECT * FROM product_type WHERE is_active = 1 ORDER BY name"; 
+		$sql ="SELECT * FROM product_type WHERE is_active = 1 ORDER BY name";
 		$result = $this->db->query($sql);
 		return  $result->result_array();
 	}
 
 	public function get_province_list()
 	{
-		$sql ="SELECT province_id id, province_name name FROM province WHERE  province_name NOT LIKE '%*%' ORDER BY province_name "; 
+		$sql ="SELECT province_id id, province_name name FROM province WHERE  province_name NOT LIKE '%*%' ORDER BY province_name ";
 		$result = $this->db->query($sql);
 		return  $result->result_array();
 	}
 
 	public function get_shipping_method()
 	{
-		$sql ="SELECT * FROM shipping_method WHERE is_active = 1 ORDER BY name"; 
+		$sql ="SELECT * FROM shipping_method WHERE is_active = 1 ORDER BY name";
 		$result = $this->db->query($sql);
 		return  $result->result_array();
 	}
 
 	public function get_amphur_list($province_id)
 	{
-		$sql ="SELECT amphur_id id, amphur_name name FROM amphur WHERE province_id ='".$province_id."' AND amphur_name NOT LIKE '%*%' ORDER BY amphur_name "; 
+		$sql ="SELECT amphur_id id, amphur_name name FROM amphur WHERE province_id ='".$province_id."' AND amphur_name NOT LIKE '%*%' ORDER BY amphur_name ";
 		$result = $this->db->query($sql);
 		return  $result->result_array();
 	}
 
 	public function get_amphur_list_all()
 	{
-		$sql ="SELECT amphur_id id, amphur_name name FROM amphur 
+		$sql ="SELECT amphur_id id, amphur_name name FROM amphur
 				WHERE amphur_name NOT LIKE '%*%'
-				ORDER BY amphur_name  "; 
+				ORDER BY amphur_name  ";
 		$result = $this->db->query($sql);
 		return  $result->result_array();
 	}
@@ -108,9 +108,9 @@ class Products_model extends CI_Model {
 			'create_by' => '',
 			'create_date' => date("Y-m-d H:i:s"),
 			'modified_date' => date("Y-m-d H:i:s"),
-			'is_active' => $this->input->post('isactive')						
+			'is_active' => $this->input->post('isactive')
 		);
-		
+
 		$this->db->insert("products", $data_product);
 		$insert_id = $this->db->insert_id();
    		return  $insert_id;
@@ -120,7 +120,7 @@ class Products_model extends CI_Model {
 	public function update_img($product_id, $image_name)
 	{
 
-		$sql ="SELECT image FROM products WHERE  id ='".$product_id."' "; 
+		$sql ="SELECT image FROM products WHERE  id ='".$product_id."' ";
 		$query = $this->db->query($sql);
 		$row = $query->row_array();
 		if(isset($row["image"])){
@@ -129,11 +129,11 @@ class Products_model extends CI_Model {
 
 
 		$data_product = array(
-			'image' => $img_path.$image_name						
+			'image' => $img_path.$image_name
 		);
-		$where = "id = '".$product_id."'"; 
+		$where = "id = '".$product_id."'";
 		$this->db->update('products', $data_product, $where);
-		
+
 	}
 
 	public function insert_productimgs($product_id, $line, $image_name)
@@ -150,12 +150,12 @@ class Products_model extends CI_Model {
 			'modified_date' => date("Y-m-d H:i:s")
 		);
 		$this->db->insert('product_images', $data_product);
-		
+
 	}
 
 	public function get_product($product_id)
 	{
-		$sql ="SELECT * FROM products WHERE id = '".$product_id."'"; 
+		$sql ="SELECT * FROM products WHERE id = '".$product_id."'";
 
 		$query = $this->db->query($sql);
 		$row = $query->row_array();
@@ -164,7 +164,7 @@ class Products_model extends CI_Model {
 
 	public function get_images($product_id)
 	{
-		$sql ="SELECT * FROM product_images WHERE product_id = '".$product_id."'"; 
+		$sql ="SELECT * FROM product_images WHERE product_id = '".$product_id."'";
 		$query = $this->db->query($sql);
 		$row = $query->result_array();
 		return $row;
@@ -200,22 +200,22 @@ class Products_model extends CI_Model {
 			'is_sale' => $this->input->post('is_sale'),
 			'create_by' => '',
 			'modified_date' => date("Y-m-d H:i:s"),
-			'is_active' => $this->input->post('isactive')						
+			'is_active' => $this->input->post('isactive')
 		);
-		$where = "id = '".$product_id."'"; 
+		$where = "id = '".$product_id."'";
 		$this->db->update("products", $data_product, $where);
 
 	}
 
 	public function update_productimgs($product_id, $line, $image_name, $is_active)
 	{
-		$sql ="SELECT path FROM product_images WHERE  product_id='".$product_id."' AND line_number='".$line."' "; 
+		$sql ="SELECT path FROM product_images WHERE  product_id='".$product_id."' AND line_number='".$line."' ";
 		$query = $this->db->query($sql);
 		$row = $query->row_array();
 		if(isset($row["path"])){
 			 unlink($row["path"]);
 		}
-		
+
 		date_default_timezone_set("Asia/Bangkok");
 		$data_product = array(
 			'product_id' => $product_id,
@@ -224,9 +224,9 @@ class Products_model extends CI_Model {
 			'modified_date' => date("Y-m-d H:i:s"),
 			'is_active' => $is_active
 		);
-		$where = "product_id = '".$product_id."' AND line_number  = '".$line."' "; 
+		$where = "product_id = '".$product_id."' AND line_number  = '".$line."' ";
 		$this->db->update('product_images', $data_product, $where);
-		
+
 	}
 	public function update_productimgs_active($product_id, $line, $is_active)
 	{
@@ -235,9 +235,9 @@ class Products_model extends CI_Model {
 			'modified_date' => date("Y-m-d H:i:s"),
 			'is_active' => $is_active
 		);
-		$where = "product_id = '".$product_id."' AND line_number  = '".$line."' "; 
+		$where = "product_id = '".$product_id."' AND line_number  = '".$line."' ";
 		$this->db->update('product_images', $data_product, $where);
-		
+
 	}
 
 	function get_department_list($limit, $start)
@@ -261,19 +261,19 @@ class Products_model extends CI_Model {
 			'is_hot' => $this->input->post('is_hot'),
 			'is_promotion' => $this->input->post('is_promotion'),
 			'is_sale' => $this->input->post('is_sale'),
-			'is_active' => $this->input->post('isactive')						
+			'is_active' => $this->input->post('isactive')
 		);
-		
+
 		 $sql ="SELECT pc.search , p.* ,t.name type_name, b.name brand_name ,p.stock stock_number
-				FROM products p 
+				FROM products p
 				INNER JOIN (
 				SELECT CONCAT(IFNULL(name,''),IFNULL(model,''),IFNULL(shot_detail,''),IFNULL(sku,'')) search ,id FROM
-				products 
+				products
 				)
-				pc ON p.id = pc.id 
-				LEFT JOIN product_brand b ON p.product_brand_id = b.id 
+				pc ON p.id = pc.id
+				LEFT JOIN product_brand b ON p.product_brand_id = b.id
 				LEFT JOIN product_type t ON p.product_type_id = t.id ";
-		 //where 
+		 //where
 		$sql = $sql." WHERE 1=1 ";
 		if($data_product['search'] != "") {
 			$sql = $sql."AND pc.search LIKE '%".trim($data_product['search'])."%'";
@@ -287,7 +287,7 @@ class Products_model extends CI_Model {
 		}
 
 		$sql = $sql."AND (IFNULL(p.stock,0) BETWEEN '".$data_product['from_stock']."' AND '".$data_product['to_stock']."' )";
-		
+
 		if($data_product['all_promotion'] == "") {
 			if($data_product['is_hot'] =='' ){$data_product['is_hot']= "0";}
 			if($data_product['is_promotion'] =='' ){$data_product['is_promotion']= "0";}
@@ -307,7 +307,7 @@ class Products_model extends CI_Model {
 		if($data_product['is_active'] =='' ){$data_product['is_active']= "0";}
 		$sql = $sql."AND (p.is_active = '".$data_product['is_active']."')";
 
-	
+
 		$re = $this->db->query($sql);
 		$return_data['result_products'] = $re->result_array();
 		$return_data['data_search'] = $data_product;
@@ -318,7 +318,7 @@ class Products_model extends CI_Model {
 	function url_slug($str, $options = array()) {
 		// Make sure string is in UTF-8 and strip invalid UTF-8 characters
 		$str = mb_convert_encoding((string)$str, 'UTF-8', mb_list_encodings());
-		
+
 		$defaults = array(
 			'delimiter' => '-',
 			'limit' => null,
@@ -326,21 +326,21 @@ class Products_model extends CI_Model {
 			'replacements' => array(),
 			'transliterate' => false,
 		);
-		
+
 		// Merge options
 		$options = array_merge($defaults, $options);
-		
+
 		$char_map = array(
 			// Latin
-			'À' => 'A', 'Á' => 'A', 'Â' => 'A', 'Ã' => 'A', 'Ä' => 'A', 'Å' => 'A', 'Æ' => 'AE', 'Ç' => 'C', 
-			'È' => 'E', 'É' => 'E', 'Ê' => 'E', 'Ë' => 'E', 'Ì' => 'I', 'Í' => 'I', 'Î' => 'I', 'Ï' => 'I', 
-			'Ð' => 'D', 'Ñ' => 'N', 'Ò' => 'O', 'Ó' => 'O', 'Ô' => 'O', 'Õ' => 'O', 'Ö' => 'O', 'Ő' => 'O', 
-			'Ø' => 'O', 'Ù' => 'U', 'Ú' => 'U', 'Û' => 'U', 'Ü' => 'U', 'Ű' => 'U', 'Ý' => 'Y', 'Þ' => 'TH', 
-			'ß' => 'ss', 
-			'à' => 'a', 'á' => 'a', 'â' => 'a', 'ã' => 'a', 'ä' => 'a', 'å' => 'a', 'æ' => 'ae', 'ç' => 'c', 
-			'è' => 'e', 'é' => 'e', 'ê' => 'e', 'ë' => 'e', 'ì' => 'i', 'í' => 'i', 'î' => 'i', 'ï' => 'i', 
-			'ð' => 'd', 'ñ' => 'n', 'ò' => 'o', 'ó' => 'o', 'ô' => 'o', 'õ' => 'o', 'ö' => 'o', 'ő' => 'o', 
-			'ø' => 'o', 'ù' => 'u', 'ú' => 'u', 'û' => 'u', 'ü' => 'u', 'ű' => 'u', 'ý' => 'y', 'þ' => 'th', 
+			'À' => 'A', 'Á' => 'A', 'Â' => 'A', 'Ã' => 'A', 'Ä' => 'A', 'Å' => 'A', 'Æ' => 'AE', 'Ç' => 'C',
+			'È' => 'E', 'É' => 'E', 'Ê' => 'E', 'Ë' => 'E', 'Ì' => 'I', 'Í' => 'I', 'Î' => 'I', 'Ï' => 'I',
+			'Ð' => 'D', 'Ñ' => 'N', 'Ò' => 'O', 'Ó' => 'O', 'Ô' => 'O', 'Õ' => 'O', 'Ö' => 'O', 'Ő' => 'O',
+			'Ø' => 'O', 'Ù' => 'U', 'Ú' => 'U', 'Û' => 'U', 'Ü' => 'U', 'Ű' => 'U', 'Ý' => 'Y', 'Þ' => 'TH',
+			'ß' => 'ss',
+			'à' => 'a', 'á' => 'a', 'â' => 'a', 'ã' => 'a', 'ä' => 'a', 'å' => 'a', 'æ' => 'ae', 'ç' => 'c',
+			'è' => 'e', 'é' => 'e', 'ê' => 'e', 'ë' => 'e', 'ì' => 'i', 'í' => 'i', 'î' => 'i', 'ï' => 'i',
+			'ð' => 'd', 'ñ' => 'n', 'ò' => 'o', 'ó' => 'o', 'ô' => 'o', 'õ' => 'o', 'ö' => 'o', 'ő' => 'o',
+			'ø' => 'o', 'ù' => 'u', 'ú' => 'u', 'û' => 'u', 'ü' => 'u', 'ű' => 'u', 'ý' => 'y', 'þ' => 'th',
 			'ÿ' => 'y',
 			// Latin symbols
 			'©' => '(c)',
@@ -357,7 +357,7 @@ class Products_model extends CI_Model {
 			'ϊ' => 'i', 'ΰ' => 'y', 'ϋ' => 'y', 'ΐ' => 'i',
 			// Turkish
 			'Ş' => 'S', 'İ' => 'I', 'Ç' => 'C', 'Ü' => 'U', 'Ö' => 'O', 'Ğ' => 'G',
-			'ş' => 's', 'ı' => 'i', 'ç' => 'c', 'ü' => 'u', 'ö' => 'o', 'ğ' => 'g', 
+			'ş' => 's', 'ı' => 'i', 'ç' => 'c', 'ü' => 'u', 'ö' => 'o', 'ğ' => 'g',
 			// Russian
 			'А' => 'A', 'Б' => 'B', 'В' => 'V', 'Г' => 'G', 'Д' => 'D', 'Е' => 'E', 'Ё' => 'Yo', 'Ж' => 'Zh',
 			'З' => 'Z', 'И' => 'I', 'Й' => 'J', 'К' => 'K', 'Л' => 'L', 'М' => 'M', 'Н' => 'N', 'О' => 'O',
@@ -373,42 +373,42 @@ class Products_model extends CI_Model {
 			'Є' => 'Ye', 'І' => 'I', 'Ї' => 'Yi', 'Ґ' => 'G',
 			'є' => 'ye', 'і' => 'i', 'ї' => 'yi', 'ґ' => 'g',
 			// Czech
-			'Č' => 'C', 'Ď' => 'D', 'Ě' => 'E', 'Ň' => 'N', 'Ř' => 'R', 'Š' => 'S', 'Ť' => 'T', 'Ů' => 'U', 
-			'Ž' => 'Z', 
+			'Č' => 'C', 'Ď' => 'D', 'Ě' => 'E', 'Ň' => 'N', 'Ř' => 'R', 'Š' => 'S', 'Ť' => 'T', 'Ů' => 'U',
+			'Ž' => 'Z',
 			'č' => 'c', 'ď' => 'd', 'ě' => 'e', 'ň' => 'n', 'ř' => 'r', 'š' => 's', 'ť' => 't', 'ů' => 'u',
-			'ž' => 'z', 
+			'ž' => 'z',
 			// Polish
-			'Ą' => 'A', 'Ć' => 'C', 'Ę' => 'e', 'Ł' => 'L', 'Ń' => 'N', 'Ó' => 'o', 'Ś' => 'S', 'Ź' => 'Z', 
-			'Ż' => 'Z', 
+			'Ą' => 'A', 'Ć' => 'C', 'Ę' => 'e', 'Ł' => 'L', 'Ń' => 'N', 'Ó' => 'o', 'Ś' => 'S', 'Ź' => 'Z',
+			'Ż' => 'Z',
 			'ą' => 'a', 'ć' => 'c', 'ę' => 'e', 'ł' => 'l', 'ń' => 'n', 'ó' => 'o', 'ś' => 's', 'ź' => 'z',
 			'ż' => 'z',
 			// Latvian
-			'Ā' => 'A', 'Č' => 'C', 'Ē' => 'E', 'Ģ' => 'G', 'Ī' => 'i', 'Ķ' => 'k', 'Ļ' => 'L', 'Ņ' => 'N', 
+			'Ā' => 'A', 'Č' => 'C', 'Ē' => 'E', 'Ģ' => 'G', 'Ī' => 'i', 'Ķ' => 'k', 'Ļ' => 'L', 'Ņ' => 'N',
 			'Š' => 'S', 'Ū' => 'u', 'Ž' => 'Z',
 			'ā' => 'a', 'č' => 'c', 'ē' => 'e', 'ģ' => 'g', 'ī' => 'i', 'ķ' => 'k', 'ļ' => 'l', 'ņ' => 'n',
 			'š' => 's', 'ū' => 'u', 'ž' => 'z'
 		);
-		
+
 		// Make custom replacements
 		$str = preg_replace(array_keys($options['replacements']), $options['replacements'], $str);
-		
+
 		// Transliterate characters to ASCII
 		if ($options['transliterate']) {
 			$str = str_replace(array_keys($char_map), $char_map, $str);
 		}
-		
+
 		// Replace non-alphanumeric characters with our delimiter
 		$str = preg_replace('/[^\p{L}\p{Nd}]+/u', $options['delimiter'], $str);
-		
+
 		// Remove duplicate delimiters
 		$str = preg_replace('/(' . preg_quote($options['delimiter'], '/') . '){2,}/', '$1', $str);
-		
+
 		// Truncate slug to max. characters
 		$str = mb_substr($str, 0, ($options['limit'] ? $options['limit'] : mb_strlen($str, 'UTF-8')), 'UTF-8');
-		
+
 		// Remove delimiter from ends
 		$str = trim($str, $options['delimiter']);
-		
+
 		return $options['lowercase'] ? mb_strtolower($str, 'UTF-8') : $str;
 	}
 
@@ -416,9 +416,9 @@ class Products_model extends CI_Model {
 	{
 
 	    $sql =" SELECT p.* ,t.name type_name, b.name brand_name
-				FROM  products p 
+				FROM  products p
 				LEFT JOIN product_brand b ON p.product_brand_id = b.id
-				LEFT JOIN product_type t ON p.product_type_id = t.id 
+				LEFT JOIN product_type t ON p.product_type_id = t.id
 				WHERE p.id in(".$in_str.")
 				 ORDER BY p.id DESC ";
 		$re = $this->db->query($sql);
@@ -428,16 +428,16 @@ class Products_model extends CI_Model {
 	public function getstock_serial($product_id){
 
 		$sql =" SELECT p.sku, sn.serial_number ,r.doc_no receive_id ,sn.create_date ,
-				sh.`comment` status_name ,p.`name` product_name ,r.create_date receive_date 
-					FROM product_serial sn 
+				sh.`comment` status_name ,p.`name` product_name ,r.create_date receive_date
+					FROM product_serial sn
 				LEFT JOIN receive r ON r.id = sn.receive_id
 				LEFT JOIN products p ON p.id = sn.product_id
         		INNER JOIN serial_history sh ON sh.serial_number = sn.serial_number AND sn.product_id = sh.product_id AND sh.create_date = (
 					SELECT MAX(create_date)
 					FROM serial_history AS b
-					WHERE b.serial_number = sn.serial_number AND b.product_id = sh.product_id 
+					WHERE b.serial_number = sn.serial_number AND b.product_id = sh.product_id
 			)
-				 WHERE p.id  =  '".$product_id."'"; 
+				 WHERE p.id  =  '".$product_id."'";
 						$query = $this->db->query($sql);
 		$row = $query->result_array();
 		return $row;

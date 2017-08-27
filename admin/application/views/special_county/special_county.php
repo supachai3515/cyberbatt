@@ -1,6 +1,6 @@
 <div class="content-wrapper">
   <section class="content">
-    <div class="container-fluid box" ng-controller="myCtrl">
+    <div class="container-fluid box" ng-controller="mainCtrl">
         <div class="page-header">
             <h1>สถานที่พิเศษ</h1>
             <?php //if(isset($sql))echo "<p>".$sql."</p>"; ?>

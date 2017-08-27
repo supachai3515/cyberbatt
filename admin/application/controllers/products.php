@@ -14,18 +14,13 @@ class Products extends BaseController
     //page view
     public function index($page=0)
     {
-        $data['global'] = $this->global;
-        $data['menu_id'] = $this->initdata_model->get_menu_id($this->router->fetch_class());
-        $data['menu_list'] = $this->initdata_model->get_menu($data['global']['menu_group_id']);
-        $data['access_menu'] = $this->isAccessMenu($data['menu_list'], $data['menu_id']);
-        if ($data['access_menu']['is_access']&&$data['access_menu']['is_view']) {
+        $data = $this->get_data_check("is_view");
+        if (!is_null($data)) {
             $count = $this->products_model->get_products_count();
             $data['links_pagination'] = $this->pagination_compress("products/index", $count, $this->config->item('pre_page'));
             $data['products_list'] = $this->products_model->get_products($page, $this->config->item('pre_page'));
-
             $data['brands_list'] = $this->products_model->get_brands();
             $data['type_list'] = $this->products_model->get_type();
-
             //defalut search
             $data_search['all_promotion'] = "1";
             $data_search['is_active'] = "1";
@@ -33,42 +28,26 @@ class Products extends BaseController
 
             $data['content'] = 'products/products';
             //if script file
-            $data['script_file']= "js/product_add_js";
-            $data['header'] = array('title' => 'Products | '.$this->config->item('sitename'),
-                                    'description' =>  'Products | '.$this->config->item('tagline'),
-                                    'author' => $this->config->item('author'),
-                                    'keyword' => 'Products');
-            $this->load->view('template/layout_main', $data);
-        } else {
-            // access denied
-            $this->loadThis();
+            $data['script_file']= "jjs/product_add_js";
+            $data["header"] = $this->get_header("product");
+            $this->load->view("template/layout_main", $data);
         }
     }
     //page edit
     public function edit($product_id)
     {
-        $data['global'] = $this->global;
-        $data['menu_id'] = $this->initdata_model->get_menu_id($this->router->fetch_class());
-        $data['menu_list'] = $this->initdata_model->get_menu($data['global']['menu_group_id']);
-        $data['access_menu'] = $this->isAccessMenu($data['menu_list'], $data['menu_id']);
-        if ($data['access_menu']['is_access']&&$data['access_menu']['is_edit']) {
+      $data = $this->get_data_check("is_edit");
+      if (!is_null($data)) {
             $data['brands_list'] = $this->products_model->get_brands();
             $data['type_list'] = $this->products_model->get_type();
             $data['product_data'] = $this->products_model->get_product($product_id);
             $data['images_list'] = $this->products_model->get_images($product_id);
 
-
             $data['content'] = 'products/product_edit';
             //if script file
-            $data['script_file']= "js/product_add_js";
-            $data['header'] = array('title' => 'Products | '.$this->config->item('sitename'),
-                                                                                        'description' =>  'Products | '.$this->config->item('tagline'),
-                                                                                        'author' => $this->config->item('author'),
-                                                                                        'keyword' => 'Products');
-            $this->load->view('template/layout_main', $data);
-        } else {
-            // access denied
-            $this->loadThis();
+            $data['script_file']= "js/product_js";
+            $data["header"] = $this->get_header("product edit");
+            $this->load->view("template/layout_main", $data);
         }
     }
     //page search
