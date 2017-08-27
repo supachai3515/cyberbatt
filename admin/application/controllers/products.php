@@ -28,7 +28,7 @@ class Products extends BaseController
 
             $data['content'] = 'products/products';
             //if script file
-            $data['script_file']= "jjs/product_add_js";
+            $data['script_file']= "js/product_add_js";
             $data["header"] = $this->get_header("product");
             $this->load->view("template/layout_main", $data);
         }
