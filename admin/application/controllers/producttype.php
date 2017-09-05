@@ -7,6 +7,7 @@ class Producttype extends BaseController
     {
         parent::__construct();
         $this->load->model('producttype_model');
+        $this->load->model('products_model');
         $this->isLoggedIn();
     }
 
@@ -21,7 +22,7 @@ class Producttype extends BaseController
             $count = $this->producttype_model->get_producttype_count();
             $data['links_pagination'] = $this->pagination_compress("producttype/index", $count, $this->config->item('pre_page'));
             $data['producttype_list'] = $this->producttype_model->get_producttype($page, $this->config->item('pre_page'));
-
+            $data['type_list'] = $this->products_model->get_type();
             $data['content'] = 'producttype/producttype';
             //if script file
             $data['script_file']= "js/product_add_js";
@@ -48,7 +49,7 @@ class Producttype extends BaseController
             $return_data = $this->producttype_model->get_producttype_search();
             $data['producttype_list'] = $return_data['result_producttype'];
             $data['data_search'] = $return_data['data_search'];
-
+            $data['type_list'] = $this->products_model->get_type();
             $data['content'] = 'producttype/producttype';
             //if script file
             $data['script_file']= "js/product_add_js";
@@ -73,6 +74,7 @@ class Producttype extends BaseController
         if ($data['access_menu']['is_access']&&$data['access_menu']['is_edit']) {
             $data['producttype_data'] = $this->producttype_model->get_producttype_id($producttype_id);
             $data['content'] = 'producttype/producttype_edit';
+            $data['type_list'] = $this->products_model->get_type();
             //if script file
             $data['script_file']= "js/product_add_js";
             $data['header'] = array('title' => 'Product type | '.$this->config->item('sitename'),

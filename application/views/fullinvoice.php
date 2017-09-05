@@ -133,7 +133,7 @@
 																 //update invoice total + shipping 20170824
 																 $products_price = $orders_data['total'];
 																 $vat_new =($products_price * 7 )/107;
-																 $befor_vat =($products_price -  $vat_new)-$orders_data['shipping_charge'];
+																 $befor_vat =$orders_data['total'] -($orders_data['total'] * 7/107);
 
 																?>
 
