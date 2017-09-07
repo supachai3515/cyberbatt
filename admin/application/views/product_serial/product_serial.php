@@ -50,7 +50,7 @@
                             <label class="sr-only" for="">search</label>
                             <input type="text" class="form-control" id="search" name="search" placeholder="Serial Number">
                         </div>
-                
+
                         <button type="submit" class="btn btn-primary">ค้นหา</button>
                     </form>
                     <div class="box-body table-responsive no-padding">
@@ -72,16 +72,16 @@
                                     <td>
                                         <span>รหัสสินค้า : <strong><?php echo $product_serial['sku'] ?></strong></span><br/>
                                         <span>ชื่อสินค้า : <strong><?php echo $product_serial['product_name'] ?></strong></span><br/>
-      
+
                                     </td>
-                                    <td>    
+                                    <td>
                                          <span>สถานะ : <strong><?php echo $product_serial['status_name'].' วันที่ : '.date("d-m-Y H:i",strtotime($product_serial['create_date_status'])); ?></strong></span><br/>
                                          <?php if (isset($product_serial['order_id'] )): ?>
                                               <span>วันที่ขาย : </span> <strong><?php echo date("d-m-Y H:i", strtotime($product_serial['modified_date_order']));?></strong><br/>
-                                             
+
                                          <?php endif ?>
-                                      
-                                    </td> 
+
+                                    </td>
                                     <td>
                                          <span><i class="fa fa-calendar"></i> <?php echo date("d-m-Y H:i", strtotime($product_serial['modified_date']));?></span>
                                         <br/>
@@ -95,7 +95,7 @@
                                     </td>
                                     <td>
                                       <button type="button" class="btn btn-info" ng-click="open(<?php echo $product_serial['product_id'] ?>,'<?php echo $product_serial['serial_number'] ?>')">ประวิติ Serial Number</button>
-                                  </td>    
+                                  </td>
                                 </tr>
                             <?php endforeach ?>
                             </tbody>

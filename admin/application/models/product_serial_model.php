@@ -51,9 +51,7 @@ class product_serial_model extends CI_Model
         foreach ($re_se as $r) {
             $in = $in.",'".$r['serial_number']."'";
         }
-        if (count($re_se) == 0) {
-            $and_str  = "AND 1=2";
-        }
+
 
         $sql ="SELECT sn.*, p.sku, sn.serial_number ,r.doc_no receive_id ,sn.create_date ,sh.comment status_name , sh.create_date create_date_status,
 				p.`name` product_name ,r.create_date receive_date
@@ -64,8 +62,15 @@ class product_serial_model extends CI_Model
 						SELECT MAX(create_date)
 						FROM serial_history AS b
 						WHERE b.serial_number = sn.serial_number AND b.product_id = sh.product_id
-				)
-				WHERE  sn.serial_number in (".str_replace("0,", "", $in).") ";
+				) ";
+
+
+        if (count($re_se) > 0) {
+          $sql = $sql."  WHERE  sn.serial_number in (".str_replace("0,", "", $in).") ";
+        }
+        else {
+          $sql = $sql."  WHERE  1=2 ";
+        }
 
         $re = $this->db->query($sql);
         $return_data['result_product_serial'] = $re->result_array();

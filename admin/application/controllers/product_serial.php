@@ -37,6 +37,7 @@ class Product_serial extends BaseController
 				$return_data = $this->product_serial_model->get_product_serial_search();
 				$data['product_serial_list'] = $return_data['result_product_serial'];
 				$data['data_search'] = $return_data['data_search'];
+        $data['sql'] = $return_data['sql'];
 
 					$data['script_file']= "js/serial_js";
 					$data["content"] = "product_serial/product_serial";
