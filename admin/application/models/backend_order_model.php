@@ -205,28 +205,12 @@ class backend_order_model extends CI_Model
 
                     // Create an array with the products rowid's and quantities.
             $data = array(
-                                     'rowid' => $item[$i],
-                                     'qty'   => 0,
-                                     'price'  => (int)$price[$i],
-                                );
+                             'rowid' => $item[$i],
+                             'qty'   => $qty[$i],
+                             'price'  => (int)$price[$i],
+                        );
             // Update the cart with the new information
             $this->cart->update($data);
-            $sql   = "SELECT * FROM products WHERE is_active = 1 AND id = ".$product_id[$i];
-            $query = $this->db->query($sql);
-            $row   = $query->row_array();
-            if (isset($row['id'])) {
-                $data = array(
-                                    array(
-                                            'id' => $row['id'],
-                                            'sku' => $row['id'],
-                                            'qty' => $qty[$i],
-                                            'price' =>$price[$i],
-                                            'is_reservations' => 0,
-                                            'name' => $row['id']
-                                    )
-                            );
-                $this->cart->insert($data);
-            }
         }
     }
 }
