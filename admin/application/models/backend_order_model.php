@@ -189,8 +189,7 @@ class backend_order_model extends CI_Model
     // Updated the shopping cart
     public function validate_update_cart()
     {
-
-                // Get the total number of items in cart
+        // Get the total number of items in cart
         $total = $this->cart->total_items();
 
         // Retrieve the posted information
@@ -202,8 +201,7 @@ class backend_order_model extends CI_Model
 
         // Cycle true all items and update them
         for ($i=0;$i < count($product_id);$i++) {
-
-                    // Create an array with the products rowid's and quantities.
+            // Create an array with the products rowid's and quantities.
             $data = array(
                              'rowid' => $item[$i],
                              'qty'   => $qty[$i],

@@ -20,7 +20,7 @@ class Backend_order extends BaseController
             $data['searchText'] = $searchText;
 
             $count =  $this->backend_order_model->get_products_serach_count($searchText);
-            $data["links_pagination"] = $this->pagination_compress("slider/index", $count, $this->config->item("pre_page"));
+            $data["links_pagination"] = $this->pagination_compress("backend_order/index", $count, $this->config->item("pre_page"));
             $data['products_serach'] = $this->backend_order_model->get_products_serach($searchText, $page, $this->config->item("pre_page"));
 
             $data["content"] = "backend_order/backend_order_view";
