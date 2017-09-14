@@ -57,6 +57,7 @@ class Backend_order extends BaseController
         $data = $this->get_data_check("is_add");
         if (!is_null($data)) {
             $result = $this->backend_order_model->validate_update_cart();
+            $this->session->set_flashdata('msg', $result);
             redirect('backend_order/list_temp', 'refresh');
         }
     }
