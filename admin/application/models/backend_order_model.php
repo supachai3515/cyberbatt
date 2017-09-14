@@ -209,6 +209,25 @@ class backend_order_model extends CI_Model
                         );
             // Update the cart with the new information
             $this->cart->update($data);
+
+
+
+            $sql   = "SELECT id FROM products WHERE is_active = 1  AND id = ".$this->db->escape($product_id[$i]);
+            $query = $this->db->query($sql);
+            $row   = $query->row_array();
+            if (isset($row['id'])) {
+
+                $data = array(
+                                array(
+                                        'id' => $row['id'],
+                                        'sku' => $row['id'],
+                                        'qty' => $qty[$i],
+                                        'price' => round($price[$i]),
+                                )
+                    );
+                $this->cart->insert($data);
+            }
+
         }
     }
 }
