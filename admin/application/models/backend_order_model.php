@@ -203,50 +203,23 @@ class backend_order_model extends CI_Model
         for ($i=0;$i < count($product_id);$i++) {
             // Create an array with the products rowid's and quantities.
             $data = array(
-                                     'rowid' => $item[$i],
-                                     'qty'   => 0,
-                                     'price'  => (int)$price[$i],
-                                );
+                           'rowid' => $item[$i],
+                           'qty'   => $qty[$i],
+                           'price'  => (int)$price[$i],
+                      );
             // Update the cart with the new information
             $this->cart->update($data);
-<<<<<<< HEAD
+            // $data = array(
+            //               'id' => $product_id[$i],
+            //               'sku' => $product_id[$i],
+            //               'qty' => $qty[$i],
+            //               'price' =>$price[$i],
+            //               'is_reservations' => 0,
+            //               'name' => $product_id[$i]
+            //
+            //         );
+            // $this->cart->insert($data);
 
-
-
-            $sql   = "SELECT id FROM products WHERE is_active = 1  AND id = ".$this->db->escape($product_id[$i]);
-            $query = $this->db->query($sql);
-            $row   = $query->row_array();
-            if (isset($row['id'])) {
-
-                $data = array(
-                                array(
-                                        'id' => $row['id'],
-                                        'sku' => $row['id'],
-                                        'qty' => $qty[$i],
-                                        'price' => round($price[$i]),
-                                )
-                    );
-                $this->cart->insert($data);
-            }
-
-=======
-            $sql   = "SELECT * FROM products WHERE is_active = 1 AND id = ".$product_id[$i];
-            $query = $this->db->query($sql);
-            $row   = $query->row_array();
-            if (isset($row['id'])) {
-                $data = array(
-                                    array(
-                                            'id' => $row['id'],
-                                            'sku' => $row['id'],
-                                            'qty' => $qty[$i],
-                                            'price' =>$price[$i],
-                                            'is_reservations' => 0,
-                                            'name' => $row['id']
-                                    )
-                            );
-                $this->cart->insert($data);
-            }
->>>>>>> parent of 0559216... cart
         }
     }
 }

@@ -108,15 +108,15 @@ class Orders extends BaseController
 
                 //sendmail
                 $email_config = array(
-                'protocol'  => 'smtp',
-                'smtp_host' => 'ssl://smtp.googlemail.com',
-                'smtp_port' => '465',
-                'smtp_user' => $this->config->item('email_noreply'),
-                'smtp_pass' => $this->config->item('pass_mail_noreply'),
-                'mailtype'  => 'html',
-                'starttls'  => true,
-                'newline'   => "\r\n"
-            );
+                    'protocol'  => 'smtp',
+                    'smtp_host' => 'ssl://smtp.googlemail.com',
+                    'smtp_port' => '465',
+                    'smtp_user' => $this->config->item('email_noreply'),
+                    'smtp_pass' => $this->config->item('pass_mail_noreply'),
+                    'mailtype'  => 'html',
+                    'starttls'  => true,
+                    'newline'   => "\r\n"
+                );
 
                 $this->load->library('email', $email_config);
                 $this->email->from($this->config->item('email_noreply'), $this->config->item('email_name'));
