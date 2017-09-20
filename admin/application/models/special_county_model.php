@@ -54,7 +54,10 @@ class special_county_model extends CI_Model
 				FROM  special_county p
 				INNER JOIN  shipping_method s  on p.shipping_method_id = s.id
 				INNER JOIN amphur a ON a.amphur_id = p.amphur_id
-				INNER JOIN province v ON v.province_id = a.province_id  WHERE s.name LIKE '%".$data_special_county['search']."%'";
+				INNER JOIN province v ON v.province_id = a.province_id
+        WHERE s.name LIKE '%".$data_special_county['search']."%' OR
+              a.amphur_name  LIKE '%".$data_special_county['search']."%' OR
+              v.province_name LIKE '%".$data_special_county['search']."%' ";
         $re = $this->db->query($sql);
         $return_data['result_special_county'] = $re->result_array();
         $return_data['data_search'] = $data_special_county;
@@ -86,6 +89,7 @@ class special_county_model extends CI_Model
     public function save_special_county()
     {
         date_default_timezone_set("Asia/Bangkok");
+        $this->delete_special_county($this->input->post('amphur_id'),$this->input->post('shipping_method_id'));
         $data_special_county = array(
             'shipping_method_id'=> $this->input->post('shipping_method_id'),
             'amphur_id'=> $this->input->post('amphur_id'),
