@@ -138,10 +138,10 @@
 	                            <?php endforeach ?>
 
 	                            <?php
-																				//update invoice total + shipping 20170824
+																				//update invoice total + shipping 201700923
 	                                      $products_price = $orders_data['total'];
 	                                      $vat_new =($products_price * 7 )/107;
-	                                      $befor_vat =($products_price -  $vat_new)-$orders_data['shipping_charge'];
+	                                      $befor_vat =($orders_data["total"] -  $vat_new) ;
 
 	                                     ?>
 
@@ -163,7 +163,7 @@
 																	 <td class="emptyrow"></td>
 																		 <td class="emptyrow"></td>
 																		 <td class="emptyrow"></td>
-																		 <td class="emptyrow text-center">ราคาสินค้าก่อน vat 7%</td>
+																		 <td class="emptyrow text-center">ราคาก่อน vat 7%</td>
 																		 <td class="emptyrow text-right">
 																		 <?php echo number_format($befor_vat,2)."&nbsp;บาท"; ?></td>
 																 </tr>
