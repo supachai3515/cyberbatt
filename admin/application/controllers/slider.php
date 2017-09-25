@@ -6,6 +6,7 @@ class Slider extends BaseController
     public function __construct()
     {
         parent::__construct();
+        session_start();
         $this->load->model('slider_model');
         $this->isLoggedIn();
     }

@@ -6,6 +6,7 @@ class Credit_note extends BaseController
     public function __construct()
     {
         parent::__construct();
+        session_start();
         $this->load->model('initdata_model');
         $this->load->model('credit_note_model');
         $this->load->model('products_model');

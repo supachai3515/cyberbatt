@@ -6,6 +6,7 @@ class Backend_order extends BaseController
     public function __construct()
     {
         parent::__construct();
+        session_start();
         $this->load->model('backend_order_model');
         $this->load->model('products_model');
         $this->isLoggedIn();

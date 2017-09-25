@@ -6,6 +6,7 @@ class Sale_orders extends BaseController
     public function __construct()
     {
         parent::__construct();
+        session_start();
         $this->load->model('sale_orders_model');
         $this->load->model('orders_model');
         $this->isLoggedIn();

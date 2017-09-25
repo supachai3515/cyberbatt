@@ -6,6 +6,7 @@ class Product_serial extends BaseController
     public function __construct()
     {
         parent::__construct();
+        session_start();
         $this->load->model('product_serial_model');
         $this->load->model('products_model');
         $this->isLoggedIn();

@@ -6,6 +6,7 @@ class Orders extends BaseController
     public function __construct()
     {
         parent::__construct();
+        session_start();
         $this->load->model('orders_model');
         $this->load->library('my_upload');
         $this->load->library('upload');

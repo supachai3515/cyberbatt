@@ -6,6 +6,7 @@ class Return_receive extends BaseController
     public function __construct()
     {
         parent::__construct();
+        session_start();
         $this->load->model('return_receive_model');
         $this->load->model('products_model');
         $this->isLoggedIn();

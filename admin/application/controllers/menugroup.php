@@ -7,7 +7,7 @@ class Menugroup extends BaseController {
   public function __construct()
   {
     parent::__construct();
-    
+    session_start();
 		$this->load->model('menugroup_model');
     $this->isLoggedIn();
   }

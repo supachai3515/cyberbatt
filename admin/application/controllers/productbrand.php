@@ -6,6 +6,7 @@ class Productbrand extends BaseController
     public function __construct()
     {
         parent::__construct();
+        session_start();
         $this->load->model("productbrand_model");
         $this->isLoggedIn();
     }

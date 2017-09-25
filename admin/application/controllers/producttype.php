@@ -6,6 +6,7 @@ class Producttype extends BaseController
     public function __construct()
     {
         parent::__construct();
+        session_start();
         $this->load->model('producttype_model');
         $this->load->model('products_model');
         $this->isLoggedIn();

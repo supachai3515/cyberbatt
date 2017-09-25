@@ -6,6 +6,7 @@ class special_county extends BaseController
     public function __construct()
     {
         parent::__construct();
+        session_start();
         $this->load->model("special_county_model");
         $this->load->model("products_model");
         $this->isLoggedIn();

@@ -6,6 +6,7 @@ class delivery_return extends BaseController
     public function __construct()
     {
         parent::__construct();
+        session_start();
         $this->load->model('delivery_return_model');
         $this->load->model('products_model');
         $this->isLoggedIn();

@@ -6,6 +6,7 @@ class Products extends BaseController
     public function __construct()
     {
         parent::__construct();
+        session_start();
         $this->load->model('products_model');
         $this->load->library('my_upload');
         $this->isLoggedIn();

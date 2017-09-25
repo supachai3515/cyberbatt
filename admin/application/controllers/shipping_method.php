@@ -6,6 +6,7 @@ class Shipping_method extends BaseController
     public function __construct()
     {
         parent::__construct();
+        session_start();
         $this->load->model('shipping_method_model');
         $this->load->model('products_model');
         $this->isLoggedIn();

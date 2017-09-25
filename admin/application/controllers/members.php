@@ -6,6 +6,7 @@ class Members extends BaseController
     public function __construct()
     {
         parent::__construct();
+        session_start();
         $this->load->model('members_model');
         $this->isLoggedIn();
     }
