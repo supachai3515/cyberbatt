@@ -6,7 +6,7 @@
             <?php
                  //left-sidebar
                 $data['page']= "product_detail";
-                     $this->load->view('template/left-sidebar',$data);
+                     $this->load->view('template/left-sidebar', $data);
             ?>
             </div>
             <div class="col-sm-9 col-lg-9 col-md-9">
@@ -31,30 +31,32 @@
                         <!-- breadcrumbs end-->
                         <div class="product-description-area product-overview">
                             <div class="row">
+                            <!-- begin product image -->
                                 <div class="col-sm-5 col-lg-5 col-md-5">
                                     <?php if (count($product_images)==0): ?>
                                         <img src="<?php echo $this->config->item('no_url_img');?>" class="img-responsive" alt="Image">
                                     <?php endif ?>
                                     <?php $i= 1; foreach ($product_images as $value): ?>
                                     <?php
-										$image_url="";
-										if($value['path'] !=""){
+                                        $image_url="";
+                                        if ($value['path'] !="") {
                                             $image_url = $this->config->item('url_img').$value['path'];
-                                        }
-										else {
+                                        } else {
                                             $image_url = $this->config->item('no_url_img');
                                         }
-									?>
+                                    ?>
                                     <?php if ($i==1): ?>
                                         <a class="fancybox-thumb" data-fancybox-group="group" href="<?php echo $image_url;?>">
-											<img  width="100%" src="<?php echo $image_url;?>" alt="" /></a>
+				                                 <img  width="100%" src="<?php echo $image_url;?>" alt="" /></a>
                                         <br>
                                     <?php else: ?>
                                         <a class="fancybox-thumb" data-fancybox-group="group" href="<?php echo $image_url;?>">
-									       <img  width="100px" style="padding: 10px 5px" src="<?php echo $image_url;?>" alt="" /></a>
+									                                 <img  width="100px" style="padding: 10px 5px" src="<?php echo $image_url;?>" alt="" /></a>
                                     <?php endif ?>
                                     <?php $i++ ; endforeach ?>
                                 </div>
+
+                            <!-- end product image -->
                                 <div class="col-sm-7 col-lg-7 col-md-7">
                                     <div class="product-description">
                                         <h1 class="product-name">
@@ -77,7 +79,7 @@
                                             <?php endif ?>
                                         </p>
                                         <p class="product-desc">
-                                            <?php //echo $product_detail['shot_detail'] ?>
+                                            <?php //echo $product_detail['shot_detail']?>
                                         </p>
                                         <p class="pquantityavailable">
                                         <?php if ($product_detail['stock'] > 0): ?>
@@ -93,15 +95,12 @@
                                                 $dis_price = $disprice = $product_detail["dis_price"];
 
                                                 if ($this->session->userdata('is_logged_in') && $this->session->userdata('verify') == "1") {
-
-                                                    if($this->session->userdata('is_lavel1')) {
-                                                        if($product_detail["member_discount_lv1"] > 1){
+                                                    if ($this->session->userdata('is_lavel1')) {
+                                                        if ($product_detail["member_discount_lv1"] > 1) {
                                                             $dis_price = $product_detail["member_discount_lv1"];
                                                         }
-                                                    }
-                                                    else {
-
-                                                        if($product_detail["member_discount"] > 1){
+                                                    } else {
+                                                        if ($product_detail["member_discount"] > 1) {
                                                             $dis_price = $product_detail["member_discount"];
                                                         }
                                                     }
