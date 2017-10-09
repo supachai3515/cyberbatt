@@ -6,7 +6,11 @@ class Products extends BaseController
     public function __construct()
     {
         parent::__construct();
+
+        session_cache_limiter('private, must-revalidate');
+        session_cache_expire(60);
         session_start();
+        
         $this->load->model('products_model');
         $this->load->library('my_upload');
         $this->isLoggedIn();
