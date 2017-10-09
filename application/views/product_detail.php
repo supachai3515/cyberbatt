@@ -47,7 +47,7 @@
                                     ?>
                                     <?php if ($i==1): ?>
                                         <a class="fancybox-thumb" data-fancybox-group="group" href="<?php echo $image_url;?>">
-				                                 <img  width="100%" src="<?php echo $image_url;?>" alt="" /></a>
+				                                 <img class="zoom-image"  width="100%" src="<?php echo $image_url;?>" alt="" data-zoom="<?php echo $image_url;?>" /></a>
                                         <br>
                                     <?php else: ?>
                                         <a class="fancybox-thumb" data-fancybox-group="group" href="<?php echo $image_url;?>">
@@ -58,7 +58,7 @@
 
                             <!-- end product image -->
                                 <div class="col-sm-7 col-lg-7 col-md-7">
-                                    <div class="product-description">
+                                    <div class="product-description zoom-area">
                                         <h1 class="product-name">
 										<?php echo $product_detail['name'] ?>
 									</h1>

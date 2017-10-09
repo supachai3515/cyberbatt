@@ -104,6 +104,10 @@
         <script type="text/javascript" src="<?php echo base_url('theme');?>/fancyBox/source/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>
         <script type="text/javascript" src="<?php echo base_url('theme');?>/fancyBox/source/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
         <script type="text/javascript" src="<?php echo base_url('theme');?>/fancyBox/source/helpers/jquery.fancybox-media.js?v=1.0.6"></script>
+
+    <!-- image zoom js
+    ============================================ -->
+    <script src="<?php echo base_url('theme');?>/zoom-image/Drift.min.js"></script>
      <script type="text/javascript">
     $(document).ready(function() {
         $(".fancybox-thumb").fancybox({
@@ -119,8 +123,23 @@
                 }
             }
         });
+
+        var demoTrigger = document.querySelector('.zoom-image');
+        var paneContainer = document.querySelector('.zoom-area');
+
+        new Drift(demoTrigger, {
+          paneContainer: paneContainer,
+          inlinePane: false
+        });
     });
     </script>
+    <style>
+        .drift-open{
+            border: 1px solid #555;
+            left: -15px;
+            border-radius: 4px;
+        }
+    </style>
     <!-- jquery.scrollUp.min js
         ============================================ -->
     <script src="<?php echo base_url('theme');?>/js/jquery.scrollUp.min.js"></script>
