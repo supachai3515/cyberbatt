@@ -110,6 +110,13 @@
     <script src="<?php echo base_url('theme');?>/zoom-image/Drift.min.js"></script>
      <script type="text/javascript">
     $(document).ready(function() {
+        $(".thumbnail-img").click(function() {
+            $("#main-image").attr({
+                "src": $(this).attr("src"),
+                "data-zoom": $(this).attr("src")
+            });
+            $("#fancybox-link").attr("href",$(this).attr("src"));
+        });
         $(".fancybox-thumb").fancybox({
             prevEffect  : "none",
             nextEffect  : "none",
