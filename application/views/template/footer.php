@@ -41,7 +41,7 @@
                                 </div>
                                 <div class="store-content">
                                     <ul>
-                                       <li><i class="fa fa-map-marker"></i>  บริษัท ไชเบอร์ แบต จำกัด <br>
+                                       <li><i class="fa fa-map-marker"></i>
                                        396 โซน B ซ.ลาดพร้าว 94 ถ.ศรีวรา พลับพลา วังทองหลาง กทม. 10310</li>
                                        <li><i class="fa fa-phone"></i> Mobile: 091-7824565 , 02-7313565</li>
                                        <li><i class="fa fa-comment"></i> LINE : @cyberbatt</li>
@@ -59,8 +59,12 @@
                                         <li><i class="fa fa-clock-o"></i> ทุกวัน จันทร์ - เสาร์ 9.30 - 19.00 น.</li>
                                     </ul>
                                 </div>
-                                <div class="footer-payment">
-                                    <img alt="" src="<?php echo base_url('theme');?>/img/payment-new.png">
+                                <div class="store-content">
+                                    <ul>
+                                        <li><i class="fa fa-map-marker"></i>ส่งสินค้าเคลมได้ที่ <br>
+                                            CYBERBATT CO., LTD
+                                            2963 ซ.ลาดพร้าว 101/2 ถ.ลาดพร้าว คลองจั่น บางกะปิ กทม. 10240</li>
+                                    </ul>
                                 </div>
                             </div>
                         </div>
