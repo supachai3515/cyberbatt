@@ -61,8 +61,8 @@
                                 </div>
                                 <div class="store-content">
                                     <ul>
-                                        <li><i class="fa fa-map-marker"></i>ส่งสินค้าเคลมได้ที่ <br>
-                                            CYBERBATT CO., LTD
+                                        <li><i class="fa fa-map-marker"></i> ส่งสินค้าเคลมได้ที่ <br>
+                                            CYBERBATT CO., LTD<br>
                                             2963 ซ.ลาดพร้าว 101/2 ถ.ลาดพร้าว คลองจั่น บางกะปิ กทม. 10240</li>
                                     </ul>
                                 </div>
