@@ -131,13 +131,16 @@
             }
         });
 
-        var demoTrigger = document.querySelector('.zoom-image');
+        var demoTrigger = document.querySelector('#main-image');
         var paneContainer = document.querySelector('.zoom-area');
-
-        new Drift(demoTrigger, {
-          paneContainer: paneContainer,
-          inlinePane: false
-        });
+        if(demoTrigger != null) {
+            new Drift(demoTrigger, {
+              paneContainer: paneContainer,
+              inlinePane: false,
+              handleTouch: false
+            });
+        }
+        
     });
     </script>
     <style>

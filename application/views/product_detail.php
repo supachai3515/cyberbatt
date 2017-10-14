@@ -47,7 +47,7 @@
                                     ?>
                                     <?php if ($i==1): ?>
                                         <a id="fancybox-link" class="fancybox-thumb" data-fancybox-group="group" href="<?php echo $image_url;?>">
-				                                 <img id="main-image" class="zoom-image"  width="100%" src="<?php echo $image_url;?>" alt="" data-zoom="<?php echo $image_url;?>" /></a>
+				                                 <img id="main-image"  width="100%" src="<?php echo $image_url;?>" alt="" data-zoom="<?php echo $image_url;?>" /></a>
                                         <br>
                                     <?php endif ?>
                                                                      <img class="thumbnail-img" width="100px" style="padding: 10px 5px" src="<?php echo $image_url;?>" alt="">
