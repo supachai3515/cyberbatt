@@ -6,7 +6,7 @@
     </div>
     <div class="modal-body">
       <form class="form-inline" role="form" ng-submit="searchOrder(search_order)">
-          <p class="" for="">รหัสสินค้า , เลขที่ใบสั่งซื้อ , เลขที่ invoice , serial number</p>
+          <p class="" for="">รหัสสินค้า, เลขที่ใบสั่งซื้อ, เลขที่ invoice, ชื่อลูกค้า</p>
         <div class="form-group">
           <input type="text" class="form-control" ng-model="search_order" ng-init="search_order =''" placeholder="">
         </div>

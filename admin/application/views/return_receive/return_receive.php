@@ -5,7 +5,7 @@
       <h4>เลือกใบสั่งซื้อ</h4>
     </div>
     <div class="modal-body">
-      <p class="" for="">รหัสสินค้า , เลขที่ใบสั่งซื้อ , เลขที่ invoice , serial number</p>
+      <p class="" for="">รหัสสินค้า, เลขที่ใบสั่งซื้อ, เลขที่ invoice, ชื่อลูกค้า</p>
       <form class="form-inline" role="form" ng-submit="searchOrder(search_order)">
         <div class="form-group">
           <input type="text" class="form-control" ng-model="search_order" ng-init="search_order =''" placeholder="">
