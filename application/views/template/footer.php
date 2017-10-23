@@ -43,7 +43,7 @@
                                     <ul>
                                        <li><i class="fa fa-map-marker"></i>
                                        396 โซน B ซ.ลาดพร้าว 94 ถ.ศรีวรา พลับพลา วังทองหลาง กทม. 10310</li>
-                                       <li><i class="fa fa-phone"></i> Mobile: 091-7824565 , 02-7313565</li>
+                                       <li><i class="fa fa-phone"></i> Mobile: 091-7824565</li>
                                        <li><i class="fa fa-comment"></i> LINE : @cyberbatt</li>
                                     </ul>
                                 </div>
@@ -51,19 +51,19 @@
                         </div>
                         <div class="col-sm-3 col-lg-3 col-md-3">
                             <div class="store-information-area">
-                                <div class="footer-title">
-                                    <h2>เวลาทำการ Cyberbatt</h2>
-                                </div>
+                              <div class="footer-title">
+                                  <h2>ส่งสินค้าเคลมได้ที่</h2>
+                              </div>
+                              <div class="store-content">
+                                  <ul>
+                                      <li><i class="fa fa-map-marker"></i> CYBERBATT CO., LTD<br>
+                                      2963 ซ.ลาดพร้าว 101/2 ถ.ลาดพร้าว คลองจั่น บางกะปิ กทม. 10240</li>
+                                  </ul>
+                              </div>
                                 <div class="store-content">
                                     <ul>
-                                        <li><i class="fa fa-clock-o"></i> ทุกวัน จันทร์ - เสาร์ 9.30 - 19.00 น.</li>
-                                    </ul>
-                                </div>
-                                <div class="store-content">
-                                    <ul>
-                                        <li><i class="fa fa-map-marker"></i> ส่งสินค้าเคลมได้ที่ <br>
-                                            CYBERBATT CO., LTD<br>
-                                            2963 ซ.ลาดพร้าว 101/2 ถ.ลาดพร้าว คลองจั่น บางกะปิ กทม. 10240</li>
+                                        <li>เวลาทำการ Cyberbatt <br>
+                                          <i class="fa fa-clock-o"></i> ทุกวัน จันทร์ - เสาร์ 9.30 - 19.00 น.</li>
                                     </ul>
                                 </div>
                             </div>

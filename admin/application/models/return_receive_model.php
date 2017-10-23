@@ -261,8 +261,8 @@ class return_receive_model extends CI_Model
 
 				WHERE o.id  = '".$search_txt."'
 					OR o.`invoice_docno`  = '".$search_txt."'
-					OR s.serial_number  = '".$search_txt."'
 					OR p.`sku`  = '".$search_txt."'
+					OR o.`name` = '".$search_txt."'
 					) a
 			";
         $re = $this->db->query($sql);
