@@ -16,6 +16,7 @@
             <th>ชื่อสินค้า</th>
             <th>หมวดสินค้า</th>
             <th>ยี่ห้อ</th>
+            <th>Model</th>
             <th>ราคา</th>
             <th>ส่วนลด</th>
             <th>ส่วนลด Dealer</th>
@@ -33,6 +34,7 @@
             <td><?php echo $product->name ?></td>
             <td><?php echo $product->type_name ?></td>
             <td><?php echo $product->brand_name ?></td>
+            <td><?php echo $product->model ?></td>
             <td><?php echo $product->price ?></td>
             <td><?php echo $product->dis_price ?></td>
             <td><?php echo $product->member_discount ?></td>

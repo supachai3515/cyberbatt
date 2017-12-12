@@ -74,6 +74,7 @@
 	                                <tr>
 	                                    <td class="text-center product-id">sku</td>
 	                                    <td class="text-center">name</td>
+																			<td class="">Model</td>
 	                                    <td class="text-center sumpricepernum">qty</td>
                                         <td class="text-center">vat</td>
 	                                    <td class="text-center">price</td>
@@ -94,6 +95,7 @@
 	                            	 <tr>
 										<td class="text-center"><?php echo $value['sku'] ?></td>
 										<td><?php echo $value['name'] ?></td>
+										<td><?php echo $value['model'] ?></td>
                     <td class="text-center"><?php echo $value['qty'] ?></td>
 										<td class="text-center"><?php echo $value['vat']; ?></td>
 										<td class="text-center"><?php echo number_format($value["price"],2);?></td>

@@ -189,6 +189,7 @@
                       <strong>Name : </strong> <?php echo $record->name ?><br>
                       <strong>Type : </strong> <?php echo $record->type_name ?><br>
                       <strong>brand : </strong> <?php echo $record->brand_name ?><br>
+                      <strong>Model : </strong> <?php echo $record->model ?><br>
                     </td>
                     <td>
 

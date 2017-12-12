@@ -74,6 +74,7 @@
 	                                <tr>
 	                                    <td class="text-center product-id"><strong>SKU</strong></td>
 	                                    <td class=""><strong>Name</strong></td>
+																			<td class=""><strong>Model</strong></td>
 	                                    <td class="text-center sumpricepernum"><strong>QTY</strong></td>
 	                                </tr>
 	                            </thead>
@@ -93,6 +94,7 @@
 											               <tr>
 																				<td class="text-center"><?php echo $value['sku'] ?></td>
 																				<td><?php echo $value['name'] ?></td>
+																				<td><?php echo $value['model'] ?></td>
 										                    <td class="text-center"><?php echo $value['qty'] ?></td>
 																			</tr>
 																		<?php endforeach; ?>

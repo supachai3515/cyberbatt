@@ -57,7 +57,7 @@ class Purchase_order_model extends CI_Model
 
     public function get_purchase_order_detail($id)
     {
-        $sql =" SELECT rd.* ,p.`name` name , p.sku FROM purchase_order_detail  rd INNER JOIN products p ON rd.product_id = p.id where rd.purchase_order_id = '".$this->db->escape_str($id)."'";
+        $sql =" SELECT rd.* ,p.`name` name ,p.model,  p.sku FROM purchase_order_detail  rd INNER JOIN products p ON rd.product_id = p.id where rd.purchase_order_id = '".$this->db->escape_str($id)."'";
         $re = $this->db->query($sql);
         return $re->result_array();
     }
