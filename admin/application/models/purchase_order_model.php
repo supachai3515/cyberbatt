@@ -44,10 +44,12 @@ class Purchase_order_model extends CI_Model
 						LEFT JOIN receive re ON re.do_ref = r.doc_no
 						WHERE 1=1 ";
         if (!empty($searchText)) {
-            $sql = $sql." AND (r.id  LIKE '%".$searchText."%'
-													OR r.doc_no  LIKE '%".$searchText."%'
-													OR  r.`comment`  LIKE '%".$searchText."%')";
-        }
+                $sql = $sql." AND (r.id  LIKE '%".$searchText."%'
+    													OR r.doc_no  LIKE '%".$searchText."%'
+    													OR r.supplier  LIKE '%".$searchText."%'
+    													OR r.warranty  LIKE '%".$searchText."%'
+    													OR  r.`comment`  LIKE '%".$searchText."%')";
+            }
         $sql = $sql."GROUP BY r.id , r.doc_no , r.create_date, r.modified_date,r.qty,r.total,r.vat, r.is_active,r.is_success ,r.supplier,r.`comment` ORDER BY r.id DESC LIMIT ".$page.",".$segment." ";
         $query = $this->db->query($sql);
         $result = $query->result();

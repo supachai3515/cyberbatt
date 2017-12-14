@@ -43,6 +43,7 @@
                                     <td>
                                         <span>รหัส : <strong><?php echo $receive['doc_no'] ?></strong></span><br/>
                                         <span>เลขที่เอกสารอ้งอิง : <strong><?php echo $receive['do_ref'] ?></strong></span><br/>
+                                        <span>Supplier : <strong><?php echo $receive['supplier'] ?></strong></span><br/>
 
                                     </td>
                                     <td>

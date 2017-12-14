@@ -11,9 +11,9 @@ class Receive_model extends CI_Model
 
     public function get_receive($start, $limit)
     {
-        $sql ="SELECT r.id , r.doc_no ,r.do_ref, r.create_date,r.modified_date,r.qty,r.total,r.vat, r.is_active,r.`comment`, COUNT(rd.product_id) product_id
+        $sql ="SELECT r.id ,r.supplier, r.doc_no ,r.do_ref, r.create_date,r.modified_date,r.qty,r.total,r.vat, r.is_active,r.`comment`, COUNT(rd.product_id) product_id
 							FROM  receive r  INNER JOIN receive_detail rd ON r.id = rd.receive_id
-							GROUP BY r.id , r.doc_no ,r.do_ref, r.create_date,r.modified_date,r.qty,r.total,r.vat, r.is_active,r.`comment`
+							GROUP BY r.id ,r.supplier, r.doc_no ,r.do_ref, r.create_date,r.modified_date,r.qty,r.total,r.vat, r.is_active,r.`comment`
 							ORDER BY r.id DESC
 
 				LIMIT " . $start . "," . $limit;
@@ -52,13 +52,13 @@ class Receive_model extends CI_Model
     public function get_compare_serial($receive_id)
     {
 
-      $sql ="  SELECT r.id , r.doc_no ,r.do_ref, r.create_date,r.modified_date,r.qty,r.total,r.vat, r.is_active,r.`comment`, COUNT(rd.product_id) product_id ,
+      $sql ="  SELECT r.id ,  r.supplier, r.doc_no ,r.do_ref, r.create_date,r.modified_date,r.qty,r.total,r.vat, r.is_active,r.`comment`, COUNT(rd.product_id) product_id ,
 						(SELECT COUNT(*) serial_number FROM product_serial WHERE (order_id IS NOT NULL OR order_id = '' ) AND  receive_id = r.id ) count_use,
 						(SELECT COUNT(*) serial_number FROM product_serial WHERE receive_id = r.id ) serial_number
 
 							FROM  receive r  INNER JOIN receive_detail rd ON r.id = rd.receive_id
 							WHERE r.id = ".$this->db->escape($receive_id)."
-							GROUP BY r.id , r.doc_no ,r.do_ref, r.create_date,r.modified_date,r.qty,r.total,r.vat, r.is_active,r.`comment` ";
+							GROUP BY r.id , r.supplier, r.doc_no ,r.do_ref, r.create_date,r.modified_date,r.qty,r.total,r.vat, r.is_active,r.`comment` ";
         $query = $this->db->query($sql);
         $row = $query->row_array();
         return $row;
@@ -91,17 +91,24 @@ class Receive_model extends CI_Model
         $data_receive = array(
             'search' => $this->input->post('search')
         );
+        $searchText = $data_receive['search'];
 
-        $sql =" SELECT r.id , r.doc_no ,r.do_ref, r.create_date,r.modified_date,r.qty,r.total,r.vat, r.is_active,r.`comment`, COUNT(rd.product_id) product_id ,
-			(SELECT COUNT(serial_number) serial_number FROM product_serial WHERE (order_id IS NOT NULL OR order_id = '' ) AND  receive_id = r.id ) count_use,
-				(SELECT COUNT(serial_number) serial_number FROM product_serial WHERE receive_id = r.id ) serial_number
+        $sql =" SELECT r.id , r.supplier, r.doc_no ,r.do_ref, r.create_date,r.modified_date,r.qty,r.total,r.vat, r.is_active,r.`comment`, COUNT(rd.product_id) product_id ,
+			   (SELECT COUNT(serial_number) serial_number FROM product_serial WHERE (order_id IS NOT NULL OR order_id = '' ) AND  receive_id = r.id ) count_use,
+				  (SELECT COUNT(serial_number) serial_number FROM product_serial WHERE receive_id = r.id ) serial_number
 
 				FROM  receive r  INNER JOIN receive_detail rd ON r.id = rd.receive_id
-				WHERE r.id  LIKE '%".$data_receive['search']."%' OR   r.doc_no LIKE '%".$data_receive['search']."%'
-				GROUP BY r.id , r.doc_no ,r.do_ref, r.create_date,r.modified_date,r.qty,r.total,r.vat, r.is_active,r.`comment`
-				ORDER BY r.id DESC
+				 WHERE 1=1   ";
 
-				";
+        if (!empty($searchText)) {
+                $sql = $sql." AND (r.id  LIKE '%".$searchText."%'
+                               OR r.doc_no  LIKE '%".$searchText."%'
+                              OR r.supplier  LIKE '%".$searchText."%'
+                              OR r.warranty  LIKE '%".$searchText."%'
+                              OR  r.`comment`  LIKE '%".$searchText."%')";
+            }
+
+         $sql = $sql."  GROUP BY r.id , r.supplier, r.doc_no ,r.do_ref, r.create_date,r.modified_date,r.qty,r.total,r.vat, r.is_active,r.`comment` ORDER BY r.id DESC   ";
         $re = $this->db->query($sql);
         $return_data['result_receive'] = $re->result_array();
         $return_data['data_search'] = $data_receive;
