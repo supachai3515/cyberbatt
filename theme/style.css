@@ -1,22 +1,22 @@
 /*-----------------------------------------------------------------------------------
 
     Template Name: Theme name
-    Template URI: 
+    Template URI:
     Description:
-    Author: 
-    Author URI: 
-    License: 
-    License URI: 
+    Author:
+    Author URI:
+    License:
+    License URI:
     Version: 1.0
-    
+
     All files, unless otherwise stated, are released under the GNU General Public License
     version 3.0 (http://www.your-site.com/index.html)
 
 -----------------------------------------------------------------------------------
-    
+
     CSS INDEX
     ===================
-	
+
     1. Theme Default CSS (body, link color, section etc)
     2.  header-area CSS
         2.1  header-top-area CSS
@@ -27,7 +27,7 @@
 	3.  slider-category-area
   4.  product-tab-area
     4.1  product-carosul
-  5. latest-news-area  
+  5. latest-news-area
   6. newproducts-area
   7. recently-bought-product
   9. popular-product-area
@@ -63,7 +63,7 @@
     24.2 product-details-page product-description
     24.3 product-details-page product-overview
     24.4 product-details-page other-product-tab
-  25. blog-page  
+  25. blog-page
   26. blog-details-page
   27. Contact-us-page
 -----------------------------------------------------------------------------------*/
@@ -3064,8 +3064,8 @@ a.fancybox:hover i{
 .product-description h1.product-name {
   color: #777;
   font-family: 'Roboto', serif;
-  font-size: 24px;
-  padding-bottom: 16px;
+  font-size: 18px;
+  padding-bottom: 10px;
   display: inline-block;
 }
 .print-mail {
