@@ -93,21 +93,26 @@ class Credit_note_model extends CI_Model
             'search' => $this->input->post('search')
         );
 
-        $sql =" SELECT  rr.*,
+        $sql ="SELECT  rr.*,
 	    		o.id order_id, o.invoice_docno invoice_no,
-				o.date order_date,
-				s.serial_number,
-				o.`name` order_name,
-				o.address,
-				s.serial_number,
-				p.id product_id,
-				p.name product_name,
-				p.sku,
-				od.price product_price
-				FROM credit_note  rr INNER JOIN orders o ON rr.order_id = o.id
-				INNER JOIN products p on p.id = rr.product_id
-				LEFT JOIN product_serial s ON s.product_id = rr.product_id  AND s.order_id = o.id AND rr.serial = s.serial_number
-				INNER JOIN order_detail od ON od.order_id = o.id AND od.product_id = rr.product_id
+					o.date order_date,
+					s.serial_number,
+					o.`name` order_name,
+					o.address,
+					s.serial_number,
+					p.id product_id,
+					p.name product_name,
+					p.sku,
+					o1.id order_id_new,
+						o1.invoice_docno invoice_docno_new,
+					o1.`name` order_name_new,
+					o1.address	order_address_new,
+					pm.create_date payment_date
+					FROM credit_note  rr INNER JOIN orders o ON rr.order_id = o.id
+					INNER JOIN products p on p.id = rr.product_id
+					LEFT JOIN product_serial s ON s.product_id = rr.product_id  AND s.order_id = o.id AND rr.serial = s.serial_number
+					LEFT JOIN payment pm ON pm.credit_note_id = rr.id
+					LEFT JOIN orders o1 ON o1.id = pm.order_id
 			 WHERE rr.docno LIKE '%".$data_credit_note['search']."%' OR  o.id LIKE '%".$data_credit_note['search']."%'  OR  s.serial_number LIKE '%".$data_credit_note['search']."%'  OR o.name LIKE '%".$data_credit_note['search']."%'  ";
         $re = $this->db->query($sql);
         $return_data['result_credit_note'] = $re->result_array();

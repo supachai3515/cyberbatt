@@ -103,6 +103,10 @@
                       <br/>
                       <span>order : <strong><?php echo $return_receive['order_id'] ?></strong></span>
                       <br/>
+                      <span>supplier name : <strong><?php echo $return_receive['supplier_name'] ?></strong></span>
+                      <br/>
+                      <span>return type name : <strong><?php echo $return_receive['return_type_name'] ?></strong></span>
+                      <br/>
 
                     </td>
                     <td>
@@ -175,7 +179,35 @@
                 </div>
               </div>
 
+              <!-- Select Basic -->
+              <div class="form-group">
+                  <label class="col-md-3 control-label" for="select_supplier">ผู้ผลิต</label>
+                  <div class="col-md-4">
+                      <select id="select_supplier" name="select_supplier" class="form-control">
+                      <option value="0">*** ไม่มี ***</option>
+                      <?php
+                          foreach ($supplier_list as $supplier) {
+                              echo '<option value="'.$supplier["id"].'">'.$supplier["name"].'</option>';
+                          }
+                      ?>
+                      </select>
+                  </div>
+              </div>
 
+              <!-- Select Basic -->
+              <div class="form-group">
+                  <label class="col-md-3 control-label" for="select_return_type">ประเภทใบส่งคืน</label>
+                  <div class="col-md-4">
+                      <select id="select_return_type" name="select_return_type" class="form-control">
+                      <option value="0">*** ไม่มี ***</option>
+                      <?php
+                          foreach ($return_type_list as $return_type) {
+                              echo '<option value="'.$return_type["id"].'">'.$return_type["name"].'</option>';
+                          }
+                      ?>
+                      </select>
+                  </div>
+              </div>
 
               <div class="form-group">
                 <label class="col-md-3 control-label" for="comment">หมายเหตุ</label>

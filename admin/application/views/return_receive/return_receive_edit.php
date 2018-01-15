@@ -103,6 +103,49 @@
           </div>
         </div>
 
+        <!-- Select Basic -->
+        <div class="form-group">
+          <label class="col-md-3 control-label" for="select_supplier">ผู้ผลิต</label>
+          <div class="col-md-4">
+            <select id="select_supplier" name="select_supplier" class="form-control">
+             <?php if ($return_receive_data['supplier_id']== 0 || !isset($return_receive_data['supplier_id'])): ?>
+                <option value="0" selected>*** ไม่มี ***</option>
+                <?php else: ?>
+                  <option value="0">*** ไม่มี ***</option>
+            <?php endif ?>
+          <?php foreach ($supplier_list as $supplier): ?>
+              <?php if ($supplier['id']==$return_receive_data['supplier_id']): ?>
+                <option value="<?php echo $supplier['id']; ?>" selected><?php echo $supplier['name']; ?></option>
+              <?php else: ?>
+                <option value="<?php echo $supplier['id']; ?>"><?php echo $supplier['name']; ?></option>
+              <?php endif ?>
+            <?php endforeach ?>
+            </select>
+          </div>
+        </div>
+
+
+        <!-- Select Basic -->
+        <div class="form-group">
+          <label class="col-md-3 control-label" for="select_return_type">ประเภทใบส่งคืน</label>
+          <div class="col-md-4">
+            <select id="select_return_type" name="select_return_type" class="form-control">
+             <?php if ($return_receive_data['return_type_id']== 0 || !isset($return_receive_data['return_type_id'])): ?>
+                <option value="0" selected>*** ไม่มี ***</option>
+                <?php else: ?>
+                  <option value="0">*** ไม่มี ***</option>
+            <?php endif ?>
+          <?php foreach ($return_type_list as $return_type): ?>
+              <?php if ($return_type['id']==$return_receive_data['return_type_id']): ?>
+                <option value="<?php echo $return_type['id']; ?>" selected><?php echo $return_type['name']; ?></option>
+              <?php else: ?>
+                <option value="<?php echo $return_type['id']; ?>"><?php echo $return_type['name']; ?></option>
+              <?php endif ?>
+            <?php endforeach ?>
+            </select>
+          </div>
+        </div>
+
 
 
         <div class="form-group">

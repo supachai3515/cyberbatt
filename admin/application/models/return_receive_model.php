@@ -20,10 +20,16 @@ class return_receive_model extends CI_Model
 				s.serial_number,
 				p.id product_id,
 				p.name product_name,
-				p.sku
+				p.sku,
+        sl.name supplier_name,
+        rt.name return_type_name
+
 				FROM return_receive  rr INNER JOIN orders o ON rr.order_id = o.id
 				INNER JOIN products p on p.id = rr.product_id
 				LEFT JOIN product_serial s ON s.product_id = rr.product_id  AND s.order_id = o.id AND rr.serial = s.serial_number
+
+        LEFT JOIN  supplier sl ON rr.supplier_id = sl.id
+        LEFT JOIN  return_type rt ON rr.return_type_id = rt.id
 
 				 ORDER BY rr.id DESC  LIMIT " . $start . "," . $limit;
         $re = $this->db->query($sql);
@@ -82,10 +88,17 @@ class return_receive_model extends CI_Model
 				s.serial_number,
 				p.id product_id,
 				p.name product_name,
-				p.sku
+        p.sku,
+        sl.name supplier_name,
+        rt.name return_type_name
+
 				FROM return_receive  rr INNER JOIN orders o ON rr.order_id = o.id
 				INNER JOIN products p on p.id = rr.product_id
 				LEFT JOIN product_serial s ON s.product_id = rr.product_id  AND s.order_id = o.id AND rr.serial = s.serial_number
+
+        LEFT JOIN  supplier sl ON rr.supplier_id = sl.id
+        LEFT JOIN  return_type rt ON rr.return_type_id = rt.id
+
 				 WHERE rr.docno LIKE '%".$data_return_receive['search']."%' OR  o.id LIKE '%".$data_return_receive['search']."%'  OR  s.serial_number LIKE '%".$data_return_receive['search']."%'  OR  o.name LIKE '%".$data_return_receive['search']."%' ";
         $re = $this->db->query($sql);
         $return_data['result_return_receive'] = $re->result_array();
@@ -98,6 +111,8 @@ class return_receive_model extends CI_Model
     {
         date_default_timezone_set("Asia/Bangkok");
         $data_return_receive = array(
+           'supplier_id' => $this->input->post('select_supplier'),
+           'return_type_id' => $this->input->post('select_return_type'),
             'comment' => $this->input->post('comment'),
             'modified_date' => date("Y-m-d H:i:s"),
             'is_cut_stock' => $this->input->post('is_cut_stock'),
@@ -189,6 +204,10 @@ class return_receive_model extends CI_Model
             'order_id' => $this->input->post('order_id'),
             'product_id' => $this->input->post('product_id'),
             'serial' => $this->input->post('serial'),
+
+            'supplier_id' => $this->input->post('select_supplier'),
+            'return_type_id' => $this->input->post('select_return_type'),
+
             'comment' => $this->input->post('comment'),
             'is_cut_stock' => $this->input->post('is_cut_stock'),
             'create_date' => date("Y-m-d H:i:s"),
@@ -269,6 +288,21 @@ class return_receive_model extends CI_Model
         $return_data = $re->result_array();
         return $return_data;
     }
+
+    public function get_supplier()
+    {
+        $sql ="SELECT * FROM supplier WHERE is_active = 1 ORDER BY name";
+        $result = $this->db->query($sql);
+        return  $result->result_array();
+    }
+
+    public function get_return_type()
+    {
+        $sql ="SELECT * FROM return_type WHERE is_active = 1 ORDER BY name";
+        $result = $this->db->query($sql);
+        return  $result->result_array();
+    }
+
 }
 
 /* End of file return_receive_model.php */
