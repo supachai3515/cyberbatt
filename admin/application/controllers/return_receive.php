@@ -23,6 +23,9 @@ class Return_receive extends BaseController
             $data["links_pagination"] = $this->pagination->create_links();
 
             $data['type_list'] = $this->products_model->get_type();
+            $data['supplier_list'] = $this->return_receive_model->get_supplier();
+            $data['return_type_list'] = $this->return_receive_model->get_return_type();
+
             $data['content'] = 'return_receive/return_receive';
             $data['script_file']= "js/return_receive_js";
             $data["header"] = $this->get_header("return_receive");
@@ -54,6 +57,8 @@ class Return_receive extends BaseController
         if (!is_null($data)) {
             $data['return_receive_data'] = $this->return_receive_model->get_return_receive_id($return_receive_id);
             $data['type_list'] = $this->products_model->get_type();
+            $data['supplier_list'] = $this->return_receive_model->get_supplier();
+            $data['return_type_list'] = $this->return_receive_model->get_return_type();
 
             $data['script_file']= "js/return_receive_js";
             $data["content"] = "return_receive/return_receive_edit";
@@ -69,6 +74,8 @@ class Return_receive extends BaseController
         if (!is_null($data)) {
             $data['return_receive_data'] = $this->return_receive_model->get_return_receive_id($return_receive_id);
             $data['type_list'] = $this->products_model->get_type();
+            $data['supplier_list'] = $this->return_receive_model->get_supplier();
+            $data['return_type_list'] = $this->return_receive_model->get_return_type();
 
             $data['script_file']= "js/return_receive_js";
             $data["content"] = "return_receive/return_receive_view";
