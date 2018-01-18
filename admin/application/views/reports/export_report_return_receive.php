@@ -22,7 +22,7 @@
             <th>product_name</th>
             <th>supplier_name</th>
             <th>return_type_name</th>
-            <th>ใบลดหนี้</th>
+            <th>รหัสใบลดหนี้</th>
             <th>ส่งคืน</th>
             <th>วันที่แก้ไข</th>
             <th>ใช้งาน</th>
@@ -43,7 +43,7 @@
           <td><?php echo $return_receive['return_type_name'] ?></td>
           <td>
             <?php if (isset($return_receive['credit_note_docno'])): ?>
-              <span class="label label-info">ใบลดหนี้ : <strong><?php echo $return_receive['credit_note_docno'] ?></strong></span>
+              <?php echo $return_receive['credit_note_docno'] ?>
               <?php endif ?>
           </td>
           <td>

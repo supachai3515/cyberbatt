@@ -427,6 +427,10 @@ class Report_model extends CI_Model {
 
 		}
 
+		if(!isset($obj['search'])){
+			$obj['search'] ="";
+		}
+
 
 		date_default_timezone_set("Asia/Bangkok");
 		$data_return_receive = array(
