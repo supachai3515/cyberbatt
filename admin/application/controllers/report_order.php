@@ -10,6 +10,7 @@ class Report_order extends BaseController
         session_start();
         $this->load->model('report_model');
         $this->load->model('products_model');
+        $this->load->model('return_receive_model');
         $this->isLoggedIn();
     }
 
@@ -110,6 +111,44 @@ class Report_order extends BaseController
             $this->loadThis();
         }
     }
+
+
+  public function report_return_receive($inti='')
+ {
+
+    $data = $this->get_data_check_name("is_view", "report_order/report_return_receive");
+    if (!is_null($data)) {
+        if ($inti =='') {
+          //
+        } else {
+            $is_export = $this->input->post('is_export');
+        }
+
+        $data['brands_list'] = $this->products_model->get_brands();
+        $data['type_list'] = $this->products_model->get_type();
+        $data['supplier_list'] = $this->return_receive_model->get_supplier();
+        $data['return_type_list'] = $this->return_receive_model->get_return_type();
+
+        /*Search*/
+        $searchTxt = $this->input->post();
+        $data['resultpost'] = $searchTxt;
+        $data['return_receive_report_data'] = $this->report_model->get_report_return_receive($searchTxt);
+        //call script
+        $data['script_file']= "js/report_js";
+        $data['content'] = 'reports/report_return_receive';
+        $data["header"] = $this->get_header("report return receive");
+
+        if (isset($is_export) && $is_export == '1') {
+            $this->load->view('reports/export_report_return_receive', $data);
+        }
+
+        $this->load->view('template/layout_main', $data);
+    } else {
+        //access denied
+        $this->loadThis();
+    }
+}
+
 }
 
 /* End of file prrducts.php */

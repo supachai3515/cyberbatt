@@ -403,6 +403,82 @@ class Report_model extends CI_Model {
 		return $query;
 	}
 
+	function get_report_return_receive($obj = ''){
+
+		if($obj == ''){
+			date_default_timezone_set("Asia/Bangkok");
+			$date  = strtotime('-7 days');
+			$obj['dateStart'] = date("Y-m-d",$date );
+			$obj['dateEnd'] = date("Y-m-d");
+		}
+		else {
+
+			if($obj['dateStart'] != ''){
+				$obj['dateStart'] = $obj['dateStart'];
+			} else {
+				$obj['dateEnd'] = date("Y-m-d");
+			}
+
+			if($obj['dateEnd'] != ''){
+				$obj['dateEnd'] = $obj['dateEnd'];
+			} else {
+				$obj['dateEnd'] = date("Y-m-d");
+			}
+
+		}
+
+
+		date_default_timezone_set("Asia/Bangkok");
+		$data_return_receive = array(
+				'search' => $this->input->post('search')
+		);
+
+		$sql =" SELECT  rr.*,
+			o.id order_id, o.invoice_docno invoice_no,
+			o.`name` order_name,
+		o.address,
+		(SELECT docno FROM credit_note WHERE is_active = 1 AND return_id = rr.id) credit_note_docno,
+		(SELECT docno FROM delivery_return WHERE is_active = 1 AND return_id = rr.id) delivery_return_docno ,
+		o.date order_date,
+		s.serial_number,
+		p.id product_id,
+		p.name product_name,
+		p.sku,
+		sl.name supplier_name,
+		rt.name return_type_name
+
+		FROM return_receive  rr INNER JOIN orders o ON rr.order_id = o.id
+		INNER JOIN products p on p.id = rr.product_id
+		LEFT JOIN product_serial s ON s.product_id = rr.product_id  AND s.order_id = o.id AND rr.serial = s.serial_number
+
+		LEFT JOIN  supplier sl ON rr.supplier_id = sl.id
+		LEFT JOIN  return_type rt ON rr.return_type_id = rt.id
+
+		WHERE
+		(
+					rr.docno LIKE '%".$obj['search']."%'
+					OR  o.id LIKE '%".$obj['search']."%'
+					OR  s.serial_number LIKE '%".$obj['search']."%'
+					OR  o.name LIKE '%".$obj['search']."%'
+		)
+				AND DATE_FORMAT(rr.modified_date,'%Y-%m-%d')  BETWEEN '".$obj['dateStart']."' AND '".$obj['dateEnd']."'
+
+
+			";
+
+			if(isset($obj['select_supplier']) && $obj['select_supplier'] != ''){
+				$sql = $sql." AND  sl.id = '".$obj['select_supplier']."' ";
+			}
+
+			if(isset($obj['select_return_type']) && $obj['select_return_type'] != ''){
+				$sql = $sql." AND  rt.id = '".$obj['select_return_type']."' ";
+			}
+
+		$re = $this->db->query($sql);
+		//print($sql);
+		return $re->result_array();
+	}
+
 	/*select *,sum(orders.total) as sum_total,sum(orders.quantity) as quantity,sum(orders.vat) as vat
 from orders
 left join order_status_history on(order_status_history.order_id = orders.order_status_id)
