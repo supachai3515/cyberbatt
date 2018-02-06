@@ -114,6 +114,7 @@ class return_receive_model extends CI_Model
            'supplier_id' => $this->input->post('select_supplier'),
            'return_type_id' => $this->input->post('select_return_type'),
             'comment' => $this->input->post('comment'),
+            'issues_comment' => $this->input->post('issues_comment'),
             'modified_date' => date("Y-m-d H:i:s"),
             'is_cut_stock' => $this->input->post('is_cut_stock'),
             'is_active' => $this->input->post('is_active')
@@ -209,6 +210,7 @@ class return_receive_model extends CI_Model
             'return_type_id' => $this->input->post('select_return_type'),
 
             'comment' => $this->input->post('comment'),
+            'issues_comment' => $this->input->post('issues_comment'),
             'is_cut_stock' => $this->input->post('is_cut_stock'),
             'create_date' => date("Y-m-d H:i:s"),
             'modified_date' => date("Y-m-d H:i:s"),

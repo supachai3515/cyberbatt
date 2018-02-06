@@ -152,6 +152,12 @@
             <textarea class="form-control" name="comment" readonly><?php echo $return_receive_data['comment']; ?></textarea>
           </div>
         </div>
+        <div class="form-group">
+          <label class="col-md-3 control-label" for="issues_comment">ปัญหาที่เสีย</label>
+          <div class="col-md-6">
+            <textarea class="form-control" name="issues_comment" readonly><?php echo $return_receive_data['issues_comment']; ?></textarea>
+          </div>
+        </div>
         <?php if ($return_receive_data['is_cut_stock']==1): ?>
           <input hidden="true" type="text" name="is_cut_stock" value="1">
           <?php endif ?>

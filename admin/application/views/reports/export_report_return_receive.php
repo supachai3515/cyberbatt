@@ -18,6 +18,8 @@
             <th>docno</th>
             <th>order_name</th>
             <th>address</th>
+            <th>หมายเหตุ</th>
+            <th>ปัญหาที่เสีย</th>
             <th>sku</th>
             <th>product_name</th>
             <th>supplier_name</th>
@@ -37,6 +39,8 @@
           <td><?php echo $return_receive['docno'] ?></td>
           <td><?php echo $return_receive['order_name'] ?></td>
           <td><?php echo $return_receive['address'] ?></td>
+          <td><?php echo $return_receive['comment'] ?></td>
+          <td><?php echo $return_receive['issues_comment'] ?></td>
           <td><?php echo $return_receive['sku'] ?></td>
           <td><?php echo $return_receive['product_name'] ?></td>
           <td><?php echo $return_receive['supplier_name'] ?></td>
