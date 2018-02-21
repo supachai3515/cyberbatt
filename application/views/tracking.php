@@ -69,7 +69,7 @@
                         </div>
                     </div>
                     <hr/>
-                    <div class="row">
+                    <!-- <div class="row">
                         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                             <img src="<?php echo base_url('theme'); ?>/img/kerry.jpg" alt="ALT NAME" class="img-responsive img-rounded" />
                         </div>
@@ -88,7 +88,7 @@
                                 </p>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                      <hr/>
                     <div class="row">
                         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">

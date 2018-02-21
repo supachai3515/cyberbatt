@@ -75,12 +75,8 @@
                         ชั้น 1 โซน B เลขที่ 396 ถ.ศรีวรา พลับพลา วังทองหลาง 10310
                         <i class="fa fa-phone"></i> Tel : 094-749-6264
                         </p>
-
-                        <p>CYBER2FIX สุขุมวิท <br><i class="fa fa-map-marker"></i> ชั้น 1 เลขที่ 109/45 ซ.พร้อมพงษ์ (สุุขุมวิท 39) คลองตันเหนือ วัฒนา กทม. 10110
-                        <i class="fa fa-phone"></i> Tel : 093-195-5324</p>
-
                         <p>CYBER2FIX ลาดพร้าว <br><i class="fa fa-map-marker"></i> 2963 ซ.ลาดพร้าว 101/2 ถ.ลาดพร้าว คลองจั่น บางกะปิ กทม. 10240
-                        <i class="fa fa-phone"></i> Tel : 088-297-4417</p>
+                        <i class="fa fa-phone"></i> Tel : 093-195-5324</p>
                     </address>
 
                <!--
