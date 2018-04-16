@@ -149,6 +149,42 @@ class Report_order extends BaseController
     }
 }
 
+
+public function serial_by_invoice($inti='')
+{
+
+   $data = $this->get_data_check_name("is_view", "report_order/serial_by_invoice");
+   if (!is_null($data)) {
+       if ($inti =='') {
+         //
+       } else {
+           $is_export = $this->input->post('is_export');
+       }
+
+       $data['brands_list'] = $this->products_model->get_brands();
+       $data['type_list'] = $this->products_model->get_type();
+
+       /*Search*/
+       $searchTxt = $this->input->post();
+       
+       $data['resultpost'] = $searchTxt;
+       $data['serial_by_invoice_report_data'] = $this->report_model->get_report_serial_by_invoice($searchTxt);
+       //call script
+       $data['script_file']= "js/report_js";
+       $data['content'] = 'reports/serial_by_invoice';
+       $data["header"] = $this->get_header("report serial by invoice");
+
+       if (isset($is_export) && $is_export == '1') {
+           $this->load->view('reports/export_serial_by_invoice', $data);
+       }
+
+       $this->load->view('template/layout_main', $data);
+   } else {
+       //access denied
+       $this->loadThis();
+   }
+}
+
 }
 
 /* End of file prrducts.php */

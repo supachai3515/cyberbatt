@@ -483,6 +483,79 @@ class Report_model extends CI_Model {
 		return $re->result_array();
 	}
 
+
+	function get_report_serial_by_invoice($obj = ''){
+
+		if($obj == ''){
+			date_default_timezone_set("Asia/Bangkok");
+			$date  = strtotime('-7 days');
+			$obj['dateStart'] = date("Y-m-d",$date );
+			$obj['dateEnd'] = date("Y-m-d");
+		}
+		else {
+
+			if($obj['dateStart'] != ''){
+				$obj['dateStart'] = $obj['dateStart'];
+			} else {
+				$obj['dateEnd'] = date("Y-m-d");
+			}
+
+			if($obj['dateEnd'] != ''){
+				$obj['dateEnd'] = $obj['dateEnd'];
+			} else {
+				$obj['dateEnd'] = date("Y-m-d");
+			}
+
+		}
+
+		if(!isset($obj['search'])){
+			$obj['search'] ="";
+		}
+
+		date_default_timezone_set("Asia/Bangkok");
+
+		$searchText = $this->db->escape_like_str($this->input->post('search'));
+		$data_serial_by_invoice = array(
+				'search' => $searchText
+		);
+
+		$sql =" SELECT 
+			o.id order_id, o.invoice_docno invoice_no,
+			o.`name` order_name,
+			o.address,
+			o.date order_date,
+			s.serial_number,
+			p.id product_id,
+			p.name product_name,
+			p.sku,
+			p.model,
+			o.invoice_date,o.is_invoice
+
+			FROM product_serial  s 
+			INNER JOIN orders o ON s.order_id = o.id
+			INNER JOIN products p ON p.id = s.product_id
+
+			WHERE
+	
+			(
+				o.invoice_docno LIKE '%".$searchText."%'
+				OR  o.id LIKE '%".$searchText."%'
+				OR  s.serial_number LIKE '%".$searchText."%'
+				OR  o.name LIKE '%".$searchText."%'
+				OR  p.sku LIKE '%".$searchText."%'
+				OR  p.name LIKE '%".$searchText."%'
+			)
+			AND DATE_FORMAT(o.invoice_date,'%Y-%m-%d')  BETWEEN '".$obj['dateStart']."' AND '".$obj['dateEnd']."'
+			AND s.order_id IS NOT NULL AND o.is_tax = 1 AND o.invoice_docno  IS NOT NULL
+
+			ORDER BY o.invoice_docno DESC
+
+			";
+		$re = $this->db->query($sql);
+		//print($sql);
+		return $re->result_array();
+	}
+
 	/*select *,sum(orders.total) as sum_total,sum(orders.quantity) as quantity,sum(orders.vat) as vat
 from orders
 left join order_status_history on(order_status_history.order_id = orders.order_status_id)

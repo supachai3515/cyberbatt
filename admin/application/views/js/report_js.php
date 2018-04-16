@@ -1,5 +1,16 @@
 <script type="text/javascript">
 
+  $(function () {
+    $('#example').DataTable({
+      'paging'      : true,
+      'lengthChange': true,
+      'searching'   : true,
+      'ordering'    : true,
+      'info'        : true,
+      'autoWidth'   : false
+    })
+  })
+
   /*Datepicker*/
 		var minD = $("#startDate").html();
         var maxD = $("#endDate").html();

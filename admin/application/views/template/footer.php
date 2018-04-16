@@ -32,9 +32,14 @@
     <script src="<?php echo base_url(); ?>assets/plugins/angular-loading-bar/loading-bar.js"></script>
     <script src="<?php echo base_url(); ?>assets/dist/js/ng-table.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/plugins/underscorejs/underscore-min.js"></script>
+  <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js" type="text/javascript"></script>
+  
   <script src="<?php echo base_url();?>js/fileinput.js" type="text/javascript"></script>
   <script src="<?php echo base_url();?>js/fileinput_locale_th.js" type="text/javascript"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
+
+ 
+
   <!-- page script -->
   <?php $this->load->view("js/main_app"); ?>
   <?php if (isset($script_file)) {
