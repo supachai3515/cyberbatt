@@ -546,7 +546,7 @@ class Report_model extends CI_Model {
 				OR  p.name LIKE '%".$searchText."%'
 			)
 			AND DATE_FORMAT(o.invoice_date,'%Y-%m-%d')  BETWEEN '".$obj['dateStart']."' AND '".$obj['dateEnd']."'
-			AND s.order_id IS NOT NULL AND o.is_tax = 1 AND o.invoice_docno  IS NOT NULL
+			AND s.order_id IS NOT NULL AND o.invoice_docno  IS NOT NULL
 
 			ORDER BY o.invoice_docno DESC
 
