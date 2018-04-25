@@ -92,10 +92,13 @@ class Returns_supplier extends BaseController
         if (!is_null($data)) {
             $data['returns_supplier_data'] = $this->returns_supplier_model->get_returns_supplier_id($returns_supplier_id);
             $data['type_list'] = $this->products_model->get_type();
+            $data['supplier_list'] = $this->return_receive_model->get_supplier();
+            $data['return_type_list'] = $this->return_receive_model->get_return_type();
+
             $data['script_file']= "js/returns_supplier_js";
             $data["content"] = "returns_supplier/returns_supplier_view";
             $data["header"] = $this->get_header("returns_supplier");
-            $this->load->view("returns_supplier/returns_supplier_view", $data);
+            $this->load->view("template/layout_main", $data);
 
         }
     }

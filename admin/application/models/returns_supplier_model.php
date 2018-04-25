@@ -47,7 +47,7 @@ class Returns_supplier_model extends CI_Model
 
     public function get_returns_supplier_id($returns_supplier_id)
     {
-        $sql ="SELECT *
+        $sql ="SELECT r.* 
                     FROM  returns_supplier r  
                     INNER JOIN returns_supplier_detail rd ON r.id = rd.returns_supplier_id 
                     LEFT JOIN supplier sp ON sp.id = r.supplier_id
@@ -205,7 +205,7 @@ class Returns_supplier_model extends CI_Model
         );
         
         $this->db->update("returns_supplier", $data_returns_supplier_update, "id = '".$insert_id."'");
-        $this->db-> delete('returns_supplier_detail', "returns_supplier_id = '".$insert_id."'");
+        $this->db->delete('returns_supplier_detail', "returns_supplier_id = '".$insert_id."'");
 
         $i = 0;
         foreach ($this->input->post('sku') as $row) {
@@ -258,10 +258,15 @@ class Returns_supplier_model extends CI_Model
     {
         // $sql =" SELECT * FROM products WHERE sku = '".$product_id."' ";
 
-        $sql = "SELECT r.* , p.name , p.sku , p.price  ,p.id product_id FROM return_receive r 
-                LEFT JOIN returns_supplier_detail s ON r.serial = s.serial_number
-                INNER JOIN products p ON p.id = r.product_id
-                WHERE s.serial_number IS NULL  AND r.serial = '".$serial_number."' AND r.supplier_id = '".$supplier_id."' ";
+        $sql = "SELECT rr.* , p.name , p.sku , p.price  ,p.id product_id
+                    FROM return_receive rr LEFT JOIN (
+                    SELECT serial_number FROM returns_supplier  rs 
+                    INNER JOIN returns_supplier_detail rsd ON  rs.id = rsd.returns_supplier_id
+                    WHERE rs.is_active = 1 
+                        AND supplier_id =  '".$supplier_id."' 
+                    )  m ON rr.serial = m.serial_number
+                    LEFT JOIN products p ON p.id = rr.product_id
+                    WHERE supplier_id =  '".$supplier_id."'   AND m.serial_number is null AND  rr.serial ='".$serial_number."' ";
 
         $query = $this->db->query($sql);
         $row = $query->row_array();

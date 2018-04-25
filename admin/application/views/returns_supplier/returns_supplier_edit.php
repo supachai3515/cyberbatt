@@ -152,7 +152,7 @@
           <div class="checkbox">
             <label for="isactive-0">
               <input type="checkbox" name="isactive" id="isactive-0" value="1"
-              <?php if ($returns_supplier_data['is_active']==1): ?>
+              <?php if($returns_supplier_data['is_active']==1): ?>
                 <?php echo "checked"; ?>
               <?php endif ?>
               >
