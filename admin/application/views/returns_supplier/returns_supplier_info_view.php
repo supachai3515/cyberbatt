@@ -31,7 +31,7 @@
             	</div>
             	<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 text-right">
                     <h3>ใบส่งคืน supplier<br>
-					<?php print_r($returns_supplier_data) ?>
+					<?php //print_r($returns_supplier_data) ?>
                     <?php echo  $returns_supplier_data['doc_no'];?> </h3>
                     <strong>วันที่ <?php echo $returns_supplier_data['create_date']?></strong><br/>
 
@@ -65,32 +65,32 @@
 	                                <tr>
 	                                    <td class="text-center product-id"><strong>serial number</strong></td>
 	                                    <td class=""><strong>Name</strong></td>
-																			<td class=""><strong>Model</strong></td>
-																			<td class=""><strong>comment</strong></td>
+										<td class=""><strong>Model</strong></td>
+										<td class=""><strong>comment</strong></td>
 	                                    <td class="text-center sumpricepernum"><strong>QTY</strong></td>
 	                                </tr>
 	                            </thead>
 	                            <tbody>
-									              <?php
+									         <?php
 									              $vat = 0;
 									              $total = 0;
 									              $priceTotal =0;
-									              ?>
+									          ?>
 
-																	<?php foreach ($returns_supplier_detail_data as $value): ?>
-																		<?php
+													<?php foreach ($returns_supplier_detail_data as $value): ?>
+														<?php
 										                    $total = $total+ $value['total'];
 										                    $priceTotal = $priceTotal + ($value["price"]*$value["qty"]);
 										                 ?>
 											               <tr>
-																				<td class="text-center"><?php echo $value['serial_number'] ?></td>
-																				<td><?php echo $value['name'] ?></td>
-																				<td><?php echo $value['model'] ?></td>
-																				<td><?php echo $value['comment'] ?></td>
+															<td class="text-center"><?php echo $value['serial_number'] ?></td>
+															<td><?php echo $value['name'] ?></td>
+															<td><?php echo $value['model'] ?></td>
+															<td><?php echo $value['comment'] ?></td>
 										                    <td class="text-center"><?php echo $value['qty'] ?></td>
-																			</tr>
-																		<?php endforeach; ?>
-																</tbody>
+														</tr>
+															<?php endforeach; ?>
+													</tbody>
 												</table>
 	                </div>
 	            </div>

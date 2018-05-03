@@ -249,14 +249,17 @@ class Report_model extends CI_Model {
 
 
 			$re = $this->db->query($sql);
+			//print($sql);
 			$return_data['result_products'] = $re->result_array();
 			$return_data['data_search'] = $data_product;
 			$return_data['sql'] = $sql;
+			
 			return $return_data;
 		}
 
+
 	function get_report_purchase_order($search_list, $obj = '') {
-		$in = 0;
+		$in = "'xyz'";
 		$in_str = "";
 		$join =" INNER JOIN ";
 		if(count($search_list)>0){
@@ -268,7 +271,8 @@ class Report_model extends CI_Model {
 
 			if($in != "0"){
 				//str_replace("0,","",$not_in).")
-				$in_str = " AND  p.id in (".str_replace("0,","",$in).")";
+				$in_str = " AND  p.id in (".str_replace("'xyz',","",$in).")";
+				
 			}
 		}
 
@@ -328,6 +332,7 @@ class Report_model extends CI_Model {
 							";
 
 		$query = $this->db->query($sql);
+		//print($sql);
 		$result = $query->result();
 		return $result;
 
