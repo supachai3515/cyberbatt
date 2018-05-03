@@ -93,9 +93,9 @@
 	                      {
 	                      	var isdup = 0;
 	                      	 angular.forEach($scope.product_returns_supplier, function(value,index) {
-		                      	if(value.sku == product_returns_supplier_re["sku"] ){
+		                      	if(value.serial_number == product_returns_supplier_re["serial"] ){
 		                      		isdup = 1;
-		                      		$scope.msgError = "ข้อมูลสินค้า "+product_returns_supplier_re["sku"] +" : "+product_returns_supplier_re["name"]+" ***ซ้ำ***  กรุณาลบแล้วเพิ่มใหม่";
+		                      		$scope.msgError = "ข้อมูลสินค้า "+product_returns_supplier_re["serial"] +" : "+product_returns_supplier_re["name"]+" ***ซ้ำ***  กรุณาลบแล้วเพิ่มใหม่";
 		                      	}
 
 							 				 });

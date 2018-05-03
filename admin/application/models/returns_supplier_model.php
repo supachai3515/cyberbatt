@@ -25,9 +25,10 @@ class Returns_supplier_model extends CI_Model
 
     public function get_returns_supplier_detail($id)
     {
-        $sql =" SELECT r.* , p.name , p.sku ,p.id product_id ,rd.serial_number ,rd.qty ,rd.total,rd.price
+        $sql =" SELECT r.* , p.name , p.sku ,p.id product_id ,rd.serial_number ,rd.qty ,rd.total,rd.price ,rr.`comment` , p.model
         FROM returns_supplier r 
         INNER JOIN returns_supplier_detail rd ON r.id = rd.returns_supplier_id
+        INNER JOIN return_receive rr ON rr.id  = rd.return_receive_id  
         INNER JOIN products p ON p.id = rd.product_id where rd.returns_supplier_id = '".$id."'";
 
         $re = $this->db->query($sql);
@@ -47,7 +48,7 @@ class Returns_supplier_model extends CI_Model
 
     public function get_returns_supplier_id($returns_supplier_id)
     {
-        $sql ="SELECT r.* 
+        $sql ="SELECT r.* ,sp.name supplier_name
                     FROM  returns_supplier r  
                     INNER JOIN returns_supplier_detail rd ON r.id = rd.returns_supplier_id 
                     LEFT JOIN supplier sp ON sp.id = r.supplier_id
@@ -61,7 +62,7 @@ class Returns_supplier_model extends CI_Model
 
     public function get_returns_supplier_detail_id($returns_supplier_id)
     {
-        $sql ="SELECT * FROM returns_supplier_detail WHERE returns_supplier_id = '".$returns_supplier_id."'";
+        $sql ="SELECT rd.* , rr.`comment` FROM returns_supplier_detail rd INNER JOIN return_receive rr ON rr.id  = rd.return_receive_id WHERE rr.returns_supplier_id = '".$returns_supplier_id."'";
         $re = $this->db->query($sql);
         return $re->result_array();
     }
