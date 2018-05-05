@@ -76,22 +76,26 @@ class Returns_supplier_model extends CI_Model
         );
         $searchText = $data_returns_supplier['search'];
 
-        $sql =" SELECT r.id , r.supplier, r.doc_no ,r.do_ref, r.create_date,r.modified_date,r.qty,r.total,r.vat, r.is_active,r.`comment`, COUNT(rd.product_id) product_id ,
-			   (SELECT COUNT(serial_number) serial_number FROM product_serial WHERE (order_id IS NOT NULL OR order_id = '' ) AND  returns_supplier_id = r.id ) count_use,
-				  (SELECT COUNT(serial_number) serial_number FROM product_serial WHERE returns_supplier_id = r.id ) serial_number
 
-				FROM  returns_supplier r  INNER JOIN returns_supplier_detail rd ON r.id = rd.returns_supplier_id
-				 WHERE 1=1   ";
 
-        if (!empty($searchText)) {
-                $sql = $sql." AND (r.id  LIKE '%".$searchText."%'
-                               OR r.doc_no  LIKE '%".$searchText."%'
-                              OR r.supplier  LIKE '%".$searchText."%'
-                              OR r.warranty  LIKE '%".$searchText."%'
-                              OR  r.`comment`  LIKE '%".$searchText."%')";
-            }
+        $sql =" SELECT r.id , r.doc_no,r.`comment` , sp.name supplier_name ,r.modified_date,r.is_active, SUM(rd.qty)  qty, SUM(rd.total) total
+        FROM  returns_supplier r  
+        INNER JOIN returns_supplier_detail rd ON r.id = rd.returns_supplier_id 
+        LEFT JOIN supplier sp ON sp.id = r.supplier_id
 
-         $sql = $sql."  GROUP BY r.id , r.supplier, r.doc_no ,r.do_ref, r.create_date,r.modified_date,r.qty,r.total,r.vat, r.is_active,r.`comment` ORDER BY r.id DESC   ";
+        WHERE 1=1   ";
+
+            if (!empty($searchText)) {
+                    $sql = $sql." AND (r.id  LIKE '%".$searchText."%'
+                                OR r.doc_no  LIKE '%".$searchText."%'
+                                OR r.supplier_id  LIKE '%".$searchText."%'
+                                OR sp.name  LIKE '%".$searchText."%'
+                                OR r.`comment`  LIKE '%".$searchText."%')";
+                }
+
+
+        $sql = $sql."  GROUP BY  r.id , r.doc_no,r.`comment` , sp.name,r.create_date,r.is_active ORDER BY r.id DESC ";
+
         $re = $this->db->query($sql);
         $return_data['result_returns_supplier'] = $re->result_array();
         $return_data['data_search'] = $data_returns_supplier;
