@@ -28,7 +28,7 @@
 	                          sku:  value.sku,
 	                          name:  value.name,
 														serial_number :  value.serial_number,
-														comment :  value.comment,
+														comment :  value.issues_comment,
 	                          qty: value.qty,
 	                          price: value.price,
 	                          total: value.total
@@ -82,7 +82,7 @@
 	                          sku: product_returns_supplier_re["sku"],
 	                          name: product_returns_supplier_re["name"],
 														serial_number : product_returns_supplier_re["serial"],
-														comment : product_returns_supplier_re["comment"],
+														comment : product_returns_supplier_re["issues_comment"],
 	                          qty: 1,
 	                          price: product_returns_supplier_re["price"],
 	                          vat: vat_p,

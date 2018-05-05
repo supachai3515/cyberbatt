@@ -25,7 +25,7 @@ class Returns_supplier_model extends CI_Model
 
     public function get_returns_supplier_detail($id)
     {
-        $sql =" SELECT r.* , p.name , p.sku ,p.id product_id ,rd.serial_number ,rd.qty ,rd.total,rd.price ,rr.`comment` , p.model
+        $sql =" SELECT r.* , p.name , p.sku ,p.id product_id ,rd.serial_number ,rd.qty ,rd.total,rd.price ,rr.`comment` , p.model ,rr.issues_comment
         FROM returns_supplier r 
         INNER JOIN returns_supplier_detail rd ON r.id = rd.returns_supplier_id
         INNER JOIN return_receive rr ON rr.id  = rd.return_receive_id  
@@ -62,7 +62,7 @@ class Returns_supplier_model extends CI_Model
 
     public function get_returns_supplier_detail_id($returns_supplier_id)
     {
-        $sql ="SELECT rd.* , rr.`comment` FROM returns_supplier_detail rd INNER JOIN return_receive rr ON rr.id  = rd.return_receive_id WHERE rr.returns_supplier_id = '".$returns_supplier_id."'";
+        $sql ="SELECT rd.* , rr.`comment` , rr.issues_comment FROM returns_supplier_detail rd INNER JOIN return_receive rr ON rr.id  = rd.return_receive_id WHERE rr.returns_supplier_id = '".$returns_supplier_id."'";
         $re = $this->db->query($sql);
         return $re->result_array();
     }
@@ -78,7 +78,7 @@ class Returns_supplier_model extends CI_Model
 
 
 
-        $sql =" SELECT r.id , r.doc_no,r.`comment` , sp.name supplier_name ,r.modified_date,r.is_active, SUM(rd.qty)  qty, SUM(rd.total) total
+        $sql =" SELECT r.id , r.doc_no,r.`comment` , rr.issues_comment, sp.name supplier_name ,r.modified_date,r.is_active, SUM(rd.qty)  qty, SUM(rd.total) total
         FROM  returns_supplier r  
         INNER JOIN returns_supplier_detail rd ON r.id = rd.returns_supplier_id 
         LEFT JOIN supplier sp ON sp.id = r.supplier_id
@@ -90,11 +90,11 @@ class Returns_supplier_model extends CI_Model
                                 OR r.doc_no  LIKE '%".$searchText."%'
                                 OR r.supplier_id  LIKE '%".$searchText."%'
                                 OR sp.name  LIKE '%".$searchText."%'
-                                OR r.`comment`  LIKE '%".$searchText."%')";
+                                OR rr.issues_comment,  LIKE '%".$searchText."%')";
                 }
 
 
-        $sql = $sql."  GROUP BY  r.id , r.doc_no,r.`comment` , sp.name,r.create_date,r.is_active ORDER BY r.id DESC ";
+        $sql = $sql."  GROUP BY  r.id , r.doc_no,r.`comment` ,rr.issues_comment, sp.name,r.create_date,r.is_active ORDER BY r.id DESC ";
 
         $re = $this->db->query($sql);
         $return_data['result_returns_supplier'] = $re->result_array();

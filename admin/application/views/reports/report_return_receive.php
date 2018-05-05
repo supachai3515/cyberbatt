@@ -158,6 +158,11 @@
                               <span class="label label-warning">ส่งคืน : <strong><?php echo $return_receive['delivery_return_docno'] ?></strong></span>
                               <br/>
                               <?php endif ?>
+                              <?php if (isset($return_receive['returns_supplier_docno'])): ?>
+                              <span class="label label-success">ส่งคืน supplier : <strong><?php echo $return_receive['returns_supplier_docno'] ?></strong></span>
+                              <br/>
+                              <?php endif ?>
+
                                 <span><i class="fa fa-calendar"></i> <?php echo date("d-m-Y H:i", strtotime($return_receive['modified_date']));?></span>
                                 <br/>
                                 <?php if ($return_receive['is_active']=="1"): ?>

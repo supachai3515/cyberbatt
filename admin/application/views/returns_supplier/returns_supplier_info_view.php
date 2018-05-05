@@ -86,7 +86,7 @@
 															<td class="text-center"><?php echo $value['serial_number'] ?></td>
 															<td><?php echo $value['name'] ?></td>
 															<td><?php echo $value['model'] ?></td>
-															<td><?php echo $value['comment'] ?></td>
+															<td><?php echo $value['issues_comment'] ?></td>
 										                    <td class="text-center"><?php echo $value['qty'] ?></td>
 														</tr>
 															<?php endforeach; ?>

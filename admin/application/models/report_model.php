@@ -448,6 +448,10 @@ class Report_model extends CI_Model {
 		o.address,
 		(SELECT docno FROM credit_note WHERE is_active = 1 AND return_id = rr.id) credit_note_docno,
 		(SELECT docno FROM delivery_return WHERE is_active = 1 AND return_id = rr.id) delivery_return_docno ,
+		(
+			SELECT doc_no FROM returns_supplier  INNER JOIN  returns_supplier_detail ON returns_supplier.id = returns_supplier_detail.returns_supplier_id
+			WHERE returns_supplier.is_active = 1 AND returns_supplier_detail.return_receive_id = rr.id
+		) returns_supplier_docno ,
 		o.date order_date,
 		s.serial_number,
 		p.id product_id,

@@ -26,6 +26,8 @@
             <th>return_type_name</th>
             <th>รหัสใบลดหนี้</th>
             <th>ส่งคืน</th>
+            <th>ส่งคืน supplier</th>
+            
             <th>วันที่แก้ไข</th>
             <th>ใช้งาน</th>
         </tr>
@@ -53,6 +55,11 @@
           <td>
                 <?php if (isset($return_receive['delivery_return_docno'])): ?>
                 <?php echo $return_receive['delivery_return_docno'] ?>
+                <?php endif ?>
+          </td>
+          <td>
+                <?php if (isset($return_receive['returns_supplier_docno'])): ?>
+                <?php echo $return_receive['returns_supplier_docno'] ?>
                 <?php endif ?>
           </td>
           <td>
