@@ -10,14 +10,14 @@
                 <div class="col-md-6">
                   <div class="form-group">
                     <span id="startDate" style="display:none"><?php echo DATE;?></span>
-                      <label for="">จากวันทีใบสั่งซื้อ</label>
+                      <label for="">จากวันทีออกใบกำกับภาษี</label>
                       <input type="text" class="form-control" id="dateStart" name="dateStart" placeholder="วันที่เริ่มต้นค้นหา" value="<?php if(isset($resultpost['dateStart'])){echo ($resultpost['dateStart'] == '' ? DATE : $resultpost['dateStart']);}?>">
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
                     <span id="endDate"></span>
-                      <label for="">ถึงวันที่ใบสั่งซื้อ</label>
+                      <label for="">ถึงวันที่ออกใบกำกับภาษี</label>
                       <input type="text" class="form-control" id="dateEnd" name="dateEnd" placeholder="วันที่สิ้นสุดการค้นหา" value="<?php if(isset($resultpost['dateEnd'])){echo ($resultpost['dateEnd'] == '' ? DATE : $resultpost['dateEnd']);}?>">
                   </div>
                 </div>
@@ -104,6 +104,13 @@
             
                                 <span><i class="fa fa-calendar"></i> <?php echo date("d-m-Y H:i", strtotime($orders_data['invoice_date']));?></span>
                                 <br/>
+
+                                 <?php if ($orders_data['is_receive']=="1"): ?>
+                                  <span class ="text-warning"><i class="fa fa-check"></i> รับคืน</span>
+                                  <br/>
+                                  <?php endif ?>
+
+
                                 <?php if ($orders_data['is_invoice']=="1"): ?>
                                   <span><i class="fa fa-check"></i> ใช้งาน</span>
                                   <br/>

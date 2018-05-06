@@ -18,7 +18,7 @@ class Report_model extends CI_Model {
 			if($obj['dateStart'] != ''){
 				$obj['dateStart'] = $obj['dateStart'];
 			} else {
-				$obj['dateEnd'] = date("Y-m-d");
+				$obj['dateStart'] = date("Y-m-d");
 			}
 
 			if($obj['dateEnd'] != ''){
@@ -136,7 +136,7 @@ class Report_model extends CI_Model {
 			if($obj['dateStart'] != ''){
 				$obj['dateStart'] = $obj['dateStart'];
 			} else {
-				$obj['dateEnd'] = date("Y-m-d");
+				$obj['dateStart'] = date("Y-m-d");
 			}
 
 			if($obj['dateEnd'] != ''){
@@ -295,7 +295,7 @@ class Report_model extends CI_Model {
 			if($obj['dateStart'] != ''){
 				$obj['dateStart'] = $obj['dateStart'];
 			} else {
-				$obj['dateEnd'] = date("Y-m-d");
+				$obj['dateStart'] = date("Y-m-d");
 			}
 
 			if($obj['dateEnd'] != ''){
@@ -358,7 +358,7 @@ class Report_model extends CI_Model {
 			if($obj['dateStart'] != ''){
 				$obj['dateStart'] = $obj['dateStart'];
 			} else {
-				$obj['dateEnd'] = date("Y-m-d");
+				$obj['dateStart'] = date("Y-m-d");
 			}
 
 			if($obj['dateEnd'] != ''){
@@ -421,7 +421,7 @@ class Report_model extends CI_Model {
 			if($obj['dateStart'] != ''){
 				$obj['dateStart'] = $obj['dateStart'];
 			} else {
-				$obj['dateEnd'] = date("Y-m-d");
+				$obj['dateStart'] = date("Y-m-d");
 			}
 
 			if($obj['dateEnd'] != ''){
@@ -506,7 +506,7 @@ class Report_model extends CI_Model {
 			if($obj['dateStart'] != ''){
 				$obj['dateStart'] = $obj['dateStart'];
 			} else {
-				$obj['dateEnd'] = date("Y-m-d");
+				$obj['dateStart'] = date("Y-m-d");
 			}
 
 			if($obj['dateEnd'] != ''){
@@ -528,38 +528,83 @@ class Report_model extends CI_Model {
 				'search' => $searchText
 		);
 
-		$sql =" SELECT 
-			o.id order_id, o.invoice_docno invoice_no,
-			o.`name` order_name,
-			o.address,
-			o.date order_date,
-			s.serial_number,
-			p.id product_id,
-			p.name product_name,
-			p.sku,
-			p.model,
-			o.invoice_date,o.is_invoice
+		$sql =" SELECT * FROM (
 
-			FROM product_serial  s 
-			INNER JOIN orders o ON s.order_id = o.id
-			INNER JOIN products p ON p.id = s.product_id
-
-			WHERE
+			SELECT 
+						o.id order_id, o.invoice_docno invoice_no,
+						o.`name` order_name,
+						o.address,
+						o.date order_date,
+						s.serial_number,
+						p.id product_id,
+						p.name product_name,
+						p.sku,
+						p.model,
+						o.invoice_date,
+						o.is_invoice,
+						'0' is_receive 
+			
+						FROM product_serial  s 
+						INNER JOIN orders o ON s.order_id = o.id
+						INNER JOIN products p ON p.id = s.product_id
+						WHERE
 	
-			(
-				o.invoice_docno LIKE '%".$searchText."%'
-				OR  o.id LIKE '%".$searchText."%'
-				OR  s.serial_number LIKE '%".$searchText."%'
-				OR  o.name LIKE '%".$searchText."%'
-				OR  p.sku LIKE '%".$searchText."%'
-				OR  p.name LIKE '%".$searchText."%'
-			)
-			AND DATE_FORMAT(o.invoice_date,'%Y-%m-%d')  BETWEEN '".$obj['dateStart']."' AND '".$obj['dateEnd']."'
-			AND s.order_id IS NOT NULL AND o.invoice_docno  IS NOT NULL
+							(
+								o.invoice_docno LIKE '%".$searchText."%'
+								OR  o.id LIKE '%".$searchText."%'
+								OR  s.serial_number LIKE '%".$searchText."%'
+								OR  o.name LIKE '%".$searchText."%'
+								OR  p.sku LIKE '%".$searchText."%'
+								OR  p.name LIKE '%".$searchText."%'
+							)
+							AND DATE_FORMAT(o.invoice_date,'%Y-%m-%d')  BETWEEN '".$obj['dateStart']."' AND '".$obj['dateEnd']."'
+							AND s.order_id IS NOT NULL AND o.invoice_docno  IS NOT NULL
 
-			ORDER BY o.invoice_docno DESC
+			
+			UNION
+			
+			SELECT  o.id order_id, o.invoice_docno invoice_no,
+						o.`name` order_name,
+						o.address,
+						o.date order_date,
+						s.serial_number,
+						p.id product_id,
+						p.name product_name,
+						p.sku,
+						p.model,
+						o.invoice_date,
+						o.is_invoice,
+						'1' is_receive 
+
+			
+						FROM  orders o 
+							LEFT JOIN   return_receive rr ON rr.order_id = o.id
+							LEFT JOIN order_detail od ON o.id = od.order_id AND rr.product_id = od.product_id 
+			
+							LEFT JOIN product_serial  s  ON rr.serial = s.serial_number
+							INNER JOIN products p ON p.id = s.product_id
+
+							WHERE
+				
+						(
+							o.invoice_docno LIKE '%".$searchText."%'
+							OR  o.id LIKE '%".$searchText."%'
+							OR  s.serial_number LIKE '%".$searchText."%'
+							OR  o.name LIKE '%".$searchText."%'
+							OR  p.sku LIKE '%".$searchText."%'
+							OR  p.name LIKE '%".$searchText."%'
+						)
+						AND DATE_FORMAT(o.invoice_date,'%Y-%m-%d')  BETWEEN '".$obj['dateStart']."' AND '".$obj['dateEnd']."'
+
+			
+			) m
+
+			
+
+			ORDER BY m.invoice_no DESC
 
 			";
+			//print($sql);
 		$re = $this->db->query($sql);
 		//print($sql);
 		return $re->result_array();
