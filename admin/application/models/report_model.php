@@ -448,10 +448,7 @@ class Report_model extends CI_Model {
 		o.address,
 		(SELECT docno FROM credit_note WHERE is_active = 1 AND return_id = rr.id) credit_note_docno,
 		(SELECT docno FROM delivery_return WHERE is_active = 1 AND return_id = rr.id) delivery_return_docno ,
-		(
-			SELECT doc_no FROM returns_supplier  INNER JOIN  returns_supplier_detail ON returns_supplier.id = returns_supplier_detail.returns_supplier_id
-			WHERE returns_supplier.is_active = 1 AND returns_supplier_detail.return_receive_id = rr.id
-		) returns_supplier_docno ,
+		d.returns_supplier_docno,
 		o.date order_date,
 		s.serial_number,
 		p.id product_id,
@@ -464,15 +461,21 @@ class Report_model extends CI_Model {
 		INNER JOIN products p on p.id = rr.product_id
 		LEFT JOIN product_serial s ON s.product_id = rr.product_id  AND s.order_id = o.id AND rr.serial = s.serial_number
 
-		LEFT JOIN  supplier sl ON rr.supplier_id = sl.id
+		LEFT JOIN  supplier sl ON rr.supplier_id = sl.id 
 		LEFT JOIN  return_type rt ON rr.return_type_id = rt.id
+
+		LEFT JOIN  
+					(	SELECT doc_no returns_supplier_docno, serial_number 
+							FROM returns_supplier  INNER JOIN  returns_supplier_detail ON returns_supplier.id = returns_supplier_detail.returns_supplier_id
+						)  d 
+				ON rr.serial = d.serial_number
 
 		WHERE
 		(
-					rr.docno LIKE '%".$obj['search']."%'
-					OR  o.id LIKE '%".$obj['search']."%'
-					OR  s.serial_number LIKE '%".$obj['search']."%'
-					OR  o.name LIKE '%".$obj['search']."%'
+			rr.docno LIKE '%".$obj['search']."%'
+			OR  o.id LIKE '%".$obj['search']."%'
+			OR  s.serial_number LIKE '%".$obj['search']."%'
+			OR  o.name LIKE '%".$obj['search']."%'
 		)
 				AND DATE_FORMAT(rr.modified_date,'%Y-%m-%d')  BETWEEN '".$obj['dateStart']."' AND '".$obj['dateEnd']."'
 
@@ -486,7 +489,6 @@ class Report_model extends CI_Model {
 			if(isset($obj['select_return_type']) && $obj['select_return_type'] != ''){
 				$sql = $sql." AND  rt.id = '".$obj['select_return_type']."' ";
 			}
-
 		$re = $this->db->query($sql);
 		//print($sql);
 		return $re->result_array();

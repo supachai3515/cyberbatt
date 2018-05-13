@@ -90,7 +90,9 @@ class Credit_note_model extends CI_Model
     {
         date_default_timezone_set("Asia/Bangkok");
         $data_credit_note = array(
-            'search' => $this->input->post('search')
+            'search' => $this->input->post('search'),
+            'select_status' => $this->input->post('select_status'),
+            'limit' => $this->input->post('limit')
         );
 
         $sql ="SELECT  rr.*,
@@ -104,7 +106,7 @@ class Credit_note_model extends CI_Model
 					p.name product_name,
 					p.sku,
 					o1.id order_id_new,
-						o1.invoice_docno invoice_docno_new,
+					o1.invoice_docno invoice_docno_new,
 					o1.`name` order_name_new,
 					o1.address	order_address_new,
 					pm.create_date payment_date
@@ -113,7 +115,21 @@ class Credit_note_model extends CI_Model
 					LEFT JOIN product_serial s ON s.product_id = rr.product_id  AND s.order_id = o.id AND rr.serial = s.serial_number
 					LEFT JOIN payment pm ON pm.credit_note_id = rr.id
 					LEFT JOIN orders o1 ON o1.id = pm.order_id
-			 WHERE rr.docno LIKE '%".$data_credit_note['search']."%' OR  o.id LIKE '%".$data_credit_note['search']."%'  OR  s.serial_number LIKE '%".$data_credit_note['search']."%'  OR o.name LIKE '%".$data_credit_note['search']."%'  ";
+			 WHERE (rr.docno LIKE '%".$data_credit_note['search']."%' OR  o.id LIKE '%".$data_credit_note['search']."%'  OR  s.serial_number LIKE '%".$data_credit_note['search']."%'  OR o.name LIKE '%".$data_credit_note['search']."%'  )";
+        
+        if(isset($data_credit_note['select_status'])){
+            if($data_credit_note['select_status'] == '1'){
+               $sql = $sql.' AND  (o1.id IS NOT NULL) ';
+
+            }
+           else {
+
+           }
+        }
+        if(isset($data_credit_note['limit'])){
+           $sql = $sql." LIMIT ".$data_credit_note['limit'];
+        }
+        //print($sql);
         $re = $this->db->query($sql);
         $return_data['result_credit_note'] = $re->result_array();
         $return_data['data_search'] = $data_credit_note;

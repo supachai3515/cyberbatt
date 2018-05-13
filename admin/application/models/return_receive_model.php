@@ -16,6 +16,8 @@ class return_receive_model extends CI_Model
 				o.address,
 				(SELECT docno FROM credit_note WHERE is_active = 1 AND return_id = rr.id) credit_note_docno,
 				(SELECT docno FROM delivery_return WHERE is_active = 1 AND return_id = rr.id) delivery_return_docno ,
+                d.returns_supplier_docno,
+                
 				o.date order_date,
 				s.serial_number,
 				p.id product_id,
@@ -23,6 +25,7 @@ class return_receive_model extends CI_Model
 				p.sku,
         sl.name supplier_name,
         rt.name return_type_name
+        
 
 				FROM return_receive  rr INNER JOIN orders o ON rr.order_id = o.id
 				INNER JOIN products p on p.id = rr.product_id
@@ -30,6 +33,11 @@ class return_receive_model extends CI_Model
 
         LEFT JOIN  supplier sl ON rr.supplier_id = sl.id
         LEFT JOIN  return_type rt ON rr.return_type_id = rt.id
+        LEFT JOIN  
+					(	SELECT doc_no returns_supplier_docno, serial_number 
+							FROM returns_supplier  INNER JOIN  returns_supplier_detail ON returns_supplier.id = returns_supplier_detail.returns_supplier_id
+						)  d 
+				ON rr.serial = d.serial_number
 
 				 ORDER BY rr.id DESC  LIMIT " . $start . "," . $limit;
         $re = $this->db->query($sql);
@@ -75,32 +83,70 @@ class return_receive_model extends CI_Model
     {
         date_default_timezone_set("Asia/Bangkok");
         $data_return_receive = array(
-            'search' => $this->input->post('search')
+            'search' => $this->input->post('search'),
+            'select_status' => $this->input->post('select_status'),
+            'limit' => $this->input->post('limit')
         );
 
         $sql =" SELECT  rr.*,
-	    		o.id order_id, o.invoice_docno invoice_no,
-	    		o.`name` order_name,
-				o.address,
-				(SELECT docno FROM credit_note WHERE is_active = 1 AND return_id = rr.id) credit_note_docno,
-				(SELECT docno FROM delivery_return WHERE is_active = 1 AND return_id = rr.id) delivery_return_docno ,
-				o.date order_date,
-				s.serial_number,
-				p.id product_id,
-				p.name product_name,
-        p.sku,
-        sl.name supplier_name,
-        rt.name return_type_name
+                o.id order_id, o.invoice_docno invoice_no,
+                o.`name` order_name,
+                o.address,
+                cr.docno credit_note_docno,
+                dr.docno delivery_return_docno,
+                d.returns_supplier_docno,
+                o.date order_date,
+                s.serial_number,
+                p.id product_id,
+                p.name product_name,
+                p.sku,
+                sl.name supplier_name,
+                rt.name return_type_name
 
-				FROM return_receive  rr INNER JOIN orders o ON rr.order_id = o.id
-				INNER JOIN products p on p.id = rr.product_id
-				LEFT JOIN product_serial s ON s.product_id = rr.product_id  AND s.order_id = o.id AND rr.serial = s.serial_number
+                FROM return_receive  rr INNER JOIN orders o ON rr.order_id = o.id
+                INNER JOIN products p on p.id = rr.product_id
+                LEFT JOIN product_serial s ON s.product_id = rr.product_id  AND s.order_id = o.id AND rr.serial = s.serial_number
 
-        LEFT JOIN  supplier sl ON rr.supplier_id = sl.id
-        LEFT JOIN  return_type rt ON rr.return_type_id = rt.id
+                LEFT JOIN  supplier sl ON rr.supplier_id = sl.id
+                LEFT JOIN  return_type rt ON rr.return_type_id = rt.id
+                LEFT JOIN  
+                    (	SELECT doc_no returns_supplier_docno, serial_number 
+                            FROM returns_supplier  INNER JOIN  returns_supplier_detail ON returns_supplier.id = returns_supplier_detail.returns_supplier_id
+                        )  d 
+                ON rr.serial = d.serial_number
+                LEFT JOIN  credit_note cr ON  cr.return_id =  rr.id AND cr.is_active = 1
+                LEFT JOIN  delivery_return dr ON  dr.return_id =  rr.id AND dr.is_active = 1
+                 WHERE (rr.docno LIKE '%".$data_return_receive['search']."%' OR  o.id LIKE '%".$data_return_receive['search']."%'  OR  s.serial_number LIKE '%".$data_return_receive['search']."%'  OR  o.name LIKE '%".$data_return_receive['search']."%' )
+            
+                 ";
 
-				 WHERE rr.docno LIKE '%".$data_return_receive['search']."%' OR  o.id LIKE '%".$data_return_receive['search']."%'  OR  s.serial_number LIKE '%".$data_return_receive['search']."%'  OR  o.name LIKE '%".$data_return_receive['search']."%' ";
+                 if(isset($data_return_receive['select_status'])){
+                     if($data_return_receive['select_status'] == '1'){
+                        $sql = $sql.' AND  (cr.docno IS NULL)  
+                                        AND  (dr.docno  IS  NULL) 
+                                        AND (d.returns_supplier_docno  IS NULL)';
+
+                     }
+                    else if($data_return_receive['select_status'] == '2'){
+                        $sql = $sql.' AND cr.docno IS NOT NULL ';
+                    }
+                    else if($data_return_receive['select_status'] == '3'){
+                        $sql = $sql.' AND  dr.docno  IS NOT NULL';
+                    }
+                    else if($data_return_receive['select_status'] == '4'){
+                        $sql = $sql.'AND  d.returns_supplier_docno  IS NOT NULL ';
+                    }
+                    else {
+
+                    }
+                 }
+                 if(isset($data_return_receive['limit'])){
+                    $sql = $sql."LIMIT ".$data_return_receive['limit'];
+                 }
+
+
         $re = $this->db->query($sql);
+        //print($sql);
         $return_data['result_return_receive'] = $re->result_array();
         $return_data['data_search'] = $data_return_receive;
         $return_data['sql'] = $sql;

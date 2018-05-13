@@ -9,7 +9,7 @@
       <form class="form-inline" role="form" ng-submit="searchOrder(search_order)">
         <div class="form-group">
           <input type="text" class="form-control" ng-model="search_order" ng-init="search_order =''" placeholder="">
-        </div>
+        </div>                
         <button type="submit" class="btn btn-primary">ค้นหา</button>
       </form>
       <div class="box-body table-responsive no-padding">
@@ -80,6 +80,20 @@
               <label class="sr-only" for="">search</label>
               <input type="text" class="form-control" id="search" name="search" placeholder="serial number">
             </div>
+            <div class="form-group">
+              <label for="select_type">สถานะ</label>
+              <select id="select_type" name="select_status" class="form-control">
+                <option value="">ทั้งหมด</option>
+                <option value="1">ใบรับคืน</option>
+                <option value="2">ใบลดหนี้</option>
+                <option value="3">ส่งคืน</option>
+                <option value="4">ส่งคืนซัพพลายเออร์</option>
+                </select>
+            </div>
+            <div class="form-group">
+              <label for="select_type">Limit</label>
+              <input type="number" class="form-control"  name="limit" value = '20' placeholder="serial number">
+            </div>
 
             <button type="submit" class="btn btn-primary">ค้นหา</button>
           </form>
@@ -129,6 +143,13 @@
                             <span class="label label-warning">ส่งคืน : <strong><?php echo $return_receive['delivery_return_docno'] ?></strong></span>
                             <br/>
                             <?php endif ?>
+
+
+                            <?php if (isset($return_receive['returns_supplier_docno'])): ?>
+                            <span class="label label-warning">ส่งคืนซัพพลายเออร์ : <strong><?php echo $return_receive['returns_supplier_docno'] ?></strong></span>
+                            <br/>
+                            <?php endif ?>
+
                               <span><i class="fa fa-calendar"></i> <?php echo date("d-m-Y H:i", strtotime($return_receive['modified_date']));?></span>
                               <br/>
                               <?php if ($return_receive['is_active']=="1"): ?>

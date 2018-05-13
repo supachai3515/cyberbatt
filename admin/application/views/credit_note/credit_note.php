@@ -84,6 +84,17 @@
               <label class="sr-only" for="">search</label>
               <input type="text" class="form-control" id="search" name="search" placeholder="serial number">
             </div>
+            <div class="form-group">
+              <label for="select_type">สถานะ</label>
+              <select id="select_type" name="select_status" class="form-control">
+                <option value="">ทั้งหมด</option>
+                <option value="1">ใบขายใหม่</option>
+                </select>
+            </div>
+            <div class="form-group">
+              <label for="select_type">Limit</label>
+              <input type="number" class="form-control"  name="limit" value = '20' placeholder="serial number">
+            </div>
 
             <button type="submit" class="btn btn-primary">ค้นหา</button>
           </form>
