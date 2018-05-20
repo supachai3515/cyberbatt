@@ -122,6 +122,9 @@ class Credit_note_model extends CI_Model
                $sql = $sql.' AND  (o1.id IS NOT NULL) ';
 
             }
+            else if($data_credit_note['select_status'] == '2'){
+                $sql = $sql.' AND  (o1.id IS NULL) ';
+             }
            else {
 
            }

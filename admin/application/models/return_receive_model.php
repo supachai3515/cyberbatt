@@ -141,7 +141,7 @@ class return_receive_model extends CI_Model
                     }
                  }
                  if(isset($data_return_receive['limit'])){
-                    $sql = $sql."LIMIT ".$data_return_receive['limit'];
+                    $sql = $sql." LIMIT ".$data_return_receive['limit'];
                  }
 
 

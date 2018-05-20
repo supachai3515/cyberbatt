@@ -89,6 +89,7 @@
               <select id="select_type" name="select_status" class="form-control">
                 <option value="">ทั้งหมด</option>
                 <option value="1">ใบขายใหม่</option>
+                <option value="2">ใบลดหนี้</option>
                 </select>
             </div>
             <div class="form-group">
