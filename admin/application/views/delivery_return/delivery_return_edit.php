@@ -27,7 +27,7 @@
                     <tbody>
                         <tr ng-repeat="value in order_data">
                             <td>
-                                ใบส่งคืน : <span ng-bind="value.return_id"></span>/<span ng-bind="value.return_docno"></span><br>
+                            ใบส่งคืนลูกค้า : <span ng-bind="value.return_id"></span>/<span ng-bind="value.return_docno"></span><br>
                                 ใบสั่งซื้อ : <span ng-bind="value.order_id"></span>/<span ng-bind="value.invoice_no"></span><br>
                                 
                             </td>
@@ -53,7 +53,7 @@
 
     <div class="container-fluid box" ng-controller="delivery_return">
         <div class="page-header">
-          <h2>ใบส่งคืน <?php echo $delivery_return_data['docno']; ?></h2>
+          <h2>ใบส่งคืนลูกค้า <?php echo $delivery_return_data['docno']; ?></h2>
         </div>
         <div style="padding-top:30px;"></div>
         <form class="form-horizontal" method="POST"  action="<?php echo base_url('delivery_return/update/'.$delivery_return_data['id']);?>" accept-charset="utf-8" enctype="multipart/form-data">

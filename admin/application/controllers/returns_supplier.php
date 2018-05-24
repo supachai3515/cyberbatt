@@ -18,6 +18,10 @@ class Returns_supplier extends BaseController
     {
         $data = $this->get_data_check("is_view");
         if (!is_null($data)) {
+
+            $this->session->set_userdata('search_txt', '');
+            $this->session->set_userdata('search_status', '');
+            
             $count = $this->returns_supplier_model->get_returns_supplier_count();
             $data["links_pagination"] = $this->pagination_compress("returns_supplier/index", $count, $this->config->item("pre_page"));
             $data["returns_supplier_list"] = $this->returns_supplier_model->get_returns_supplier($page, $this->config->item("pre_page"));
@@ -38,13 +42,50 @@ class Returns_supplier extends BaseController
 
 
     //page search
-    public function search()
+    public function search($page=0)
     {
         $data = $this->get_data_check("is_view");
         if (!is_null($data)) {
-            $return_data = $this->returns_supplier_model->get_returns_supplier_search();
+
+
+            if ($this->input->post('search'))
+            {
+                $search_txt = $this->input->post('search');
+                $this->session->set_userdata('search_txt', $search_txt);
+            }
+            elseif ($this->session->userdata('search'))
+            {
+                $search_txt = $this->session->userdata('search_txt');
+            }
+
+
+            if ($this->input->post('select_status'))
+            {
+                $search_status = $this->input->post('select_status');
+                $this->session->set_userdata('search_status', $search_status);
+            }
+            elseif($this->session->userdata('search_status'))
+            {
+                $search_status=  $this->session->userdata('search_status');
+            }
+ 
+
+            $data_search = array(
+                'search' => $this->session->userdata('search_txt'),
+                'select_status' => $this->session->userdata('search_status')
+            );
+
+
+            $count = $this->returns_supplier_model->get_returns_supplier_search_count($data_search);
+            $data["links_pagination"] = $this->pagination_compress("return_receive/index", $count, $this->config->item("pre_page"));
+            $return_data = $this->returns_supplier_model->get_returns_supplier_search($page, $this->config->item("pre_page"), $data_search);
+            $data["links_pagination"] = $this->pagination->create_links();
+
+
+
             $data['returns_supplier_list'] = $return_data['result_returns_supplier'];
             $data['data_search'] = $return_data['data_search'];
+
             $data['script_file']= "js/returns_supplier_js";
             $data["content"] = "returns_supplier/returns_supplier";
             $data["header"] = $this->get_header("returns_supplier");

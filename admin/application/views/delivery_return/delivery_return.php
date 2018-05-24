@@ -56,17 +56,17 @@
 
     <div class="container-fluid box" ng-controller="delivery_return">
         <div class="page-header">
-            <h1>ใบส่งคืน</h1>
+            <h1>ใบส่งคืนลูกค้า</h1>
             <?php //if(isset($sql))echo "<p>".$sql."</p>";?>
         </div>
         <div role="tabpanel">
         <!-- Nav tabs -->
             <ul class="nav nav-tabs" role="tablist">
                 <li role="presentation" class="active">
-                    <a href="#search" aria-controls="search" role="tab" data-toggle="tab"><i class="fa fa-search"></i> ค้นหาใบส่งคืน</a>
+                    <a href="#search" aria-controls="search" role="tab" data-toggle="tab"><i class="fa fa-search"></i> ค้นหาใบส่งคืนลูกค้า</a>
                 </li>
                 <li role="presentation">
-                    <a href="#add" aria-controls="tab" role="add" data-toggle="tab"><i class="fa fa-plus"></i> เพิ่มใบส่งคืน</a>
+                    <a href="#add" aria-controls="tab" role="add" data-toggle="tab"><i class="fa fa-plus"></i> เพิ่มใบส่งคืนลูกค้า</a>
                 </li>
             </ul>
              <!-- Tab panes -->

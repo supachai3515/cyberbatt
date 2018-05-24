@@ -78,23 +78,19 @@
 
             <div class="form-group">
               <label class="sr-only" for="">search</label>
-              <input type="text" class="form-control" id="search" name="search" placeholder="serial number">
+              <input type="text" class="form-control" id="search" name="search" placeholder="serial number" value ="<?php if(isset($data_search['search'])){echo $data_search['search'];}?>">
             </div>
             <div class="form-group">
               <label for="select_type">สถานะ</label>
               <select id="select_type" name="select_status" class="form-control">
-                <option value="">ทั้งหมด</option>
-                <option value="1">ใบรับคืน</option>
-                <option value="2">ใบลดหนี้</option>
-                <option value="3">ส่งคืน</option>
-                <option value="4">ส่งคืนซัพพลายเออร์</option>
+                <option value="9" <?php if(isset($data_search['select_status']) && $data_search['select_status'] == '9'){echo "selected";}?>>ทั้งหมด</option>
+                <option value="1"<?php if(isset($data_search['select_status']) && $data_search['select_status'] == '1'){echo "selected";}?>>ใบรับคืน</option>
+                <option value="2"<?php if(isset($data_search['select_status']) && $data_search['select_status'] == '2'){echo "selected";}?>>ใบลดหนี้</option>
+                <option value="3"<?php if(isset($data_search['select_status']) && $data_search['select_status'] == '3'){echo "selected";}?>>ส่งคืน</option>
+                <option value="4"<?php if(isset($data_search['select_status']) && $data_search['select_status'] == '4'){echo "selected";}?>>ส่งคืนซัพพลายเออร์</option>
+                <option value="5"<?php if(isset($data_search['select_status']) && $data_search['select_status'] == '5'){echo "selected";}?>>ยกเลิกรับคืน</option>
                 </select>
             </div>
-            <div class="form-group">
-              <label for="select_type">Limit</label>
-              <input type="number" class="form-control"  name="limit" value = '20' placeholder="serial number">
-            </div>
-
             <button type="submit" class="btn btn-primary">ค้นหา</button>
           </form>
           <div class="box-body table-responsive no-padding">

@@ -85,15 +85,47 @@ class Credit_note_model extends CI_Model
         return $row;
     }
 
-
-    public function get_credit_note_search()
+    public function get_credit_note_search_count($data_search)
     {
         date_default_timezone_set("Asia/Bangkok");
-        $data_credit_note = array(
-            'search' => $this->input->post('search'),
-            'select_status' => $this->input->post('select_status'),
-            'limit' => $this->input->post('limit')
-        );
+        $data_return_receive = $data_search;
+
+                $sql ="SELECT  COUNT(o.id) connt_id
+                    FROM credit_note  rr INNER JOIN orders o ON rr.order_id = o.id
+                    INNER JOIN products p on p.id = rr.product_id
+                    LEFT JOIN product_serial s ON s.product_id = rr.product_id  AND s.order_id = o.id AND rr.serial = s.serial_number
+                    LEFT JOIN payment pm ON pm.credit_note_id = rr.id
+                    LEFT JOIN orders o1 ON o1.id = pm.order_id
+            WHERE (rr.docno LIKE '%".$data_search['search']."%' 
+                    OR  o.id LIKE '%".$data_search['search']."%'  
+                    OR  s.serial_number LIKE '%".$data_search['search']."%'  
+                    OR o.name LIKE '%".$data_search['search']."%'  )";
+
+        if(isset($data_credit_note['select_status'])){
+            if($data_credit_note['select_status'] == '1'){
+            $sql = $sql.' AND  (o1.id IS NOT NULL) ';
+
+            }
+            else if($data_credit_note['select_status'] == '2'){
+                $sql = $sql.' AND  (o1.id IS NULL) ';
+            }
+            else if($data_credit_note['select_status'] == '3'){
+                $sql = $sql.' AND rr.is_active = 0 ';
+            }
+            else {
+
+            }
+        }
+
+        $query = $this->db->query($sql);
+        $row = $query->row_array();
+        return $row['connt_id'];
+    }
+
+    public function get_credit_note_search($start, $limit, $data_search)
+    {
+        date_default_timezone_set("Asia/Bangkok");
+        $data_credit_note = $data_search;
 
         $sql ="SELECT  rr.*,
 	    		o.id order_id, o.invoice_docno invoice_no,
@@ -125,13 +157,14 @@ class Credit_note_model extends CI_Model
             else if($data_credit_note['select_status'] == '2'){
                 $sql = $sql.' AND  (o1.id IS NULL) ';
              }
+             else if($data_credit_note['select_status'] == '3'){
+                $sql = $sql.' AND rr.is_active = 0 ';
+             }
            else {
 
            }
         }
-        if(isset($data_credit_note['limit'])){
-           $sql = $sql." LIMIT ".$data_credit_note['limit'];
-        }
+        $sql = $sql." ORDER BY o.date DESC  LIMIT " . $start . "," . $limit;
         //print($sql);
         $re = $this->db->query($sql);
         $return_data['result_credit_note'] = $re->result_array();

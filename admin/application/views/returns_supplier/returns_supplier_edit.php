@@ -162,6 +162,34 @@
           </div>
         </div>
 
+         <!-- Multiple Checkboxes -->
+         <div class="form-group">
+          <label class="col-md-3 control-label" for="is_export">ส่งออก</label>
+          <div class="col-md-4">
+          <div class="checkbox">
+            <label for="isactive-0">
+              <input type="checkbox" name="is_export" id="is_export" value="1"
+              <?php if($returns_supplier_data['is_export']==1): ?>
+                <?php echo "checked"; ?>
+              <?php endif ?>
+              >
+              ส่งออก
+            </label>
+            </div>
+          </div>
+        </div>
+
+         <div class="form-group">
+         <label class="col-md-3 control-label" for="export_date">วันที่ส่งออก</label>
+          <div class="col-md-4">
+
+            	<span id="startDate" style="display:none"><?php echo DATE;?></span>
+                <input type="text" class="form-control" id="dateStart" name="export_date" placeholder="วันที่ส่งออก" 
+                value="<?php if($returns_supplier_data['export_date']){echo date("Y-m-d", strtotime($returns_supplier_data['export_date']));} ?>">
+            </div>
+        </div>
+   
+
         <!-- Button -->
         <div class="form-group">
           <label class="col-md-3 control-label" for="save"></label>

@@ -11,12 +11,13 @@ class Returns_supplier_model extends CI_Model
 
     public function get_returns_supplier($start, $limit)
     {
-        $sql =" SELECT r.id , r.doc_no,r.`comment` , sp.name supplier_name ,r.modified_date,r.is_active, SUM(rd.qty)  qty, SUM(rd.total) total
+        $sql =" SELECT r.id , r.doc_no,r.`comment` , sp.name supplier_name ,r.modified_date,r.is_active,  r.is_export,
+                r.export_date, SUM(rd.qty)  qty, SUM(rd.total) total
                 FROM  returns_supplier r  
                 INNER JOIN returns_supplier_detail rd ON r.id = rd.returns_supplier_id 
                 LEFT JOIN supplier sp ON sp.id = r.supplier_id
                 
-                GROUP BY  r.id , r.doc_no,r.`comment` , sp.name,r.create_date,r.is_active
+                GROUP BY  r.id , r.doc_no,r.`comment` , sp.name,r.create_date,r.is_active , r.is_export, r.export_date
                 ORDER BY r.id DESC
 				LIMIT " . $start . "," . $limit;
         $re = $this->db->query($sql);
@@ -69,35 +70,105 @@ class Returns_supplier_model extends CI_Model
         $re = $this->db->query($sql);
         return $re->result_array();
     }
-
-
-    public function get_returns_supplier_search()
+    public function get_returns_supplier_search_count($data_search)
     {
+
+
         date_default_timezone_set("Asia/Bangkok");
-        $data_returns_supplier = array(
-            'search' => $this->input->post('search')
-        );
+        $data_returns_supplier = $data_search;
         $searchText = $data_returns_supplier['search'];
 
-
-
-        $sql =" SELECT r.id , r.doc_no,r.`comment` , rr.issues_comment, sp.name supplier_name ,r.modified_date,r.is_active, SUM(rd.qty)  qty, SUM(rd.total) total
-        FROM  returns_supplier r  
-        INNER JOIN returns_supplier_detail rd ON r.id = rd.returns_supplier_id 
-        LEFT JOIN supplier sp ON sp.id = r.supplier_id
-
+        $sql =" 
+        
+        SELECT COUNT(r.id) connt_id
+                FROM  returns_supplier r  
+                INNER JOIN returns_supplier_detail rd ON r.id = rd.returns_supplier_id 
+                LEFT JOIN supplier sp ON sp.id = r.supplier_id
+                
         WHERE 1=1   ";
 
             if (!empty($searchText)) {
                     $sql = $sql." AND (r.id  LIKE '%".$searchText."%'
                                 OR r.doc_no  LIKE '%".$searchText."%'
                                 OR r.supplier_id  LIKE '%".$searchText."%'
-                                OR sp.name  LIKE '%".$searchText."%'
-                                OR rr.issues_comment,  LIKE '%".$searchText."%')";
+                                OR r.comment  LIKE '%".$searchText."%'
+                                OR sp.name  LIKE '%".$searchText."%')";
+                }
+
+                
+                if(isset($data_return_receive['select_status'])){
+                    if($data_return_receive['select_status'] == '1'){
+                       $sql = $sql.' AND  r.is_export  = 1 ';
+
+                    }
+                   else if($data_return_receive['select_status'] == '2'){
+                    $ $sql = $sql.' AND  (r.is_export  = 0  OR r.is_export IS NULL) ';
+                   }
+                   else if($data_return_receive['select_status'] == '3'){
+                    $sql = $sql.' AND  r.is_active  = 0';
+                   }
+                   else {
+
+                   }
                 }
 
 
-        $sql = $sql."  GROUP BY  r.id , r.doc_no,r.`comment` ,rr.issues_comment, sp.name,r.create_date,r.is_active ORDER BY r.id DESC ";
+        $sql = $sql."  GROUP BY  r.id , r.doc_no,r.`comment` , sp.name,r.create_date,r.is_active ";
+
+        $query = $this->db->query($sql);
+        $row = $query->row_array();
+        return $row['connt_id'];
+    }
+
+    public function get_returns_supplier_search($start, $limit, $data_search)
+    {
+        date_default_timezone_set("Asia/Bangkok");
+        $data_returns_supplier = $data_search;
+        $searchText = $data_returns_supplier['search'];
+
+        $sql =" 
+        
+        SELECT r.id , r.doc_no,r.`comment` , sp.name supplier_name ,r.modified_date,r.is_active, 
+        r.is_export,
+        r.export_date,
+        SUM(rd.qty)  qty, SUM(rd.total) total
+                FROM  returns_supplier r  
+                INNER JOIN returns_supplier_detail rd ON r.id = rd.returns_supplier_id 
+                LEFT JOIN supplier sp ON sp.id = r.supplier_id
+                
+        WHERE 1=1   ";
+
+            if (!empty($searchText)) {
+                    $sql = $sql." AND (r.id  LIKE '%".$searchText."%'
+                                OR r.doc_no  LIKE '%".$searchText."%'
+                                OR r.supplier_id  LIKE '%".$searchText."%'
+                                OR r.comment  LIKE '%".$searchText."%'
+                                OR sp.name  LIKE '%".$searchText."%')";
+                }
+
+
+                if(isset($data_returns_supplier['select_status'])){
+                    if($data_returns_supplier['select_status'] == '1'){
+                       $sql = $sql.' AND  r.is_export  =1 ';
+
+                    }
+                   else if($data_returns_supplier['select_status'] == '2'){
+                    $sql = $sql.' AND  (r.is_export  = 0  OR r.is_export IS NULL) ';
+                   }
+                   else if($data_returns_supplier['select_status'] == '3'){
+                    $sql = $sql.' AND  r.is_active  = 0';
+                   }
+                   else {
+
+                   }
+                }
+
+              
+
+        $sql = $sql."  GROUP BY  r.id , r.doc_no,r.`comment` , sp.name,r.create_date,r.is_active ,r.is_export,
+        r.export_date ORDER BY r.id DESC ";
+
+        $sql = $sql." LIMIT " . $start . "," . $limit;
 
         $re = $this->db->query($sql);
         $return_data['result_returns_supplier'] = $re->result_array();
@@ -115,14 +186,19 @@ class Returns_supplier_model extends CI_Model
         $row_doc_no =  $re->row_array();
         $returns_supplier_docno = $row_doc_no['doc_no'];
         //
-
-
+        $export_date = null;
+        if( $this->input->post('export_date') != null){
+            if($this->input->post('export_date')!= ""){
+                $export_date  = $this->input->post('export_date');
+            }
+        }
         //returns_supplier master
         date_default_timezone_set("Asia/Bangkok");
         $data_returns_supplier = array(
             'comment' =>$this->input->post('comment'),
             'modified_date' => date("Y-m-d H:i:s"),
-            'is_active' => $this->input->post('isactive')
+            'is_export' => $this->input->post('is_export'),
+            'export_date' => $export_date
         );
 
         $where = "id = '".$returns_supplier_id."'";

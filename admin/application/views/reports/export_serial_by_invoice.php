@@ -14,6 +14,7 @@
         <tr>
             <th>invoice_docno</th>
             <th>serial number</th>
+            <th>เลขที่ใบรับเข้า</th>
             <th>order_id</th>
             <th>order_name</th>
             <th>Address</th>
@@ -21,6 +22,7 @@
             <th>product name</th>
             <th>model</th>
             <th>วันที่ออก invoice</th>
+            <th>ใบรับคืน</th>
             <th>ใช้งาน</th>
         </tr>
     </thead>
@@ -29,6 +31,7 @@
         <tr>
           <td><?php echo $orders_data['invoice_no'] ?></td>
           <td><?php echo $orders_data['serial_number'] ?></td>
+          <td><?php echo $orders_data['receive_doc_no'] ?></td>
           <td><?php echo $orders_data['order_id'] ?></td>
           <td><?php echo $orders_data['order_name'] ?></td>
           <td><?php echo $orders_data['address'] ?></td>
@@ -37,6 +40,13 @@
           <td><?php echo $orders_data['model'] ?></td>
           <td>
               <?php echo date("d-m-Y H:i", strtotime($orders_data['invoice_date']));?>
+          </td>
+          <td>
+          <?php if ($orders_data['is_receive']=="1"): ?>
+                  true
+                <?php else: ?>
+                  false
+                <?php endif ?>
           </td>
           <td>
           <?php if ($orders_data['is_invoice']=="1"): ?>

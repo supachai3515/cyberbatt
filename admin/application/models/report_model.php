@@ -322,7 +322,7 @@ class Report_model extends CI_Model {
 						".$join."
 							(
 								SELECT IFNULL(SUM(od.quantity),0) order_qty , od.product_id FROM orders o INNER JOIN order_detail od ON o.id = od.order_id
-								WHERE o.order_status_id = 4 AND  DATE_FORMAT(o.date,'%Y-%m-%d')  BETWEEN '".$obj['dateStart']."' AND '".$obj['dateEnd']."'
+								WHERE o.order_status_id = 4 AND  DATE_FORMAT(o.invoice_date,'%Y-%m-%d')  BETWEEN '".$obj['dateStart']."' AND '".$obj['dateEnd']."'
 								GROUP BY od.product_id
 							) o ON o.product_id = p.id
 						WHERE 1=1  ".$in_str."
@@ -544,11 +544,13 @@ class Report_model extends CI_Model {
 						p.model,
 						o.invoice_date,
 						o.is_invoice,
-						'0' is_receive 
+						'0' is_receive ,
+						rv.doc_no receive_doc_no
 			
 						FROM product_serial  s 
 						INNER JOIN orders o ON s.order_id = o.id
 						INNER JOIN products p ON p.id = s.product_id
+						INNER JOIN receive rv ON rv.id = s.receive_id
 						WHERE
 	
 							(
@@ -576,16 +578,16 @@ class Report_model extends CI_Model {
 						p.model,
 						o.invoice_date,
 						o.is_invoice,
-						'1' is_receive 
+						'1' is_receive ,
+						rv.doc_no receive_doc_no
 
-			
 						FROM  orders o 
 							LEFT JOIN   return_receive rr ON rr.order_id = o.id
 							LEFT JOIN order_detail od ON o.id = od.order_id AND rr.product_id = od.product_id 
 			
 							LEFT JOIN product_serial  s  ON rr.serial = s.serial_number
 							INNER JOIN products p ON p.id = s.product_id
-
+							INNER JOIN receive rv ON rv.id = s.receive_id
 							WHERE
 				
 						(
@@ -606,7 +608,6 @@ class Report_model extends CI_Model {
 			ORDER BY m.invoice_no DESC
 
 			";
-			//print($sql);
 		$re = $this->db->query($sql);
 		//print($sql);
 		return $re->result_array();

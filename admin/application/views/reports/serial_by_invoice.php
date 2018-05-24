@@ -84,6 +84,10 @@
                         <br/>
                         <span>serial number : <strong><?php echo $orders_data['serial_number'] ?></strong></span>
                         <br/>
+                        <span>เลขที่ใบรับเข้า : <strong><?php echo $orders_data['receive_doc_no'] ?></strong></span>
+                        <br/>
+
+                        
                         <span>order : <strong><?php echo $orders_data['order_id'] ?></strong></span>
                       </td>
                       <td>

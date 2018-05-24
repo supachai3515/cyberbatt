@@ -22,8 +22,18 @@
                     <form action="<?php echo base_url('returns_supplier/search');?>" method="POST" class="form-inline" role="form">
                         <div class="form-group">
                             <label class="sr-only" for="">search</label>
-                            <input type="text" class="form-control" id="search" name="search" placeholder="เลขที่เอกสาร">
+                            <input type="text" class="form-control" id="search" name="search" placeholder="เลขที่เอกสาร" value ="<?php if(isset($data_search['search'])){echo $data_search['search'];}?>">
                         </div>
+
+                         <div class="form-group">
+              <label for="select_type">สถานะ</label>
+              <select id="select_type" name="select_status" class="form-control">
+                <option value="9" <?php if(isset($data_search['select_status']) && $data_search['select_status'] == '9'){echo "selected";}?>>ทั้งหมด</option>
+                <option value="1"<?php if(isset($data_search['select_status']) && $data_search['select_status'] == '1'){echo "selected";}?>>ส่งออก</option>
+                <option value="2"<?php if(isset($data_search['select_status']) && $data_search['select_status'] == '2'){echo "selected";}?>>รอส่งออก</option>
+                <option value="3"<?php if(isset($data_search['select_status']) && $data_search['select_status'] == '3'){echo "selected";}?>>ยกเลิก</option>
+                </select>
+            </div>
 
                         <button type="submit" class="btn btn-primary">ค้นหา</button>
                     </form>
@@ -33,6 +43,8 @@
                                 <tr>
                                     <th>รหัส</th>
                                     <th>ชื่อ</th>
+                                    <th>จำนวน</th>
+                                    <th>ส่งออก</th>
                                     <th>สถานะ</th>
                                     <th>แก้ไข</th>
                                 </tr>
@@ -54,6 +66,18 @@
                                            <span>total : <strong><?php echo $returns_supplier['total'] ?></strong></span><br/>
 
                                     </td>
+                                    <td>
+                                        <?php if ($returns_supplier['is_export']=="1"): ?>
+                                            
+                                            <?php if ($returns_supplier['is_export']=="1"): ?>
+                                                <span><i class="fa fa-check"></i> ส่งออกแล้ว</span>
+                                            <?php endif ?>
+                                            <br/>
+                                            <span><i class="fa fa-calendar"></i> <?php echo date("d-m-Y H:i", strtotime($returns_supplier['export_date']));?></span>
+                                            
+                                        <?php endif ?>
+                                    </td>
+
                                     <td>
                                          <span><i class="fa fa-calendar"></i> <?php echo date("d-m-Y H:i", strtotime($returns_supplier['modified_date']));?></span>
                                         <br/>

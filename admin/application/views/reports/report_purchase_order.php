@@ -10,14 +10,14 @@
                 <div class="col-md-6">
                   <div class="form-group">
                     <span id="startDate" style="display:none"><?php echo DATE;?></span>
-                      <label for="">จากวันทีใบสั่งซื้อ</label>
+                      <label for="">จากวันทีออกใบกำกับภาษี</label>
                       <input type="text" class="form-control" id="dateStart" name="dateStart" placeholder="วันที่เริ่มต้นค้นหา" value="<?php if($this->input->get("method") == 'post'){echo ($resultpost['dateStart'] == '' ? DATE : $resultpost['dateStart']);}?>">
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
                     <span id="endDate"></span>
-                      <label for="">ถึงวันที่ใบสั่งซื้อ</label>
+                      <label for="">ถึงวันที่ออกใบกำกับภาษี</label>
                       <input type="text" class="form-control" id="dateEnd" name="dateEnd" placeholder="วันที่สิ้นสุดการค้นหา" value="<?php if($this->input->get("method") == 'post'){echo ($resultpost['dateEnd'] == '' ? DATE : $resultpost['dateEnd']);}?>">
                   </div>
                 </div>
@@ -149,21 +149,7 @@
                   </div>
                 </div>
               </fieldset>
-            </form>
-            <p> *** วันที่ขาย
-              <?php
-
-              $date  = strtotime('-7 days');
-              $obj['dateStart'] = date("Y-m-d",$date );
-              $obj['dateEnd'] = date("Y-m-d");
-
-                if (isset($resultpost['dateStart']) && $resultpost['dateStart'] != "") {
-                    echo $resultpost['dateStart'].' - '. $resultpost['dateEnd'];
-                }
-                else {
-                  echo $obj['dateStart'] .' - '. $obj['dateEnd'];
-                }
-              ?> ***</p>
+            </form>     
         </div>
         <div class="row">
           <div class="col-md-12">

@@ -17,6 +17,10 @@ class Return_receive extends BaseController
     {
         $data = $this->get_data_check("is_view");
         if (!is_null($data)) {
+
+            $this->session->set_userdata('search_txt', '');
+            $this->session->set_userdata('search_status', '');
+
             $count = $this->return_receive_model->get_return_receive_count();
             $data["links_pagination"] = $this->pagination_compress("return_receive/index", $count, $this->config->item("pre_page"));
             $data["return_receive_list"] = $this->return_receive_model->get_return_receive($page, $this->config->item("pre_page"));
@@ -35,11 +39,46 @@ class Return_receive extends BaseController
     }
 
     //page search
-    public function search()
+    public function search($page=0)
     {
         $data = $this->get_data_check("is_view");
         if (!is_null($data)) {
-            $return_data = $this->return_receive_model->get_return_receive_search();
+
+            if ($this->input->post('search'))
+            {
+                $search_txt = $this->input->post('search');
+                $this->session->set_userdata('search_txt', $search_txt);
+            }
+            elseif ($this->session->userdata('search'))
+            {
+                $search_txt = $this->session->userdata('search_txt');
+            }
+
+
+            if ($this->input->post('select_status'))
+            {
+                $search_status= $this->input->post('select_status');
+                $this->session->set_userdata('search_status', $search_status);
+            }
+            elseif($this->session->userdata('search_status'))
+            {
+                $search_status=  $this->session->userdata('search_status');
+            }
+ 
+
+            $data_search = array(
+                'search' => $this->session->userdata('search_txt'),
+                'select_status' => $this->session->userdata('search_status')
+            );
+
+
+
+            $count = $this->return_receive_model->get_return_receive_search_count($data_search);
+
+            $data["links_pagination"] = $this->pagination_compress("return_receive/search", $count, $this->config->item("pre_page"));
+            $return_data = $this->return_receive_model->get_return_receive_search($page, $this->config->item("pre_page"), $data_search);
+            $data["links_pagination"] = $this->pagination->create_links();
+
             $data['return_receive_list'] = $return_data['result_return_receive'];
             $data['data_search'] = $return_data['data_search'];
 

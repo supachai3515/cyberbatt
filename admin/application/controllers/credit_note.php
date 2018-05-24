@@ -19,6 +19,10 @@ class Credit_note extends BaseController
     {
         $data = $this->get_data_check("is_view");
         if (!is_null($data)) {
+
+            $this->session->set_userdata('search_txt', '');
+            $this->session->set_userdata('search_status', '');
+
             $count = $this->credit_note_model->get_credit_note_count();
             $data["links_pagination"] = $this->pagination_compress("credit_note/index", $count, $this->config->item("pre_page"));
             $data["credit_note_list"] = $this->credit_note_model->get_credit_note($page, $this->config->item("pre_page"));
@@ -33,13 +37,49 @@ class Credit_note extends BaseController
 
 
     //page search
-    public function search()
+    public function search($page=0)
     {
         $data = $this->get_data_check("is_view");
         if (!is_null($data)) {
-            $return_data = $this->credit_note_model->get_credit_note_search();
+
+
+            if ($this->input->post('search'))
+            {
+                $search_txt = $this->input->post('search');
+                $this->session->set_userdata('search_txt', $search_txt);
+            }
+            elseif ($this->session->userdata('search'))
+            {
+                $search_txt = $this->session->userdata('search_txt');
+            }
+
+
+            if ($this->input->post('select_status'))
+            {
+                $search_status= $this->input->post('select_status');
+                $this->session->set_userdata('search_status', $search_status);
+            }
+            elseif($this->session->userdata('search_status'))
+            {
+                $search_status=  $this->session->userdata('search_status');
+            }
+
+
+            $data_search = array(
+                'search' => $this->session->userdata('search_txt'),
+                'select_status' => $this->session->userdata('search_status')
+            );
+            
+
+            $count = $this->credit_note_model->get_credit_note_search_count($data_search);
+
+            $data["links_pagination"] = $this->pagination_compress("credit_note/search", $count, $this->config->item("pre_page"));
+            $return_data = $this->credit_note_model->get_credit_note_search($page, $this->config->item("pre_page"), $data_search);
+            $data["links_pagination"] = $this->pagination->create_links();
+
             $data['credit_note_list'] = $return_data['result_credit_note'];
             $data['data_search'] = $return_data['data_search'];
+
             $data["content"] = "credit_note/credit_note";
             $data['script_file']= "js/credit_note_js";
             $data["header"] = $this->get_header("credit note");

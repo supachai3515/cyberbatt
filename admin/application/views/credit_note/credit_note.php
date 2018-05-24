@@ -82,21 +82,17 @@
 
             <div class="form-group">
               <label class="sr-only" for="">search</label>
-              <input type="text" class="form-control" id="search" name="search" placeholder="serial number">
+              <input type="text" class="form-control" id="search" name="search" placeholder="serial number" value ="<?php if(isset($data_search['search'])){echo $data_search['search'];}?>" >
             </div>
             <div class="form-group">
               <label for="select_type">สถานะ</label>
               <select id="select_type" name="select_status" class="form-control">
-                <option value="">ทั้งหมด</option>
-                <option value="1">ใบขายใหม่</option>
-                <option value="2">ใบลดหนี้</option>
+                <option value="9"<?php if(isset($data_search['select_status']) && $data_search['select_status'] == '9'){echo "selected";}?>>ทั้งหมด</option>
+                <option value="1"<?php if(isset($data_search['select_status']) && $data_search['select_status'] == '1'){echo "selected";}?>>ใบขายใหม่</option>
+                <option value="2"<?php if(isset($data_search['select_status']) && $data_search['select_status'] == '2'){echo "selected";}?>>ใบลดหนี้</option>
+                <option value="3"<?php if(isset($data_search['select_status']) && $data_search['select_status'] == '3'){echo "selected";}?>>ยกเลิก</option>
                 </select>
             </div>
-            <div class="form-group">
-              <label for="select_type">Limit</label>
-              <input type="number" class="form-control"  name="limit" value = '20' placeholder="serial number">
-            </div>
-
             <button type="submit" class="btn btn-primary">ค้นหา</button>
           </form>
           <div class="table-responsive">
