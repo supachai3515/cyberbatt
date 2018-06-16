@@ -548,6 +548,7 @@ class Report_model extends CI_Model {
 						rv.doc_no receive_doc_no
 			
 						FROM product_serial  s 
+						INNER JOIN order_detail od ON s.order_id = od.order_id AND s.product_id = od.product_id
 						INNER JOIN orders o ON s.order_id = o.id
 						INNER JOIN products p ON p.id = s.product_id
 						INNER JOIN receive rv ON rv.id = s.receive_id
@@ -582,12 +583,11 @@ class Report_model extends CI_Model {
 						rv.doc_no receive_doc_no
 
 						FROM  orders o 
-							LEFT JOIN   return_receive rr ON rr.order_id = o.id
-							LEFT JOIN order_detail od ON o.id = od.order_id AND rr.product_id = od.product_id 
-			
-							LEFT JOIN product_serial  s  ON rr.serial = s.serial_number
-							INNER JOIN products p ON p.id = s.product_id
-							INNER JOIN receive rv ON rv.id = s.receive_id
+						LEFT JOIN   return_receive rr ON rr.order_id = o.id
+						LEFT JOIN order_detail od ON o.id = od.order_id AND rr.product_id = od.product_id 
+						LEFT JOIN product_serial  s  ON rr.serial = s.serial_number AND rr.product_id = s.product_id
+						INNER JOIN products p ON p.id = s.product_id
+						INNER JOIN receive rv ON rv.id = s.receive_id
 							WHERE
 				
 						(
