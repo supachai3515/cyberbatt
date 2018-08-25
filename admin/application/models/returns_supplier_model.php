@@ -26,7 +26,7 @@ class Returns_supplier_model extends CI_Model
 
     public function get_returns_supplier_detail($id)
     {
-        $sql =" SELECT r . * , p.name, p.sku, p.id product_id, rd.serial_number, rd.qty, rd.total, rd.price, rr.`comment` , p.model, rr.issues_comment
+        $sql =" SELECT DISTINCT r . * , p.name, p.sku, p.id product_id, rd.serial_number, rd.qty, rd.total, rd.price, rr.`comment` , p.model, rr.issues_comment
         FROM returns_supplier r
         INNER JOIN returns_supplier_detail rd ON r.id = rd.returns_supplier_id
         INNER JOIN return_receive rr ON rr.serial = rd.serial_number
@@ -204,8 +204,7 @@ class Returns_supplier_model extends CI_Model
         $where = "id = '".$returns_supplier_id."'";
         $this->db->update("returns_supplier", $data_returns_supplier, $where);
 
-
-
+        //delete all detail
         $this->db-> delete('returns_supplier_detail', "returns_supplier_id = '".$returns_supplier_id."'");
         $i = 0;
         $not_in ="0";
