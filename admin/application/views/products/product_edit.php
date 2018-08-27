@@ -140,7 +140,7 @@
 		<div class="form-group">
 		  <label class="col-md-3 control-label" for="stock">สินค้าคงเหลือ</label>  
 		  <div class="col-md-4">
-		  <input id="stock" name="stock" type="number" value="<?php echo $product_data['stock']; ?>" placeholder="สินค้าคงเหลือ" class="form-control input-md" disabled="true">
+		  <input id="stock" name="stock" type="number" value="<?php echo $product_data['stock']; ?>" placeholder="สินค้าคงเหลือ" class="form-control input-md" readonly>
 		    
 		  </div>
 		</div>
