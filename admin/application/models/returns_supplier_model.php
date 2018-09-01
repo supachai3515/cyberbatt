@@ -11,7 +11,7 @@ class Returns_supplier_model extends CI_Model
 
     public function get_returns_supplier($start, $limit)
     {
-        $sql =" SELECT r.id , r.doc_no,r.`comment` , sp.name supplier_name ,r.modified_date,r.is_active,  r.is_export,
+        $sql =" SELECT DISTINCT r.id , r.doc_no,r.`comment` , sp.name supplier_name ,r.modified_date,r.is_active,  r.is_export,
                 r.export_date, SUM(rd.qty)  qty, SUM(rd.total) total
                 FROM  returns_supplier r  
                 INNER JOIN returns_supplier_detail rd ON r.id = rd.returns_supplier_id 
@@ -29,7 +29,11 @@ class Returns_supplier_model extends CI_Model
         $sql =" SELECT DISTINCT r . * , p.name, p.sku, p.id product_id, rd.serial_number, rd.qty, rd.total, rd.price, rr.`comment` , p.model, rr.issues_comment
         FROM returns_supplier r
         INNER JOIN returns_supplier_detail rd ON r.id = rd.returns_supplier_id
-        INNER JOIN return_receive rr ON rr.serial = rd.serial_number
+        INNER JOIN (SELECT x.* FROM  return_receive  x 
+					JOIN (
+					SELECT serial , MAX(modified_date) max_date FROM return_receive GROUP BY serial ) y 
+						ON y.serial = x.serial 
+					 AND y.max_date = x.modified_date) rr ON rr.serial = rd.serial_number
         INNER JOIN products p ON p.id = rd.product_id
         WHERE rd.returns_supplier_id = '".$id."'";
 
@@ -50,7 +54,7 @@ class Returns_supplier_model extends CI_Model
 
     public function get_returns_supplier_id($returns_supplier_id)
     {
-        $sql ="SELECT r.* ,sp.name supplier_name
+        $sql ="SELECT  DISTINCT r.* ,sp.name supplier_name
                     FROM  returns_supplier r  
                     INNER JOIN returns_supplier_detail rd ON r.id = rd.returns_supplier_id 
                     LEFT JOIN supplier sp ON sp.id = r.supplier_id
@@ -64,7 +68,7 @@ class Returns_supplier_model extends CI_Model
 
     public function get_returns_supplier_detail_id($returns_supplier_id)
     {
-        $sql ="SELECT rd.* , rr.`comment` , rr.issues_comment FROM returns_supplier_detail rd 
+        $sql ="SELECT DISTINCT rd.* , rr.`comment` , rr.issues_comment FROM returns_supplier_detail rd 
         INNER JOIN return_receive rr ON rr.id  = rd.return_receive_id 
         WHERE rr.returns_supplier_id = '".$returns_supplier_id."'";
         $re = $this->db->query($sql);
@@ -181,7 +185,7 @@ class Returns_supplier_model extends CI_Model
     {
         $this->db->trans_start(); # Starting Transaction
         //DOC_NO
-        $sql =" SELECT doc_no  FROM returns_supplier  WHERE  id = '".$returns_supplier_id."'";
+        $sql =" SELECT DISTINCT doc_no  FROM returns_supplier  WHERE  id = '".$returns_supplier_id."'";
         $re = $this->db->query($sql);
         $row_doc_no =  $re->row_array();
         $returns_supplier_docno = $row_doc_no['doc_no'];
@@ -222,6 +226,9 @@ class Returns_supplier_model extends CI_Model
                 'return_receive_id' => $this->input->post('id')[$i],
                 'total' => $total,
             );
+
+            print_r( $data_returns_supplier_detail);
+            print('<br>');
 
             $this->db->insert("returns_supplier_detail", $data_returns_supplier_detail);
 
