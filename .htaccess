@@ -3,10 +3,11 @@ RewriteEngine on
 #RewriteCond %{HTTP_HOST} ^www\.cyberbatt\.com$ [NC]
 #RewriteRule ^(.*)$ http://cyberbatt.com/$1 [L,R=301]
 
-RewriteCond %{HTTP_HOST} ^cyberbatt\.com$ [NC]
-RewriteRule ^(.*)$ http://www.cyberbatt.com/$1 [L,R=301]
-
+RewriteCond %{HTTPS} !=on
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.*)$ index.php?$1
-ErrorDocument 404 http://www.cyberbatt.com/demo/notfound
+RewriteRule ^(.*)$ ./index.php/$1 [L]
+
+
+ErrorDocument 404 https://www.cyberbatt.com/demo/notfound

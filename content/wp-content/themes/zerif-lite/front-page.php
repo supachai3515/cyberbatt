@@ -197,6 +197,7 @@ if ( get_option( 'show_on_front' ) == 'page' ) {
 					<?php zerif_sidebar_trigger(); ?>
 
 				</div><!-- .container -->
+				
 			<?php
 	}
 }

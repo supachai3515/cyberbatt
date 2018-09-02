@@ -16,7 +16,7 @@
     <meta property="fb:app_id" content="204742923362459"/>
     <title><?php echo $header['title']; ?></title>
     <link rel="shortcut icon" type="image/x-icon" href="<?php echo base_url('theme');?>/img/favicon-2.ico">
-    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,600" type="text/css" media="all" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,600" type="text/css" media="all" />
     <link href='https://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/css?family=Athiti|Kanit|Prompt:300" rel="stylesheet">

@@ -14,9 +14,10 @@
 | path to your installation.
 |
 */
-$config['base_url'] = ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "https" : "http");
-$config['base_url'] .= "://".$_SERVER['HTTP_HOST'];
-$config['base_url'] .= str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT_NAME']);
+$root=(isset($_SERVER['HTTPS']) ? "https://" : "http://").$_SERVER['HTTP_HOST'];
+$root.= str_replace(basename($_SERVER['SCRIPT_NAME']), '', $_SERVER['SCRIPT_NAME']);
+$config['base_url'] = $root;
+
 
 //Config by user
 $config['short_sitename'] = "Cyberbatt (ไซเบอร์ แบต)";
@@ -26,14 +27,14 @@ $config['author'] = "Cyberbatt (ไซเบอร์ แบต)";
 $config['keyword'] = "อะไหล่แมคบุ๊ค,อะไหล่โน๊ตบุ๊ค,อะไหล่ไอโฟน,จอแมคบุ๊ค,จอไอแมค,จอไอโฟน,แบตเตอรี่โน๊ตบุ๊ค,แบตเตอรี่แมคบุ๊ค,แบตเตอรี่ไอโฟน,ครบวงจร";
 
 
-$config['url_img'] = "http://www.cyberbatt.com/";
-$config['no_url_img'] = "http://www.cyberbatt.com/uploads/no_image.jpg";
+$config['url_img'] = "https://www.cyberbatt.com/";
+$config['no_url_img'] = "https://www.cyberbatt.com/uploads/no_image.jpg";
 
 $config['email_name'] = "cyberbatt";
 $config['email_owner'] = "cyberbatt_md@hotmail.com";
 $config['email_noreply'] = "cyberbatt.fix@gmail.com";
 $config['pass_mail_noreply'] = "0917824565";
-$config['weburl'] = "http://www.cyberbatt.com/";
+$config['weburl'] = "https://www.cyberbatt.com/";
 $config['line_id'] = "@cyberbatt";
 
 $config['payment_transfer'] = '<h4>ธนาคารกรุงเทพ</h4>
@@ -58,6 +59,7 @@ $config['payment_transfer'] = '<h4>ธนาคารกรุงเทพ</h4>
 |
 */
 $config['index_page'] = '';
+//$config['enable_hooks'] = TRUE;
 
 /*
 |--------------------------------------------------------------------------
