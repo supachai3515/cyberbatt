@@ -25,6 +25,7 @@
 	font-family: serif;
 	/*color: #3AA3D4;*/
 }
+/*Title parameters*/
 .title_parametrs_image{
 	height: 37px;
     float: left;
@@ -139,6 +140,7 @@
 	content: '\f142';
 	
 }
+/*Main parameters style*/
 .main_parametrs_group_div.closed_params .open_or_closed:before{
 	content: '\f140';
 }
@@ -194,6 +196,7 @@ button{
 .save_all_section_parametrs.padding_loading{
 	width: 150px !important;
 }
+/*Save section style*/
  .save_section_parametrs{
 	width: 100px;
 	text-align: left;
@@ -202,6 +205,7 @@ button{
 .save_section_parametrs.padding_loading{
 	width: 130px !important;
 }
+/*Saving in progress style*/
 .saving_in_progress{
 	position: relative;
 	display:none;
@@ -237,6 +241,7 @@ button{
 	background-image: url(../../images/remove_element.png);
 	background-size:100% 100%;
 }
+/*Error message style*/
 .error_massage{
 	color: #BB1E1E;
 	font-size: 18px;

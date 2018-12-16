@@ -1,5 +1,7 @@
 <?php 
 
+	/*###################### Facebook comments front-end ##################*/	
+	
 class wpdevart_comment_front_end{
 	private $menu_name;
 	
@@ -33,7 +35,9 @@ class wpdevart_comment_front_end{
 		
 		
 	}
+	
 	/*###################### FUNCTION FOR CONNECTING TO THE DATABASE ##################*/
+	
 	private function generete_params(){
 		
 		foreach($this->databese_parametrs as $param_array_key => $param_value){
@@ -73,14 +77,18 @@ class wpdevart_comment_front_end{
 		
 		
 	}
-	/*###################### Scripts and Styles part ##################*/
+	
+	/*###################### Scripts and Styles function ##################*/
+	
 	public function generete_front_javascript(){
 			wp_enqueue_script('thickbox');
 			wp_enqueue_style('thickbox');
 			echo '<meta property="fb:app_id" content="'.$this->params['wpdevart_comment_facebook_app_id'].'"/>';
 		
 	}
+	
 	/*###################### Shortcode function ##################*/	
+	
 	public function wpdevart_comment_shortcode($atts){
 		$atts = shortcode_atts( array(
 			"facebook_app_id"					=> $this->params['wpdevart_comment_facebook_app_id'],

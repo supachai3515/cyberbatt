@@ -39,7 +39,7 @@
  		  				  credit_note_docno : ''
  		  				};
 
-			<?php if (isset($orders_data['credit_note_id'])): ?>
+			<?php if (isset($orders_data['credit_note_id']) && $orders_data['credit_note_id'] > 0): ?>
 
 			  	 $scope.items = { credit_note_id : "<?php echo $orders_data['credit_note_id'] ?>",
 		 		  				  credit_note_docno : "<?php echo $orders_data['credit_note_docno'] ?>",
@@ -63,6 +63,7 @@
 
 		    $scope.animationsEnabled = true;
 		    modalInstance.result.then(function (selectedItem) {
+
 		     $scope.items = selectedItem;
 		     $scope.credit_note_id = $scope.items.credit_note_id;
 		     $scope.credit_note_docno = $scope.items.credit_note_docno;
@@ -304,6 +305,22 @@
 	});
 
 	$('#timepicker1').timepicker({
+        showMeridian: false,
+        defaultTime: false
+
+    });
+
+		$('#datepicker_1').datepicker({
+	    format: "yyyy-mm-dd",
+	    language: "th",
+	    autoclose: true,
+	    todayHighlight: true,
+	    todayBtn: true,
+	    orientation: "top auto",
+	    enableOnReadonly : true
+	});
+
+	$('#timepicker1_1').timepicker({
         showMeridian: false,
         defaultTime: false
 

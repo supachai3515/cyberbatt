@@ -195,7 +195,7 @@ class return_receive_model extends CI_Model
                     }
                  }
            
-        $sql = $sql." ORDER BY o.date DESC  LIMIT " . $start . "," . $limit;
+        $sql = $sql." ORDER BY rr.id DESC  LIMIT " . $start . "," . $limit;
 
         $re = $this->db->query($sql);
         //print($sql);

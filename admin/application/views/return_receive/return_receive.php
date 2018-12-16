@@ -107,7 +107,7 @@
                 <?php foreach ($return_receive_list as $return_receive): ?>
                   <tr>
                     <td>
-                      <span>รหัส : <strong><?php echo $return_receive['docno'] ?></strong></span>
+                      <span>รหัส :<span>#<?php echo $return_receive['id'] ?></span> <strong><?php echo $return_receive['docno'] ?></strong></span>
                       <br/>
                       <span>serial number : <strong><?php echo $return_receive['serial_number'] ?></strong></span>
                       <br/>

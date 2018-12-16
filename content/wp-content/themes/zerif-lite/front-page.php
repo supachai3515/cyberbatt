@@ -201,5 +201,5 @@ if ( get_option( 'show_on_front' ) == 'page' ) {
 			<?php
 	}
 }
-
+echo'<div style="padding:20px"> </div>';
 get_footer(); ?>

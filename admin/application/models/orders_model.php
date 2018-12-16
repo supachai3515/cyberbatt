@@ -18,7 +18,7 @@ class Orders_model extends CI_Model
 				FROM  orders o
 				LEFT JOIN order_status s ON s.id =  o.order_status_id
 				LEFT JOIN  members m ON m.id = o.customer_id
-				LEFT JOIN payment p ON p.order_id = o.id
+				LEFT JOIN payment p ON p.order_id = o.id AND p.line_number = 0
         LEFT JOIN tbl_users u ON u.userId = o.userId
         ORDER BY o.date DESC LIMIT " . $start . "," . $limit;
         $re = $this->db->query($sql);
@@ -47,11 +47,11 @@ class Orders_model extends CI_Model
 				DATE_FORMAT(p.inform_date_time,'%H:%i') inform_time,
 				p.create_date payment_create_date,
 				c.docno credit_note_docno,
-        u.`name` user_name
+                u.`name` user_name
 				FROM  orders o
 				LEFT JOIN order_status s ON s.id =  o.order_status_id
 				LEFT JOIN  members m ON m.id = o.customer_id
-				LEFT JOIN payment p ON p.order_id = o.id
+				LEFT JOIN payment p ON p.order_id = o.id AND p.line_number = 0
 				LEFT JOIN credit_note c ON c.id = p.credit_note_id
         LEFT JOIN tbl_users u ON u.userId = o.userId
 			  WHERE o.id = '".$orders_id."'";
@@ -60,6 +60,33 @@ class Orders_model extends CI_Model
         $row = $query->row_array();
         return $row;
     }
+
+    public function get_payment_orders_id($orders_id)
+    {
+        $sql =" SELECT  p.bank_name,
+                    p.line_number,
+                    p.`comment`,
+                    p.member_id,
+                    p.amount,
+                    p.credit_note_id,
+                    c.docno credit_note_docno,
+                    DATE_FORMAT(p.inform_date_time,'%Y-%m-%d') inform_date,
+                    DATE_FORMAT(p.inform_date_time,'%H:%i') inform_time,
+                    p.create_date payment_create_date,
+                    c.docno credit_note_docno, 
+                    u.`name` user_name
+                    FROM  orders o
+                    LEFT JOIN  members m ON m.id = o.customer_id
+                    LEFT JOIN payment p ON p.order_id = o.id  
+                    LEFT JOIN credit_note c ON c.id = p.credit_note_id
+            LEFT JOIN tbl_users u ON u.userId = o.userId
+			  WHERE o.id = '".$orders_id."'  AND p.line_number > 0 ";
+
+            $re = $this->db->query($sql);
+            return $re->result_array();
+    }
+
+    
 
     public function get_orders_detail_id($orders_id)
     {
@@ -241,7 +268,7 @@ class Orders_model extends CI_Model
 				FROM  orders o
 				LEFT JOIN order_status s ON s.id =  o.order_status_id
 				LEFT JOIN  members m ON m.id = o.customer_id
-				LEFT JOIN payment p ON p.order_id = o.id
+				LEFT JOIN payment p ON p.order_id = o.id AND p.line_number = 0
         LEFT JOIN tbl_users u ON u.userId = o.userId
 				LEFT JOIN order_status_history sh ON sh.order_id = o.id AND sh.create_date =
 

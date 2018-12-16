@@ -54,6 +54,9 @@ class Orders extends BaseController
         if (!is_null($data)) {
             $data['orders_data'] = $this->orders_model->get_orders_id($orders_id);
             $data['orders_detail'] = $this->orders_model->get_orders_detail_id($orders_id);
+            $data['orders_payment'] = $this->orders_model->get_payment_orders_id($orders_id);
+            
+
             $data['order_status_list'] = $this->orders_model->get_order_status();
             $data['order_status_history_list'] = $this->orders_model->get_order_status_history($orders_id);
 
@@ -352,6 +355,60 @@ class Orders extends BaseController
         }
     }
 
+
+
+    public function save_slip_credit_note_add($order_id)
+    {
+
+        $cid = $this->input->post('credit_note_id');
+ 
+        if ($order_id!="" && $cid != "") {
+            $sql ="SELECT COUNT(*)+1 connt_id FROM payment where order_id = '".$order_id."' AND line_number!= 0;";
+            $query = $this->db->query($sql);
+            $row = $query->row_array();
+            $count =  $row['connt_id'];
+
+            date_default_timezone_set("Asia/Bangkok");
+            $data_payment = array(
+                "order_id" => $order_id,
+                "line_number" => $count,
+                "credit_note_id" => $this->input->post('credit_note_id'),
+                "member_id" => $this->input->post('member_id'),
+                "bank_name" => $this->input->post('bank_name'),
+                "comment" => $this->input->post('comment'),
+                "inform_date_time" => $this->input->post('inform_date')." ".$this->input->post('inform_time'),
+                "amount" => $this->input->post('amount'),
+                "modified_date" => date("Y-m-d H:i:s"),
+                "is_active" => "1",
+            );
+
+            $where = "order_id = '".$order_id."'  AND  line_number = 0";
+            $this->db->insert('payment', $data_payment, $where);
+            //print($where);
+        }
+        if ($order_id!="") {
+            redirect('orders/edit/'.$order_id);
+        } else {
+            redirect('orders');
+        }
+    }
+
+
+    public function credit_note_del($order_id,$line_number)
+    {
+ 
+        if ($order_id!="" && $line_number!="" ) {
+            $sql = "DELETE FROM payment WHERE order_id = '".$order_id."' AND  line_number = '".$line_number."'  ";
+            $this->db->query($sql);
+        }
+        if ($order_id!="") {
+            redirect('orders/edit/'.$order_id);
+        } else {
+            redirect('orders');
+        }
+    }
+
+
     public function save_slip($order_id)
     {
         $image_name = "";
@@ -359,12 +416,13 @@ class Orders extends BaseController
         $dir_insert ='uploads/payment/'.date("Ym").'/';
 
         if ($order_id!="") {
-            $sql = "DELETE FROM payment WHERE order_id = '".$order_id."' ";
+            $sql = "DELETE FROM payment WHERE order_id = '".$order_id."' AND  line_number = 0 ";
             $this->db->query($sql);
 
             date_default_timezone_set("Asia/Bangkok");
             $data_payment = array(
                 "order_id" => $order_id,
+                "line_number" => 0,
                 "credit_note_id" => $this->input->post('credit_note_id'),
                 "member_id" => $this->input->post('member_id'),
                 "bank_name" => $this->input->post('bank_name'),
@@ -375,7 +433,7 @@ class Orders extends BaseController
                 "is_active" => "1",
             );
 
-            $where = "order_id = '".$order_id."'";
+            $where = "order_id = '".$order_id."'  AND  line_number = 0";
             $this->db->insert('payment', $data_payment, $where);
             print($where);
 

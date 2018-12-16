@@ -90,7 +90,9 @@
                 <option value="9"<?php if(isset($data_search['select_status']) && $data_search['select_status'] == '9'){echo "selected";}?>>ทั้งหมด</option>
                 <option value="1"<?php if(isset($data_search['select_status']) && $data_search['select_status'] == '1'){echo "selected";}?>>ใบขายใหม่</option>
                 <option value="2"<?php if(isset($data_search['select_status']) && $data_search['select_status'] == '2'){echo "selected";}?>>ใบลดหนี้</option>
+                <option value="4"<?php if(isset($data_search['select_status']) && $data_search['select_status'] == '4'){echo "selected";}?>>คืนเงิน</option>
                 <option value="3"<?php if(isset($data_search['select_status']) && $data_search['select_status'] == '3'){echo "selected";}?>>ยกเลิก</option>
+                
                 </select>
             </div>
             <button type="submit" class="btn btn-primary">ค้นหา</button>
@@ -109,7 +111,7 @@
                 <?php foreach ($credit_note_list as $credit_note): ?>
                   <tr>
                     <td>
-                      <span>รหัส : <strong><?php echo $credit_note['docno'] ?></strong></span>
+                      <span>รหัส :<span>#<?php echo $credit_note['id'] ?> </span> <strong><?php echo $credit_note['docno'] ?></strong></span>
                       <br/>
                       <span>serial number : <strong><?php echo $credit_note['serial_number'] ?></strong></span>
                       <br/>

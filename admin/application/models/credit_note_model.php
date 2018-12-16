@@ -147,7 +147,9 @@ class Credit_note_model extends CI_Model
 					LEFT JOIN product_serial s ON s.product_id = rr.product_id  AND s.order_id = o.id AND rr.serial = s.serial_number
 					LEFT JOIN payment pm ON pm.credit_note_id = rr.id
 					LEFT JOIN orders o1 ON o1.id = pm.order_id
-			 WHERE (rr.docno LIKE '%".$data_credit_note['search']."%' OR  o.id LIKE '%".$data_credit_note['search']."%'  OR  s.serial_number LIKE '%".$data_credit_note['search']."%'  OR o.name LIKE '%".$data_credit_note['search']."%'  )";
+			 WHERE (rr.docno LIKE '%".$data_credit_note['search']."%' OR  o.id LIKE '%".$data_credit_note['search']."%'  
+             OR  s.serial_number LIKE '%".$data_credit_note['search']."%'  
+             OR o.name LIKE '%".$data_credit_note['search']."%'  )";
         
         if(isset($data_credit_note['select_status'])){
             if($data_credit_note['select_status'] == '1'){
@@ -155,16 +157,19 @@ class Credit_note_model extends CI_Model
 
             }
             else if($data_credit_note['select_status'] == '2'){
-                $sql = $sql.' AND  (o1.id IS NULL) ';
+                $sql = $sql.' AND  (o1.id IS NULL)  AND rr.is_active = 1 ';
              }
              else if($data_credit_note['select_status'] == '3'){
                 $sql = $sql.' AND rr.is_active = 0 ';
+             }
+             else if($data_credit_note['select_status'] == '4'){
+                $sql = $sql.' AND rr.is_refund = 1 ';
              }
            else {
 
            }
         }
-        $sql = $sql." ORDER BY o.date DESC  LIMIT " . $start . "," . $limit;
+        $sql = $sql." ORDER BY rr.id DESC  LIMIT " . $start . "," . $limit;
         //print($sql);
         $re = $this->db->query($sql);
         $return_data['result_credit_note'] = $re->result_array();

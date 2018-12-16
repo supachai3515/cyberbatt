@@ -2,8 +2,8 @@
 Contributors: wpdevart
 Tags: facebook comments, facebook comment, facebook comment notification, facebook comments import, facebook comment system, comments, comment, wordpress comment, wordpress comments, Facebook, facebook badge, facebook connect, facebook group, facebook integration, Facebook like widget, facebook meta, facebook meta tag, Facebook Open Graph, Facebook Page, facebook platform, facebook plugin, post to facebook, Facebook feed, Facebook Stream, social, responsive comments, social comments, comments plugin, facebook comment plugin           
 Requires at least: 2.9
-Tested up to: 4.7.3
-Stable tag: 1.6.8
+Tested up to: 4.7.4
+Stable tag: 1.7.8
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -47,7 +47,7 @@ You can upgrade WordPress Facebook Comments plugin to [Facebook Comments Pro](ht
 
 ### If you found any bug in our WordPress Facebook comments plugin or have a question contact us at support@wpdevart.com.
 
-Dear users, we also recommend you to take a look for this useful plugins - [WordPress Contact Form](https://wordpress.org/plugins/contact-forms-builder/), [WordPress Coming Soon](https://wordpress.org/plugins/coming-soon-page/), [WordPress booking calendar](https://wordpress.org/plugins/booking-calendar), [WordPress Poll plugin](https://wordpress.org/plugins/polls-widget/), [WordPress Countdown plugin](https://wordpress.org/plugins/widget-countdown), [WordPress YouTube](https://wordpress.org/plugins/youtube-video-player/), [WordPress like box](https://wordpress.org/plugins/like-box/), [WordPress lightbox](https://wordpress.org/plugins/lightbox-popup).
+Dear users, we also recommend you to take a look for this useful plugins - [WordPress Gallery](https://wordpress.org/plugins/gallery-album), [WordPress Contact Form](https://wordpress.org/plugins/contact-forms-builder/), [WordPress Coming Soon](https://wordpress.org/plugins/coming-soon-page/), [WordPress booking calendar](https://wordpress.org/plugins/booking-calendar), [WordPress Poll plugin](https://wordpress.org/plugins/polls-widget/), [WordPress Countdown plugin](https://wordpress.org/plugins/widget-countdown), [WordPress YouTube](https://wordpress.org/plugins/youtube-video-player/), [WordPress like box](https://wordpress.org/plugins/like-box/), [WordPress lightbox](https://wordpress.org/plugins/lightbox-popup).
 
 ### The Best Offer From WpDevArt
 
@@ -67,7 +67,7 @@ Dear users, we also recommend you to take a look for this useful plugins - [Word
 
 **You can check the best offer page here - [Best Price](http://wpdevart.com/the-best-offer-from-wpdevart)**
 
-Dear users, we also recommend you to take a look for this useful plugins - [WordPress Contact Form](https://wordpress.org/plugins/contact-forms-builder/), [WordPress Coming Soon](https://wordpress.org/plugins/coming-soon-page/), [WordPress booking calendar](https://wordpress.org/plugins/booking-calendar), [WordPress Poll plugin](https://wordpress.org/plugins/polls-widget/), [WordPress Countdown plugin](https://wordpress.org/plugins/widget-countdown), [WordPress YouTube](https://wordpress.org/plugins/youtube-video-player/), [WordPress like box](https://wordpress.org/plugins/like-box/), [WordPress lightbox](https://wordpress.org/plugins/lightbox-popup). 
+Dear users, we also recommend you to take a look for this useful plugins - [WordPress Gallery](https://wordpress.org/plugins/gallery-album), [WordPress Contact Form](https://wordpress.org/plugins/contact-forms-builder/), [WordPress Coming Soon](https://wordpress.org/plugins/coming-soon-page/), [WordPress booking calendar](https://wordpress.org/plugins/booking-calendar), [WordPress Poll plugin](https://wordpress.org/plugins/polls-widget/), [WordPress Countdown plugin](https://wordpress.org/plugins/widget-countdown), [WordPress YouTube](https://wordpress.org/plugins/youtube-video-player/), [WordPress like box](https://wordpress.org/plugins/like-box/), [WordPress lightbox](https://wordpress.org/plugins/lightbox-popup). 
 
 == Frequently Asked Questions ==
 
@@ -100,6 +100,10 @@ Unfortuantely Facebook Api does't allow us to do that.
 
 Yes dear user, find this option below posts/pages content(admin panel).
 
+= After activation I don't see Facebook comments =
+
+Try to clear your website and browser cache.
+
 = What files I need to upload for installing the Facebook comments plugin =
 
 You need to select the .zip file only, there is no need to extract the zip file, just upload it
@@ -120,7 +124,7 @@ Yes, If you are logged in(Facebook account) then you will see the moderate optio
 
 **You can check our best offer page here - [Best Price](http://wpdevart.com/the-best-offer-from-wpdevart)**
 
-Dear users, we also recommend you to take a look for this useful plugins - [WordPress Contact Form](https://wordpress.org/plugins/contact-forms-builder/), [WordPress Coming Soon](https://wordpress.org/plugins/coming-soon-page/), [WordPress booking calendar](https://wordpress.org/plugins/booking-calendar), [WordPress Poll plugin](https://wordpress.org/plugins/polls-widget/), [WordPress Countdown plugin](https://wordpress.org/plugins/widget-countdown), [WordPress YouTube](https://wordpress.org/plugins/youtube-video-player/), [WordPress like box](https://wordpress.org/plugins/like-box/), [WordPress lightbox](https://wordpress.org/plugins/lightbox-popup).
+Dear users, we also recommend you to take a look for this useful plugins - [WordPress Gallery](https://wordpress.org/plugins/gallery-album), [WordPress Contact Form](https://wordpress.org/plugins/contact-forms-builder/), [WordPress Coming Soon](https://wordpress.org/plugins/coming-soon-page/), [WordPress booking calendar](https://wordpress.org/plugins/booking-calendar), [WordPress Poll plugin](https://wordpress.org/plugins/polls-widget/), [WordPress Countdown plugin](https://wordpress.org/plugins/widget-countdown), [WordPress YouTube](https://wordpress.org/plugins/youtube-video-player/), [WordPress like box](https://wordpress.org/plugins/like-box/), [WordPress lightbox](https://wordpress.org/plugins/lightbox-popup).
 
 == Screenshots ==
 
@@ -407,6 +411,18 @@ Dear users, we also recommend you to take a look for this useful plugins - [Word
 
 *  Edited notices in code.
 
+= 1.6.9 ==
+
+*  Added new featured plugin in admin panel.
+
+= 1.7.0 ==
+
+*  Updated comments for developers.
+
+= 1.7.8 ==
+
+*  Edited and added descriptions for developers.
+
 ==Facebook comments WordPress step by step guide==
 
 ### Facebook Comments plugin main options
@@ -451,7 +467,7 @@ animation_effect - Choose animation effect for Facebook comments box
 
 **You can check the best offer page here - [Best Price](http://wpdevart.com/the-best-offer-from-wpdevart)**
 
-Dear users, we also recommend you to take a look for this useful plugins - [WordPress Contact Form](https://wordpress.org/plugins/contact-forms-builder/), [WordPress Coming Soon](https://wordpress.org/plugins/coming-soon-page/), [WordPress booking calendar](https://wordpress.org/plugins/booking-calendar), [WordPress Poll plugin](https://wordpress.org/plugins/polls-widget/), [WordPress Countdown plugin](https://wordpress.org/plugins/widget-countdown), [WordPress YouTube](https://wordpress.org/plugins/youtube-video-player/), [WordPress like box](https://wordpress.org/plugins/like-box/), [WordPress lightbox](https://wordpress.org/plugins/lightbox-popup) .
+Dear users, we also recommend you to take a look for this useful plugins - [WordPress Gallery](https://wordpress.org/plugins/gallery-album), [WordPress Contact Form](https://wordpress.org/plugins/contact-forms-builder/), [WordPress Coming Soon](https://wordpress.org/plugins/coming-soon-page/), [WordPress booking calendar](https://wordpress.org/plugins/booking-calendar), [WordPress Poll plugin](https://wordpress.org/plugins/polls-widget/), [WordPress Countdown plugin](https://wordpress.org/plugins/widget-countdown), [WordPress YouTube](https://wordpress.org/plugins/youtube-video-player/), [WordPress like box](https://wordpress.org/plugins/like-box/), [WordPress lightbox](https://wordpress.org/plugins/lightbox-popup) .
 
 
 

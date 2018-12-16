@@ -416,22 +416,20 @@
          
             <div class="well">
 
-               <form class="form-horizontal" method="POST" action="<?php echo base_url('orders/save_slip/'.$orders_data['id']);?>" accept-charset="utf-8" enctype="multipart/form-data">
+            <form class="form-horizontal" method="POST" action="<?php echo base_url('orders/save_slip/'.$orders_data['id']);?>" accept-charset="utf-8" enctype="multipart/form-data">
                <div class="form-group">
                   <legend>การชำระเงิน</legend>
                 </div>
                  <!-- Text input-->
+                 <?php if (isset($orders_data['credit_note_id'])  && $orders_data['credit_note_id']>0 ): ?>
                   <div class="form-group">
-                      <label class="col-md-3 control-label" for="credit_note_id">อ้างอิงใบลดหนี้</label>
-                      <div class="col-md-4">
-                          <div class="input-group">
-                              <input id="credit_note_id" name="credit_note_id" type="text" placeholder="เลขที่ใบลดหนี้" class="form-control input-md" 
-                              ng-model="credit_note_id"  ng-init="credit_note_id = items.credit_note_id" required="" readonly="true">
-                              <span class="input-group-addon"> <button type="button" ng-click="open_credit()">เลือกใบลดหนี้</i></button></span>
-                          </div>
-                      </div>
-                      <div class="col-md-4"></div> <span ng-model="credit_note_docno" ng-bind="credit_note_docno"  ng-init="credit_note_docno = items.credit_note_docno"> </span>
+                        
+                          <label class="col-md-3 control-label" for="credit_note_id">อ้างอิงใบลดหนี้</label>
+                          <div class="col-md-4">
+                            <?php echo $orders_data['credit_note_id'] ?>  : <?php echo $orders_data['credit_note_docno'] ?> 
+                            </div>   
                   </div>
+                  <?php endif ?>
                  <input hidden="true"  value="<?php echo $orders_data['member_id']; ?>"  name="member_id" >
                 <div class="form-group">
                     <label class="col-md-3 control-label" for="textinput">เลือกธนาคาร  *</label>
@@ -530,16 +528,139 @@
                   </div>
 
                 <div class="form-group">
-                  <div class="col-sm-10 col-sm-offset-2">
+                  <div class="col-sm-10 col-sm-offset-3">
                     <button type="submit" value="upload"  class="btn btn-success">บันทึก slip</button>
                   </div>
                 </div>
             </form>
 
             </div>
-        
-          </div>
 
+
+             <div class="well">
+
+            <form class="form-horizontal" method="POST" action="<?php echo base_url('orders/save_slip_credit_note_add/'.$orders_data['id']);?>" accept-charset="utf-8" enctype="multipart/form-data">
+              <div class="form-group">
+                  <legend>ชำระแบบใบลดหนี้</legend>
+                </div>
+                <!-- Text input-->
+                  <div class="form-group">
+                      <label class="col-md-3 control-label" for="credit_note_id">อ้างอิงใบลดหนี้</label>
+                      <div class="col-md-4">
+                          <div class="input-group">
+                              <input id="credit_note_id" name="credit_note_id" type="text" placeholder="เลขที่ใบลดหนี้" class="form-control input-md" 
+                              ng-model="credit_note_id"  ng-init="credit_note_id = items.credit_note_id" required="" readonly="true" required="required">
+                              <span class="input-group-addon"> <button type="button" ng-click="open_credit()">เลือกใบลดหนี้</i></button></span>
+                          </div>
+                      </div>
+                      <div class="col-md-4"></div> <span ng-model="credit_note_docno" ng-bind="credit_note_docno"  ng-init="credit_note_docno = items.credit_note_docno"> </span>
+                  </div>
+                <input hidden="true"  value="<?php echo $orders_data['member_id']; ?>"  name="member_id" >
+                <div class="form-group">
+                    <label class="col-md-3 control-label" for="textinput">ใบลดหนี้  *</label>
+                    <div class="col-md-6">
+                      <select  name="bank_name"  class="form-control" required="required">
+                            <option value="ใบลดหนี้" selected>ใบลดหนี้</option>
+                      </select>
+                    </div>
+                </div>
+
+              <div class="form-group">
+                  <label class="col-md-3 control-label" for="textinput">จำนวนเงิน *</label>
+                  <div class="col-md-6">
+                    <input value=""  name="amount" type="number" placeholder="จำนวนเงิน" class="form-control input-md" required="required">
+                  </div>
+              </div>
+              <div class="form-group">
+              <label class="col-md-3 control-label" for="textinput">วันที่โอน  *</label>
+                <div class="col-md-6">
+                    <div class='input-group date' id='datepicker_1'>
+                        <input type='text' class="form-control" name="inform_date" placeholder="วันที่" value=""  required="true" />
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+                   </div>
+                  </div>
+                        
+                <div class="form-group">
+                <label class="col-md-3 control-label" for="textinput">เวลาที่โอน  *</label>
+                <div class="col-md-6">
+                    <div class="input-group bootstrap-timepicker timepicker">
+                        <input id="timepicker1_1" type="text" name="inform_time" class="form-control input-small" value=""   required="true"/>
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+                    </div>
+                 </div>
+                  </div>
+
+
+                  <div class="form-group">
+                      <label class="col-md-3 control-label" for="textinput">หมายเหตุ</label>
+                      <div class="col-md-6">
+                        <textarea  name="comment" class="form-control input-md" ></textarea>
+                    </div>
+                    </div>
+
+                <div class="form-group">
+                  <div class="col-sm-10 col-sm-offset-3">
+                    <button type="submit" value="upload"  class="btn btn-success">เพิ่ม</button>
+                  </div>
+                </div>
+            </form>
+            <div class="panel panel-success">
+    <div class="panel-heading">
+        <h3 class="panel-title">ใบลดหนั้</h3>
+    </div>
+    <div class="panel-body">
+        <div class="box-body table-responsive no-padding">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Docno</th>
+                        <th>Date</th>
+                        <td>Comment</td>
+                        <th class="text-right">Amount</th>
+  
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php  $sum_amont = 0 ; foreach ($orders_payment as $value): ?>
+                    <tr>
+                      <td> <a href="<?php echo base_url('orders/credit_note_del/'.$orders_data['id'].'/'.$value['line_number']);?>"  class="btn btn-sm btn-danger">Del</a></td>
+
+                        <td>
+                            <?php echo  $value['credit_note_docno'] ?>
+                        </td>
+                        <td>
+                            <?php echo  $value['inform_date'].' '.$value['inform_time'] ?>
+                        </td>
+                        <td>
+                            <?php echo  $value['comment'] ?>
+                        </td>
+                        <td class="text-right">
+                            <?php echo  $value['amount']?>
+                        </td>
+                    </tr>
+                    <?php   $sum_amont =  $sum_amont + $value['amount']  ?>
+                    <?php endforeach ?>
+                    <tr>
+                        <td></td> <td></td> 
+                        <td></td>
+                        <td class="text-right"><strong>รวม</strong></td>
+                        <td class="text-right"><ins>  <?php echo  $sum_amont ?></ins></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+
+           </div>
+
+          </div>
 
           <div class="col-md-4">
             <a href="<?php echo $this->config->item('weburl').'invoice/'.$orders_data['ref_id']; ?>" target="_blank"><button type="button" class="btn btn-success">ใบสั่งซื้อ</button></a>
