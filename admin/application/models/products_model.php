@@ -104,8 +104,16 @@ class Products_model extends CI_Model
             'is_active' => $this->input->post('isactive')
         );
 
+
         $this->db->insert("products", $data_product);
         $insert_id = $this->db->insert_id();
+
+        $data_product = array(
+            'sku' => $insert_id 
+        );
+        $where = "id = '".$product_id."'";
+        $this->db->update('products', $data_product, $where);
+
         return  $insert_id;
     }
 
