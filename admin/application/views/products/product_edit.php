@@ -21,7 +21,7 @@
 		<div class="form-group">
 		  <label class="col-md-3 control-label" for="sku">รหัส</label>  
 		  <div class="col-md-4">
-		  <input id="sku" name="sku" type="text" value="<?php echo $product_data['sku']; ?>" placeholder="รหัสสินค้า" class="form-control input-md" required="">
+		  <input id="sku" name="sku" type="text"  value="<?php echo $product_data['sku']; ?>" placeholder="รหัสสินค้า" class="form-control input-md" required="" readonly>
 		    
 		  </div>
 		</div>
