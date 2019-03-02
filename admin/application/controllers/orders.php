@@ -355,18 +355,25 @@ class Orders extends BaseController
         }
     }
 
-
-
     public function save_slip_credit_note_add($order_id)
     {
 
         $cid = $this->input->post('credit_note_id');
  
         if ($order_id!="" && $cid != "") {
-            $sql ="SELECT COUNT(*)+1 connt_id FROM payment where order_id = '".$order_id."' AND line_number!= 0;";
+            $sql =" SELECT MAX( line_number ) +1 connt_id
+                    FROM payment
+                    WHERE order_id = '".$order_id."'
+                    AND line_number != 0";
+
+
             $query = $this->db->query($sql);
             $row = $query->row_array();
             $count =  $row['connt_id'];
+
+            if(!isset( $count)){
+                $count =1;
+            }
 
             date_default_timezone_set("Asia/Bangkok");
             $data_payment = array(
