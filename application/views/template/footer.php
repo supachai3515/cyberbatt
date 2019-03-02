@@ -57,7 +57,7 @@
                               <div class="store-content">
                                   <ul>
                                       <li><i class="fa fa-map-marker"></i> CYBERBATT CO., LTD<br>
-                                      2963 ซ.ลาดพร้าว 101/2 ถ.ลาดพร้าว คลองจั่น บางกะปิ กทม. 10240</li>
+                                      396 โซน B ซ.ลาดพร้าว 94 ถ.ศรีวรา พลับพลา วังทองหลาง กทม. 10310</li>
                                   </ul>
                               </div>
                                 <div class="store-content">

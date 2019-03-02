@@ -104,13 +104,20 @@ class Products_model extends CI_Model
             'is_active' => $this->input->post('isactive')
         );
 
+
         $this->db->insert("products", $data_product);
         $insert_id = $this->db->insert_id();
 
         $data_product = array(
+<<<<<<< HEAD
             'sku' => $insert_id
         );
         $where = "id = '".$insert_id."'";
+=======
+            'sku' => $insert_id 
+        );
+        $where = "id = '".$product_id."'";
+>>>>>>> 385a6c9a40c574e76fed815aff041f28cfe4a49c
         $this->db->update('products', $data_product, $where);
 
         return  $insert_id;

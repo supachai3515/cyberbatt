@@ -365,8 +365,11 @@ class Orders extends BaseController
                     FROM payment
                     WHERE order_id = '".$order_id."'
                     AND line_number != 0";
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 385a6c9a40c574e76fed815aff041f28cfe4a49c
             $query = $this->db->query($sql);
             $row = $query->row_array();
             $count =  $row['connt_id'];
