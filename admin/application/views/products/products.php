@@ -463,11 +463,7 @@
                             <div class="form-group">
                                 <label class="col-md-3 control-label" for="sku">รหัส</label>
                                 <div class="col-md-4">
-<<<<<<< HEAD
                                     <input id="sku" name="sku" type="text" placeholder="รหัสสินค้า" class="form-control input-md" readonly>
-=======
-                                    <input id="sku" name="sku" type="text" placeholder="รหัสสินค้า" class="form-control input-md" required="" readonly>
->>>>>>> 385a6c9a40c574e76fed815aff041f28cfe4a49c
                                 </div>
                             </div>
                             <!-- Text input-->
