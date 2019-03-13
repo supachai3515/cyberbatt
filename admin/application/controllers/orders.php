@@ -208,6 +208,22 @@ class Orders extends BaseController
             $this->load->view('orders/invoice_doc', $data);
         }
     }
+    public function  delivery_invoice($orders_id, $print_f = 0)
+    {
+        $data = $this->get_data_check("is_edit");
+        if (!is_null($data)) {
+            $data['print_f'] = $print_f;
+            $data['orders_tem'] = $this->orders_model->get_orders_id($orders_id);
+
+            $data['orders_data'] = $this->orders_model->get_orders_id($orders_id);
+            $data['orders_detail'] = $this->orders_model->get_orders_detail_id($orders_id);
+            $data['order_status_list'] = $this->orders_model->get_order_status();
+            $data['order_status_history_list'] = $this->orders_model->get_order_status_history($orders_id);
+            $this->load->view('orders/delivery_invoice_doc', $data);
+        }
+    }
+
+   
 
     public function get_product_serial()
     {
