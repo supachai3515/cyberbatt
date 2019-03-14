@@ -222,6 +222,16 @@
 
 	    		   วันที่ <u><?php echo $orders_data['inform_date'];?></u>  จำนวนเงิน <u><?php echo number_format($orders_data['amount'],2);?></u>
 	    		   </p>
+
+				   <?php foreach ($orders_payment as $value): ?>
+
+				   <?php if ($value['line_number'] !=  0): ?>
+					<p> 
+						เลขที่ใบลดหนี้ <?php echo $value['credit_note_docno'];?> วันที่ <u><?php echo $value['inform_date'];?></u>  จำนวนเงิน <u><?php echo number_format($value['amount'],2);?></u>
+					</p>
+					<?php endif ?>
+	               <?php endforeach ?>
+
 	    		  <div class="row">
 	    		  	<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 	    		  		<p class="text-center"><br></p>

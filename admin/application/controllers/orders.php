@@ -203,6 +203,7 @@ class Orders extends BaseController
 
             $data['orders_data'] = $this->orders_model->get_orders_id($orders_id);
             $data['orders_detail'] = $this->orders_model->get_orders_detail_id($orders_id);
+            $data['orders_payment'] = $this->orders_model->get_payment_orders_id($orders_id);
             $data['order_status_list'] = $this->orders_model->get_order_status();
             $data['order_status_history_list'] = $this->orders_model->get_order_status_history($orders_id);
             $this->load->view('orders/invoice_doc', $data);
@@ -217,6 +218,7 @@ class Orders extends BaseController
 
             $data['orders_data'] = $this->orders_model->get_orders_id($orders_id);
             $data['orders_detail'] = $this->orders_model->get_orders_detail_id($orders_id);
+            $data['orders_payment'] = $this->orders_model->get_payment_orders_id($orders_id);
             $data['order_status_list'] = $this->orders_model->get_order_status();
             $data['order_status_history_list'] = $this->orders_model->get_order_status_history($orders_id);
             $this->load->view('orders/delivery_invoice_doc', $data);
