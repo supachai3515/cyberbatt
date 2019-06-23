@@ -24,8 +24,10 @@
             	<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
             		<img src="<?php echo base_url('theme');?>/img/logo/logo.png" style="width: 200px"/>
             		<h4><?php echo $this->config->item('short_sitename')?></h4>
-			  		 บริษัท ไซเบอร์ แบต จำกัด 2963 ซ.ลาดพร้าว <br>
-			  		 101/2 ถ.ลาดพร้าว คลองจั่น บางกะปิ กทม. 10310<br>
+					บริษัท ไซเบอร์ แบต จำกัด <br>
+					396 ชั้น 1 โซน เอ ซ.ลาดพร้าว 94 (ปัญจมิตร) <br>
+					แขวงพลับพลา  เขตวังทองหลาง  กทม. 10310 <br>
+					โทรศัพท์มือถือ 081-754-7565<br>
 
             	</div>
             	<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 text-right">
