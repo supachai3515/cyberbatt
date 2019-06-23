@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="">
 	<head>
 		<meta charset="utf-8">
@@ -24,24 +24,27 @@
             	<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
             		<img src="<?php echo $this->config->item('url_img');?>theme/img/logo/logo.png" style="width: 200px"/>
             		<h4>บริษัท ไซเบอร์ แบต จำกัด (สำนักงานใหญ่)</h4>
-					  396 ชั้น 1 โซน เอ ซ.ลาดพร้าว 94 (ปัญจมิตร) ถ.ลาดพร้าว<br>
-					  แขวงพลับพลา เขตวังทองหลาง กทม.10310 <br>
+					  396 ชั้น 1 โซน เอ ซ.ลาดพร้าว 94 (ปัญจมิตร) ถ.ลาดพร้าว <br>
+					  แขวงพลับพลา เขตวังทองหลาง กทม. 10310 <br>
 					  โทรศัพท์มือถือ 081-754-7565<br>
 			  		 <strong>เลขประจำตัวผู้เสียภาษี 0105553076314</strong>
 
             	</div>
             	<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 text-right">
             	<?php if ($orders_data['is_tax'] == 1): ?>
-        				<h3>ใบกํากับภาษี/ใบเสร็จรับเงิน<br>
+        				<h3>ใบกํากับภาษี/ใบแจ้งหนี้/ใบส่งสินค้า<br>
         				 <?php if ($print_f == "0"): ?>
                         		<span style="font-size:14px"> (ต้นฉบับ) </span>
                         <?php else: ?>
                         		<span style="font-size:14px"> (สำเนา) </span>
                         <?php endif ?>
         				 <?php echo  $orders_data['invoice_docno'];?> </h3>
-                        <strong>วันที่ออก <?php echo $orders_data['invoice_date']?></strong><br/>
-                        <strong>วันครบกำหนด <?php echo $orders_data['invoice_date']?></strong><br/>
-
+                        <strong>วันที่ออก <?php echo  date("Y-m-d", strtotime($orders_data['invoice_date']));?></strong><br/>
+                        <?php if (isset($orders_data['invoice_duedate'])): ?>
+                            <strong>วันครบกำหนด <?php echo date("Y-m-d", strtotime($orders_data['invoice_duedate']))?></strong><br/>
+                        <?php else: ?>
+                            <strong>วันครบกำหนด <?php echo date("Y-m-d", strtotime($orders_data['invoice_date']))?></strong><br/>
+                        <?php endif ?>
                          <strong>Ref. #<?php echo $orders_data['id']?></strong><br/>
 
             	<?php else: ?>
@@ -226,13 +229,13 @@
 
 				   <?php foreach ($orders_payment as $value): ?>
 
-				   <?php if ($value['line_number'] !=  0): ?>
+					<?php if ($value['line_number'] !=  0): ?>
 					<p> 
 						เลขที่ใบลดหนี้ <?php echo $value['credit_note_docno'];?> วันที่ <u><?php echo $value['inform_date'];?></u>  จำนวนเงิน <u><?php echo number_format($value['amount'],2);?></u>
 					</p>
 					<?php endif ?>
-	               <?php endforeach ?>
-
+					<?php endforeach ?>
+					
 	    		  <div class="row">
 	    		  	<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 	    		  		<p class="text-center"><br></p>

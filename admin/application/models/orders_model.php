@@ -138,7 +138,8 @@ class Orders_model extends CI_Model
             'is_tax' => $this->input->post('is_tax'),
             'tax_address' => $this->input->post('tax_address'),
             'tax_id' =>$this->input->post('tax_id'),
-            'tax_company'=> $this->input->post('tax_company')
+            'tax_company'=> $this->input->post('tax_company'),
+            'invoice_duedate'=> $this->input->post('invoice_duedate'),
             );
 
             $where = "id = '".$orders_id."'";

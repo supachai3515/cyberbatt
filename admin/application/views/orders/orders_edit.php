@@ -321,6 +321,19 @@
                     <input type="text" class="form-control" name="tax_address" placeholder="ที่อยู่" value="<?php echo $orders_data['tax_address']; ?>">
                   </div>
 
+                  <div class="form-group">
+                  <label  for="textinput">วันที่ครบกำหนด</label>
+             
+                    <div class='input-group date' id='datepicker_2'>
+                        <input type='text' class="form-control" name="invoice_duedate" placeholder="วันที่" value="<?php if(isset($orders_data['invoice_duedate']))echo date("Y-m-d", strtotime($orders_data['invoice_duedate']));?>"  required="true" />
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                
+                   </div>
+                  </div>
+
+
                   <button type="submit" class="btn btn-primary">บันทึก</button>
                 </form>
               </div>
@@ -668,6 +681,8 @@
             <?php if ($orders_data['order_status_id'] >= 2): ?>
                 <?php if ($orders_data['is_invoice'] == 1): ?>
                   <a href="<?php echo  base_url('orders/invoice/'.$orders_data['id']); ?>" ><button type="button" class="btn btn-info">ใบกำกับภาษี</button></a> <span><?php echo $orders_data['invoice_docno'] ?></span>
+                  <br><br>
+                  <a href="<?php echo  base_url('orders/delivery_invoice/'.$orders_data['id']); ?>" ><button type="button" class="btn btn-info">ใบส่งของ</button></a>
                 <?php else: ?>
                   <a href="<?php echo base_url('orders/invoice/'.$orders_data['id']); ?>"><button type="button" class="btn btn-warning">ออกใบกำกับภาษี</button></a>
                 <?php endif ?>
