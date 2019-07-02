@@ -682,12 +682,18 @@
                 <?php if ($orders_data['is_invoice'] == 1): ?>
                   <a href="<?php echo  base_url('orders/invoice/'.$orders_data['id']); ?>" ><button type="button" class="btn btn-info">ใบกำกับภาษี</button></a> <span><?php echo $orders_data['invoice_docno'] ?></span>
                   <br><br>
-                  <a href="<?php echo  base_url('orders/delivery_invoice/'.$orders_data['id']); ?>" ><button type="button" class="btn btn-info">ใบส่งของ</button></a>
+                  <!-- <a href="<?php echo  base_url('orders/delivery_invoice/'.$orders_data['id']); ?>" ><button type="button" class="btn btn-info">ใบส่งของ</button></a> -->
                 <?php else: ?>
                   <a href="<?php echo base_url('orders/invoice/'.$orders_data['id']); ?>"><button type="button" class="btn btn-warning">ออกใบกำกับภาษี</button></a>
                 <?php endif ?>
 
               
+            <?php endif ?>
+
+            <?php if (isset($delivery_note_data)): ?>
+              <a href="<?php echo base_url('delivery_note/delivery_invoice/'.$delivery_note_data['id']); ?>"><button type="button" class="btn btn-info">ใบส่งของ</button></a>
+            <?php else: ?>
+              <a href="<?php echo base_url('delivery_note/add/'.$orders_data['id']); ?>"><button type="button" class="btn btn-info">ออกใบส่งของ</button></a>
             <?php endif ?>
 
             <h4 class="text-info">สถานะสินค้า</h4>

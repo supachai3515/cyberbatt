@@ -86,8 +86,6 @@ class Orders_model extends CI_Model
             return $re->result_array();
     }
 
-    
-
     public function get_orders_detail_id($orders_id)
     {
         $sql ="SELECT od.* ,  IFNULL(p.sku,'') sku, IFNULL(p.name,'') product_name , p.slug FROM order_detail od
@@ -375,6 +373,15 @@ class Orders_model extends CI_Model
         $re = $this->db->query($sql);
         $return_data = $re->result_array();
         return $return_data;
+    }
+
+
+    public function get_delivery_note($order_id)
+    {
+        $sql =" SELECT o.*   FROM  delivery_note o WHERE o.order_id = '".$order_id."' AND is_active = 1 ";
+        $query = $this->db->query($sql);
+        $row = $query->row_array();
+        return $row;
     }
 }
 
