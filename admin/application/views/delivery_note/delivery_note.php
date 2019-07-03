@@ -7,14 +7,14 @@
         </div>
         <form action="<?php echo base_url('delivery_note/search');?>" method="POST" class="form-inline" role="form">
 
-            <div class="form-group">
-                <label class="sr-only" for="">เลขที่เอกสาร</label>
-                <input type="number" class="form-control" id="order_id" name="order_id" placeholder="เลขที่เอกสาร">
+        <div class="form-group">
+                <label class="sr-only" for="">เลขที่ใบสั่งซื้อ</label>
+                <input type="number" class="form-control" id="order_id" name="order_id" placeholder="เลขที่ใบสั่งซื้อ">
             </div>
 
             <div class="form-group">
-                <label class="sr-only" for="">search</label>
-                <input type="text" class="form-control" id="search" name="search" placeholder="ชื่อ">
+                <label class="sr-only" for="">เลขที่เอกสาร</label>
+                <input type="text" class="form-control" id="search" name="search" placeholder="เลขที่เอกสาร">
             </div>
 
             <button type="submit" class="btn btn-primary">ค้นหา</button>
@@ -24,7 +24,7 @@
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>#</th>
+                        <th>Order</th>
                         <th>จำนวน</th>
                         <th>ส่งไปยัง</th>
                         <th>รวม</th>
@@ -35,10 +35,16 @@
                 <?php foreach ($delivery_note_list as $delivery_note): ?>
                     <tr>
                         <td>
+                        <span class="">เลขที่เอกสาร : <?php echo $delivery_note['id'];?></span><br/>
                         <?php if (isset($delivery_note['docno']) && $delivery_note['docno'] !="") : ?>
                                   <span class=""><?php echo $delivery_note['docno'];?></span><br/>
                         <?php endif ?>
                         <span>ครบกำหนด : <i class="fa fa-calendar"></i> <?php echo date("d-m-Y", strtotime($delivery_note['due_date']));?></span><br/>
+
+                        <?php if (isset($delivery_note['invoice_docno']) && $delivery_note['invoice_docno'] !="") : ?>
+                                  <strong class="label label-info">ใบส่งของ : <?php echo $delivery_note['invoice_docno'];?></strong><br/>
+                        <?php endif ?>
+
                         </td>
                         <td>
                             <span>เลขที่ใบสั่งซื้อ : <strong>#<?php echo $delivery_note['order_id'] ?></strong></span><br/>

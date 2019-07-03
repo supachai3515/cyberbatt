@@ -383,6 +383,14 @@ class Orders_model extends CI_Model
         $row = $query->row_array();
         return $row;
     }
+
+    public function get_invoice($order_id)
+    {
+        $sql =" SELECT o.*   FROM  invoice o WHERE o.order_id = '".$order_id."' AND is_active = 1 ";
+        $query = $this->db->query($sql);
+        $row = $query->row_array();
+        return $row;
+    }
 }
 
 /* End of file orders_model.php */

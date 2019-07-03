@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>ใบส่งสินค้า <?php echo $orders_data['invoice_docno']." ".$orders_data["name"];?></title>
+		<title>ใบวางบิล/ใบแจ้งนี้ <?php echo $invoice_data['docno']." ".$orders_data["name"];?></title>
 
 		<!-- Bootstrap CSS -->
 		<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
@@ -33,15 +33,12 @@
             	<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 text-right">
              
 
-        				<h3>ใบส่งสินค้า<br>
-        				 <?php echo  $delivery_note_data['docno'];?> </h3>
-                        <strong>วันที่ออก <?php echo date("Y-m-d", strtotime($delivery_note_data['create_date']));?></strong><br/>
-                        <strong>วันครบกำหนด <?php echo date("Y-m-d", strtotime($delivery_note_data['due_date']));?></strong><br/>
-                        <strong>Ref. #<?php echo $orders_data['id']?></strong><br/>
-
- 
-
-
+        				<h3>ใบวางบิล/ใบแจ้งนี้<br>
+        				 <?php echo  $invoice_data['docno'];?> </h3>
+                        <strong>วันที่ออก <?php echo date("Y-m-d", strtotime($invoice_data['create_date']));?></strong><br/>
+                        <strong>วันครบกำหนด <?php echo date("Y-m-d", strtotime($invoice_data['due_date']));?></strong><br/>
+						<strong>Ref.ใบสั่งซื้อ #<?php echo $orders_data['id']?></strong><br/>
+						<strong>Ref.ใบส่งของ #<?php echo $delivery_note_data['docno']?></strong><br/>
             	</div>
 		</div>
 		<div class="row" style="padding-top:10px;">
@@ -171,14 +168,14 @@
 		<div class="col-xs-3">
 			<br><br><br>
 			<p class="text-center">___________________</p>
-			<p class="text-center">ผู้ส่งสินค้า</p>
+			<p class="text-center">ผู้รับวางบิล</p>
 			<p class="text-center">วันที่......./......./.......</p>
 
 		</div>
 		<div class="col-xs-3">
 			<br><br><br>
 			<p class="text-center">___________________</p>
-			<p class="text-center">ผู้รับสินค้า</p>
+			<p class="text-center">ผู้รับเงิน</p>
 			<p class="text-center">วันที่......./......./.......</p>
 
 		</div>
@@ -201,7 +198,7 @@
 		<div class="row noprint">
 			<p class="text-center"><br><br><br>
 			<button type="button" class="btn btn-primary" onClick="window.print()"><span class="glyphicon glyphicon-print" aria-hidden="true"></span> พิมพ์</button>
-			<a class="btn btn-success" href="<?php echo base_url("delivery_note");?>" role="button">ปิดหน้าต่างนี้</a>
+			<a class="btn btn-success" href="<?php echo base_url("invoice");?>" role="button">ปิดหน้าต่างนี้</a>
 			</p>
 		</div>
 	</div>

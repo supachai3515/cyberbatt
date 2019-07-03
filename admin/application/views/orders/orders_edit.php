@@ -690,11 +690,19 @@
               
             <?php endif ?>
 
-            <?php if (isset($delivery_note_data)): ?>
+            <?php if (isset($delivery_note_data['id'])): ?>
               <a href="<?php echo base_url('delivery_note/delivery_invoice/'.$delivery_note_data['id']); ?>"><button type="button" class="btn btn-info">ใบส่งของ</button></a>
             <?php else: ?>
               <a href="<?php echo base_url('delivery_note/add/'.$orders_data['id']); ?>"><button type="button" class="btn btn-info">ออกใบส่งของ</button></a>
             <?php endif ?>
+
+
+            <?php if (isset($invoice_data['id'])): ?>
+              <a href="<?php echo base_url('invoice/invoice_doc/'.$invoice_data['id']); ?>"><button type="button" class="btn btn-info">ใบวางบิล/ใบแจ้งนี้</button></a>
+            <?php else: ?>
+              <a href="<?php echo base_url('invoice/add/'.$orders_data['id']); ?>"><button type="button" class="btn btn-info">ออกใบวางบิล/ใบแจ้งนี้</button></a>
+            <?php endif ?>
+
 
             <h4 class="text-info">สถานะสินค้า</h4>
             <div class="well">

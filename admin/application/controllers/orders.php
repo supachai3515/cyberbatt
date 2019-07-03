@@ -58,6 +58,8 @@ class Orders extends BaseController
 
             $data['delivery_note_data'] = $this->orders_model->get_delivery_note($orders_id);
 
+            $data['invoice_data'] = $this->orders_model->get_invoice($orders_id);
+
             $data['order_status_list'] = $this->orders_model->get_order_status();
             $data['order_status_history_list'] = $this->orders_model->get_order_status_history($orders_id);
 
