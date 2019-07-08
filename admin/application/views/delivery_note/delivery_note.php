@@ -85,7 +85,10 @@
                         <a href="<?php echo  base_url('delivery_note/edit/'.$delivery_note['id']); ?>" ><button type="button" class="btn btn-sm btn-warning"> <i class="fa fa-pencil"></i></button></a>
                           </a>
                           <a href="<?php echo  base_url('delivery_note/delivery_invoice/'.$delivery_note['id']); ?>" ><button type="button" class="btn btn-sm btn-info"> <i class="fa fa-eye"></i></button></a>
-                          </a>
+                          
+                          <a href="<?php echo  base_url('delivery_note/delivery_invoice_searial/'.$delivery_note['id']); ?>" ><button type="button" class="btn btn-sm btn-info"> <i class="fa fa-eye"></i> Searial</button>
+                        </a>
+                           
                         </td>
                     </tr>
                 <?php endforeach ?>

@@ -316,6 +316,15 @@ class Orders_model extends CI_Model
     }
 
 
+    public function get_product_serial_byorder($order_id)
+    {
+        $sql =" SELECT ps.* , p.`name` product_name ,p.sku FROM product_serial ps INNER JOIN products p ON p.id = ps.product_id
+				where ps.order_id = '".$order_id."'
+				AND ps.is_active = 1
+		        ORDER BY ps.line_number ;";
+        $re = $this->db->query($sql);
+        return $re->result_array();
+    }
 
 
     public function update_img($order_id, $image_name, $feild)

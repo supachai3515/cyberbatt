@@ -124,6 +124,31 @@ class delivery_note extends BaseController
             $this->load->view('delivery_note/delivery_invoice_doc', $data);
         }
     }
+
+    public function  delivery_invoice_searial($delivery_note_id, $print_f = 0)
+    {
+        $data = $this->get_data_check("is_edit");
+        if (!is_null($data)) {
+            $data['print_f'] = $print_f;
+
+
+            $order_data = $this->delivery_note_model->get_delivery_note_id($delivery_note_id);
+            $order_id = $order_data["order_id"];
+
+            $data['delivery_note_data'] = $this->delivery_note_model->delivery_note_id($order_id);
+
+            $data['orders_tem'] = $this->orders_model->get_orders_id($order_id);
+            $data['orders_data'] = $this->orders_model->get_orders_id($order_id);
+            $data['orders_detail'] = $this->orders_model->get_orders_detail_id($order_id);
+            $data['orders_payment'] = $this->orders_model->get_payment_orders_id($order_id);
+            $data['order_status_list'] = $this->orders_model->get_order_status();
+            $data['order_status_history_list'] = $this->orders_model->get_order_status_history($order_id);
+            $data['serial'] =  $this->orders_model->get_product_serial_byorder($order_id);
+
+
+            $this->load->view('delivery_note/delivery_invoice_doc_searial', $data);
+        }
+    }
    
 }
 
