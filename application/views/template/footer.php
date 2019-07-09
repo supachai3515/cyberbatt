@@ -42,7 +42,7 @@
                                 <div class="store-content">
                                     <ul>
                                        <li><i class="fa fa-map-marker"></i>
-                                       396 โซน B ซ.ลาดพร้าว 94 ถ.ศรีวรา พลับพลา วังทองหลาง กทม. 10310</li>
+                                       ชั้น 1 โซน A เลขที่ 396 ซ.ลาดพร้าว 94 (ปัญจมิตร) ถ.ลาดพร้าว พลับพลา วังทองหลาง กทม. 10310</li>
                                        <li><i class="fa fa-phone"></i> Mobile: 091-7824565</li>
                                        <li><i class="fa fa-comment"></i> LINE : @cyberbatt</li>
                                     </ul>
@@ -57,7 +57,7 @@
                               <div class="store-content">
                                   <ul>
                                       <li><i class="fa fa-map-marker"></i> CYBERBATT CO., LTD<br>
-                                      396 โซน B ซ.ลาดพร้าว 94 ถ.ศรีวรา พลับพลา วังทองหลาง กทม. 10310</li>
+                                      ชั้น 1 โซน A เลขที่ 396 ซ.ลาดพร้าว 94 (ปัญจมิตร) ถ.ลาดพร้าว พลับพลา วังทองหลาง กทม. 10310</li>
                                   </ul>
                               </div>
                                 <div class="store-content">
@@ -77,7 +77,7 @@
                 <div class="row">
                     <div class="col-lg-12 col-md-12">
                         <div class="copyright">
-                            <p>Copyright &copy; 2016 <a href="<?php echo $this->config->item('weburl') ?>"><?php echo $this->config->item('sitename') ?></a>. All rights reserved. Design By <a href="http://www.wisadev.com" target="_blank">wisadev.com</a></p>
+                            <p>Copyright &copy; 2016 <a href="<?php echo $this->config->item('weburl') ?>"><?php echo $this->config->item('sitename') ?></a>. All rights reserved.</p>
                         </div>
                     </div>
                 </div>

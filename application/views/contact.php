@@ -17,7 +17,7 @@
                         cyberbatt (cyberbatt.com)
                     </h2>
                     <address>
-                        <p><i class="fa fa-map-marker"></i>  บริษัท ไซเบอร์ แบต จำกัด <br>2963 ซ.ลาดพร้าว 101/2 ถ.ลาดพร้าว คลองจั่น บางกะปิ กทม. 10310 </p>
+                        <p><i class="fa fa-map-marker"></i>  บริษัท ไซเบอร์ แบต จำกัด <br>ชั้น 1 โซน A เลขที่ 396 ซ.ลาดพร้าว 94 (ปัญจมิตร) ถ.ลาดพร้าว พลับพลา วังทองหลาง กทม.  10310</p>
                         <p><i class="fa fa-phone"></i> Mobile: 091-7824565</p>
                         <p><i class="fa fa-envelope-o"></i> Email: <?php echo $this->config->item('email_owner') ?></p>
                         <p><i class="fa fa-comment"></i> Line Id: <a href="http://line.me/ti/p/%40cyberbatt" target="_blank">@cyberbatt</a></p>
@@ -51,7 +51,7 @@
                         </p>
 
                         <p><i class="fa fa-map-marker"></i>  ที่อยู่จัดส่งสินค้าเคลม <br>
-                        2963 ซ. ลาดพร้าว 101/2 ถ.ลาดพร้าว คลองจั่น บางกะปิ กทม. 10240 (ส่ง EMS  หรือ Kerry เท่านั้น)<br>
+                        ชั้น 1 โซน A เลขที่ 396 ซ.ลาดพร้าว 94 (ปัญจมิตร) ถ.ลาดพร้าว พลับพลา วังทองหลาง กทม.  10310 (ส่ง EMS  หรือ Kerry เท่านั้น)<br>
 
                     </address>
                 </div>
@@ -75,8 +75,7 @@
                         ชั้น 1 โซน B เลขที่ 396 ถ.ศรีวรา พลับพลา วังทองหลาง 10310
                         <i class="fa fa-phone"></i> Tel : 094-749-6264
                         </p>
-                        <p>CYBER2FIX ลาดพร้าว <br><i class="fa fa-map-marker"></i> 2963 ซ.ลาดพร้าว 101/2 ถ.ลาดพร้าว คลองจั่น บางกะปิ กทม. 10240
-                        <i class="fa fa-phone"></i> Tel : 093-195-5324</p>
+                        
                     </address>
 
                <!--
