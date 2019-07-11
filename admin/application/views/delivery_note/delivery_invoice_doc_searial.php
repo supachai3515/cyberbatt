@@ -111,7 +111,7 @@
                                             <?php foreach ($serial as $item): ?>
                                             <?php if ($value['product_id'] == $item['product_id']): ?>
                                                 <div class="col-xs-6 col-md-4 col-lg-3">
-                                                    <span>SN <?php echo $item['serial_number'] ?></span>
+                                                    <span><?php echo $item['serial_number'] ?></span>
                                                 </div>
                                                 <?php endif; ?>
                                             <?php endforeach ?>
