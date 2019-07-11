@@ -179,6 +179,8 @@
     <script src="<?php echo base_url('theme');?>/datepicker/js/bootstrap-timepicker.js"></script>
     <script type='text/javascript' src='<?php echo base_url('theme');?>/js/angular.min.js'></script>
 
+    <script id="salesdesk-widget-script" src="https://api-salesdesk.readyplanet.com/js/salesdesk-widget-v2.min.js?business_id=1266bb5978f40e990ad89706a0cbbe94" type="text/javascript" charset="UTF-8"></script>
+
     <?php echo $this->load->view("template/app");?>
     <?php if(isset($script)){echo $script;}?>
     <?php if(isset($script_file)){echo $this->load->view($script_file); }?>
