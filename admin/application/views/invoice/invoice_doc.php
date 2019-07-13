@@ -38,7 +38,9 @@
                         <strong>วันที่ออก <?php echo date("Y-m-d", strtotime($invoice_data['create_date']));?></strong><br/>
                         <strong>วันครบกำหนด <?php echo date("Y-m-d", strtotime($invoice_data['due_date']));?></strong><br/>
 						<strong>Ref.ใบสั่งซื้อ #<?php echo $orders_data['id']?></strong><br/>
+						<?php if (isset($delivery_note_data['docno'])): ?>
 						<strong>Ref.ใบส่งของ #<?php echo $delivery_note_data['docno']?></strong><br/>
+						<?php endif; ?>
             	</div>
 		</div>
 		<div class="row" style="padding-top:10px;">
