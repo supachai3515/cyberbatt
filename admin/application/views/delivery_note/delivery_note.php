@@ -2,7 +2,7 @@
   <section class="content">
     <div class="container-fluid box" ng-controller="mainCtrl">
         <div class="page-header">
-            <h1>ใบสั่งซื้อสินค้า</h1>
+            <h1>ใบส่งสินค้า</h1>
             <?php //if(isset($sql))echo "<p>".$sql."</p>"; ?>
         </div>
         <form action="<?php echo base_url('delivery_note/search');?>" method="POST" class="form-inline" role="form">

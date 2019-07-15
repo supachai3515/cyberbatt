@@ -122,7 +122,7 @@ i.id invoice_id ,
     public function save_delivery_note($order_id)
     {
 
-        $sql =" SELECT COUNT(id) as connt_id FROM  delivery_note ";
+        $sql =" SELECT IFNULL(COUNT(id) , 1) as connt_id FROM  delivery_note ";
         $query = $this->db->query($sql);
         $row = $query->row_array();
         $countId =  $row['connt_id'];

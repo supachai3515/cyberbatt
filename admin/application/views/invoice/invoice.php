@@ -2,7 +2,7 @@
   <section class="content">
     <div class="container-fluid box" ng-controller="mainCtrl">
         <div class="page-header">
-            <h1>ใบวางบิล/ใบแจ้งนี้</h1>
+            <h1>ใบวางบิล/ใบแจ้งหนี้</h1>
             <?php //if(isset($sql))echo "<p>".$sql."</p>"; ?>
         </div>
         <form action="<?php echo base_url('invoice/search');?>" method="POST" class="form-inline" role="form">

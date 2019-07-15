@@ -37,7 +37,7 @@ n.id delivery_note_id ,
                         LEFT JOIN payment p ON p.order_id = o.id AND p.line_number = 0
                 LEFT JOIN tbl_users u ON u.userId = o.userId
                  
-        ORDER BY o.date DESC LIMIT " . $start . "," . $limit;
+        ORDER BY  d.create_date DESC LIMIT " . $start . "," . $limit;
         $re = $this->db->query($sql);
         return $re->result_array();
     }
@@ -107,7 +107,7 @@ n.id delivery_note_id ,
                                  OR  d.order_id LIKE '%".$data_invoice['order_id']."%'
 								 OR  d.docno LIKE '%".$data_invoice['search']."%')
 
-								 ORDER BY d.create_date DESC , o.date DESC
+								 ORDER BY d.create_date DESC
 								 ";
 
 
@@ -125,7 +125,7 @@ n.id delivery_note_id ,
     public function save_invoice($order_id)
     {
 
-        $sql =" SELECT COUNT(id) as connt_id FROM  invoice ";
+        $sql =" SELECT  IFNULL(COUNT(id) , 1)  as connt_id FROM  invoice ";
         $query = $this->db->query($sql);
         $row = $query->row_array();
         $countId =  $row['connt_id'];
