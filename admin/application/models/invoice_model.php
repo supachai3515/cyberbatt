@@ -51,8 +51,7 @@ n.id delivery_note_id ,
     }
 
 
-
-
+ 
     public function get_invoice_search()
     {
         date_default_timezone_set("Asia/Bangkok");
@@ -125,7 +124,7 @@ n.id delivery_note_id ,
     public function save_invoice($order_id)
     {
 
-        $sql =" SELECT  IFNULL(COUNT(id) , 1)  as connt_id FROM  invoice ";
+        $sql =" SELECT IFNULL(COUNT(id)+1 , 1))  as connt_id FROM  invoice ";
         $query = $this->db->query($sql);
         $row = $query->row_array();
         $countId =  $row['connt_id'];
