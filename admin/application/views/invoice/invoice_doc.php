@@ -33,7 +33,12 @@
             	<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 text-right">
              
 
-        				<h3>ใบวางบิล/ใบแจ้งนี้<br>
+						<h3>ใบวางบิล/ใบแจ้งนี้<br>
+						<?php if ($print_f == "0"): ?>
+                        		<span style="font-size:14px"> (ต้นฉบับ) </span>
+                        <?php else: ?>
+                        		<span style="font-size:14px"> (สำเนา) </span>
+                        <?php endif ?>
         				 <?php echo  $invoice_data['docno'];?> </h3>
                         <strong>วันที่ออก <?php echo date("Y-m-d", strtotime($invoice_data['create_date']));?></strong><br/>
                         <strong>วันครบกำหนด <?php echo date("Y-m-d", strtotime($invoice_data['due_date']));?></strong><br/>
@@ -198,7 +203,10 @@
 	    		  	 
 		</div>
 		<div class="row noprint">
-			<p class="text-center"><br><br><br>
+			<p class="text-center"><br><br>
+			<a class="btn btn-default btn-sm" href="<?php echo base_url("invoice/invoice_doc/".$invoice_data['id']."/1");?>" role="button">สำเนา</a> 
+			<a class="btn btn-default btn-sm" href="<?php echo base_url("invoice/invoice_doc/".$invoice_data['id']);?>" role="button">ต้นฉบับ</a> 
+			<br><br>
 			<button type="button" class="btn btn-primary" onClick="window.print()"><span class="glyphicon glyphicon-print" aria-hidden="true"></span> พิมพ์</button>
 			<a class="btn btn-success" href="<?php echo base_url("invoice");?>" role="button">ปิดหน้าต่างนี้</a>
 			</p>
