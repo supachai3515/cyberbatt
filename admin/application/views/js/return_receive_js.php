@@ -89,6 +89,15 @@
 			$uibModalInstance.close($scope.items);
 		};
 
+		$scope.checkbtnClick = function(qty,qtyall) {
+				var qty1 = parseInt(qty);
+				var qty2 = parseInt(qtyall);
+				if(qty1 < qty2) {
+					return true;
+				} else {
+					return false;
+				}
+			}
 
 	});
 

@@ -41,7 +41,7 @@
                 <strong>ชื่อลูกค้า: </strong><span ng-bind="value.order_name"></span>
                 <br>
               </td>
-              <td ng-if="value.Count_qty < value.quantity">
+              <td ng-if="checkbtnClick(value.Count_qty,value.quantity)">
                 <button type="button" class="btn btn-info btn-xs" ng-click="selectOrder(value.order_id,value.product_id,value.serial_number)">เลือก</button>
               </td>
               <td ng-if="value.Count_qty == value.quantity"><span class="label label-default">รับคืนแล้ว</span></td>
