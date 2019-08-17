@@ -61,7 +61,7 @@ n.id delivery_note_id ,
         );
 
         $sql ="
-
+        SELECT
         d.id, d.docno, d.order_id,
         d.create_date ,d.modified_date,
         DATE_FORMAT(d.due_date,'%Y-%m-%d') due_date,
@@ -98,19 +98,14 @@ n.id delivery_note_id ,
 				WHERE  1=1";
 
         if ($data_invoice['order_id'] !="") {
-            $sql = $sql." AND d.order_id ='".$data_invoice['order_id']."'";
+            $sql = $sql." AND d.order_id ='".$data_invoice['order_id']."'  ORDER BY d.create_date DESC";
+        }else{
+            $sql = $sql." AND (  d.id LIKE '%".$data_invoice['search']."%'
+                            OR  d.docno LIKE '%".$data_invoice['search']."%')
+                    ORDER BY d.create_date DESC
+             ";
         }
-
-        $sql = $sql." AND (o.name LIKE '%".$data_invoice['search']."%'
-								 OR  d.id LIKE '%".$data_invoice['search']."%'
-                                 OR  d.order_id LIKE '%".$data_invoice['order_id']."%'
-								 OR  d.docno LIKE '%".$data_invoice['search']."%')
-
-								 ORDER BY d.create_date DESC
-								 ";
-
-
-
+ 
         $re = $this->db->query($sql);
         $return_data['result_invoice'] = $re->result_array();
         $return_data['data_search'] = $data_invoice;

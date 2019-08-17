@@ -96,16 +96,15 @@ i.id invoice_id ,
 				WHERE  1=1";
 
         if ($data_delivery_note['order_id'] !="") {
-            $sql = $sql." AND d.order_id ='".$data_delivery_note['order_id']."'";
+            $sql = $sql." AND d.order_id ='".$data_delivery_note['order_id']."'   ORDER BY d.create_date DESC , o.date DESC";
+        }else{
+            $sql = $sql." AND ( d.id LIKE '%".$data_delivery_note['search']."%'
+            OR  d.docno LIKE '%".$data_delivery_note['search']."%') 
+             ORDER BY d.create_date DESC , o.date DESC
+            ";
         }
 
-        $sql = $sql." AND (o.name LIKE '%".$data_delivery_note['search']."%'
-								 OR  d.id LIKE '%".$data_delivery_note['search']."%'
-                                 OR  d.order_id LIKE '%".$data_delivery_note['order_id']."%'
-								 OR  d.docno LIKE '%".$data_delivery_note['search']."%')
-
-								 ORDER BY d.create_date DESC , o.date DESC
-								 ";
+      
 
 
 
