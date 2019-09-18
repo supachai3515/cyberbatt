@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>ใบแจ้งนี้ <?php echo $invoice_data['docno']." ".$orders_data["name"];?></title>
+		<title>ใบวางบิล/ใบแจ้งหนี้ <?php echo $invoice_data['docno']." ".$orders_data["name"];?></title>
 
 		<!-- Bootstrap CSS -->
 		<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
@@ -33,7 +33,7 @@
             	<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 text-right">
              
 
-						<h3>ใบแจ้งนี้<br>
+						<h3>ใบวางบิล/ใบแจ้งหนี้<br>
 						<?php if ($print_f == "0"): ?>
                         		<span style="font-size:14px"> (ต้นฉบับ) </span>
                         <?php else: ?>
