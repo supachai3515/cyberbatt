@@ -50,7 +50,7 @@ class Products extends CI_Controller {
 		$data['header'] = array('title' => 'สินค้า | '.$this->config->item('sitename'),
 								'description' =>  'สินค้า | '.$this->config->item('tagline'),
 								'author' => $this->config->item('author'),
-								'keyword' =>  'bboycomputer');
+								'keyword' =>  'cyberbatt');
 		//get menu database
 		$this->load->model('initdata_model');
 		$data['menus_list'] = $this->initdata_model->get_menu();
