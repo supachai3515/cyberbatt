@@ -48,6 +48,12 @@ class Products extends BaseController
             $data['product_data'] = $this->products_model->get_product($product_id);
             $data['images_list'] = $this->products_model->get_images($product_id);
 
+            $data['edit_stock']= false;
+            if($data['global']['menu_group_id'] == 1 || $data['global']['menu_group_id']==2){
+                $data['edit_stock']= true;
+            }
+           
+
             $data['content'] = 'products/product_edit';
             //if script file
             $data['script_file']= "js/product_js";
@@ -55,6 +61,7 @@ class Products extends BaseController
             $this->load->view("template/layout_main", $data);
         }
     }
+ 
     //page search
     public function search()
     {

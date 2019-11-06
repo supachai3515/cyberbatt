@@ -161,6 +161,18 @@ class Members extends BaseController
         }
     }
 
+
+    public function export()
+    {
+        $data = $this->get_data_check("is_view");
+        if (!is_null($data)) { 
+            $return_data = $this->members_model->get_members_search();
+            $data['members_list'] = $return_data['result_members'];
+            //print_r( $data['members_list']);
+            $this->load->view('members/export_member', $data);
+        }
+    }
+
 }
 
 /* End of file prrducts.php */

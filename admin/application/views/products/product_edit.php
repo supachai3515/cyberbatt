@@ -135,6 +135,16 @@
             </div>
         </div>
 
+		<?php if ($edit_stock==true): ?>
+		<!-- Text input-->
+		<div class="form-group">
+		  <label class="col-md-3 control-label" for="stock">สินค้าคงเหลือ</label>  
+		  <div class="col-md-4">
+		  <input id="stock" name="stock" type="number" value="<?php echo $product_data['stock']; ?>" placeholder="สินค้าคงเหลือ" class="form-control input-md">
+		    
+		  </div>
+		</div>
+		<?php else: ?>
 
 		<!-- Text input-->
 		<div class="form-group">
@@ -144,6 +154,7 @@
 		    
 		  </div>
 		</div>
+		<?php endif ?>
 
 		<!-- Multiple Checkboxes -->
 		<div class="form-group">
