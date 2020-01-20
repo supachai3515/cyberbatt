@@ -79,8 +79,8 @@
                     </address>
 
                <!--
-                <a class="fancybox-thumb" data-fancybox-group="group" href="<?php echo base_url('theme');?>/img/banner/map-bboycomputer.jpg">
-				<img  class="img-thumbnail img-responsive" src="<?php echo base_url('theme');?>/img/banner/map-bboycomputer.jpg" alt="แผนที่ร้าน bboycomputer">
+                <a class="fancybox-thumb" data-fancybox-group="group" href="<?php echo base_url('theme');?>/img/banner/map-cyberbatt.jpg">
+				<img  class="img-thumbnail img-responsive" src="<?php echo base_url('theme');?>/img/banner/map-cyberbatt.jpg" alt="แผนที่ร้าน cyberbatt">
 				</a>
                 -->
             </div>

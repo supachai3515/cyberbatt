@@ -3,7 +3,7 @@ var app = angular.module('myApp', []);
 app.controller('mainCtrl', function($scope,$http) {
     $scope.product_alert = false;
     $scope.is_reservations_check = false;
-     $scope.product_alert_text = 'สินค้า 1 ชิ้น ได้ถูกเพิ่มเข้าไปยังตะกร้าสินค้าของคุณ <a class="btn btn-default" href="http://bboycomputer.com/demo/cart" role="button">ดูตะกร้าสินค้า</a>';
+     $scope.product_alert_text = 'สินค้า 1 ชิ้น ได้ถูกเพิ่มเข้าไปยังตะกร้าสินค้าของคุณ <a class="btn btn-default" href="http://cyberbatt.com/demo/cart" role="button">ดูตะกร้าสินค้า</a>';
     
 	$scope.productItems = [{
      		id: '0',
@@ -41,7 +41,7 @@ app.controller('mainCtrl', function($scope,$http) {
           // Simple GET request example:
         $http({
             method: 'GET',
-            url: 'http://bboycomputer.com/demo/cart/add_item/'+ productId
+            url: 'http://cyberbatt.com/demo/cart/add_item/'+ productId
 
         }).success(function(data) {
             $scope.product_alert = true;
@@ -53,7 +53,7 @@ app.controller('mainCtrl', function($scope,$http) {
         // Simple GET request example:
         $http({
             method: 'GET',
-            url: 'http://bboycomputer.com/demo/cart/update_item/'+ rowid + '/' + editValue
+            url: 'http://cyberbatt.com/demo/cart/update_item/'+ rowid + '/' + editValue
         }).success(function(data) {
              $scope.getOrder();
             $scope.deleteResult = data;
@@ -73,7 +73,7 @@ app.controller('mainCtrl', function($scope,$http) {
          if(qty>0){
              $http({
                 method: 'GET',
-                url: 'http://bboycomputer.com/demo/cart/update_item/'+ rowid + '/' + qty
+                url: 'http://cyberbatt.com/demo/cart/update_item/'+ rowid + '/' + qty
             }).success(function(data) {
                  $scope.getOrder();
                 $scope.deleteResult = data;
@@ -96,7 +96,7 @@ app.controller('mainCtrl', function($scope,$http) {
          if(qty>0){
              $http({
                method: 'GET',
-               url: 'http://bboycomputer.com/demo/cart/update_item/'+ rowid + '/' + qty
+               url: 'http://cyberbatt.com/demo/cart/update_item/'+ rowid + '/' + qty
             }).success(function(data) {
                  $scope.getOrder();
                 $scope.deleteResult = data;
@@ -111,7 +111,7 @@ app.controller('mainCtrl', function($scope,$http) {
         // Simple GET request example:
         $http({
             method: 'GET',
-            url: 'http://bboycomputer.com/demo/cart/delete_item/'+ rowid
+            url: 'http://cyberbatt.com/demo/cart/delete_item/'+ rowid
         }).success(function(data) {
              $scope.getOrder();
             //$scope.deleteResult = data;
@@ -123,7 +123,7 @@ app.controller('mainCtrl', function($scope,$http) {
         // Simple GET request example:
         $http({
             method: 'GET',
-            url: 'http://bboycomputer.com/demo/cart/get_cart'
+            url: 'http://cyberbatt.com/demo/cart/get_cart'
         }).success(function(data) {
  
             $scope.productItems = [{
@@ -197,7 +197,7 @@ app.controller('mainCtrl', function($scope,$http) {
          
           $http({
             method: 'POST',
-            url: 'http://bboycomputer.com/demo/dealer/register',
+            url: 'http://cyberbatt.com/demo/dealer/register',
              headers: {
            'Content-Type': 'application/x-www-form-urlencoded'
          },
@@ -248,7 +248,7 @@ app.controller('mainCtrl', function($scope,$http) {
             $scope.name_dealer = name
              $http({
             method: 'POST',
-            url: 'http://bboycomputer.com/demo/dealer/getdealer',
+            url: 'http://cyberbatt.com/demo/dealer/getdealer',
              headers: {
            'Content-Type': 'application/x-www-form-urlencoded'
          },
@@ -270,7 +270,7 @@ app.controller('mainCtrl', function($scope,$http) {
 
               $http({
             method: 'POST',
-            url: 'http://bboycomputer.com/demo/payment/sendmail',
+            url: 'http://cyberbatt.com/demo/payment/sendmail',
              headers: {
            'Content-Type': 'application/x-www-form-urlencoded'
          },
@@ -295,7 +295,7 @@ app.controller('mainCtrl', function($scope,$http) {
 
             $http({
             method: 'GET',
-            url: 'http://bboycomputer.com/demo/tracking/get_all?get='+orderid,
+            url: 'http://cyberbatt.com/demo/tracking/get_all?get='+orderid,
              headers: {
            'Content-Type': 'application/x-www-form-urlencoded'
          },
@@ -312,7 +312,7 @@ app.controller('mainCtrl', function($scope,$http) {
             console.log($scope.txtSearchTracking);
             $http({
             method: 'GET',
-            url: 'http://bboycomputer.com/demo/download/get_all',
+            url: 'http://cyberbatt.com/demo/download/get_all',
              headers: {
            'Content-Type': 'application/x-www-form-urlencoded'
          },
@@ -333,7 +333,7 @@ app.controller('mainCtrl', function($scope,$http) {
 
                   $http({
                 method: 'POST',
-                url: 'http://bboycomputer.com/demo/payment/sendmail',
+                url: 'http://cyberbatt.com/demo/payment/sendmail',
                  headers: {
                'Content-Type': 'application/x-www-form-urlencoded'
              },
