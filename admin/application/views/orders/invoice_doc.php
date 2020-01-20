@@ -280,10 +280,7 @@
 		</div>
 		<div class="row noprint">
 			<p class="text-center">
-
-			<a class="btn btn-default btn-sm" href="<?php echo base_url("orders/invoice/".$orders_data['id']."/1");?>" role="button">สำเนา</a> 
-			<a class="btn btn-default btn-sm" href="<?php echo base_url("orders/invoice/".$orders_data['id']);?>" role="button">ต้นฉบับ</a> <br><br>
-			
+			<a class="btn btn-default btn-sm" href="<?php echo base_url("orders/invoice/".$orders_data['id']."/1");?>" role="button">สำเนา</a> <a class="btn btn-default btn-sm" href="<?php echo base_url("orders/invoice/".$orders_data['id']);?>" role="button">ต้นฉบับ</a> <br><br>
 			<button type="button" class="btn btn-primary" onClick="window.print()"><span class="glyphicon glyphicon-print" aria-hidden="true"></span> พิมพ์ใบชำระเงิน</button>
 			<a class="btn btn-success" href="<?php echo base_url();?>" role="button">ปิดหน้าต่างนี้</a>
 			</p>

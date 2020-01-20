@@ -77,7 +77,7 @@ class Returns_supplier extends BaseController
 
 
             $count = $this->returns_supplier_model->get_returns_supplier_search_count($data_search);
-            $data["links_pagination"] = $this->pagination_compress("return_receive/index", $count, $this->config->item("pre_page"));
+            $data["links_pagination"] = $this->pagination_compress("returns_supplier/search", $count, $this->config->item("pre_page"));
             $return_data = $this->returns_supplier_model->get_returns_supplier_search($page, $this->config->item("pre_page"), $data_search);
             $data["links_pagination"] = $this->pagination->create_links();
 
@@ -186,7 +186,7 @@ class Returns_supplier extends BaseController
             $returns_supplier_id ="";
             $returns_supplier_id = $this->returns_supplier_model->save_returns_supplier();
 
-            if ($document_id !="") {
+            if ($returns_supplier_id !="") {
                 redirect('returns_supplier/edit/'.$returns_supplier_id);
             } else {
                 redirect('returns_supplier');
