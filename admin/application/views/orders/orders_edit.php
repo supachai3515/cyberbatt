@@ -2,7 +2,7 @@
   <section class="content">
 
     <script type="text/ng-template" id="myModalContent_credit.html">
-        <div class="modal-header">
+      <div class="modal-header">
             <h4>เลือกใบสั่งซื้อ</h4>
         </div>
         <div class="modal-body">
@@ -52,8 +52,8 @@
 
     <div class="container-fluid box" ng-controller="order">
 
-          <script type="text/ng-template" id="myModalContent.html">
-          <div class="modal-header">
+      <script type="text/ng-template" id="myModalContent.html">
+        <div class="modal-header">
               <h3 class="modal-title" ng-bind="product_serial[0].sku +' : '+ product_serial[0].product_name">Stock สินค้า </h3>
           </div>
           <div class="modal-body">
@@ -99,187 +99,187 @@
       </script>
 
 
-        <div class="page-header">
-          <h1>ใบสั่งซื้อสินค้า <strong>#<?php echo $orders_data['id'] ?></h1>
+      <div class="page-header">
+        <h1>ใบสั่งซื้อสินค้า <strong>#<?php echo $orders_data['id'] ?></h1>
+      </div>
+      <div style="padding-top:30px;"></div>
+
+      <form action="<?php echo base_url('orders/update_status/' . $orders_data['id']); ?>" method="POST" class="form-inline" role="form">
+        <div class="form-group">
+          <label class="sr-only" for="">สถานะ</label>
+          <select id="select_status" name="select_status" class="form-control">
+            <?php
+            switch ($orders_data['order_status_id']) {
+              case '1':
+            ?>
+                <?php foreach ($order_status_list as $status) : ?>
+                  <?php if ($status['id'] == "1" || $status['id'] == "2" || $status['id'] == "5") : ?>
+                    <?php if ($status['id'] == $orders_data['order_status_id']) : ?>
+                      <option value="<?php echo $status['id']; ?>" selected><?php echo $status['name']; ?></option>
+                    <?php else : ?>
+                      <option value="<?php echo $status['id']; ?>"><?php echo $status['name']; ?></option>
+                    <?php endif ?>
+                  <?php endif ?>
+                <?php endforeach ?>
+              <?php
+                break;
+
+              case '2':
+              ?>
+                <?php foreach ($order_status_list as $status) : ?>
+                  <?php if ($status['id'] == "2" || $status['id'] == "3" || $status['id'] == "4" || $status['id'] == "6") : ?>
+                    <?php if ($status['id'] == $orders_data['order_status_id']) : ?>
+                      <option value="<?php echo $status['id']; ?>" selected><?php echo $status['name']; ?></option>
+                    <?php else : ?>
+                      <option value="<?php echo $status['id']; ?>"><?php echo $status['name']; ?></option>
+                    <?php endif ?>
+                  <?php endif ?>
+                <?php endforeach ?>
+              <?php
+                break;
+
+              case '3':
+              ?>
+                <?php foreach ($order_status_list as $status) : ?>
+                  <?php if ($status['id'] == "3" || $status['id'] == "4" || $status['id'] == "6") : ?>
+                    <?php if ($status['id'] == $orders_data['order_status_id']) : ?>
+                      <option value="<?php echo $status['id']; ?>" selected><?php echo $status['name']; ?></option>
+                    <?php else : ?>
+                      <option value="<?php echo $status['id']; ?>"><?php echo $status['name']; ?></option>
+                    <?php endif ?>
+                  <?php endif ?>
+                <?php endforeach ?>
+              <?php
+                break;
+
+              case '4':
+              ?>
+                <?php foreach ($order_status_list as $status) : ?>
+                  <?php if ($status['id'] == "4") : ?>
+                    <?php if ($status['id'] == $orders_data['order_status_id']) : ?>
+                      <option value="<?php echo $status['id']; ?>" selected><?php echo $status['name']; ?></option>
+                    <?php else : ?>
+                      <option value="<?php echo $status['id']; ?>"><?php echo $status['name']; ?></option>
+                    <?php endif ?>
+                  <?php endif ?>
+                <?php endforeach ?>
+              <?php
+                break;
+
+              case '5':
+              ?>
+                <?php foreach ($order_status_list as $status) : ?>
+                  <?php if ($status['id'] == "5") : ?>
+                    <?php if ($status['id'] == $orders_data['order_status_id']) : ?>
+                      <option value="<?php echo $status['id']; ?>" selected><?php echo $status['name']; ?></option>
+                    <?php else : ?>
+                      <option value="<?php echo $status['id']; ?>"><?php echo $status['name']; ?></option>
+                    <?php endif ?>
+                  <?php endif ?>
+                <?php endforeach ?>
+              <?php
+                break;
+
+              case '6':
+              ?>
+                <?php foreach ($order_status_list as $status) : ?>
+                  <?php if ($status['id'] == "6" || $status['id'] == "1") : ?>
+                    <?php if ($status['id'] == $orders_data['order_status_id']) : ?>
+                      <option value="<?php echo $status['id']; ?>" selected><?php echo $status['name']; ?></option>
+                    <?php else : ?>
+                      <option value="<?php echo $status['id']; ?>"><?php echo $status['name']; ?></option>
+                    <?php endif ?>
+                  <?php endif ?>
+                <?php endforeach ?>
+              <?php
+                break;
+
+              default:
+              ?>
+                <?php foreach ($order_status_list as $status) : ?>
+                  <?php if ($status['id'] == $orders_data['order_status_id']) : ?>
+                    <option value="<?php echo $status['id']; ?>" selected><?php echo $status['name']; ?></option>
+                  <?php else : ?>
+                    <option value="<?php echo $status['id']; ?>"><?php echo $status['name']; ?></option>
+                  <?php endif ?>
+                <?php endforeach ?>
+            <?php
+                break;
+            }
+            ?>
+          </select>
         </div>
-        <div style="padding-top:30px;"></div>
+        <div class="form-group">
+          <label class="sr-only" for="">description</label>
+          <input type="text" class="form-control" id="description" name="description" placeholder="รายละเอียด">
+        </div>
 
-        <form action="<?php echo base_url('orders/update_status/'.$orders_data['id']); ?>" method="POST" class="form-inline" role="form">
-          <div class="form-group">
-            <label class="sr-only" for="">สถานะ</label>
-             <select id="select_status" name="select_status" class="form-control">
-            <?php 
-             switch ($orders_data['order_status_id']) {
-               case '1':
-                  ?>
-                  <?php foreach ($order_status_list as $status): ?>
-                    <?php if ($status['id'] == "1" || $status['id'] == "2" || $status['id'] == "5" ): ?>
-                        <?php if ($status['id'] == $orders_data['order_status_id']): ?>
-                            <option value="<?php echo $status['id']; ?>" selected><?php echo $status['name']; ?></option>
-                        <?php else: ?>
-                            <option value="<?php echo $status['id']; ?>"><?php echo $status['name']; ?></option>
-                        <?php endif ?>  
-                    <?php endif ?>      
-                <?php endforeach ?>
-                <?php
-                 break;
+        <button type="submit" class="btn btn-primary">เปลี่ยน</button>
+      </form>
 
-               case '2':
-                 ?>
-                  <?php foreach ($order_status_list as $status): ?>
-                    <?php if ($status['id'] == "2" || $status['id'] == "3" || $status['id'] == "4" || $status['id'] == "6" ): ?>
-                        <?php if ($status['id'] == $orders_data['order_status_id']): ?>
-                            <option value="<?php echo $status['id']; ?>" selected><?php echo $status['name']; ?></option>
-                        <?php else: ?>
-                            <option value="<?php echo $status['id']; ?>"><?php echo $status['name']; ?></option>
-                        <?php endif ?>  
-                    <?php endif ?>      
-                <?php endforeach ?>
-                <?php
-                break;
+      <div class="row">
+        <div class="col-md-8">
+          <h4 class="text-info">ข้อมูลการสั่งซื้อ</h4>
+          <div class="box-body table-responsive no-padding">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>สถานะ</th>
+                  <th>#</th>
+                  <th>จำนวน</th>
+                  <th>ส่งไปยัง</th>
+                  <th>รวม</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <strong><?php echo $orders_data['order_status_name']; ?></strong><br />
+                    <?php if (isset($orders_data['trackpost'])) : ?>
+                      <?php if ($orders_data['trackpost'] != "") : ?>
+                        <span>traking : </span> <strong><?php echo $orders_data['trackpost']; ?></strong><br />
+                      <?php endif ?>
+                    <?php endif ?>
+                  </td>
+                  <td>
+                    <span>เลขที่ใบเสร็จ : <strong>#<?php echo $orders_data['id'] ?></strong></span><br />
+                    <span>โดย : <strong><?php echo $orders_data['name'] ?></strong></span><br />
+                    <span><i class="fa fa-calendar"></i> <?php echo date("d-m-Y H:i", strtotime($orders_data['date'])); ?></span>
 
-               case '3':
-                ?>
-                  <?php foreach ($order_status_list as $status): ?>
-                    <?php if ($status['id'] == "3" || $status['id'] == "4" || $status['id'] == "6" ): ?>
-                        <?php if ($status['id'] == $orders_data['order_status_id']): ?>
-                            <option value="<?php echo $status['id']; ?>" selected><?php echo $status['name']; ?></option>
-                        <?php else: ?>
-                            <option value="<?php echo $status['id']; ?>"><?php echo $status['name']; ?></option>
-                        <?php endif ?>  
-                    <?php endif ?>      
-                <?php endforeach ?>
-                <?php
-                break;
+                  </td>
+                  <td>
+                    <span><strong><?php echo $orders_data['quantity'] ?></strong> item</span><br />
+                  </td>
+                  <td>
+                    <strong>ที่อยู่ : </strong><span><?php echo $orders_data['address']; ?></span><br />
+                    <strong>วิธีการจัดส่ง : </strong><span><?php echo $orders_data['shipping']; ?></span><br />
+                    <strong>อีเมลล์ : </strong><span><?php echo $orders_data['email']; ?></span><br />
+                    <strong>เบอร์โทร : </strong><span><?php echo $orders_data['tel']; ?></span><br />
+                    <?php if ($orders_data['is_tax'] == "1") : ?>
+                      <h4>ออกใบกำภาษี</h4>
+                      <strong>เลขที่ผุ้เสียภาษี : </strong><span><?php echo $orders_data['tax_id']; ?></span><br />
+                      <strong>บริษัท : </strong><span><?php echo $orders_data['tax_company']; ?></span><br />
+                      <strong>ที่อยู่ : </strong><span><?php echo $orders_data['tax_address']; ?></span><br />
 
-               case '4':
-                ?>
-                  <?php foreach ($order_status_list as $status): ?>
-                    <?php if ($status['id'] == "4"): ?>
-                        <?php if ($status['id'] == $orders_data['order_status_id']): ?>
-                            <option value="<?php echo $status['id']; ?>" selected><?php echo $status['name']; ?></option>
-                        <?php else: ?>
-                            <option value="<?php echo $status['id']; ?>"><?php echo $status['name']; ?></option>
-                        <?php endif ?>  
-                    <?php endif ?>      
-                <?php endforeach ?>
-                <?php
-                break;
+                    <?php endif ?>
 
-               case '5':
-                ?>
-                  <?php foreach ($order_status_list as $status): ?>
-                    <?php if ($status['id'] == "5"): ?>
-                        <?php if ($status['id'] == $orders_data['order_status_id']): ?>
-                            <option value="<?php echo $status['id']; ?>" selected><?php echo $status['name']; ?></option>
-                        <?php else: ?>
-                            <option value="<?php echo $status['id']; ?>"><?php echo $status['name']; ?></option>
-                        <?php endif ?>  
-                    <?php endif ?>      
-                <?php endforeach ?>
-                <?php
-               break;
+                  </td>
 
-               case '6':
-                ?>
-                  <?php foreach ($order_status_list as $status): ?>
-                    <?php if ($status['id'] == "6" || $status['id'] == "1"): ?>
-                        <?php if ($status['id'] == $orders_data['order_status_id']): ?>
-                            <option value="<?php echo $status['id']; ?>" selected><?php echo $status['name']; ?></option>
-                        <?php else: ?>
-                            <option value="<?php echo $status['id']; ?>"><?php echo $status['name']; ?></option>
-                        <?php endif ?>  
-                    <?php endif ?>      
-                <?php endforeach ?>
-                <?php
-               break;
-               
-               default:
-                 ?>
-                 <?php foreach ($order_status_list as $status): ?>
-                    <?php if ($status['id'] == $orders_data['order_status_id']): ?>
-                        <option value="<?php echo $status['id']; ?>" selected><?php echo $status['name']; ?></option>
-                    <?php else: ?>
-                        <option value="<?php echo $status['id']; ?>"><?php echo $status['name']; ?></option>
-                    <?php endif ?>          
-                <?php endforeach ?>
-                 <?php
-                 break;
-             }
-             ?>
-             </select>
-          </div>
-          <div class="form-group">
-            <label class="sr-only" for="">description</label>
-            <input type="text" class="form-control" id="description" name="description" placeholder="รายละเอียด">
-          </div>
-      
-          <button type="submit" class="btn btn-primary">เปลี่ยน</button>
-        </form>
-
-        <div class="row">
-          <div class="col-md-8">
-            <h4 class="text-info">ข้อมูลการสั่งซื้อ</h4>
-            <div class="box-body table-responsive no-padding">
-              <table class="table table-hover">
-                  <thead>
-                      <tr>
-                          <th>สถานะ</th>
-                          <th>#</th>
-                          <th>จำนวน</th>
-                          <th>ส่งไปยัง</th>
-                          <th>รวม</th>
-                      </tr>
-                  </thead>
-                  <tbody>
-                      <tr>
-                          <td>
-                              <strong><?php echo $orders_data['order_status_name'];?></strong><br/>
-                               <?php if (isset($orders_data['trackpost'])) : ?>
-                                <?php if ($orders_data['trackpost'] !=""): ?>
-                                   <span>traking : </span>  <strong><?php echo $orders_data['trackpost'];?></strong><br/>
-                                <?php endif ?>
-                              <?php endif ?>
-                          </td>
-                          <td>
-                              <span>เลขที่ใบเสร็จ : <strong>#<?php echo $orders_data['id'] ?></strong></span><br/>
-                              <span>โดย : <strong><?php echo $orders_data['name'] ?></strong></span><br/>
-                              <span><i class="fa fa-calendar"></i> <?php echo date("d-m-Y H:i", strtotime($orders_data['date']));?></span>
-
-                          </td>
-                          <td>
-                              <span><strong><?php echo $orders_data['quantity'] ?></strong> item</span><br/>
-                          </td>
-                          <td>
-                              <strong>ที่อยู่ : </strong><span><?php echo $orders_data['address']; ?></span><br/>
-                              <strong>วิธีการจัดส่ง : </strong><span><?php echo $orders_data['shipping']; ?></span><br/>
-                              <strong>อีเมลล์ : </strong><span><?php echo $orders_data['email']; ?></span><br/>
-                              <strong>เบอร์โทร : </strong><span><?php echo $orders_data['tel']; ?></span><br/>
-                              <?php if ($orders_data['is_tax']=="1"): ?>
-                                <h4>ออกใบกำภาษี</h4>
-                                 <strong>เลขที่ผุ้เสียภาษี : </strong><span><?php echo $orders_data['tax_id']; ?></span><br/>
-                                 <strong>บริษัท : </strong><span><?php echo $orders_data['tax_company']; ?></span><br/>
-                                <strong>ที่อยู่ : </strong><span><?php echo $orders_data['tax_address']; ?></span><br/>
-                          
-                            <?php endif ?>
-                             
-                          </td>
-                             
-                          <td>
-                               <strong ng-bind="<?php echo $orders_data['total'];?> | currency:'฿':0"></strong>
-                          </td>
-                      </tr>
-                  </tbody>
-              </table>
+                  <td>
+                    <strong ng-bind="<?php echo $orders_data['total']; ?> | currency:'฿':0"></strong>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
 
             <div class="panel panel-info">
               <div class="panel-heading">
                 <h3 class="panel-title">แก้ไขที่อยู่ลูกค้า</h3>
               </div>
               <div class="panel-body">
-                <form action="<?php echo base_url('orders/update_address/'.$orders_data['id']); ?>" method="POST"  role="form">
+                <form action="<?php echo base_url('orders/update_address/' . $orders_data['id']); ?>" method="POST" role="form">
                   <legend>ที่อยู่จัดส่ง</legend>
-                
+
                   <div class="form-group">
                     <label for="">ที่อยู่</label>
                     <input type="text" class="form-control" name="address" placeholder="ที่อยู่" value="<?php echo $orders_data['address']; ?>">
@@ -296,15 +296,11 @@
                     <label for="">เบอร์โทร</label>
                     <input type="text" class="form-control" name="tel" placeholder="tel" value="<?php echo $orders_data['tel']; ?>">
                   </div>
-                  
+
                   <legend>ที่อยู่ออกใบกำกับภาษี</legend>
                   <div class="checkbox">
                     <label>
-                      <input type="checkbox" name="is_tax" value="1"
-                      <?php if ($orders_data['is_tax']==1): ?>
-                          <?php echo "checked"; ?>
-                        <?php endif ?>
-                        >
+                      <input type="checkbox" name="is_tax" value="1" <?php if ($orders_data['is_tax'] == 1) : ?> <?php echo "checked"; ?> <?php endif ?>>
                       ออกใบกำกับภาษี
                     </label>
                   </div>
@@ -322,15 +318,15 @@
                   </div>
 
                   <div class="form-group">
-                  <label  for="textinput">วันที่ครบกำหนด</label>
-             
+                    <label for="textinput">วันที่ครบกำหนด</label>
+
                     <div class='input-group date' id='datepicker_2'>
-                        <input type='text' class="form-control" name="invoice_duedate" placeholder="วันที่" value="<?php if(isset($orders_data['invoice_duedate']))echo date("Y-m-d", strtotime($orders_data['invoice_duedate']));?>"  required="true" />
-                        <span class="input-group-addon">
-                            <span class="glyphicon glyphicon-calendar"></span>
-                        </span>
-                
-                   </div>
+                      <input type='text' class="form-control" name="invoice_duedate" placeholder="วันที่" value="<?php if (isset($orders_data['invoice_duedate'])) echo date("Y-m-d", strtotime($orders_data['invoice_duedate'])); ?>" required="true" />
+                      <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                      </span>
+
+                    </div>
                   </div>
 
 
@@ -345,368 +341,395 @@
             </div>
             <div class="panel-body">
               <div class="box-body table-responsive no-padding">
-            <table class="table table-striped table-hover">
-              <thead>
-                <tr>
-                  <th>sku</th>
-                  <th>name</th>
-                  <td>quantity</td>
-                  <td>price</td>
-                  <td>vat</td>
-                  <td>total</td>
-                </tr>
-              </thead>
-              <tbody>
-              <?php  $sum_price=0; foreach ($orders_detail as $value): ?>
-                <tr>
-                  <td><?php echo  $value['sku'] ?></td>
-                  <td>
-                    <?php echo  $value['product_name'] ?> <br/>
-                    <button type="button" class="btn btn-info btn-xs" ng-click="open(<?php echo  $value['product_id'] ?>,<?php echo  $value['quantity'] ?>,<?php echo $orders_data['id'] ?>)">Serial Number</button>
-                  </td>
-                  <td><?php echo  $value['quantity'] ?></td>
-                  <td><?php echo  $value['price'] ?></td>
-                  <td><?php echo  $value['vat'] ?></td>
-                  <td><?php echo  $value['total']?></td>
-                </tr>
+                <table class="table table-striped table-hover">
+                  <thead>
+                    <tr>
+                      <th>sku</th>
+                      <th>name</th>
+                      <td>quantity</td>
+                      <td>price</td>
+                      <td>vat</td>
+                      <td>total</td>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php $sum_price = 0;
+                    foreach ($orders_detail as $value) : ?>
+                      <tr>
+                        <td><?php echo  $value['sku'] ?></td>
+                        <td>
+                          <?php echo  $value['product_name'] ?> <br />
+                          <button type="button" class="btn btn-info btn-xs" ng-click="open(<?php echo  $value['product_id'] ?>,<?php echo  $value['quantity'] ?>,<?php echo $orders_data['id'] ?>)">Serial Number</button>
+                        </td>
+                        <td><?php echo  $value['quantity'] ?></td>
+                        <td><?php echo  $value['price'] ?></td>
+                        <td><?php echo  $value['vat'] ?></td>
+                        <td><?php echo  $value['total'] ?></td>
+                      </tr>
 
-              <?php $sum_price = $sum_price+($value['total']-$value['vat']); endforeach ?>
+                    <?php $sum_price = $sum_price + ($value['total'] - $value['vat']);
+                    endforeach ?>
 
-                <tr>
-                  <td colspan="5" class="text-right"><strong>รวม</strong></td>
-                  <td class="text-right"><ins ><?php echo  $sum_price ?></ins></td>
-                </tr>
+                    <tr>
+                      <td colspan="5" class="text-right"><strong>รวม</strong></td>
+                      <td class="text-right"><ins><?php echo  $sum_price ?></ins></td>
+                    </tr>
 
-                <tr>
-                  <td colspan="5" class="text-right"><strong>vat</strong></td>
-                  <td class="text-right"><ins ><?php echo  $orders_data['vat'] ?></ins></td>
-                </tr>
-                <tr>
-                  <td colspan="5" class="text-right"><strong>ค่าจัดส่ง</strong></td>
-                  <td class="text-right"><ins class="text-right"><?php echo  $orders_data['shipping_charge'] ?></ins></td>
-                </tr>
-                 <tr>
-                  <td colspan="5" class="text-right"><strong>รวมทั้งหมด</strong></td>
-                  <td class="text-right"><ins class="text-right"><?php echo  $orders_data['total'] ?></ins></td>
-                </tr>
-                
-              </tbody>
-            </table>
-              <?php if ($orders_data['order_status_id'] >= "2" && $orders_data['order_status_id'] < "5"): ?>
-                  <form action="<?php echo base_url('orders/update_tracking/'.$orders_data['id']); ?>" method="POST" class="form-inline" role="form">
-              <div class="form-group">
-                <label class="sr-only" for="">tracking</label>
-                <input type="text" class="form-control" id="tracking" name="tracking"
-                <?php if (isset($orders_data['trackpost'])): ?>
-                  value="<?php echo $orders_data['trackpost']; ?>"
+                    <tr>
+                      <td colspan="5" class="text-right"><strong>vat</strong></td>
+                      <td class="text-right"><ins><?php echo  $orders_data['vat'] ?></ins></td>
+                    </tr>
+                    <tr>
+                      <td colspan="5" class="text-right"><strong>ค่าจัดส่ง</strong></td>
+                      <td class="text-right"><ins class="text-right"><?php echo  $orders_data['shipping_charge'] ?></ins></td>
+                    </tr>
+                    <tr>
+                      <td colspan="5" class="text-right"><strong>รวมทั้งหมด</strong></td>
+                      <td class="text-right"><ins class="text-right"><?php echo  $orders_data['total'] ?></ins></td>
+                    </tr>
+
+                  </tbody>
+                </table>
+                <?php if ($orders_data['order_status_id'] >= "2" && $orders_data['order_status_id'] < "5") : ?>
+                  <form action="<?php echo base_url('orders/update_tracking/' . $orders_data['id']); ?>" method="POST" class="form-inline" role="form">
+                    <div class="form-group">
+                      <label class="sr-only" for="">tracking</label>
+                      <input type="text" class="form-control" id="tracking" name="tracking" <?php if (isset($orders_data['trackpost'])) : ?> value="<?php echo $orders_data['trackpost']; ?>" <?php endif ?> placeholder="tracking number" required="true">
+                    </div>
+                    <div class="form-group">
+                      <select id="select_status" name="select_status" class="form-control" readonly="true">
+                        <?php foreach ($order_status_list as $status) : ?>
+                          <?php if ($status['id'] == "4") : ?>
+                            <option value="<?php echo $status['id']; ?>" selected><?php echo $status['name']; ?></option>
+                          <?php endif ?>
+                        <?php endforeach ?>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label class="sr-only" for="">description</label>
+                      <input type="text" class="form-control" id="description" name="description" placeholder="รายละเอียด">
+                    </div>
+
+
+                    <button type="submit" class="btn btn-primary">ส่งรหัส tracking</button>
+                  </form>
+
+
                 <?php endif ?>
-                 placeholder="tracking number" required="true">
               </div>
+            </div>
+          </div>
+
+
+          <div class="well">
+
+            <form class="form-horizontal" method="POST" action="<?php echo base_url('orders/save_slip/' . $orders_data['id']); ?>" accept-charset="utf-8" enctype="multipart/form-data">
               <div class="form-group">
-                 <select id="select_status" name="select_status" class="form-control" readonly="true">
-                <?php foreach ($order_status_list as $status): ?>
-                    <?php if ($status['id'] == "4"): ?>
-                        <option value="<?php echo $status['id']; ?>" selected><?php echo $status['name']; ?></option>
-                    <?php endif ?>          
-                <?php endforeach ?>
-            </select>
-          </div>
-          <div class="form-group">
-            <label class="sr-only" for="">description</label>
-            <input type="text" class="form-control" id="description" name="description" placeholder="รายละเอียด" >
-          </div>
+                <legend>การชำระเงิน</legend>
+              </div>
+              <!-- Text input-->
+              <?php if (isset($orders_data['credit_note_id'])  && $orders_data['credit_note_id'] > 0) : ?>
+                <div class="form-group">
 
-          
-              <button type="submit" class="btn btn-primary">ส่งรหัส tracking</button>
-            </form>
-
-                
+                  <label class="col-md-3 control-label" for="credit_note_id">อ้างอิงใบลดหนี้</label>
+                  <div class="col-md-4">
+                    <?php echo $orders_data['credit_note_id'] ?> : <?php echo $orders_data['credit_note_docno'] ?>
+                  </div>
+                </div>
               <?php endif ?>
-          </div>
-            </div>
-          </div>
-
-         
-            <div class="well">
-
-            <form class="form-horizontal" method="POST" action="<?php echo base_url('orders/save_slip/'.$orders_data['id']);?>" accept-charset="utf-8" enctype="multipart/form-data">
-               <div class="form-group">
-                  <legend>การชำระเงิน</legend>
-                </div>
-                 <!-- Text input-->
-                 <?php if (isset($orders_data['credit_note_id'])  && $orders_data['credit_note_id']>0 ): ?>
-                  <div class="form-group">
-                        
-                          <label class="col-md-3 control-label" for="credit_note_id">อ้างอิงใบลดหนี้</label>
-                          <div class="col-md-4">
-                            <?php echo $orders_data['credit_note_id'] ?>  : <?php echo $orders_data['credit_note_docno'] ?> 
-                            </div>   
-                  </div>
-                  <?php endif ?>
-                 <input hidden="true"  value="<?php echo $orders_data['member_id']; ?>"  name="member_id" >
-                <div class="form-group">
-                    <label class="col-md-3 control-label" for="textinput">เลือกธนาคาร  *</label>
-                    <div class="col-md-6">
-                      <select  name="bank_name"  class="form-control" required="required">
-
-                          <?php if ($orders_data['bank_name'] == "ธนาคารกรุงเทพ"): ?>
-                            <option value="ธนาคารกรุงเทพ" selected>ธนาคารกรุงเทพ</option>
-                          <?php else: ?>
-                            <option value="ธนาคารกรุงเทพ">ธนาคารกรุงเทพ</option>
-                          <?php endif ?>
-
-                          <?php if ($orders_data['bank_name'] == "ธนาคารกรุงไทย"): ?>
-                            <option value="ธนาคารกรุงไทย" selected>ธนาคารกรุงไทย</option>
-                          <?php else: ?>
-                            <option value="ธนาคารกรุงไทย">ธนาคารกรุงไทย</option>
-                          <?php endif ?>
-
-                          <?php if ($orders_data['bank_name'] == "ธนาคารไทยพาณิชย์"): ?>
-                            <option value="ธนาคารไทยพาณิชย์" selected>ธนาคารไทยพาณิชย์</option>
-                          <?php else: ?>
-                            <option value="ธนาคารไทยพาณิชย์">ธนาคารไทยพาณิชย์</option>
-                          <?php endif ?>
-
-                          <?php if ($orders_data['bank_name'] == "ธนาคารกสิกรไทย"): ?>
-                            <option value="ธนาคารกสิกรไทย" selected>ธนาคารกสิกรไทย</option>
-                          <?php else: ?>
-                            <option value="ธนาคารกสิกรไทย">ธนาคารกสิกรไทย</option>
-                          <?php endif ?>
-
-
-                          <?php if ($orders_data['bank_name'] == "ใบลดหนี้"): ?>
-                            <option value="ใบลดหนี้" selected>ใบลดหนี้</option>
-                          <?php else: ?>
-                            <option value="ใบลดหนี้">ใบลดหนี้</option>
-                          <?php endif ?>
-
-                      </select>
-                     </div>
-                </div>
-
+              <input hidden="true" value="<?php echo $orders_data['member_id']; ?>" name="member_id">
               <div class="form-group">
-                  <label class="col-md-3 control-label" for="textinput">จำนวนเงิน *</label>
-                  <div class="col-md-6">
-                    <input value="<?php echo $orders_data['amount']; ?>"  name="amount" type="number" placeholder="จำนวนเงิน" class="form-control input-md" required="required">
-                   </div>
+                <label class="col-md-3 control-label" for="textinput">เลือกธนาคาร *</label>
+                <div class="col-md-6">
+                  <select name="bank_name" class="form-control" required="required">
+
+                    <?php if ($orders_data['bank_name'] == "ธนาคารกรุงเทพ") : ?>
+                      <option value="ธนาคารกรุงเทพ" selected>ธนาคารกรุงเทพ</option>
+                    <?php else : ?>
+                      <option value="ธนาคารกรุงเทพ">ธนาคารกรุงเทพ</option>
+                    <?php endif ?>
+
+                    <?php if ($orders_data['bank_name'] == "ธนาคารกรุงไทย") : ?>
+                      <option value="ธนาคารกรุงไทย" selected>ธนาคารกรุงไทย</option>
+                    <?php else : ?>
+                      <option value="ธนาคารกรุงไทย">ธนาคารกรุงไทย</option>
+                    <?php endif ?>
+
+                    <?php if ($orders_data['bank_name'] == "ธนาคารไทยพาณิชย์") : ?>
+                      <option value="ธนาคารไทยพาณิชย์" selected>ธนาคารไทยพาณิชย์</option>
+                    <?php else : ?>
+                      <option value="ธนาคารไทยพาณิชย์">ธนาคารไทยพาณิชย์</option>
+                    <?php endif ?>
+
+                    <?php if ($orders_data['bank_name'] == "ธนาคารกสิกรไทย") : ?>
+                      <option value="ธนาคารกสิกรไทย" selected>ธนาคารกสิกรไทย</option>
+                    <?php else : ?>
+                      <option value="ธนาคารกสิกรไทย">ธนาคารกสิกรไทย</option>
+                    <?php endif ?>
+
+
+                    <?php if ($orders_data['bank_name'] == "ใบลดหนี้") : ?>
+                      <option value="ใบลดหนี้" selected>ใบลดหนี้</option>
+                    <?php else : ?>
+                      <option value="ใบลดหนี้">ใบลดหนี้</option>
+                    <?php endif ?>
+
+                  </select>
+                </div>
               </div>
 
               <div class="form-group">
-              <label class="col-md-3 control-label" for="textinput">วันที่โอน  *</label>
+                <label class="col-md-3 control-label" for="textinput">จำนวนเงิน *</label>
                 <div class="col-md-6">
-                    <div class='input-group date' id='datepicker'>
-                        <input type='text' class="form-control" name="inform_date" placeholder="วันที่" value="<?php echo $orders_data['inform_date']; ?>"  required="true" />
-                        <span class="input-group-addon">
-                            <span class="glyphicon glyphicon-calendar"></span>
-                        </span>
-                    </div>
-                   </div>
-                  </div>
-                        
-                <div class="form-group">
-                <label class="col-md-3 control-label" for="textinput">เวลาที่โอน  *</label>
+                  <input value="<?php echo $orders_data['amount']; ?>" name="amount" type="number" placeholder="จำนวนเงิน" class="form-control input-md" required="required">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-md-3 control-label" for="textinput">วันที่โอน *</label>
                 <div class="col-md-6">
-                    <div class="input-group bootstrap-timepicker timepicker">
-                        <input id="timepicker1" type="text" name="inform_time" class="form-control input-small" value="<?php echo $orders_data['inform_time']; ?>"   required="true"/>
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
-                    </div>
-                 </div>
-                  </div>
-                         
-                       
-                  <div class="form-group">
-                      <label class="col-md-3 control-label" for="textinput">หมายเหตุ</label>
-                      <div class="col-md-6">
-                        <textarea  name="comment" class="form-control input-md" ><?php echo $orders_data['comment']; ?></textarea>
-                    </div>
-                    </div>
-
-
-                <!-- File Button --> 
-                  <div class="form-group">
-                    <label class="col-md-3 control-label" for="image_field">รูปสำหรับลูกค้า</label>
-                    <div class="col-md-6">
-                      <p><input id="image_field" name="image_field" class="file-loading" type="file" data-show-upload="false" data-min-file-count="1"></p>
-                      
-                    </div>
-                  </div>
-
-                  <!-- File Button --> 
-                  <div class="form-group">
-                    <label class="col-md-3 control-label" for="image_field1">รูปสำหรับเจ้าหน้าที่</label>
-                    <div class="col-md-6">
-                      <p><input id="image_field1" name="image_field1" class="file-loading" type="file" data-show-upload="false" data-min-file-count="1"></p>
-                      
-                    </div>
-                  </div>
-
-                <div class="form-group">
-                  <div class="col-sm-10 col-sm-offset-3">
-                    <button type="submit" value="upload"  class="btn btn-success">บันทึก slip</button>
+                  <div class='input-group date' id='datepicker'>
+                    <input type='text' class="form-control" name="inform_date" placeholder="วันที่" value="<?php echo $orders_data['inform_date']; ?>" required="true" />
+                    <span class="input-group-addon">
+                      <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
                   </div>
                 </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-md-3 control-label" for="textinput">เวลาที่โอน *</label>
+                <div class="col-md-6">
+                  <div class="input-group bootstrap-timepicker timepicker">
+                    <input id="timepicker1" type="text" name="inform_time" class="form-control input-small" value="<?php echo $orders_data['inform_time']; ?>" required="true" />
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="form-group">
+                <label class="col-md-3 control-label" for="textinput">หมายเหตุ</label>
+                <div class="col-md-6">
+                  <textarea name="comment" class="form-control input-md"><?php echo $orders_data['comment']; ?></textarea>
+                </div>
+              </div>
+
+
+              <!-- File Button -->
+              <div class="form-group">
+                <label class="col-md-3 control-label" for="image_field">รูปสำหรับลูกค้า</label>
+                <div class="col-md-6">
+                  <p><input id="image_field" name="image_field" class="file-loading" type="file" data-show-upload="false" data-min-file-count="1"></p>
+
+                </div>
+              </div>
+
+              <!-- File Button -->
+              <div class="form-group">
+                <label class="col-md-3 control-label" for="image_field1">รูปสำหรับเจ้าหน้าที่</label>
+                <div class="col-md-6">
+                  <p><input id="image_field1" name="image_field1" class="file-loading" type="file" data-show-upload="false" data-min-file-count="1"></p>
+
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="col-sm-10 col-sm-offset-3">
+                  <button type="submit" value="upload" class="btn btn-success">บันทึก slip</button>
+                </div>
+              </div>
             </form>
 
-            </div>
+          </div>
 
 
-             <div class="well">
+          <div class="well">
 
-            <form class="form-horizontal" method="POST" action="<?php echo base_url('orders/save_slip_credit_note_add/'.$orders_data['id']);?>" accept-charset="utf-8" enctype="multipart/form-data">
+            <form class="form-horizontal" method="POST" action="<?php echo base_url('orders/save_slip_credit_note_add/' . $orders_data['id']); ?>" accept-charset="utf-8" enctype="multipart/form-data">
               <div class="form-group">
-                  <legend>ชำระแบบใบลดหนี้</legend>
-                </div>
-                <!-- Text input-->
-                  <div class="form-group">
-                      <label class="col-md-3 control-label" for="credit_note_id">อ้างอิงใบลดหนี้</label>
-                      <div class="col-md-4">
-                          <div class="input-group">
-                              <input id="credit_note_id" name="credit_note_id" type="text" placeholder="เลขที่ใบลดหนี้" class="form-control input-md" 
-                              ng-model="credit_note_id"  ng-init="credit_note_id = items.credit_note_id" required="" readonly="true" required="required">
-                              <span class="input-group-addon"> <button type="button" ng-click="open_credit()">เลือกใบลดหนี้</i></button></span>
-                          </div>
-                      </div>
-                      <div class="col-md-4"></div> <span ng-model="credit_note_docno" ng-bind="credit_note_docno"  ng-init="credit_note_docno = items.credit_note_docno"> </span>
+                <legend>ชำระแบบใบลดหนี้</legend>
+              </div>
+              <!-- Text input-->
+              <div class="form-group">
+                <label class="col-md-3 control-label" for="credit_note_id">อ้างอิงใบลดหนี้</label>
+                <div class="col-md-4">
+                  <div class="input-group">
+                    <input id="credit_note_id" name="credit_note_id" type="text" placeholder="เลขที่ใบลดหนี้" class="form-control input-md" ng-model="credit_note_id" ng-init="credit_note_id = items.credit_note_id" required="" readonly="true" required="required">
+                    <span class="input-group-addon"> <button type="button" ng-click="open_credit()">เลือกใบลดหนี้</i></button></span>
                   </div>
-                <input hidden="true"  value="<?php echo $orders_data['member_id']; ?>"  name="member_id" >
-                <div class="form-group">
-                    <label class="col-md-3 control-label" for="textinput">ใบลดหนี้  *</label>
-                    <div class="col-md-6">
-                      <select  name="bank_name"  class="form-control" required="required">
-                            <option value="ใบลดหนี้" selected>ใบลดหนี้</option>
-                      </select>
-                    </div>
                 </div>
+                <div class="col-md-4"></div> <span ng-model="credit_note_docno" ng-bind="credit_note_docno" ng-init="credit_note_docno = items.credit_note_docno"> </span>
+              </div>
+              <input hidden="true" value="<?php echo $orders_data['member_id']; ?>" name="member_id">
+              <div class="form-group">
+                <label class="col-md-3 control-label" for="textinput">ใบลดหนี้ *</label>
+                <div class="col-md-6">
+                  <select name="bank_name" class="form-control" required="required">
+                    <option value="ใบลดหนี้" selected>ใบลดหนี้</option>
+                  </select>
+                </div>
+              </div>
 
               <div class="form-group">
-                  <label class="col-md-3 control-label" for="textinput">จำนวนเงิน *</label>
-                  <div class="col-md-6">
-                    <input value=""  name="amount" type="number" placeholder="จำนวนเงิน" class="form-control input-md" required="required">
-                  </div>
+                <label class="col-md-3 control-label" for="textinput">จำนวนเงิน *</label>
+                <div class="col-md-6">
+                  <input value="" name="amount" type="number" placeholder="จำนวนเงิน" class="form-control input-md" required="required">
+                </div>
               </div>
               <div class="form-group">
-              <label class="col-md-3 control-label" for="textinput">วันที่โอน  *</label>
+                <label class="col-md-3 control-label" for="textinput">วันที่โอน *</label>
                 <div class="col-md-6">
-                    <div class='input-group date' id='datepicker_1'>
-                        <input type='text' class="form-control" name="inform_date" placeholder="วันที่" value=""  required="true" />
-                        <span class="input-group-addon">
-                            <span class="glyphicon glyphicon-calendar"></span>
-                        </span>
-                    </div>
-                   </div>
-                  </div>
-                        
-                <div class="form-group">
-                <label class="col-md-3 control-label" for="textinput">เวลาที่โอน  *</label>
-                <div class="col-md-6">
-                    <div class="input-group bootstrap-timepicker timepicker">
-                        <input id="timepicker1_1" type="text" name="inform_time" class="form-control input-small" value=""   required="true"/>
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
-                    </div>
-                 </div>
-                  </div>
-
-
-                  <div class="form-group">
-                      <label class="col-md-3 control-label" for="textinput">หมายเหตุ</label>
-                      <div class="col-md-6">
-                        <textarea  name="comment" class="form-control input-md" ></textarea>
-                    </div>
-                    </div>
-
-                <div class="form-group">
-                  <div class="col-sm-10 col-sm-offset-3">
-                    <button type="submit" value="upload"  class="btn btn-success">เพิ่ม</button>
+                  <div class='input-group date' id='datepicker_1'>
+                    <input type='text' class="form-control" name="inform_date" placeholder="วันที่" value="" required="true" />
+                    <span class="input-group-addon">
+                      <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
                   </div>
                 </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-md-3 control-label" for="textinput">เวลาที่โอน *</label>
+                <div class="col-md-6">
+                  <div class="input-group bootstrap-timepicker timepicker">
+                    <input id="timepicker1_1" type="text" name="inform_time" class="form-control input-small" value="" required="true" />
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="form-group">
+                <label class="col-md-3 control-label" for="textinput">หมายเหตุ</label>
+                <div class="col-md-6">
+                  <textarea name="comment" class="form-control input-md"></textarea>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="col-sm-10 col-sm-offset-3">
+                  <button type="submit" value="upload" class="btn btn-success">เพิ่ม</button>
+                </div>
+              </div>
             </form>
             <div class="panel panel-success">
-    <div class="panel-heading">
-        <h3 class="panel-title">ใบลดหนั้</h3>
-    </div>
-    <div class="panel-body">
-        <div class="box-body table-responsive no-padding">
-            <table class="table table-striped table-hover">
-                <thead>
-                    <tr>
+              <div class="panel-heading">
+                <h3 class="panel-title">ใบลดหนั้</h3>
+              </div>
+              <div class="panel-body">
+                <div class="box-body table-responsive no-padding">
+                  <table class="table table-striped table-hover">
+                    <thead>
+                      <tr>
                         <th>#</th>
                         <th>Docno</th>
                         <th>Date</th>
                         <td>Comment</td>
                         <th class="text-right">Amount</th>
-  
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php  $sum_amont = 0 ; foreach ($orders_payment as $value): ?>
-                    <tr>
-                      <td> <a href="<?php echo base_url('orders/credit_note_del/'.$orders_data['id'].'/'.$value['line_number']);?>"  class="btn btn-sm btn-danger">Del</a></td>
 
-                        <td>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <?php $sum_amont = 0;
+                      foreach ($orders_payment as $value) : ?>
+                        <tr>
+                          <td> <a href="<?php echo base_url('orders/credit_note_del/' . $orders_data['id'] . '/' . $value['line_number']); ?>" class="btn btn-sm btn-danger">Del</a></td>
+
+                          <td>
                             <?php echo  $value['credit_note_docno'] ?>
-                        </td>
-                        <td>
-                            <?php echo  $value['inform_date'].' '.$value['inform_time'] ?>
-                        </td>
-                        <td>
+                          </td>
+                          <td>
+                            <?php echo  $value['inform_date'] . ' ' . $value['inform_time'] ?>
+                          </td>
+                          <td>
                             <?php echo  $value['comment'] ?>
-                        </td>
-                        <td class="text-right">
-                            <?php echo  $value['amount']?>
-                        </td>
-                    </tr>
-                    <?php   $sum_amont =  $sum_amont + $value['amount']  ?>
-                    <?php endforeach ?>
-                    <tr>
-                        <td></td> <td></td> 
+                          </td>
+                          <td class="text-right">
+                            <?php echo  $value['amount'] ?>
+                          </td>
+                        </tr>
+                        <?php $sum_amont =  $sum_amont + $value['amount']  ?>
+                      <?php endforeach ?>
+                      <tr>
+                        <td></td>
+                        <td></td>
                         <td></td>
                         <td class="text-right"><strong>รวม</strong></td>
-                        <td class="text-right"><ins>  <?php echo  $sum_amont ?></ins></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
+                        <td class="text-right"><ins> <?php echo  $sum_amont ?></ins></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
 
-</div>
+            </div>
 
-
-           </div>
 
           </div>
 
-          <div class="col-md-4">
-            <a href="<?php echo $this->config->item('weburl').'invoice/'.$orders_data['ref_id']; ?>" target="_blank"><button type="button" class="btn btn-success">ใบสั่งซื้อ</button></a>
+        </div>
 
-            <?php if ($orders_data['order_status_id'] >= 2): ?>
-                <?php if ($orders_data['is_invoice'] == 1): ?>
-                  <a href="<?php echo  base_url('orders/invoice/'.$orders_data['id']); ?>" ><button type="button" class="btn btn-info">ใบกำกับภาษี</button></a> <span><?php echo $orders_data['invoice_docno'] ?></span>
-                  <br><br>
-                  <!-- <a href="<?php echo  base_url('orders/delivery_invoice/'.$orders_data['id']); ?>" ><button type="button" class="btn btn-info">ใบส่งของ</button></a> -->
-                <?php else: ?>
-                  <a href="<?php echo base_url('orders/invoice/'.$orders_data['id']); ?>"><button type="button" class="btn btn-warning">ออกใบกำกับภาษี</button></a>
-                <?php endif ?>
+        <div class="col-md-4">
+          <table class="table  table-striped table-hover">
+            <tbody>
+              <tr>
+                <td>ใบสั่งซื้อ</td>
+                <td>
+                  <a href="<?php echo $this->config->item('weburl') . 'invoice/' . $orders_data['ref_id']; ?>" target="_blank"><button type="button" class="btn btn-success">ใบสั่งซื้อ #<?php echo $orders_data['id'] ?></button></a>
+                </td>
+              </tr>
 
-              
-            <?php endif ?>
+              <tr>
+                <td>ใบกำกับภาษี</td>
+                <td>
+                  <?php if ($orders_data['order_status_id'] >= 2) : ?>
+                    <?php if ($orders_data['is_invoice'] == 1) : ?>
+                      <a href="<?php echo  base_url('orders/invoice/' . $orders_data['id']); ?>" class="btn btn-success">ใบกำกับภาษี <?php echo $orders_data['invoice_docno'] ?></a> 
+                    <?php else : ?>
+                      <a href="<?php echo base_url('orders/invoice/' . $orders_data['id']); ?>" class="btn btn-warning">ออกใบกำกับภาษี </a>
+                    <?php endif ?>
+                  <?php endif ?>
+                </td>
+              </tr>
+              <tr>
+                <td>ใบเสนอราคา</td>
+                <td>
+                  <?php if (isset($quotation_data['id'])) : ?>
+                    <a href="<?php echo base_url('quotation/quotation_invoice/' . $quotation_data['id']); ?>"><button type="button" class="btn btn-success">ใบเสนอราคา <?php echo  $quotation_data['docno']; ?></button></a>
+                  <?php else : ?>
+                    <a href="<?php echo base_url('quotation/add/' . $orders_data['id']); ?>"><button type="button" class="btn btn-warning">ออกใบเสนอราคา</button></a>
+                  <?php endif ?>
+                </td>
+              </tr>
 
-            <?php if (isset($delivery_note_data['id'])): ?>
-              <a href="<?php echo base_url('delivery_note/delivery_invoice/'.$delivery_note_data['id']); ?>"><button type="button" class="btn btn-info">ใบส่งของ</button></a>
-            <?php else: ?>
-              <a href="<?php echo base_url('delivery_note/add/'.$orders_data['id']); ?>"><button type="button" class="btn btn-info">ออกใบส่งของ</button></a>
-            <?php endif ?>
+              <tr>
+                <td>ใบส่งของ</td>
+                <td>
+                  <?php if (isset($delivery_note_data['id'])) : ?>
+                    <a href="<?php echo base_url('delivery_note/delivery_invoice/' . $delivery_note_data['id']); ?>"><button type="button" class="btn btn-success">ใบส่งของ <?php echo  $delivery_note_data['docno']; ?></button></a>
+                  <?php else : ?>
+                    <a href="<?php echo base_url('delivery_note/add/' . $orders_data['id']); ?>"><button type="button" class="btn btn-warning">ออกใบส่งของ</button></a>
+                  <?php endif ?>
+                </td>
+              </tr>
+              <tr>
+                <td>ออกใบวางบิล/ใบแจ้งนี้</td>
+                <td>
+                  <?php if (isset($invoice_data['id'])) : ?>
+                    <a href="<?php echo base_url('invoice/invoice_doc/' . $invoice_data['id']); ?>"><button type="button" class="btn btn-success">ใบวางบิล/ใบแจ้งนี้ <?php echo  $invoice_data['docno']; ?></button></a>
+                  <?php else : ?>
+                    <a href="<?php echo base_url('invoice/add/' . $orders_data['id']); ?>"><button type="button" class="btn btn-warning">ออกใบวางบิล/ใบแจ้งนี้</button></a>
+                  <?php endif ?>
+                </td>
+              </tr>
 
+            </tbody>
+          </table>
 
-            <?php if (isset($invoice_data['id'])): ?>
-              <a href="<?php echo base_url('invoice/invoice_doc/'.$invoice_data['id']); ?>"><button type="button" class="btn btn-info">ใบวางบิล/ใบแจ้งนี้</button></a>
-            <?php else: ?>
-              <a href="<?php echo base_url('invoice/add/'.$orders_data['id']); ?>"><button type="button" class="btn btn-info">ออกใบวางบิล/ใบแจ้งนี้</button></a>
-            <?php endif ?>
-
-
-            <h4 class="text-info">สถานะสินค้า</h4>
-            <div class="well">
-              <div class="box-body table-responsive no-padding">
+          <h4 class="text-info">สถานะสินค้า</h4>
+          <div class="well">
+            <div class="box-body table-responsive no-padding">
               <table class="table table-hover">
                 <thead>
                   <tr>
@@ -716,23 +739,23 @@
                   </tr>
                 </thead>
                 <tbody>
-                <?php foreach ($order_status_history_list as $value): ?>
-                  <tr>
-                    <td><?php echo  $value['order_status_name'] ?></td>
-                    <th><?php echo  $value['description'] ?></th>
-                    <th><?php echo date("d-m-Y H:i", strtotime($value['create_date']));?></th>
-                  </tr>
-                <?php endforeach ?>
-                  
+                  <?php foreach ($order_status_history_list as $value) : ?>
+                    <tr>
+                      <td><?php echo  $value['order_status_name'] ?></td>
+                      <th><?php echo  $value['description'] ?></th>
+                      <th><?php echo date("d-m-Y H:i", strtotime($value['create_date'])); ?></th>
+                    </tr>
+                  <?php endforeach ?>
+
                 </tbody>
               </table>
             </div>
-              
-            </div>
 
           </div>
+
         </div>
-        
+      </div>
+
     </div>
     <!-- /.container-fluid box -->
 </div>
